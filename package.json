@@ -13,8 +13,17 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "diff": "^3.5.0",
+    "growl": "^1.10.2",
+    "https-proxy-agent": "^2.2.3",
+    "js-yaml": "^3.13.1",
+    "lodash.defaultsdeep": "^4.6.1",
+    "mem": "^4.0.0",
+    "minimist": "^0.2.1",
+    "serialize-javascript": "^3.1.0",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "yargs-parser": "^13.1.2"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -64,8 +73,8 @@
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.2",
     "webpack": "^3.6.0",
-    "webpack-bundle-analyzer": "^2.9.0",
-    "webpack-dev-server": "^2.9.1",
+    "webpack-bundle-analyzer": "^3.3.2",
+    "webpack-dev-server": "^3.1.11",
     "webpack-merge": "^4.1.0"
   },
   "engines": {
