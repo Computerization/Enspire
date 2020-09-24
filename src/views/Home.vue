@@ -1,6 +1,17 @@
 <template>
   <div class="home">
     <h1>欢迎来到 Enspire!</h1>
-    <img alt="Vue logo" src="../assets/img/logo.svg" width="100px" />
+    <img
+      alt="Enspire logo"
+      class="logo"
+      src="@/assets/img/Enspire-logo.png"
+      width="100px"
+    />
   </div>
 </template>
+
+<style scoped>
+.logo {
+  border-radius: 20%;
+}
+</style>

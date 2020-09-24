@@ -71,7 +71,7 @@ export default {
 
 <style scoped>
 a {
-  color: #42b983;
+  color: #2071c1;
   text-decoration: none;
 }
 table {
@@ -85,7 +85,7 @@ td {
   border: 1px solid #cccccc;
   border-radius: 50%;
   width: 150px;
-  transition: all 0.4s;
+  transition: all 0.2s;
 }
 .avatar:hover {
   transform: scale(1.04);
@@ -96,7 +96,7 @@ td {
   color: #2c3e50;
 }
 .caption:hover {
-  color: #42b983;
+  color: #2071c1;
   text-decoration: none;
 }
 </style>
