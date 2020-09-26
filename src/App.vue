@@ -51,5 +51,6 @@
   position: absolute;
   left: 30px;
   top: 10px;
+  background-color: white;
 }
 </style>
