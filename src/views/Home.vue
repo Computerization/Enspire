@@ -4,7 +4,7 @@
     <img
       alt="Enspire logo"
       class="logo"
-      src="@/assets/img/Enspire-logo.png"
+      src="@/assets/img/Enspire-logo.svg"
       width="100px"
     />
   </div>
