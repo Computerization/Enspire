@@ -75,7 +75,7 @@ export default {
     drawerItems: [
       { title: "首页", icon: "mdi-home", to: "/" },
       { title: "关于我们", icon: "mdi-information", to: "/about" },
-      { title: "预约教室", icon: "mdi-view-dashboard", to: "/reservation" },
+      { title: "预约教室", icon: "mdi-calendar", to: "/reservation" },
       { title: "相册", icon: "mdi-image", to: "/album" }
     ]
   }),
