@@ -70,6 +70,9 @@ export default {
 </script>
 
 <style scoped>
+.about {
+  text-align: center;
+}
 a {
   color: #2071c1;
   text-decoration: none;

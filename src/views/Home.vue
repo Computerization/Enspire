@@ -11,6 +11,9 @@
 </template>
 
 <style scoped>
+.home {
+  text-align: center;
+}
 .logo {
   border-radius: 20%;
 }
