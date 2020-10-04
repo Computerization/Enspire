@@ -5,11 +5,7 @@
         <v-subheader>贡献者们</v-subheader>
       </v-row>
       <v-row>
-        <v-col
-          v-for="person in contributors"
-          :key="person.alias"
-          class="col-sm"
-        >
+        <v-col v-for="person in contributors" :key="person.alias">
           <v-card class="mx-auto" max-width="300" outlined>
             <v-list-item three-line>
               <v-list-item-content>

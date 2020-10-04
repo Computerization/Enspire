@@ -14,7 +14,7 @@
         <v-toolbar-title>Enspire</v-toolbar-title>
       </div>
     </v-app-bar>
-    <v-navigation-drawer v-model="drawer" absolute bottom temporary>
+    <v-navigation-drawer v-model="drawer" temporary absolute bottom>
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="title">
@@ -31,6 +31,16 @@
           v-model="group"
           active-class="primary--text text--accent-4"
         >
+          <v-list-item to="/">
+            <v-list-item-icon>
+              <v-icon>mdi-home</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>首页</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-divider />
+          <v-subheader>CAS管理</v-subheader>
           <v-list-item
             v-for="item in drawerItems"
             :key="item.title"
@@ -41,6 +51,16 @@
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-divider />
+          <v-subheader>信息</v-subheader>
+          <v-list-item to="/about">
+            <v-list-item-icon>
+              <v-icon>mdi-information</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>关于我们</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list-item-group>
@@ -68,10 +88,8 @@ export default {
     drawer: false,
     group: null,
     drawerItems: [
-      { title: "首页", icon: "mdi-home", to: "/" },
-      { title: "关于我们", icon: "mdi-information", to: "/about" },
-      { title: "预约教室", icon: "mdi-calendar", to: "/reservation" },
-      { title: "相册", icon: "mdi-image", to: "/album" }
+      { title: "我们的社团", icon: "mdi-view-dashboard", to: "/clubs" },
+      { title: "预约教室", icon: "mdi-calendar", to: "/reservation" }
     ]
   }),
   watch: {
