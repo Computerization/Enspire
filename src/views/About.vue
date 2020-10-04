@@ -1,32 +1,57 @@
 <template>
   <div class="about">
-    <h1>关于 Enspire</h1>
-    <h2>贡献者们</h2>
-    <table>
-      <tr v-for="index in tableFirst" :key="index">
-        <td
-          v-for="person in contributors.slice(index, index + 4)"
+    <v-container>
+      <v-row>
+        <v-subheader>贡献者们</v-subheader>
+      </v-row>
+      <v-row>
+        <v-col
+          v-for="person in contributors"
           :key="person.alias"
+          class="col-sm"
         >
-          <a :href="'https://github.com/' + person.alias" target="_blank">
-            <img
-              :src="require('@/assets/img/' + person.alias + '-avatar.jpg')"
-              :alt="person.alias"
-              class="avatar"
-            />
-            <div class="caption">
-              <span>
-                {{ person.name }}
-              </span>
-            </div>
-          </a>
-        </td>
-      </tr>
-    </table>
-
-    <a href="https://github.com/Computerization/enspire" target="_blank">
-      在 GitHub 上支持 / 帮助我们！
-    </a>
+          <v-card class="mx-auto" max-width="300" outlined>
+            <v-list-item three-line>
+              <v-list-item-content>
+                <div class="overline mb-4">
+                  C社成员
+                </div>
+                <v-list-item-title class="headline mb-1">
+                  {{ person.name }}
+                </v-list-item-title>
+                <v-list-item-subtitle>
+                  {{ person.desc }}
+                </v-list-item-subtitle>
+              </v-list-item-content>
+              <v-list-item-avatar size="100">
+                <img
+                  :src="require('@/assets/img/' + person.alias + '-avatar.jpg')"
+                  :alt="person.alias"
+                />
+              </v-list-item-avatar>
+            </v-list-item>
+            <v-card-actions class="white justify-center">
+              <v-btn
+                icon
+                :href="'https://github.com/' + person.alias"
+                target="_blank"
+              >
+                <v-icon>
+                  mdi-link
+                </v-icon>
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+    <v-footer absolute>
+      <v-col class="text-center col-12">
+        <a href="https://github.com/Computerization/enspire" target="_blank">
+          在 GitHub 上支持 / 帮助我们！
+        </a>
+      </v-col>
+    </v-footer>
   </div>
 </template>
 
@@ -37,69 +62,30 @@ export default {
     contributors: [
       {
         alias: "Josh-Cena",
-        name: "陈思达"
+        name: "陈思达",
+        desc: "22届Web部负责人"
       },
       {
         alias: "yechs",
-        name: "舒烨"
+        name: "舒烨",
+        desc: "20届社长"
       },
       {
         alias: "JoyceQu",
-        name: "曲乐成"
+        name: "曲乐成",
+        desc: "22届美工"
       },
       {
         alias: "Will-WHT",
-        name: "王昊天"
+        name: "王昊天",
+        desc: "22届社长"
       },
       {
         alias: "ETwilight",
-        name: "郭培扬"
+        name: "郭培扬",
+        desc: "22届副社长"
       }
     ]
-  }),
-  computed: {
-    tableFirst: function() {
-      let res = [];
-      for (let i = 0; i < this.contributors.length; i += 4) {
-        res.push(i);
-      }
-      return res;
-    }
-  }
+  })
 };
 </script>
-
-<style scoped>
-.about {
-  text-align: center;
-}
-a {
-  color: #2071c1;
-  text-decoration: none;
-}
-table {
-  margin: 0 auto;
-  margin-bottom: 50px;
-}
-td {
-  padding: 10px;
-}
-.avatar {
-  border: 1px solid #cccccc;
-  border-radius: 50%;
-  width: 150px;
-  transition: all 0.2s;
-}
-.avatar:hover {
-  transform: scale(1.04);
-}
-.caption {
-  margin-top: 10px;
-  font-size: 5;
-  color: #2c3e50;
-}
-.caption:hover {
-  color: #2071c1;
-  text-decoration: none;
-}
-</style>
