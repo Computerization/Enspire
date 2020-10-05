@@ -1,10 +1,14 @@
 <template>
   <v-container>
-    <v-row v-for="index in 6" :key="index">
-      <v-subheader>{{ catName[index] }}</v-subheader>
+    <v-row v-for="index in 7" :key="index">
+      <v-subheader>{{ catName[index - 1] }}</v-subheader>
       <v-container fluid>
         <v-row>
-          <v-col v-for="item in clubs[index]" :key="item.name" align="center">
+          <v-col
+            v-for="item in clubs[index - 1]"
+            :key="item.name"
+            align="center"
+          >
             <v-card width="370" align="left">
               <v-img
                 :src="`https://cdn.vuetifyjs.com/images/cards/cooking.png`"
@@ -14,8 +18,10 @@
               <v-card-text>
                 <div>
                   {{
-                    item.chnDesc.substring(0, 90) +
-                      (item.chnDesc.length > 90 ? "..." : "")
+                    item.chnDesc == 0
+                      ? "暂无介绍"
+                      : item.chnDesc.substring(0, 90) +
+                        (item.chnDesc.length > 90 ? "..." : "")
                   }}
                 </div>
               </v-card-text>
