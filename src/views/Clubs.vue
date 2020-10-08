@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row v-for="index in 7" :key="index">
+    <v-row v-for="index in 6" :key="index">
       <v-subheader>{{ catName[index - 1] }}</v-subheader>
       <v-container fluid>
         <v-row>

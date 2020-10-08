@@ -14,7 +14,7 @@
         <v-toolbar-title>Enspire</v-toolbar-title>
       </div>
     </v-app-bar>
-    <v-navigation-drawer v-model="drawer" temporary absolute bottom>
+    <v-navigation-drawer v-model="drawer" temporary fixed bottom>
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="title">
