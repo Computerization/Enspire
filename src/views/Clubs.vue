@@ -6,10 +6,10 @@
         <v-row>
           <v-col
             v-for="item in clubs[index - 1]"
-            :key="item.name"
+            :key="item.engName"
             align="center"
           >
-            <v-card width="370" align="left">
+            <v-card width="370" align="left" :to="`/clubpage/${item.engName}`">
               <v-img
                 :src="`https://cdn.vuetifyjs.com/images/cards/cooking.png`"
                 height="200"
