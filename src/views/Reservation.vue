@@ -14,9 +14,7 @@
 
     <v-flex sm4 xs12 class="text-sm-left text-xs-center">
       <v-btn @click="$refs.calendar.prev()">
-        <v-icon dark left>
-          mdi-arrow-left
-        </v-icon>
+        <v-icon dark left>mdi-arrow-left</v-icon>
         Prev
       </v-btn>
     </v-flex>
@@ -26,9 +24,7 @@
     <v-flex sm4 xs12 class="text-sm-right text-xs-center">
       <v-btn @click="$refs.calendar.next()">
         Next
-        <v-icon right dark>
-          mdi-arrow-right
-        </v-icon>
+        <v-icon right dark>mdi-arrow-right</v-icon>
       </v-btn>
     </v-flex>
   </v-layout>

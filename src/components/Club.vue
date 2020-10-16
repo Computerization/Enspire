@@ -6,16 +6,10 @@
           {{ info.chnName }}
           <small>{{ info.engName }}</small>
         </h1>
-        <p
-          class="subheading font-weight-regular"
-          style="white-space: pre-wrap;"
-        >
+        <p class="subheading font-weight-regular" style="white-space: pre-wrap">
           {{ info.chnDesc }}
         </p>
-        <p
-          class="subheading font-weight-regular"
-          style="white-space: pre-wrap;"
-        >
+        <p class="subheading font-weight-regular" style="white-space: pre-wrap">
           {{ info.engDesc }}
         </p>
       </v-col>
