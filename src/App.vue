@@ -13,6 +13,10 @@
         />
         <v-toolbar-title>Enspire</v-toolbar-title>
       </div>
+      <v-spacer />
+      <v-btn fab outlined small @click="showLoginDialog()">
+        <v-icon>mdi-account</v-icon>
+      </v-btn>
     </v-app-bar>
     <v-navigation-drawer v-model="drawer" temporary fixed bottom>
       <v-list-item>
@@ -67,6 +71,7 @@
         <router-view />
       </v-container>
     </v-main>
+    <loginDialog ref="loginDialog" @login-success="globalInit"></loginDialog>
   </v-app>
 </template>
 
@@ -79,6 +84,8 @@
 </style>
 
 <script>
+import loginDialog from "./components/LoginDialog.vue";
+
 export default {
   data: () => ({
     drawer: false,
@@ -92,6 +99,18 @@ export default {
     group() {
       this.drawer = false;
     }
+  },
+  methods: {
+    showLoginDialog() {
+      this.$refs.loginDialog.showLoginDialog();
+    },
+    globalInit() {
+      this.$refs.loginDialog.hideLoginDialog();
+      alert("Hi:)");
+    }
+  },
+  components: {
+    loginDialog
   }
 };
 </script>
