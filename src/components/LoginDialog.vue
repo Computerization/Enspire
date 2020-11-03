@@ -32,9 +32,7 @@
           <v-btn color="primary lighten-1" outlined @click="hideLoginDialog()">
             关闭
           </v-btn>
-          <v-btn color="primary lighten-1" flat @click="tryLogin()">
-            登录
-          </v-btn>
+          <v-btn color="primary lighten-1" @click="tryLogin()">登录</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -59,7 +57,20 @@ export default {
     },
     tryLogin() {
       this.hideLoginDialog();
-      this.$emit("login-success");
+      this.$axios
+        .post("php/login.php", {
+          username: this.userName,
+          password: this.password
+        })
+        .then(response => {
+          let data = response.data;
+          if (data.status == "ok") {
+            this.hideLoginDialog();
+            this.$emit("login-success");
+          } else {
+            alert("Login Failed");
+          }
+        });
     }
   }
 };
