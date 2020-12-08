@@ -10,9 +10,10 @@
   "dependencies": {
     "axios": "^0.21.0",
     "core-js": "^3.8.1",
+    "highlight.js": "^10.4.1",
     "vue": "^2.6.11",
-    "vuetify": "^2.3.19",
     "vue-router": "^3.4.9",
+    "vuetify": "^2.3.19",
     "vuex": "^3.6.0"
   },
   "devDependencies": {
