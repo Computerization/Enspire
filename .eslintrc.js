@@ -3,12 +3,28 @@ module.exports = {
   env: {
     node: true
   },
-  extends: ["plugin:vue/essential", "eslint:recommended", "@vue/prettier"],
+  extends: [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:vue/essential",
+    "@vue/typescript",
+    "prettier",
+    "prettier/vue"
+  ],
+  plugins: ["@typescript-eslint"],
   parserOptions: {
-    parser: "babel-eslint"
+    parser: "@typescript-eslint/parser",
+    ecmaVersion: 2020,
+    sourceType: "module",
+    extraFileExtensions: [".vue"]
   },
   rules: {
+    "no-undef": "off", // covered by typescript
     "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
-    "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off"
+    "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
+    "prefer-const": [
+      "error",
+      { destructuring: "any", ignoreReadBeforeAssign: true }
+    ]
   }
 };

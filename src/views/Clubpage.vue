@@ -16,26 +16,26 @@
   </v-container>
 </template>
 
-<script>
-import Club from "@/components/Club.vue";
-import clubInfo from "@/assets/data/Club-Info.json";
+<script lang="ts">
+import Vue from "vue";
+import Club from "../components/Club.vue";
+import clubInfo from "../assets/data/Club-Info.json";
 
-export default {
+export default Vue.extend({
   components: {
     Club
   },
-  data: () => ({
-    info: null
-  }),
-  mounted() {
-    let name = this.$route.params.name;
-    for (let i = 0; i < 6; i++) {
-      for (let club of clubInfo[i]) {
-        if (club.engName == name) {
-          this.info = club;
-        }
+  computed: {
+    info(): ClubInfo {
+      const name = this.$route.params.name;
+      const club = clubInfo
+        .map(subCategory => subCategory.find(it => it.engName === name))
+        .find(it => it != null);
+      if (club == null) {
+        throw new Error(`Club with name '${name}' not found`);
       }
+      return club;
     }
   }
-};
+});
 </script>

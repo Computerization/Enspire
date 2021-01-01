@@ -39,8 +39,11 @@
   </v-layout>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from "vue";
+import Axios from "axios";
+
+export default Vue.extend({
   data() {
     return {
       loginDialog: false,
@@ -57,21 +60,19 @@ export default {
     },
     tryLogin() {
       this.hideLoginDialog();
-      this.$axios
-        .post("php/login.php", {
-          username: this.userName,
-          password: this.password
-        })
-        .then(response => {
-          let data = response.data;
-          if (data.status == "ok") {
-            this.hideLoginDialog();
-            this.$emit("login-success");
-          } else {
-            alert("Login Failed");
-          }
-        });
+      Axios.post("php/login.php", {
+        username: this.userName,
+        password: this.password
+      }).then(response => {
+        const data = response.data;
+        if (data.status == "ok") {
+          this.hideLoginDialog();
+          this.$emit("login-success");
+        } else {
+          alert("Login Failed");
+        }
+      });
     }
   }
-};
+});
 </script>

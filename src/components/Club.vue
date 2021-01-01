@@ -17,11 +17,13 @@
   </v-container>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue, { PropType } from "vue";
+
+export default Vue.extend({
   name: "Club",
   props: {
-    info: Object
+    info: Object as PropType<ClubInfo>
   }
-};
+});
 </script>
