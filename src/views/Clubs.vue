@@ -18,7 +18,7 @@
               <v-card-text>
                 <div>
                   {{
-                    item.chnDesc == 0
+                    item.chnDesc === ""
                       ? "暂无介绍"
                       : item.chnDesc.substring(0, 90) +
                         (item.chnDesc.length > 90 ? "..." : "")
@@ -33,10 +33,12 @@
   </v-container>
 </template>
 
-<script>
-import clubInfo from "@/assets/data/Club-Info.json";
+<script lang="ts">
+import Vue from "vue";
 
-export default {
+import clubInfo from "../assets/data/Club-Info.json";
+
+export default Vue.extend({
   data: () => ({
     catName: [
       "体育类社团",
@@ -48,5 +50,5 @@ export default {
     ],
     clubs: clubInfo
   })
-};
+});
 </script>

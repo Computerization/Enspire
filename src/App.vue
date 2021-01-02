@@ -83,10 +83,11 @@
 }
 </style>
 
-<script>
+<script lang="ts">
+import Vue from "vue";
 import loginDialog from "./components/LoginDialog.vue";
 
-export default {
+export default Vue.extend({
   data: () => ({
     drawer: false,
     group: null,
@@ -102,15 +103,15 @@ export default {
   },
   methods: {
     showLoginDialog() {
+      // @ts-expect-error: refactor it
       this.$refs.loginDialog.showLoginDialog();
     },
     globalInit() {
-      this.$refs.loginDialog.hideLoginDialog();
       alert("Hi:)");
     }
   },
   components: {
     loginDialog
   }
-};
+});
 </script>

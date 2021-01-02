@@ -4,8 +4,10 @@ import Vuetify from "vuetify/lib";
 
 Vue.use(Vuetify);
 
-export default new Vuetify({
+const vuetifyPlugin: Vuetify = new Vuetify({
   icons: {
     iconfont: "mdi"
   }
 });
+
+export default vuetifyPlugin;

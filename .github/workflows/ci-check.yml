@@ -1,0 +1,28 @@
+name: CI Check
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Set up Node
+        uses: actions/setup-node@v2-beta
+      - name: Use Yarn Cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.cache/yarn
+          key: yarn-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+          restore-keys: yarn-
+      - name: Yarn Install
+        run: yarn install
+      - name: Run Prettier Check
+        run: yarn format:check
+      - name: Run Linter
+        run: yarn lint
+      - name: Type Check
+        run: yarn type-check
