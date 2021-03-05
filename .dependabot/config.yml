@@ -8,6 +8,7 @@ update_configs:
     # Default reviewers requested for Pull Requests
     default_reviewers:
       - 'Josh-Cena'
+      - 'GeMini-220'
     # Default labels added for Pull Requests
     default_labels:
       - 'dependencies'
