@@ -8,7 +8,7 @@ module.exports = {
     "plugin:@typescript-eslint/recommended",
     "plugin:vue/essential",
     "@vue/typescript",
-    "prettier"
+    "prettier",
   ],
   plugins: ["@typescript-eslint"],
   parserOptions: {
