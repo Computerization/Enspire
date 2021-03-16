@@ -9,7 +9,6 @@ module.exports = {
     "plugin:vue/essential",
     "@vue/typescript",
     "prettier",
-    "prettier/vue"
   ],
   plugins: ["@typescript-eslint"],
   parserOptions: {
