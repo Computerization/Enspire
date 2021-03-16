@@ -7,7 +7,7 @@
     </v-flex>
 
     <v-flex sm4 xs12 class="text-sm-left text-xs-center">
-      <v-btn @click="calanderPrev()">
+      <v-btn @click="calendarPrev()">
         <v-icon dark left>mdi-arrow-left</v-icon>
         Prev
       </v-btn>
@@ -16,7 +16,7 @@
       <v-select v-model="type" :items="typeOptions" label="Type"></v-select>
     </v-flex>
     <v-flex sm4 xs12 class="text-sm-right text-xs-center">
-      <v-btn @click="calanderNext()">
+      <v-btn @click="calendarNext()">
         Next
         <v-icon right dark>mdi-arrow-right</v-icon>
       </v-btn>
@@ -34,18 +34,17 @@ export default Vue.extend({
     type: "month",
     typeOptions: [
       { text: "Day", value: "day" },
-      { text: "4 Day", value: "4day" },
       { text: "Week", value: "week" },
-      { text: "Month", value: "month" }
-    ]
+      { text: "Month", value: "month" },
+    ],
   }),
   methods: {
-    calanderPrev() {
+    calendarPrev() {
       ((this.$refs.calendar as unknown) as Calendar).prev();
     },
-    calanderNext() {
+    calendarNext() {
       ((this.$refs.calendar as unknown) as Calendar).next();
-    }
-  }
+    },
+  },
 });
 </script>

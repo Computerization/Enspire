@@ -7,7 +7,7 @@ const vuexStore: Store<Record<string, unknown>> = new Vuex.Store({
   state: {},
   mutations: {},
   actions: {},
-  modules: {}
+  modules: {},
 });
 
 export default vuexStore;

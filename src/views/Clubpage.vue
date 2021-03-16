@@ -23,19 +23,19 @@ import clubInfo from "../assets/data/Club-Info.json";
 
 export default Vue.extend({
   components: {
-    Club
+    Club,
   },
   computed: {
     info(): ClubInfo {
       const name = this.$route.params.name;
       const club = clubInfo
-        .map(subCategory => subCategory.find(it => it.engName === name))
-        .find(it => it != null);
+        .map((subCategory) => subCategory.find((it) => it.engName === name))
+        .find((it) => it != null);
       if (club == null) {
         throw new Error(`Club with name '${name}' not found`);
       }
       return club;
-    }
-  }
+    },
+  },
 });
 </script>

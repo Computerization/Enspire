@@ -23,7 +23,7 @@ import Vue, { PropType } from "vue";
 export default Vue.extend({
   name: "Club",
   props: {
-    info: Object as PropType<ClubInfo>
-  }
+    info: Object as PropType<ClubInfo>,
+  },
 });
 </script>

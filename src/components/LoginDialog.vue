@@ -48,7 +48,7 @@ export default Vue.extend({
     return {
       loginDialog: false,
       userName: null,
-      password: null
+      password: null,
     };
   },
   methods: {
@@ -62,8 +62,8 @@ export default Vue.extend({
       this.hideLoginDialog();
       Axios.post("php/login.php", {
         username: this.userName,
-        password: this.password
-      }).then(response => {
+        password: this.password,
+      }).then((response) => {
         const data = response.data;
         if (data.status == "ok") {
           this.hideLoginDialog();
@@ -72,7 +72,7 @@ export default Vue.extend({
           alert("Login Failed");
         }
       });
-    }
-  }
+    },
+  },
 });
 </script>

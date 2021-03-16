@@ -1,7 +1,7 @@
 module.exports = {
   root: true,
   env: {
-    node: true
+    node: true,
   },
   extends: [
     "eslint:recommended",
@@ -15,7 +15,7 @@ module.exports = {
     parser: "@typescript-eslint/parser",
     ecmaVersion: 2020,
     sourceType: "module",
-    extraFileExtensions: [".vue"]
+    extraFileExtensions: [".vue"],
   },
   rules: {
     "no-undef": "off", // covered by typescript
@@ -23,7 +23,7 @@ module.exports = {
     "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
     "prefer-const": [
       "error",
-      { destructuring: "any", ignoreReadBeforeAssign: true }
-    ]
-  }
+      { destructuring: "any", ignoreReadBeforeAssign: true },
+    ],
+  },
 };

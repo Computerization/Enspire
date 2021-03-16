@@ -93,13 +93,13 @@ export default Vue.extend({
     group: null,
     drawerItems: [
       { title: "我们的社团", icon: "mdi-view-dashboard", to: "/clubs" },
-      { title: "预约教室", icon: "mdi-calendar", to: "/reservation" }
-    ]
+      { title: "预约教室", icon: "mdi-calendar", to: "/reservation" },
+    ],
   }),
   watch: {
     group() {
       this.drawer = false;
-    }
+    },
   },
   methods: {
     showLoginDialog() {
@@ -108,10 +108,10 @@ export default Vue.extend({
     },
     globalInit() {
       alert("Hi:)");
-    }
+    },
   },
   components: {
-    loginDialog
-  }
+    loginDialog,
+  },
 });
 </script>

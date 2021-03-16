@@ -57,29 +57,29 @@ export default Vue.extend({
       {
         alias: "Josh-Cena",
         name: "陈思达",
-        desc: "22届Web部负责人"
+        desc: "22届Web部负责人",
       },
       {
         alias: "yechs",
         name: "舒烨",
-        desc: "20届社长"
+        desc: "20届社长",
       },
       {
         alias: "JoyceQu",
         name: "曲乐成",
-        desc: "22届美工"
+        desc: "22届美工",
       },
       {
         alias: "Will-WHT",
         name: "王昊天",
-        desc: "22届社长"
+        desc: "22届社长",
       },
       {
         alias: "ETwilight",
         name: "郭培扬",
-        desc: "22届副社长"
-      }
-    ]
-  })
+        desc: "22届副社长",
+      },
+    ],
+  }),
 });
 </script>

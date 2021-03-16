@@ -46,9 +46,9 @@ export default Vue.extend({
       "艺术类社团",
       "生活类社团",
       "学术类社团",
-      "其他"
+      "其他",
     ],
-    clubs: clubInfo
-  })
+    clubs: clubInfo,
+  }),
 });
 </script>

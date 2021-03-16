@@ -6,8 +6,8 @@ Vue.use(Vuetify);
 
 const vuetifyPlugin: Vuetify = new Vuetify({
   icons: {
-    iconfont: "mdi"
-  }
+    iconfont: "mdi",
+  },
 });
 
 export default vuetifyPlugin;
