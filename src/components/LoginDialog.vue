@@ -1,6 +1,6 @@
 <template>
   <v-layout row justify-center>
-    <v-dialog v-model="loginDialog" persistent max-width="400">
+    <v-dialog v-model="visible" persistent max-width="400">
       <v-card class="pa-4">
         <v-card-title>
           <span class="headline">登录</span>
@@ -29,7 +29,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary lighten-1" outlined @click="hideLoginDialog()">
+          <v-btn color="primary lighten-1" outlined @click="hide()">
             关闭
           </v-btn>
           <v-btn color="primary lighten-1" @click="tryLogin()">登录</v-btn>
@@ -46,27 +46,26 @@ import Axios from "axios";
 export default Vue.extend({
   data() {
     return {
-      loginDialog: false,
+      visible: false,
       userName: null,
       password: null,
     };
   },
   methods: {
-    showLoginDialog() {
-      this.loginDialog = true;
+    show(): void {
+      this.visible = true;
     },
-    hideLoginDialog() {
-      this.loginDialog = false;
+    hide(): void {
+      this.visible = false;
     },
-    tryLogin() {
-      this.hideLoginDialog();
+    tryLogin(): void {
       Axios.post("php/login.php", {
         username: this.userName,
         password: this.password,
       }).then((response) => {
         const data = response.data;
         if (data.status == "ok") {
-          this.hideLoginDialog();
+          this.hide();
           this.$emit("login-success");
         } else {
           alert("Login Failed");

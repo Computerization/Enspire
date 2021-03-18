@@ -14,6 +14,7 @@
         <v-toolbar-title>Enspire</v-toolbar-title>
       </div>
       <v-spacer />
+      <loginDialog ref="loginDialog" @login-success="globalInit"></loginDialog>
       <v-btn fab outlined small @click="showLoginDialog()">
         <v-icon>mdi-account</v-icon>
       </v-btn>
@@ -71,7 +72,33 @@
         <router-view />
       </v-container>
     </v-main>
-    <loginDialog ref="loginDialog" @login-success="globalInit"></loginDialog>
+    <v-footer
+      class="primary lighten-2 pa-3"
+      padless
+    >
+      <v-row
+        justify="center"
+        no-gutters
+      >
+        <v-btn
+          v-for="link in links"
+          :key="link.title"
+          color="white"
+          text
+          rounded
+          class="my-2"
+          :href="link.src"
+        >
+          {{ link.title }}
+        </v-btn>
+        <v-col
+          class="py-4 text-center white--text"
+          cols="12"
+        >
+          Copyright © {{new Date().getFullYear()}} Computerization. Built with Vue.
+        </v-col>
+      </v-row>
+    </v-footer>
   </v-app>
 </template>
 
@@ -87,6 +114,11 @@
 import Vue from "vue";
 import loginDialog from "./components/LoginDialog.vue";
 
+type dialog = {
+  show(): void;
+  hide(): void;
+}
+
 export default Vue.extend({
   data: () => ({
     drawer: false,
@@ -94,6 +126,9 @@ export default Vue.extend({
     drawerItems: [
       { title: "我们的社团", icon: "mdi-view-dashboard", to: "/clubs" },
       { title: "预约教室", icon: "mdi-calendar", to: "/reservation" },
+    ],
+    links: [
+      { title: "GitHub", src: "https://github.com/Computerization/Enspire"},
     ],
   }),
   watch: {
@@ -103,10 +138,10 @@ export default Vue.extend({
   },
   methods: {
     showLoginDialog() {
-      // @ts-expect-error: refactor it
-      this.$refs.loginDialog.showLoginDialog();
+      ((this.$refs.loginDialog as unknown) as dialog).show();
     },
     globalInit() {
+      ((this.$refs.loginDialog as unknown) as dialog).hide();
       alert("Hi:)");
     },
   },
