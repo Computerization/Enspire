@@ -81,8 +81,8 @@ export default Vue.extend({
       {
         alias: "edgexyz",
         name: "杨书",
-        desc: "22届后端（伪）"
-      }
+        desc: "22届后端（伪）",
+      },
     ],
   }),
 });
