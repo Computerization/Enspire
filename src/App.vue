@@ -72,14 +72,8 @@
         <router-view />
       </v-container>
     </v-main>
-    <v-footer
-      class="primary lighten-2 pa-3"
-      padless
-    >
-      <v-row
-        justify="center"
-        no-gutters
-      >
+    <v-footer class="primary lighten-2 pa-3" padless>
+      <v-row justify="center" no-gutters>
         <v-btn
           v-for="link in links"
           :key="link.title"
@@ -91,11 +85,9 @@
         >
           {{ link.title }}
         </v-btn>
-        <v-col
-          class="py-4 text-center white--text"
-          cols="12"
-        >
-          Copyright © {{new Date().getFullYear()}} Computerization. Built with Vue.
+        <v-col class="py-4 text-center white--text" cols="12">
+          Copyright © {{ new Date().getFullYear() }} Computerization. Built with
+          Vue.
         </v-col>
       </v-row>
     </v-footer>
@@ -117,7 +109,7 @@ import loginDialog from "./components/LoginDialog.vue";
 type dialog = {
   show(): void;
   hide(): void;
-}
+};
 
 export default Vue.extend({
   data: () => ({
@@ -128,7 +120,7 @@ export default Vue.extend({
       { title: "预约教室", icon: "mdi-calendar", to: "/reservation" },
     ],
     links: [
-      { title: "GitHub", src: "https://github.com/Computerization/Enspire"},
+      { title: "GitHub", src: "https://github.com/Computerization/Enspire" },
     ],
   }),
   watch: {
