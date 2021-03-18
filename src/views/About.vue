@@ -42,7 +42,6 @@
 
 <script lang="ts">
 import Vue from "vue";
-
 export default Vue.extend({
   name: "about",
   data: () => ({
@@ -71,6 +70,11 @@ export default Vue.extend({
         alias: "ETwilight",
         name: "郭培扬",
         desc: "22届副社长",
+      },
+      {
+        alias: "edgexyz",
+        name: "杨书",
+        desc: "22届后端（伪）",
       },
     ],
   }),
