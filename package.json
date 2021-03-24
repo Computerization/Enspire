@@ -16,7 +16,7 @@
     "highlight.js": "^10.7.1",
     "vue": "^2.6.11",
     "vue-router": "^3.5.1",
-    "vuetify": "^2.4.7",
+    "vuetify": "^2.4.8",
     "vuex": "^3.6.2"
   },
   "devDependencies": {
