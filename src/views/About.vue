@@ -76,6 +76,11 @@ export default Vue.extend({
         name: "杨书",
         desc: "22届后端（伪）",
       },
+      {
+        alias: "Lazenander",
+        name: "杨淏然",
+        desc: "23届打工人",
+      }
     ],
   }),
 });
