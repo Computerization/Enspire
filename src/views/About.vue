@@ -80,7 +80,7 @@ export default Vue.extend({
         alias: "Lazenander",
         name: "杨淏然",
         desc: "23届打工人",
-      }
+      },
     ],
   }),
 });
