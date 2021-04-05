@@ -1,6 +1,18 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-yarn format
-yarn lint
-yarn type-check
+## Run lint-staged
+yarn run lint-staged
+
+# ## If there's change to JS files, run type-check
+# TODO: From a discussion with Josh-Cena, it seems best to
+# disable vti diagnose for now
+
+# FILES=$(git diff --cached --name-only --diff-filter=ACMR "*.js" "*.ts" "*.vue" | sed 's| |\\ |g')
+
+# # Quit if no action needed
+# [ -z "$FILES" ] && exit 0
+
+# # It is run here, since vti-diagnose does not accept file arguments
+# # and thus should not be run with lint-staged
+# yarn type-check

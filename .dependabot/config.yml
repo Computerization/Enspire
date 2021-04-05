@@ -1,20 +1,20 @@
 version: 1
 update_configs:
-  - package_manager: 'javascript'
-    directory: '/'
+  - package_manager: "javascript"
+    directory: "/"
     # changed frequency to daily to avoid the PR notification bombing
-    update_schedule: 'daily'
-    target_branch: 'master'
+    update_schedule: "daily"
+    target_branch: "master"
     # Default reviewers requested for Pull Requests
     default_reviewers:
-      - 'Josh-Cena'
-      - 'GeMini-220'
+      - "Josh-Cena"
+      - "GeMini-220"
     # Default labels added for Pull Requests
     default_labels:
-      - 'dependencies'
+      - "dependencies"
     # increase versions in package.json for apps
     # widen version range for libraries
-    version_requirement_updates: 'auto'
+    version_requirement_updates: "auto"
     commit_message:
-      prefix: 'Dependencies'
+      prefix: "Dependencies"
       include_scope: true
