@@ -1,35 +1,15 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-# JavaScript Files (will be linted & prettified)
+## Run lint-staged
+yarn run lint-staged
+
+## If there's change to JS files, run type-check
 FILES=$(git diff --cached --name-only --diff-filter=ACMR "*.js" "*.ts" "*.vue" | sed 's| |\\ |g')
 
-# Other files that should be prettified
-PRETTYFILES=$(git diff --cached --name-only --diff-filter=ACMR "*.html" "*.css" "*.md" "*.json" | sed 's| |\\ |g')
-
 # Quit if no action needed
-[ -z "$FILES" ] && [ -z "$PRETTYFILES" ] && exit 0
+[ -z "$FILES" ] && exit 0
 
-if [ -n "$FILES" ]; then
-  # Lint the JS files
-  echo "$FILES" | xargs yarn lint
-  # However type-check must be run on all files (instead of only those to be committed)
-  yarn type-check
-
-  # Prettify JS files
-  echo "$FILES" | xargs yarn run prettier --write
-
-  # Add back the modified/prettified files to staging
-  echo "$FILES" | xargs git add
-fi
-
-if [ -n "$PRETTYFILES" ]; then
-  # Prettify HTML/CSS & Markdown & JSON files
-  echo "$PRETTYFILES" | xargs yarn run prettier --write
-
-  # Add back the modified/prettified files to staging
-  echo "$PRETTYFILES" | xargs git add
-fi
-
-# Note that the `git add` may not work
-# In that case, you need a `git update-index -g` post-commit hook
+# It is run here, since vti-diagnose does not accept file arguments
+# and thus should not be run with lint-staged
+yarn type-check
