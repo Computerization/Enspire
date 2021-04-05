@@ -4,12 +4,15 @@
 ## Run lint-staged
 yarn run lint-staged
 
-## If there's change to JS files, run type-check
-FILES=$(git diff --cached --name-only --diff-filter=ACMR "*.js" "*.ts" "*.vue" | sed 's| |\\ |g')
+# ## If there's change to JS files, run type-check
+# TODO: From a discussion with Josh-Cena, it seems best to
+# disable vti diagnose for now
 
-# Quit if no action needed
-[ -z "$FILES" ] && exit 0
+# FILES=$(git diff --cached --name-only --diff-filter=ACMR "*.js" "*.ts" "*.vue" | sed 's| |\\ |g')
 
-# It is run here, since vti-diagnose does not accept file arguments
-# and thus should not be run with lint-staged
-yarn type-check
+# # Quit if no action needed
+# [ -z "$FILES" ] && exit 0
+
+# # It is run here, since vti-diagnose does not accept file arguments
+# # and thus should not be run with lint-staged
+# yarn type-check
