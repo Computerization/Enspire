@@ -37,6 +37,13 @@
         </v-col>
       </v-row>
     </v-container>
+    <v-footer absolute>
+      <v-col class="text-center col-12">
+        <a href="https://github.com/Computerization/enspire" target="_blank">
+          在 GitHub 上支持 / 帮助我们！
+        </a>
+      </v-col>
+    </v-footer>
   </div>
 </template>
 
@@ -80,6 +87,11 @@ export default Vue.extend({
         alias: "Lazenander",
         name: "杨淏然",
         desc: "23届打工人",
+      },
+      {
+        alias: "GeMini-220",
+        name: "张驰",
+        desc: "23届社员",
       },
     ],
   }),
