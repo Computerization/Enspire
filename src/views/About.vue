@@ -81,6 +81,11 @@ export default Vue.extend({
         name: "杨淏然",
         desc: "23届打工人",
       },
+      {
+        alias: "mathscty",
+        name: "陈韬宇",
+        desc: "23届开发者",
+      },
     ],
   }),
 });
