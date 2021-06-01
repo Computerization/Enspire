@@ -40,10 +40,10 @@ export default Vue.extend({
   }),
   methods: {
     calendarPrev() {
-      ((this.$refs.calendar as unknown) as Calendar).prev();
+      (this.$refs.calendar as unknown as Calendar).prev();
     },
     calendarNext() {
-      ((this.$refs.calendar as unknown) as Calendar).next();
+      (this.$refs.calendar as unknown as Calendar).next();
     },
   },
 });

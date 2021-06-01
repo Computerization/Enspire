@@ -130,10 +130,10 @@ export default Vue.extend({
   },
   methods: {
     showLoginDialog() {
-      ((this.$refs.loginDialog as unknown) as dialog).show();
+      (this.$refs.loginDialog as unknown as dialog).show();
     },
     globalInit() {
-      ((this.$refs.loginDialog as unknown) as dialog).hide();
+      (this.$refs.loginDialog as unknown as dialog).hide();
       alert("Hi:)");
     },
   },
