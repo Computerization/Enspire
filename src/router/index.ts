@@ -23,19 +23,19 @@ const routes = [
     path: "/reservation",
     name: "Reservation",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Reservation.vue"),
+      import(/* webpackChunkName: "reservation" */ "../views/Reservation.vue"),
   },
   {
     path: "/clubs",
     name: "Clubs",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Clubs.vue"),
+      import(/* webpackChunkName: "clubs" */ "../views/Clubs.vue"),
   },
   {
     path: "/clubpage/:name",
     name: "Clubpage",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Clubpage.vue"),
+      import(/* webpackChunkName: "clubpage" */ "../views/Clubpage.vue"),
   },
 ];
 

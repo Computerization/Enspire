@@ -1,11 +1,11 @@
 <template>
   <v-container>
     <v-row v-for="index in 6" :key="index">
-      <v-subheader>{{ catName[index - 1] }}</v-subheader>
+      <v-subheader>{{ clubInfo[index - 1].catName }}</v-subheader>
       <v-container fluid>
         <v-row>
           <v-col
-            v-for="item in clubs[index - 1]"
+            v-for="item in clubInfo[index - 1].clubs"
             :key="item.engName"
             align="center"
           >
@@ -40,15 +40,7 @@ import clubInfo from "../assets/data/Club-Info.json";
 
 export default Vue.extend({
   data: () => ({
-    catName: [
-      "体育类社团",
-      "服务类社团",
-      "艺术类社团",
-      "生活类社团",
-      "学术类社团",
-      "其他",
-    ],
-    clubs: clubInfo,
+    clubInfo: clubInfo,
   }),
 });
 </script>
