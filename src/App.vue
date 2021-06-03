@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
+    <v-app-bar app color="art-primary" dark>
       <div class="d-flex align-center">
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <v-img
@@ -72,20 +72,20 @@
         <router-view />
       </v-container>
     </v-main>
-    <v-footer class="primary lighten-2 pa-3" padless>
+    <v-footer class="art-secondary pa-3" background-color="rgb(50, 173, 225)">
       <v-row justify="center" no-gutters>
         <v-btn
           v-for="link in links"
           :key="link.title"
-          color="white"
+          color="rgb(50, 173, 225)"
           text
           rounded
-          class="my-2"
+          class="art-footerBt1"
           :href="link.src"
         >
           {{ link.title }}
         </v-btn>
-        <v-col class="py-4 text-center white--text" cols="12">
+        <v-col class="text-center white--text art-footerTx1" cols="12">
           Copyright © {{ new Date().getFullYear() }} Computerization. Built with
           Vue.
         </v-col>
@@ -95,10 +95,24 @@
 </template>
 
 <style scoped>
+.art-primary {
+  background-color: #ffffff !important;
+  box-shadow: rgb(243, 243, 243) 1px !important;
+}
+.art-secondary {
+  background-color: #dee8ec !important;
+}
 .logo {
   border-radius: 20%;
   background-color: white;
   margin-left: 20px;
+}
+/* .art-footerTx1 {
+  text- ;
+} */
+.art-footerBt1 {
+  background-color: white;
+  margin-bottom: 5px;
 }
 </style>
 
