@@ -72,12 +72,11 @@
         <router-view />
       </v-container>
     </v-main>
-    <v-footer class="art-footer pa-3" background-color="rgb(50, 173, 225)">
+    <v-footer class="art-footer" background-color="rgb(50, 173, 225)">
       <v-row justify="center" no-gutters>
         <v-btn
           v-for="link in links"
           :key="link.title"
-          color="rgb(50, 173, 225)"
           text
           rounded
           class="art-footerBt1"
@@ -85,7 +84,7 @@
         >
           {{ link.title }}
         </v-btn>
-        <v-col class="text-center white--text art-footerTx1" cols="12">
+        <v-col class="text-center art-footerTx1" cols="12">
           Copyright © {{ new Date().getFullYear() }} Computerization. Built with
           Vue.
         </v-col>
@@ -97,22 +96,28 @@
 <style scoped>
 .art-header {
   background-color: #ffffff !important;
-  box-shadow: rgba(0, 0, 0, 0.151) 0px 0px 35px 8px !important;
+  box-shadow: rgba(0, 0, 0, 0.096) 0px 0px 50px 8px !important;
 }
 .art-footer {
-  background-color: #dee8ec !important;
+  background-color: #f9fbfb !important;
+  padding: 23px 0px 23px 0px;
+  border: solid 1px #e4e4e4;
 }
 .logo {
   border-radius: 20%;
   background-color: white;
   margin-left: 20px;
 }
-/* .art-footerTx1 {
-  text- ;
-} */
+.art-footerTx1 {
+  color: #126b77 !important;
+  letter-spacing: -0.3px;
+  height: 25px;
+  line-height: 27px;
+}
 .art-footerBt1 {
-  background-color: white;
-  margin-bottom: 5px;
+  background-color: #1baec1;
+  color: #f9fbfb;
+  margin-bottom: 10px;
 }
 </style>
 
