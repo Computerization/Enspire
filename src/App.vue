@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app color="art-primary" dark>
+    <v-app-bar app color="art-header">
       <div class="d-flex align-center">
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <v-img
@@ -72,7 +72,7 @@
         <router-view />
       </v-container>
     </v-main>
-    <v-footer class="art-secondary pa-3" background-color="rgb(50, 173, 225)">
+    <v-footer class="art-footer pa-3" background-color="rgb(50, 173, 225)">
       <v-row justify="center" no-gutters>
         <v-btn
           v-for="link in links"
@@ -95,11 +95,11 @@
 </template>
 
 <style scoped>
-.art-primary {
+.art-header {
   background-color: #ffffff !important;
-  box-shadow: rgb(243, 243, 243) 1px !important;
+  box-shadow: rgba(0, 0, 0, 0.151) 0px 0px 35px 8px !important;
 }
-.art-secondary {
+.art-footer {
   background-color: #dee8ec !important;
 }
 .logo {
