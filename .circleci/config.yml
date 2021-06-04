@@ -42,9 +42,8 @@ jobs:
       - run:
           name: Copy files to remote server
           command: |
-            echo 'theenspire.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHghe+sx1Y/la3EhFbjeWg4De8eVM7G+ja+oXlm7e/6v' >> ~/.ssh/known_hosts
-            echo "${PWD}" && ls .
-          # scp -r dist ubuntu@theenspire.com:/var/www/html
+            echo $HOST_FINGERPRINT >> ~/.ssh/known_hosts
+            scp -r dist $REMOTE_DIR
 
 workflows:
   version: 2.1
