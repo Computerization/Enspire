@@ -1,17 +1,10 @@
 version: 2.1
 
-executors:
-  computerization-bot:
-    docker:
-      - image: circleci/node:15.12.0
-        auth:
-          uername: computerization-bot
-          password: 20FsxzjymQl17
-
 jobs:
 
   build:
-    executor: computerization-bot
+    docker:
+      - image: circleci/node:15.12.0
     steps:
       - checkout
       - restore_cache:
@@ -37,7 +30,8 @@ jobs:
             - node_modules
 
   deploy-to-server:
-    executor: computerization-bot
+    docker:
+      - image: circleci/node:15.12.0
     steps:
       - checkout
       - add_ssh_keys:
