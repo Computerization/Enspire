@@ -60,7 +60,7 @@ jobs:
           command: |
             echo $HOST_FINGERPRINT >> ~/.ssh/known_hosts
             ls dist
-            ssh $REMOTE_ADDR "ls ${DEPLOY_DIR}"
+            ssh $REMOTE_ADDR "ls ${DEPLOY_DIR} && echo 'Hello!' > ${DEPLOY_DIR}/test.txt"
 
 workflows:
   version: 2.1
