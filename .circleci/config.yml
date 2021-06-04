@@ -43,16 +43,39 @@ jobs:
           name: Copy files to remote server
           command: |
             echo $HOST_FINGERPRINT >> ~/.ssh/known_hosts
-            scp -r dist/* $REMOTE_DIR
+            scp -r dist/* $(REMOTE_ADDR):$(DEPLOY_DIR)
+
+  test-server-connection:
+    docker:
+      - image: circleci/node:15.12.0
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - "94:c5:37:e2:c6:6d:b1:c3:0f:36:cd:5c:0f:49:7f:cc"
+      - attach_workspace:
+          at: .
+      - run:
+          name: Communicate with server
+          command: |
+            echo $HOST_FINGERPRINT >> ~/.ssh/known_hosts
+            ls dist
+            ssh $REMOTE_ADDR "ls $(DEPLOY_DIR)"
 
 workflows:
   version: 2.1
   build-deploy:
     jobs:
       - build
+      - test-server-connection:
+          requires:
+            - build
+          filters:
+            branches:
+              only: /circleci.*/
       - deploy-to-server:
           requires:
             - build
           filters:
             branches:
-              only: /(master|circleci.*)/
+              only: /master/
