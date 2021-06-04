@@ -11,6 +11,8 @@ jobs:
           command: echo 'Hello world!'
 
   deploy-to-server:
+    docker:
+      - image: circleci/node:15.12.0
     steps:
       - add_ssh_keys:
           fingerprints:
