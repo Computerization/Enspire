@@ -23,7 +23,7 @@
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="title">Enspire</v-list-item-title>
-          <v-list-item-subtitle>Make CAS great again</v-list-item-subtitle>
+          <v-list-item-subtitle>Make Netlify great again</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
       <v-divider />
