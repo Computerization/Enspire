@@ -43,7 +43,7 @@ jobs:
           name: Copy files to remote server
           command: |
             echo $HOST_FINGERPRINT >> ~/.ssh/known_hosts
-            scp -r dist $REMOTE_DIR
+            scp -r dist/* $REMOTE_DIR
 
 workflows:
   version: 2.1
