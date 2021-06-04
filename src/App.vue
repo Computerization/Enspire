@@ -94,6 +94,9 @@
 </template>
 
 <style scoped>
+.container {
+  padding: 0;
+}
 .art-header {
   background-color: #ffffff !important;
   box-shadow: rgba(0, 0, 0, 0.096) 0px 0px 50px 8px !important;
