@@ -43,7 +43,7 @@ jobs:
           name: Copy files to remote server
           command: |
             echo $HOST_FINGERPRINT >> ~/.ssh/known_hosts
-            scp -r dist/* $(REMOTE_ADDR):$(DEPLOY_DIR)
+            scp -r dist/* ${REMOTE_ADDR}:${DEPLOY_DIR}
 
   test-server-connection:
     docker:
@@ -60,7 +60,7 @@ jobs:
           command: |
             echo $HOST_FINGERPRINT >> ~/.ssh/known_hosts
             ls dist
-            ssh $REMOTE_ADDR "ls $(DEPLOY_DIR)"
+            ssh $REMOTE_ADDR "ls ${DEPLOY_DIR}"
 
 workflows:
   version: 2.1
