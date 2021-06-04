@@ -38,10 +38,14 @@ jobs:
             - "94:c5:37:e2:c6:6d:b1:c3:0f:36:cd:5c:0f:49:7f:cc"
       - run:
           name: Login with SSH
-          command: ssh ubuntu@theenspire.com
+          command: |
+            echo 'theenspire.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHghe+sx1Y/la3EhFbjeWg4De8eVM7G+ja+oXlm7e/6v' >> ~/.ssh/known_hosts
+            ssh ubuntu@theenspire.com
       - run:
           name: Git pull
-          command: cd /var/www/html; echo 'Hello world!'
+          command: |
+            cd /var/www/html
+            echo 'Hello world!'
 
 workflows:
   version: 2.1
