@@ -39,11 +39,10 @@ jobs:
             - "94:c5:37:e2:c6:6d:b1:c3:0f:36:cd:5c:0f:49:7f:cc"
       - run:
           name: Copy files to remote server
-          working_directory: dist
           command: |
             echo 'theenspire.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHghe+sx1Y/la3EhFbjeWg4De8eVM7G+ja+oXlm7e/6v' >> ~/.ssh/known_hosts
             echo "${PWD}" && ls .
-            scp -r "${PWD}" ubuntu@theenspire.com:/var/www/html
+            scp -r dist ubuntu@theenspire.com:/var/www/html
 
 workflows:
   version: 2.1
