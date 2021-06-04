@@ -40,7 +40,7 @@ jobs:
           name: Copy files to remote server
           command: |
             echo 'theenspire.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHghe+sx1Y/la3EhFbjeWg4De8eVM7G+ja+oXlm7e/6v' >> ~/.ssh/known_hosts
-            scp . ubuntu@theenspire.com:/var/www/html
+            scp -r . ubuntu@theenspire.com:/var/www/html
 
 workflows:
   version: 2.1
