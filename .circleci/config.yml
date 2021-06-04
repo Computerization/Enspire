@@ -53,5 +53,4 @@ workflows:
             - build
           filters:
             branches:
-              only: master
-              only: /^circleci.*/
+              only: /(master|circleci.*)/
