@@ -41,6 +41,7 @@ jobs:
           working_directory: dist
           command: |
             echo 'theenspire.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHghe+sx1Y/la3EhFbjeWg4De8eVM7G+ja+oXlm7e/6v' >> ~/.ssh/known_hosts
+            ls .
             scp -r "${PWD}" ubuntu@theenspire.com:/var/www/html
 
 workflows:
