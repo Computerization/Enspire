@@ -6,18 +6,10 @@
         <h1 class="art-titleTx2">Enspire</h1>
       </div>
       <v-carousel class="art-banner">
-        <v-carousel-item
-          v-for="(banner, i) in banners"
-          :key="i"
-          :src="banner.src"
-        ></v-carousel-item>
+        <v-carousel-item v-for="(banner, i) in banners" :key="i">
+          <img :src="banner.src" style="height: 20vw; width: auto" />
+        </v-carousel-item>
       </v-carousel>
-      <!--img
-      alt="Enspire logo"
-      class="logo"
-      src="@/assets/img/Enspire-logo.svg"
-      width="100px"
-    /-->
     </div>
   </div>
 </template>
@@ -52,33 +44,26 @@
 }
 .art-banner {
   width: 53vw;
-  height: 18.5vw !important;
+  height: 20vw !important;
   float: right;
   border-radius: 1vw;
   outline: #e4e4e4 1px;
-}
-/*.home {
   text-align: center;
 }
-.logo {
-  border-radius: 20%;
-}*/
 </style>
 
 <script lang="ts">
 import Vue from "vue";
-import Vuetify from "vuetify";
 
 export default Vue.extend({
-  vuetify: new Vuetify(),
   data() {
     return {
       banners: [
         {
-          src: "../assets/img/Enspire-logo.svg",
+          src: require("../assets/img/Enspire-logo.svg"),
         },
         {
-          src: "../assets/img/Josh-Cena-avatar.jpg",
+          src: require("../assets/img/Josh-Cena-avatar.jpg"),
         },
       ],
     };

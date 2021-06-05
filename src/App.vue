@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app color="art-header">
+    <v-app-bar app class="art-header">
       <div class="d-flex align-center">
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <v-img
@@ -72,7 +72,7 @@
         <router-view />
       </v-container>
     </v-main>
-    <v-footer class="art-footer" background-color="rgb(50, 173, 225)">
+    <v-footer class="art-footer">
       <v-row justify="center" no-gutters>
         <v-btn
           v-for="link in links"
