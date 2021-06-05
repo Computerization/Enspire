@@ -9,7 +9,7 @@
         <v-carousel-item
           v-for="(banner, i) in banners"
           :key="i"
-          :src="banners.src"
+          :src="banner.src"
         ></v-carousel-item>
       </v-carousel>
       <!--img
