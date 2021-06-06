@@ -10,6 +10,10 @@
     </v-row>
     <v-row>
       <v-col>
+        <v-img
+          :src="require('@/assets/img/club/' + getId + '.png')"
+          height="200"
+        />
         <Club :info="info"></Club>
       </v-col>
     </v-row>
@@ -29,12 +33,26 @@ export default Vue.extend({
     info(): ClubInfo {
       const name = this.$route.params.name;
       const club = clubInfo
-        .map((subCategory) => subCategory.clubs.find((it) => it.engName === name))
+        .map((subCategory) =>
+          subCategory.clubs.find((it) => it.engName === name)
+        )
         .find((it) => it != null);
       if (club == null) {
         throw new Error(`Club with name '${name}' not found`);
       }
       return club;
+    },
+    getId(): number {
+      const name = this.$route.params.name;
+      const club = clubInfo
+        .map((subCategory) =>
+          subCategory.clubs.find((it) => it.engName === name)
+        )
+        .find((it) => it != null);
+      if (club == null) {
+        throw new Error(`Club with name '${name}' not found`);
+      }
+      return club.id;
     },
   },
 });

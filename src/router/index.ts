@@ -32,7 +32,7 @@ const routes = [
       import(/* webpackChunkName: "clubs" */ "../views/Clubs.vue"),
   },
   {
-    path: "/clubpage/:id",
+    path: "/clubpage/:name",
     name: "Clubpage",
     component: () =>
       import(/* webpackChunkName: "clubpage" */ "../views/Clubpage.vue"),

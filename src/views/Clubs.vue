@@ -9,8 +9,9 @@
             :key="item.id"
             align="center"
           >
-            <v-card width="370" align="left" :to="`/clubpage/${item.name}`">
+            <v-card width="370" align="left" :to="`/clubpage/${item.engName}`">
               <v-img
+                :id="item.id"
                 :src="require('@/assets/img/club/' + item.id + '.png')"
                 height="200"
               />
