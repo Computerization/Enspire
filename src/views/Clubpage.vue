@@ -27,14 +27,14 @@ export default Vue.extend({
   },
   computed: {
     info(): ClubInfo {
-      const name = this.$route.params.name;
+      const id = Number(this.$route.params.id);
       const club = clubInfo
         .map((subCategory) =>
-          subCategory.clubs.find((it) => it.engName === name)
+          subCategory.clubs.find((it) => it.id === id)
         )
         .find((it) => it != null);
       if (club == null) {
-        throw new Error(`Club with name '${name}' not found`);
+        throw new Error(`Club with id '${id}' not found`);
       }
       return club;
     },
