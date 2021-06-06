@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <v-img :src="require(`@/assets/img/club/${info.id}.png`)" height="200" />
     <v-row>
       <v-col class="mb-4">
         <h1 class="display-2 font-weight-bold mb-3">
