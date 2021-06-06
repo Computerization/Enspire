@@ -9,7 +9,7 @@
             :key="item.id"
             align="center"
           >
-            <v-card width="370" align="left" :to="`/clubpage/${item.id}`">
+            <v-card width="370" align="left" :to="`/clubpage/${item.name}`">
               <v-img
                 :src="require('@/assets/img/club/' + item.id + '.png')"
                 height="200"

@@ -27,12 +27,12 @@ export default Vue.extend({
   },
   computed: {
     info(): ClubInfo {
-      const id = Number(this.$route.params.id);
+      const name = this.$route.params.name;
       const club = clubInfo
-        .map((subCategory) => subCategory.clubs.find((it) => it.id === id))
+        .map((subCategory) => subCategory.clubs.find((it) => it.engName === name))
         .find((it) => it != null);
       if (club == null) {
-        throw new Error(`Club with id '${id}' not found`);
+        throw new Error(`Club with name '${name}' not found`);
       }
       return club;
     },
