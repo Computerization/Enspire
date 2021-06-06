@@ -29,7 +29,9 @@ export default Vue.extend({
     info(): ClubInfo {
       const id = Number(this.$route.params.id);
       const club = clubInfo
-        .map((subCategory) => subCategory.clubs.find((it) => it.id === id))
+        .map((subCategory) =>
+          subCategory.clubs.find((it) => it.id === id)
+        )
         .find((it) => it != null);
       if (club == null) {
         throw new Error(`Club with id '${id}' not found`);
