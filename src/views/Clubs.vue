@@ -11,8 +11,7 @@
           >
             <v-card width="370" align="left" :to="`/clubpage/${item.engName}`">
               <v-img
-                :id="item.id"
-                :src="require('@/assets/img/club/' + item.id + '.png')"
+                :src="require(`@/assets/img/club/${item.id}.png`)"
                 height="200"
               />
               <v-card-title>{{ item.chnName }}</v-card-title>
