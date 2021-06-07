@@ -10,7 +10,7 @@
     </v-row>
     <v-row>
       <v-col>
-        <Club :info="info"></Club>
+        <ClubPageMain :club="club" />
       </v-col>
     </v-row>
   </v-container>
@@ -18,16 +18,16 @@
 
 <script lang="ts">
 import Vue from "vue";
-import Club from "../components/ClubPageMain.vue";
+import ClubPageMain from "../components/ClubPageMain.vue";
 import clubInfo from "../assets/data/Club-Info.json";
 import { encode } from "../utils/urlTransform";
 
 export default Vue.extend({
   components: {
-    Club,
+    ClubPageMain,
   },
   computed: {
-    info(): ClubInfo {
+    club(): ClubInfo {
       const name = this.$route.params.name;
       const club = clubInfo
         .map((subCategory) =>

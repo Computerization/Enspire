@@ -19,6 +19,7 @@
 
 <script lang="ts">
 import Vue, { PropType } from "vue";
+import fetchImg from "../utils/fetchImg";
 import { encode } from "../utils/urlTransform";
 
 export default Vue.extend({
@@ -28,15 +29,14 @@ export default Vue.extend({
   },
   data: function () {
     return {
-      imgUrl: require("@/assets/img/club/not-found.png"),
+      imgUrl: "",
     };
   },
   mounted() {
-    try {
-      this.imgUrl = require(`@/assets/img/club/${this.$props.club.id}.png`);
-    } catch (e) {
-      this.imgUrl = require("@/assets/img/club/not-found.png");
-    }
+    this.imgUrl = fetchImg(
+      `club/${this.$props.club.id}.png`,
+      "club/not-found.png"
+    );
   },
   methods: {
     encode: encode,

@@ -27,11 +27,23 @@
 
 <script lang="ts">
 import Vue, { PropType } from "vue";
+import fetchImg from "../utils/fetchImg";
 
 export default Vue.extend({
   name: "Club",
   props: {
-    info: Object as PropType<ClubInfo>,
+    club: Object as PropType<ClubInfo>,
+  },
+  data() {
+    return {
+      logoUrl: "",
+    };
+  },
+  mounted: function () {
+    this.logoUrl = fetchImg(
+      `club/${this.$props.club.id}.png`,
+      "club/not-found.png"
+    );
   },
 });
 </script>
