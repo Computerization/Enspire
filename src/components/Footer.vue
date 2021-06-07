@@ -42,10 +42,12 @@
 import Vue from "vue";
 
 export default Vue.extend({
-  data: () => ({
-    links: [
-      { title: "GitHub", src: "https://github.com/Computerization/Enspire" },
-    ],
-  }),
+  data() {
+    return {
+      links: [
+        { title: "GitHub", src: "https://github.com/Computerization/Enspire" },
+      ],
+    };
+  },
 });
 </script>

@@ -27,7 +27,7 @@ export default Vue.extend({
   props: {
     club: Object as PropType<ClubInfo>,
   },
-  data: function () {
+  data() {
     return {
       imgUrl: "",
     };

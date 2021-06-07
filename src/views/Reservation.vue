@@ -30,14 +30,16 @@ import Vue from "vue";
 type Calendar = { prev(): void; next(): void };
 
 export default Vue.extend({
-  data: () => ({
-    type: "month",
-    typeOptions: [
-      { text: "Day", value: "day" },
-      { text: "Week", value: "week" },
-      { text: "Month", value: "month" },
-    ],
-  }),
+  data() {
+    return {
+      type: "month",
+      typeOptions: [
+        { text: "Day", value: "day" },
+        { text: "Week", value: "week" },
+        { text: "Month", value: "month" },
+      ],
+    };
+  },
   methods: {
     calendarPrev() {
       (this.$refs.calendar as unknown as Calendar).prev();

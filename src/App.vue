@@ -18,9 +18,11 @@ import sidebar from "./components/Sidebar.vue";
 import myfooter from "./components/Footer.vue";
 
 export default Vue.extend({
-  data: () => ({
-    drawer: false,
-  }),
+  data() {
+    return {
+      drawer: false,
+    };
+  },
   methods: {
     toggleSidebar: function () {
       this.drawer = !this.drawer;

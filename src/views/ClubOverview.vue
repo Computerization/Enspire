@@ -24,8 +24,10 @@ export default Vue.extend({
   components: {
     ClubCard: ClubCard,
   },
-  data: () => ({
-    clubInfo: clubInfo,
-  }),
+  data() {
+    return {
+      clubInfo: clubInfo,
+    };
+  },
 });
 </script>
