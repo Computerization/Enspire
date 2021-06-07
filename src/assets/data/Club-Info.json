@@ -117,7 +117,10 @@
         "chnName": "微笑社",
         "engName": "Careholic",
         "chnDesc": "微笑社一直着眼于“教育”与“社区”两大元素。我们认为，在将目光投向遥远的青藏高原或是大别山区之前，我们不应忘了，我们自己的社区就急需我们的帮助。所以，我们致力于关注身边居民们的需求，解决他们的不便，真正成为细致观察，敢于实践的Careholists。我们的理念就是希望教育能够紧跟新时代的潮流，英语是全球化的象征，程序设计和手机是信息化的象征，这些都是在新时代必不可少的技能。我们希望能够通过自己的努力，帮助小朋友尽快适应新时代，帮助老年人努力赶上新时代，将知识与微笑传递给更多的人。",
-        "engDesc": "Careholic has been focusing on the two elements: \"education\" and \"community\". We believe that before we turn our eyes to the remote areas far away, we should not forget that our own communities are in urgent need of our help. Therefore, we are committed to paying attention to the needs of the residents around us and solving their inconveniences. Our objective is that education should keep up with the trend of the new era. English is the symbol of globalization, programming and mobile phone are the symbol of informationization. We hope that through our own efforts, we can help the children adapt to the new era as soon as possible, help the elderly to catch up with the new era, and pass knowledge and smile to more people."
+        "engDesc": "Careholic has been focusing on the two elements: \"education\" and \"community\". We believe that before we turn our eyes to the remote areas far away, we should not forget that our own communities are in urgent need of our help. Therefore, we are committed to paying attention to the needs of the residents around us and solving their inconveniences. Our objective is that education should keep up with the trend of the new era. English is the symbol of globalization, programming and mobile phone are the symbol of informationization. We hope that through our own efforts, we can help the children adapt to the new era as soon as possible, help the elderly to catch up with the new era, and pass knowledge and smile to more people.",
+        "services": {
+          "website": "http://careholic.cn"
+        }
       },
       {
         "id": 200007,

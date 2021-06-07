@@ -6,5 +6,5 @@ type ClubInfo = {
   readonly engDesc: string;
   readonly services?: {
     readonly website?: string;
-  }
+  };
 };

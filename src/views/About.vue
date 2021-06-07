@@ -19,7 +19,7 @@
               </v-list-item-content>
               <v-list-item-avatar size="100">
                 <img
-                  :src="require('@/assets/img/' + person.alias + '-avatar.jpg')"
+                  :src="require(`@/assets/img/${person.alias}-avatar.jpg`)"
                   :alt="person.alias"
                 />
               </v-list-item-avatar>
@@ -27,8 +27,9 @@
             <v-card-actions class="white justify-center">
               <v-btn
                 icon
-                :href="'https://github.com/' + person.alias"
+                :href="`https://github.com/${person.alias}`"
                 target="_blank"
+                rel="noreferer"
               >
                 <v-icon>mdi-link</v-icon>
               </v-btn>

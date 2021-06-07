@@ -1,5 +1,13 @@
 <template>
   <v-container>
+    <v-row>
+      <v-col cols="12">
+        <h2>社团总览</h2>
+      </v-col>
+      <v-col cols="6">
+        <v-text-field label="搜索名称" outlined dense />
+      </v-col>
+    </v-row>
     <v-row v-for="(category, index) in clubInfo" :key="index">
       <v-subheader>{{ category.catName }}</v-subheader>
       <v-container fluid>
