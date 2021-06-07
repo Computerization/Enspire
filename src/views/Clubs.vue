@@ -1,11 +1,11 @@
 <template>
   <v-container>
-    <v-row v-for="index in 6" :key="index">
-      <v-subheader>{{ clubInfo[index - 1].catName }}</v-subheader>
+    <v-row v-for="(category, index) in clubInfo" :key="index">
+      <v-subheader>{{ category.catName }}</v-subheader>
       <v-container fluid>
         <v-row>
           <club-card
-            v-for="item in clubInfo[index - 1].clubs"
+            v-for="item in category.clubs"
             :key="item.id"
             :club="item"
           />
