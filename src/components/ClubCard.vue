@@ -13,6 +13,20 @@
           }}
         </div>
       </v-card-text>
+      <v-card-actions>
+        <v-spacer />
+        <v-btn
+          icon
+          v-if="club.services && club.services.website"
+          :href="`${club.services.website}`"
+          @click.stop=""
+          target="_blank"
+          rel="noreferer"
+        >
+          <v-icon>mdi-web</v-icon>
+        </v-btn>
+        <v-spacer />
+      </v-card-actions>
     </v-card>
   </v-col>
 </template>
