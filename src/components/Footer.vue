@@ -21,18 +21,16 @@
 
 <style scoped>
 .art-footer {
-  background-color: #f9fbfb !important;
-  padding: 23px 0px 23px 0px;
-  border: solid 1px #e4e4e4;
+  background-color: #303846 !important;
+  padding: 45px 0px 23px 0px;
 }
 .art-footerTx1 {
-  color: #126b77 !important;
+  color: #f9fbfb !important;
   letter-spacing: -0.3px;
   height: 25px;
   line-height: 27px;
 }
 .art-footerBt1 {
-  background-color: #1baec1;
   color: #f9fbfb;
   margin-bottom: 10px;
 }
