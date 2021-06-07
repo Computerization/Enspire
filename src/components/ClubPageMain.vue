@@ -2,10 +2,7 @@
   <v-container>
     <v-row>
       <v-col>
-        <v-img
-          :src="logoUrl"
-          height="200"
-        />
+        <v-img :src="logoUrl" height="200" />
       </v-col>
     </v-row>
     <v-row>
