@@ -1,7 +1,7 @@
 <template>
   <v-app-bar app class="art-header">
     <div class="d-flex align-center">
-      <v-app-bar-nav-icon @click.stop="expandSidebar"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click.stop="toggleSidebar"></v-app-bar-nav-icon>
       <v-img
         alt="Enspire logo"
         class="shrink mr-2 logo"
@@ -50,7 +50,7 @@ export default Vue.extend({
       (this.$refs.loginDialog as unknown as dialog).hide();
       alert("Hi:)");
     },
-    expandSidebar() {
+    toggleSidebar() {
       this.$emit("toggle-sidebar");
     },
   },

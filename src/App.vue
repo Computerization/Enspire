@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <appbar @toggle-sidebar="toggleSidebar" />
-    <sidebar v-model="drawer" />
+    <sidebar :drawer="drawer" @hide-sidebar="hideSidebar" />
     <v-main>
       <v-container fluid>
         <router-view />
@@ -10,12 +10,6 @@
     <myfooter />
   </v-app>
 </template>
-
-<style scoped>
-.container {
-  padding: 0;
-}
-</style>
 
 <script lang="ts">
 import Vue from "vue";
@@ -30,7 +24,9 @@ export default Vue.extend({
   methods: {
     toggleSidebar: function () {
       this.drawer = !this.drawer;
-      console.log(this.drawer);
+    },
+    hideSidebar: function () {
+      this.drawer = false;
     },
   },
   components: {

@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer temporary fixed bottom>
+  <v-navigation-drawer v-model="show" temporary app>
     <v-list-item>
       <v-list-item-content>
         <v-list-item-title class="title">Enspire</v-list-item-title>
@@ -8,7 +8,10 @@
     </v-list-item>
     <v-divider />
     <v-list nav dense>
-      <v-list-item-group active-class="primary--text text--accent-4">
+      <v-list-item-group
+        v-model="group"
+        active-class="primary--text text--accent-4"
+      >
         <v-list-item to="/">
           <v-list-item-icon>
             <v-icon>mdi-home</v-icon>
@@ -50,11 +53,32 @@
 import Vue from "vue";
 
 export default Vue.extend({
-  data: () => ({
-    drawerItems: [
-      { title: "我们的社团", icon: "mdi-view-dashboard", to: "/clubs" },
-      { title: "预约教室", icon: "mdi-calendar", to: "/reservation" },
-    ],
-  }),
+  props: {
+    drawer: Boolean,
+  },
+  data() {
+    return {
+      group: null,
+      drawerItems: [
+        { title: "我们的社团", icon: "mdi-view-dashboard", to: "/clubs" },
+        { title: "预约教室", icon: "mdi-calendar", to: "/reservation" },
+      ],
+    };
+  },
+  computed: {
+    show: {
+      get() {
+        return (this as Vue).$props.drawer;
+      },
+      set(newValue) {
+        if (newValue === false) (this as unknown as Vue).$emit("hide-sidebar");
+      },
+    },
+  },
+  watch: {
+    group() {
+      (this as unknown as Vue).$emit("hide-sidebar");
+    },
+  },
 });
 </script>
