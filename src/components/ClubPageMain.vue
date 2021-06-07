@@ -3,7 +3,7 @@
     <v-row>
       <v-col>
         <v-img
-          :src="require(`@/assets/img/club/${info.id}.png`)"
+          :src="require(`@/assets/img/club/${club.id}.png`)"
           height="200"
         />
       </v-col>
@@ -11,14 +11,14 @@
     <v-row>
       <v-col class="mb-4">
         <h1 class="display-2 font-weight-bold mb-3">
-          {{ info.chnName }}
-          <small>{{ info.engName }}</small>
+          {{ club.chnName }}
+          <small>{{ club.engName }}</small>
         </h1>
         <p class="subheading font-weight-regular" style="white-space: pre-wrap">
-          {{ info.chnDesc }}
+          {{ club.chnDesc }}
         </p>
         <p class="subheading font-weight-regular" style="white-space: pre-wrap">
-          {{ info.engDesc }}
+          {{ club.engDesc }}
         </p>
       </v-col>
     </v-row>
