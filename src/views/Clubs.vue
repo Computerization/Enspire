@@ -4,33 +4,11 @@
       <v-subheader>{{ clubInfo[index - 1].catName }}</v-subheader>
       <v-container fluid>
         <v-row>
-          <v-col
+          <club-card
             v-for="item in clubInfo[index - 1].clubs"
             :key="item.id"
-            align="center"
-          >
-            <v-card
-              width="370"
-              align="left"
-              :to="`/clubpage/${encode(item.engName)}`"
-            >
-              <v-img
-                :src="require(`@/assets/img/club/${item.id}.png`)"
-                height="200"
-              />
-              <v-card-title>{{ item.chnName }}</v-card-title>
-              <v-card-text>
-                <div>
-                  {{
-                    item.chnDesc === ""
-                      ? "暂无介绍"
-                      : item.chnDesc.substring(0, 90) +
-                        (item.chnDesc.length > 90 ? "..." : "")
-                  }}
-                </div>
-              </v-card-text>
-            </v-card>
-          </v-col>
+            :club="item"
+          />
         </v-row>
       </v-container>
     </v-row>
@@ -40,14 +18,14 @@
 <script lang="ts">
 import Vue from "vue";
 import clubInfo from "../assets/data/Club-Info.json";
-import { encode } from "../utils/urlTransform";
+import ClubCard from "../components/ClubCard.vue";
 
 export default Vue.extend({
+  components: {
+    ClubCard: ClubCard,
+  },
   data: () => ({
     clubInfo: clubInfo,
   }),
-  methods: {
-    encode: encode,
-  },
 });
 </script>
