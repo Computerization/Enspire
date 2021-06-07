@@ -67,10 +67,10 @@ export default Vue.extend({
   },
   computed: {
     show: {
-      get() {
+      get(): boolean {
         return (this as Vue).$props.drawer;
       },
-      set(newValue) {
+      set(newValue: boolean) {
         if (newValue === false) (this as Vue).$emit("hide-sidebar");
       },
     },
