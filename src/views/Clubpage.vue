@@ -20,6 +20,7 @@
 import Vue from "vue";
 import Club from "../components/Club.vue";
 import clubInfo from "../assets/data/Club-Info.json";
+import { encode } from "../utils/urlTransform";
 
 export default Vue.extend({
   components: {
@@ -30,7 +31,7 @@ export default Vue.extend({
       const name = this.$route.params.name;
       const club = clubInfo
         .map((subCategory) =>
-          subCategory.clubs.find((it) => it.engName === name)
+          subCategory.clubs.find((it) => encode(it.engName) === name)
         )
         .find((it) => it != null);
       if (club == null) {

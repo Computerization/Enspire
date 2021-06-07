@@ -9,7 +9,11 @@
             :key="item.id"
             align="center"
           >
-            <v-card width="370" align="left" :to="`/clubpage/${item.engName}`">
+            <v-card
+              width="370"
+              align="left"
+              :to="`/clubpage/${encode(item.engName)}`"
+            >
               <v-img
                 :src="require(`@/assets/img/club/${item.id}.png`)"
                 height="200"
@@ -35,12 +39,15 @@
 
 <script lang="ts">
 import Vue from "vue";
-
 import clubInfo from "../assets/data/Club-Info.json";
+import { encode } from "../utils/urlTransform";
 
 export default Vue.extend({
   data: () => ({
     clubInfo: clubInfo,
   }),
+  methods: {
+    encode: encode,
+  },
 });
 </script>
