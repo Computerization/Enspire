@@ -2,15 +2,28 @@
   <v-container>
     <v-row>
       <v-col>
-        <v-img :src="logoUrl" height="200" />
+        <v-simple-table>
+          <table>
+            <tbody>
+              <tr>
+                <td width="320" height="200">
+                  <v-img :src="logoUrl" contain height="200" width="300" />
+                </td>
+                <td>
+                  <h1 class="display-2 font-weight-bold mb-3">
+                    {{ club.chnName }}
+                    <br />
+                    <small>{{ club.engName }}</small>
+                  </h1>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </v-simple-table>
       </v-col>
     </v-row>
     <v-row>
       <v-col class="mb-4">
-        <h1 class="display-2 font-weight-bold mb-3">
-          {{ club.chnName }}
-          <small>{{ club.engName }}</small>
-        </h1>
         <p class="subheading font-weight-regular" style="white-space: pre-wrap">
           {{ club.chnDesc }}
         </p>
