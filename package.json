@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "core-js": "^3.13.1",
+    "core-js": "^3.14.0",
     "highlight.js": "^11.0.1",
     "vue": "^2.6.13",
     "vue-router": "^3.5.1",
