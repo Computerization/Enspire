@@ -17,7 +17,7 @@
       </v-subheader>
       <v-container fluid v-if="visible[index]">
         <v-row>
-          <club-card
+          <Club-card
             v-for="item in category.clubs"
             :key="item.id"
             :club="item"
