@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import Club from "../components/Club.vue";
+import Club from "../components/ClubPageMain.vue";
 import clubInfo from "../assets/data/Club-Info.json";
 import { encode } from "../utils/urlTransform";
 

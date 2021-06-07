@@ -27,12 +27,12 @@ const routes = [
   },
   {
     path: "/clubs",
-    name: "Clubs",
+    name: "ClubOverview",
     component: () =>
-      import(/* webpackChunkName: "clubs" */ "../views/Clubs.vue"),
+      import(/* webpackChunkName: "clubs" */ "../views/ClubOverview.vue"),
   },
   {
-    path: "/clubpage/:name",
+    path: "/clubs/:name",
     name: "Clubpage",
     component: () =>
       import(/* webpackChunkName: "clubpage" */ "../views/Clubpage.vue"),

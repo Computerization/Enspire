@@ -1,6 +1,6 @@
 <template>
   <v-col align="center">
-    <v-card width="370" align="left" :to="`/clubpage/${encode(club.engName)}`">
+    <v-card width="370" align="left" :to="`/clubs/${encode(club.engName)}`">
       <v-img :src="imgUrl" contain height="200" />
       <v-card-title>{{ club.chnName }}</v-card-title>
       <v-card-text>
