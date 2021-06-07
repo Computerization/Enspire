@@ -4,4 +4,7 @@ type ClubInfo = {
   readonly engName: string;
   readonly chnDesc: string;
   readonly engDesc: string;
+  readonly services?: {
+    readonly website?: string;
+  }
 };
