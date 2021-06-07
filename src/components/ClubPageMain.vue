@@ -1,16 +1,21 @@
 <template>
   <v-container>
     <v-row>
+      <v-col>
+        <v-img :src="logoUrl" height="200" />
+      </v-col>
+    </v-row>
+    <v-row>
       <v-col class="mb-4">
         <h1 class="display-2 font-weight-bold mb-3">
-          {{ info.chnName }}
-          <small>{{ info.engName }}</small>
+          {{ club.chnName }}
+          <small>{{ club.engName }}</small>
         </h1>
         <p class="subheading font-weight-regular" style="white-space: pre-wrap">
-          {{ info.chnDesc }}
+          {{ club.chnDesc }}
         </p>
         <p class="subheading font-weight-regular" style="white-space: pre-wrap">
-          {{ info.engDesc }}
+          {{ club.engDesc }}
         </p>
       </v-col>
     </v-row>
@@ -19,11 +24,23 @@
 
 <script lang="ts">
 import Vue, { PropType } from "vue";
+import fetchImg from "../utils/fetchImg";
 
 export default Vue.extend({
   name: "Club",
   props: {
-    info: Object as PropType<ClubInfo>,
+    club: Object as PropType<ClubInfo>,
+  },
+  data() {
+    return {
+      logoUrl: "",
+    };
+  },
+  mounted: function () {
+    this.logoUrl = fetchImg(
+      `club/${this.$props.club.id}.png`,
+      "club/not-found.png"
+    );
   },
 });
 </script>
