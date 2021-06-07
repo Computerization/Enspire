@@ -66,13 +66,6 @@
         "engDesc": "WFLA Running Club aims at help student develop the habit of exercise, release study pressure, and improve the immunity. Every week, we run after school. We also have city hiking and other activites as well. Our club is relaxing. Club members get along with each other very well."
       },
       {
-        "id": 100016,
-        "chnName": "六合武学社",
-        "engName": "Art of Martial",
-        "chnDesc": "在世外学生走向世界之前，让我们的学生更加了解我们自己的文化，同时爱上我们的武术文化，并且相映地习得一些武术的技能。以及在跆拳道，散打盛行的今天，通过传统武术这门冷门艺术带给学生并不亚于其他武术门类的反应力和身体协调力。同时通过我们的公众号让更多人和学生了解我们华夏文明自身产出的功夫。我们希望让同学们能够在了解世界前，首先更加了解我们自己。另外，我们结合了西方健身文化的元素，每周武术与健身的交替活动让同学们从中西两种文化中能够得到熏陶以及身体素质的提升。",
-        "engDesc": ""
-      },
-      {
         "id": 100017,
         "chnName": "弈语棋斋",
         "engName": "Go club",
@@ -421,13 +414,6 @@
         "engDesc": "Established in August 2015, TechoMedia is the very first student-oriented STEM student media in China. Our mission is to provide a platform to unite talented students interested in STEM-related areas and combine their efforts together, so that they can find their peers and improve together by communication and cooperation. What’s more, TechoMedia also devotes to gathering the best available resources for those who are interested in STEM-related subjects and majors, offering them a chance to start their journey along this path. \n\nAs a STEM-related media, TechoMedia is using various online platforms to spread influence among the students. Meanwhile, TechoMedia engages in STEM activities such as Google App Inventor Contest, HackShanghai Hackathon, Invention Convention Worldwide, etc., serving as the partnered student media and co-host.\n\nTechoMedia is not merely an influential student media. Our ultimate goal is to build a platform and a nationwide student STEM community. This year, we’ve partnered with several influential social enterprises and student organizations to help us move forward and spread our philosophy."
       },
       {
-        "id": 500023,
-        "chnName": "阁楼",
-        "engName": "ATTIC",
-        "chnDesc": "ATTIC组织是一个学生创办，以“创客”概念为主题的校际联盟社团。活动、科技、发明、创造是我们对于创客的定义。ATTIC希望为那些尚未确定自身努力方向的同学提供一个尝试的机会，同时为已经有兴趣的同学提供交流、实践、发展的平台。ATTIC的目标是鼓励更多“创客”产生，并用他们的成品使生活变得更为便捷，改变人们对于创新的看法：其实创新就在身旁，需要的只有他们的双手来实现灵感。 ATTIC对于自身的定位是校际联盟社团，即建立各分社，吸引更多的学生关注创新。ATTIC核心团队将一直致力于打造更有吸引力、影响力的平台作为首要目标。\n",
-        "engDesc": "\"ATTIC is a club of an aggregation of innovative, creative and helpful makers. It aims to establish a new platform for innovation and cultivate a \"maker culture\". Specifically, ATTIC provides students of creative ideas with platforms for turning their thoughts into reality by technology; resources to make it accomplished and opportunities to introduce and publicize the product in a larger scale to serve a better life.\n\nDaily club activities include brainstorming new ideas of innovation, developing the product through academic experiments and researches, associating with corporations and student organizations to introduce the products and attending product-development contests. Up to now, the core team of ATTIC has already contacted Shanghai Nanyang Modal School, Secondary School Attached To East China Normal University and High School Affiliated to Fudan University to reach an agreement on founding sub-clubs in their school. Besides, Pragmatists and the ATTIC together formed an alliance, in which the former gives out demands in people’s daily life and practical theories and the latter makes it into reality by technology.\n\nThe primary steps are practiced smoothly and the ATTIC is impressed by the hospitality towards technology and demands for creation by students from three high schools in Shanghai themselves. Therefore, in the future, the ATTIC will follow the core spirit of “maker culture” and expand the size and influence on more students interested in.\"\n"
-      },
-      {
         "id": 500024,
         "chnName": "起源",
         "engName": "Origin",
@@ -515,13 +501,6 @@
         "id": 500040,
         "chnName": "科幻社",
         "engName": "Science-Future Club",
-        "chnDesc": "",
-        "engDesc": ""
-      },
-      {
-        "id": 500041,
-        "chnName": "凌枫社",
-        "engName": "Story Upon the Maple",
         "chnDesc": "",
         "engDesc": ""
       },
