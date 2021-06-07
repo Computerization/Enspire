@@ -9,8 +9,10 @@
       </v-col>
     </v-row>
     <v-row v-for="(category, index) in clubInfo" :key="index">
-      <v-subheader>{{ category.catName }}</v-subheader>
-      <v-container fluid>
+      <v-subheader class="sectionHead" @click="toggleSection(index)">
+        {{ category.catName }}
+      </v-subheader>
+      <v-container fluid v-if="visible[index]">
         <v-row>
           <club-card
             v-for="item in category.clubs"
@@ -23,6 +25,12 @@
   </v-container>
 </template>
 
+<style scoped>
+.sectionHead {
+  cursor: pointer;
+}
+</style>
+
 <script lang="ts">
 import Vue from "vue";
 import clubInfo from "../assets/data/Club-Info.json";
@@ -34,6 +42,12 @@ export default Vue.extend({
   },
   data: () => ({
     clubInfo: clubInfo,
+    visible: [false, true, false, false, false, false],
   }),
+  methods: {
+    toggleSection: function (index: number) {
+      this.visible = this.visible.map((e, i) => (i === index ? !e : e));
+    },
+  },
 });
 </script>
