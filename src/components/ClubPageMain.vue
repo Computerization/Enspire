@@ -3,7 +3,7 @@
     <v-row>
       <v-col>
         <v-img
-          :src="require(`@/assets/img/club/${club.id}.png`)"
+          :src="logoUrl"
           height="200"
         />
       </v-col>
