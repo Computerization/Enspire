@@ -36,6 +36,35 @@
             </v-card-actions>
           </v-card>
         </v-col>
+        <v-col>
+          <v-card class="mx-auto" width="270" outlined>
+            <v-list-item three-line>
+              <v-list-item-content>
+                <div class="overline mb-4">社区贡献者</div>
+                <v-list-item-title class="headline mb-1">
+                  贡献者 X
+                </v-list-item-title>
+                <v-list-item-subtitle> 会是你吗？ </v-list-item-subtitle>
+              </v-list-item-content>
+              <v-list-item-avatar size="100">
+                <img
+                  src="https://computerization.io/img/alumni/Default.svg"
+                  alt="Contributor unknown"
+                />
+              </v-list-item-avatar>
+            </v-list-item>
+            <v-card-actions class="white justify-center">
+              <v-btn
+                text
+                href="https://github.com/computerization/enspire"
+                target="_blank"
+                rel="noreferer"
+              >
+                在 GitHub 上支持我们
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-col>
       </v-row>
     </v-container>
   </div>
