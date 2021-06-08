@@ -39,7 +39,7 @@ export default class Clubpage extends Vue {
   mounted(): void {
     Axios.get("getClubList.php").then((response) => {
       const name = this.$route.params.name;
-      const clubs = response.data as unknown as Club[];
+      const clubs = response.data as Club[];
       const club = clubs.find((it) => encode(it.en_name) === name) as Club;
       this.club = club;
     });

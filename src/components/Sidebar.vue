@@ -55,7 +55,7 @@ import { Component, Vue } from "vue-property-decorator";
 @Component({
   watch: {
     group(): void {
-      (this as unknown as Vue).$emit("hide-sidebar");
+      this.$emit("hide-sidebar");
     },
   },
   props: {

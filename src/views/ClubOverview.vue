@@ -61,7 +61,7 @@ export default class ClubOverview extends Vue {
   }
   mounted(): void {
     Axios.get("getClubList.php").then((response) => {
-      const clubList = response.data as unknown as Club[];
+      const clubList = response.data as Club[];
       this.categories = this.categories.map((cat, i) => {
         return { ...cat, clubs: clubList.filter((e) => e.category_id === i) };
       });
