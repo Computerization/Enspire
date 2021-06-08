@@ -5,33 +5,13 @@
         <h2>社团总览</h2>
       </v-col>
       <v-col cols="6">
-        <v-menu offset-y>
-          <template v-slot:activator="{ on }">
-            <v-text-field
-              label="搜索名称"
-              v-on="on"
-              v-model="searchingText"
-              @keyup="searchResult()"
-              outlined
-              dense
-            />
-          </template>
-          <v-list
-            v-if="resultNum > 0"
-            class="border-list overflow-y-auto overflow-x-hidden"
-            v-on="on"
-            max-height="35vh"
-            dense
-          >
-            <v-list-item
-              v-for="item in resultList"
-              :key="item"
-              :to="`/clubs/${encode(item)}`"
-            >
-              <v-list-item-title> {{ item }} </v-list-item-title>
-            </v-list-item>
-          </v-list>
-        </v-menu>
+        <v-text-field
+          label="搜索名称"
+          v-model="searchText"
+          @keyup="search"
+          outlined
+          dense
+        />
       </v-col>
     </v-row>
     <v-row v-for="(category, index) in categories" :key="index">
@@ -84,16 +64,11 @@ export default class ClubOverview extends Vue {
     { name: "其他", visible: false, clubs: [] },
   ];
   dataLoaded = false;
+  searchText = "";
+  resultList: string[] = [];
+  clubList: Club[] = [];
 
   encode = encode;
-
-  resultNum = 0;
-
-  searchingText = "";
-
-  resultList: Array<string> = new Array<string>();
-
-  clubList: Array<Club> = new Array<Club>();
 
   toggleSection(index: number): void {
     this.categories = this.categories.map((e, i) =>
@@ -101,23 +76,20 @@ export default class ClubOverview extends Vue {
     );
   }
 
-  searchResult(): void {
-    var text: string = this.searchingText;
-    this.resultList = new Array<string>();
-    if (text == "") {
+  search(): void {
+    const text = this.searchText;
+    this.resultList = [];
+    if (text === "") {
       return;
     }
-    this.resultNum = 0;
-    for (var id in this.clubList) {
-      var club: Club = this.clubList[id];
-      var en_result: boolean =
-        club.en_name.toLocaleLowerCase().indexOf(text.toLocaleLowerCase()) !=
-        -1;
-      var zh_result: boolean = club.zh_name.indexOf(text) != -1;
-      var result: boolean = en_result || zh_result;
+    for (const id in this.clubList) {
+      const club = this.clubList[id];
+      const en_result =
+        club.en_name.toLowerCase().indexOf(text.toLowerCase()) !== -1;
+      const zh_result = club.zh_name.indexOf(text) !== -1;
+      var result = en_result || zh_result;
       if (result) {
         this.resultList.push(club.en_name);
-        this.resultNum++;
       }
     }
   }
