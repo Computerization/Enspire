@@ -40,38 +40,34 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import { Component, Vue } from "vue-property-decorator";
 import Axios from "axios";
 
-export default Vue.extend({
-  data() {
-    return {
-      visible: false,
-      userName: null,
-      password: null,
-    };
-  },
-  methods: {
-    show(): void {
-      this.visible = true;
-    },
-    hide(): void {
-      this.visible = false;
-    },
-    tryLogin(): void {
-      Axios.post("php/login.php", {
-        username: this.userName,
-        password: this.password,
-      }).then((response) => {
-        const data = response.data;
-        if (data.status == "ok") {
-          this.hide();
-          this.$emit("login-success");
-        } else {
-          alert("Login Failed");
-        }
-      });
-    },
-  },
-});
+@Component
+export default class LoginDialog extends Vue {
+  visible = false;
+  userName = "";
+  password = "";
+
+  show(): void {
+    this.visible = true;
+  }
+  hide(): void {
+    this.visible = false;
+  }
+  tryLogin(): void {
+    Axios.post("php/login.php", {
+      username: this.userName,
+      password: this.password,
+    }).then((response) => {
+      const data = response.data;
+      if (data.status == "ok") {
+        this.hide();
+        this.$emit("login-success");
+      } else {
+        alert("Login Failed");
+      }
+    });
+  }
+}
 </script>

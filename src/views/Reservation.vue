@@ -25,28 +25,30 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import { Component, Vue } from "vue-property-decorator";
 
-type Calendar = { prev(): void; next(): void };
+type Calendar = {
+  prev: () => void;
+  next: () => void;
+} & Vue;
 
-export default Vue.extend({
-  data() {
-    return {
-      type: "month",
-      typeOptions: [
-        { text: "Day", value: "day" },
-        { text: "Week", value: "week" },
-        { text: "Month", value: "month" },
-      ],
-    };
-  },
-  methods: {
-    calendarPrev() {
-      (this.$refs.calendar as unknown as Calendar).prev();
-    },
-    calendarNext() {
-      (this.$refs.calendar as unknown as Calendar).next();
-    },
-  },
-});
+@Component
+export default class Reservation extends Vue {
+  type = "month";
+  typeOptions = [
+    { text: "Day", value: "day" },
+    { text: "Week", value: "week" },
+    { text: "Month", value: "month" },
+  ];
+  $refs!: {
+    calendar: Calendar;
+  };
+
+  calendarPrev(): void {
+    this.$refs.calendar.prev();
+  }
+  calendarNext(): void {
+    this.$refs.calendar.next();
+  }
+}
 </script>

@@ -17,11 +17,16 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import axios from "axios";
+import { Component, Vue } from "vue-property-decorator";
+import Axios from "axios";
 import ClubPageMain from "../components/ClubPageMain.vue";
 import { encode } from "../utils/urlTransform";
 
+@Component({
+  components: {
+    ClubPageMain,
+  },
+})
 export default class Clubpage extends Vue {
   club: Club = {
     id: 0,
@@ -31,11 +36,8 @@ export default class Clubpage extends Vue {
     zh_desc: "",
     en_desc: "",
   };
-  components = {
-    ClubPageMain,
-  };
   mounted(): void {
-    axios.get("getClubList.php").then((response) => {
+    Axios.get("getClubList.php").then((response) => {
       const name = this.$route.params.name;
       const clubs = response as unknown as Club[];
       const club = clubs.find((it) => encode(it.en_name) === name);

@@ -10,9 +10,9 @@
     </v-row>
     <v-row v-for="(category, index) in categories" :key="index">
       <v-subheader class="sectionHead" @click="toggleSection(index)">
-        <v-icon>{{
-          categories[index].visible ? "mdi-menu-down" : "mdi-menu-right"
-        }}</v-icon>
+        <v-icon>
+          {{ categories[index].visible ? "mdi-menu-down" : "mdi-menu-right" }}
+        </v-icon>
         {{ category.name }}
       </v-subheader>
       <v-container fluid v-if="categories[index].visible">
@@ -35,10 +35,15 @@
 </style>
 
 <script lang="ts">
-import Vue from "vue";
-import axios from "axios";
+import { Component, Vue } from "vue-property-decorator";
+import Axios from "axios";
 import ClubCard from "../components/ClubCard.vue";
 
+@Component({
+  components: {
+    ClubCard: ClubCard,
+  },
+})
 export default class ClubOverview extends Vue {
   categories: { name: string; visible: boolean; clubs: Club[] }[] = [
     { name: "体育类社团", visible: false, clubs: [] },
@@ -48,9 +53,6 @@ export default class ClubOverview extends Vue {
     { name: "学术类社团", visible: false, clubs: [] },
     { name: "其他", visible: false, clubs: [] },
   ];
-  components = {
-    ClubCard: ClubCard,
-  };
 
   toggleSection(index: number): void {
     this.categories = this.categories.map((e, i) =>
@@ -58,7 +60,7 @@ export default class ClubOverview extends Vue {
     );
   }
   mounted(): void {
-    axios.get("getClubList.php").then((response) => {
+    Axios.get("getClubList.php").then((response) => {
       const clubs = response as unknown as Club[];
       for (let i = 0; i < this.categories.length; i++)
         this.categories[i].clubs = clubs.filter((e) => e.category_id === i);

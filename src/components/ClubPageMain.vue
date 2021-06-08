@@ -23,14 +23,13 @@
 </template>
 
 <script lang="ts">
-import Vue, { PropType } from "vue";
+import { Component, Prop, Vue } from "vue-property-decorator";
 import fetchImg from "../utils/fetchImg";
 
+@Component
 export default class ClubPageMain extends Vue {
   logoUrl = "";
-  props = {
-    club: Object as PropType<Club>,
-  };
+  @Prop() club!: Club;
 
   mounted(): void {
     this.logoUrl = fetchImg(

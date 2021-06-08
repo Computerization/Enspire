@@ -37,15 +37,12 @@
 </style>
 
 <script lang="ts">
-import Vue from "vue";
+import { Component, Vue } from "vue-property-decorator";
 
-export default Vue.extend({
-  data() {
-    return {
-      links: [
-        { title: "GitHub", src: "https://github.com/Computerization/Enspire" },
-      ],
-    };
-  },
-});
+@Component
+export default class Footer extends Vue {
+  links = [
+    { title: "GitHub", src: "https://github.com/Computerization/Enspire" },
+  ];
+}
 </script>

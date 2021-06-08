@@ -37,15 +37,14 @@
 </template>
 
 <script lang="ts">
-import Vue, { PropType } from "vue";
+import { Component, Prop, Vue } from "vue-property-decorator";
 import fetchImg from "../utils/fetchImg";
 import { encode } from "../utils/urlTransform";
 
+@Component
 export default class ClubCard extends Vue {
   imgUrl = "";
-  props = {
-    club: Object as PropType<Club>,
-  };
+  @Prop() club!: Club;
   encode = encode;
   mounted(): void {
     this.imgUrl = fetchImg(
