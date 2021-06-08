@@ -3,18 +3,18 @@
     <v-card
       width="370"
       align="left"
-      :to="`/clubs/${encode(club.engName)}`"
+      :to="`/clubs/${encode(club.en_name)}`"
       class="flex"
     >
       <v-img :src="imgUrl" contain height="200" />
-      <v-card-title>{{ club.chnName }}</v-card-title>
+      <v-card-title>{{ club.zh_name }}</v-card-title>
       <v-card-text>
         <div>
           {{
-            club.chnDesc === ""
+            club.zh_desc === ""
               ? "暂无介绍"
-              : club.chnDesc.substring(0, 90) +
-                (club.chnDesc.length > 90 ? "..." : "")
+              : club.zh_desc.substring(0, 90) +
+                (club.zh_desc.length > 90 ? "..." : "")
           }}
         </div>
       </v-card-text>
@@ -41,24 +41,17 @@ import Vue, { PropType } from "vue";
 import fetchImg from "../utils/fetchImg";
 import { encode } from "../utils/urlTransform";
 
-export default Vue.extend({
-  name: "ClubCard",
-  props: {
-    club: Object as PropType<ClubInfo>,
-  },
-  data() {
-    return {
-      imgUrl: "",
-    };
-  },
-  mounted() {
+export default class ClubCard extends Vue {
+  imgUrl = "";
+  props = {
+    club: Object as PropType<Club>,
+  };
+  encode = encode;
+  mounted(): void {
     this.imgUrl = fetchImg(
       `club/${this.$props.club.id}.png`,
       "club/not-found.png"
     );
-  },
-  methods: {
-    encode: encode,
-  },
-});
+  }
+}
 </script>

@@ -18,27 +18,32 @@
 
 <script lang="ts">
 import Vue from "vue";
+import axios from "axios";
 import ClubPageMain from "../components/ClubPageMain.vue";
-import clubInfo from "../assets/data/Club-Info.json";
 import { encode } from "../utils/urlTransform";
 
-export default Vue.extend({
-  components: {
+export default class Clubpage extends Vue {
+  club: Club = {
+    id: 0,
+    category_id: 0,
+    zh_name: "",
+    en_name: "",
+    zh_desc: "",
+    en_desc: "",
+  };
+  components = {
     ClubPageMain,
-  },
-  computed: {
-    club(): ClubInfo {
+  };
+  mounted(): void {
+    axios.get("getClubList.php").then((response) => {
       const name = this.$route.params.name;
-      const club = clubInfo
-        .map((subCategory) =>
-          subCategory.clubs.find((it) => encode(it.engName) === name)
-        )
-        .find((it) => it != null);
+      const clubs = response as unknown as Club[];
+      const club = clubs.find((it) => encode(it.en_name) === name);
       if (club == null) {
         throw new Error(`Club with name '${name}' not found`);
       }
-      return club;
-    },
-  },
-});
+      this.club = club;
+    });
+  }
+}
 </script>

@@ -1,9 +1,10 @@
-type ClubInfo = {
+type Club = {
   readonly id: number;
-  readonly chnName: string;
-  readonly engName: string;
-  readonly chnDesc: string;
-  readonly engDesc: string;
+  readonly category_id: number;
+  readonly zh_name: string;
+  readonly en_name: string;
+  readonly zh_desc: string;
+  readonly en_desc: string;
   readonly services?: {
     readonly website?: string;
   };
