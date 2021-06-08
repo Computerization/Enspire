@@ -56,7 +56,7 @@ export default class LoginDialog extends Vue {
     this.visible = false;
   }
   tryLogin(): void {
-    Axios.post("php/login.php", {
+    Axios.post("login.php", {
       username: this.userName,
       password: this.password,
     }).then((response) => {
