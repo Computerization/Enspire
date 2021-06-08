@@ -13,7 +13,7 @@
       <v-toolbar-title>Enspire</v-toolbar-title>
     </div>
     <v-spacer />
-    <loginDialog ref="loginDialog" @login-success="globalInit"></loginDialog>
+    <Login-dialog ref="loginDialog" @login-success="globalInit" />
     <v-btn fab outlined small @click="showLoginDialog">
       <v-icon>mdi-account</v-icon>
     </v-btn>
@@ -33,29 +33,27 @@
 </style>
 
 <script lang="ts">
-import Vue from "vue";
-import loginDialog from "./LoginDialog.vue";
+import { Component, Vue } from "vue-property-decorator";
+import LoginDialog from "./LoginDialog.vue";
 
-type dialog = {
-  show(): void;
-  hide(): void;
-};
-
-export default Vue.extend({
-  methods: {
-    showLoginDialog() {
-      (this.$refs.loginDialog as unknown as dialog).show();
-    },
-    globalInit() {
-      (this.$refs.loginDialog as unknown as dialog).hide();
-      alert("Hi:)");
-    },
-    toggleSidebar() {
-      this.$emit("toggle-sidebar");
-    },
-  },
+@Component({
   components: {
-    loginDialog,
+    LoginDialog,
   },
-});
+})
+export default class Appbar extends Vue {
+  $refs!: {
+    loginDialog: LoginDialog;
+  };
+  showLoginDialog(): void {
+    this.$refs.loginDialog.show();
+  }
+  globalInit(): void {
+    this.$refs.loginDialog.hide();
+    alert("Hi:)");
+  }
+  toggleSidebar(): void {
+    this.$emit("toggle-sidebar");
+  }
+}
 </script>

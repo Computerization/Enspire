@@ -53,20 +53,13 @@
 </style>
 
 <script lang="ts">
-import Vue from "vue";
+import { Component, Vue } from "vue-property-decorator";
 
-export default Vue.extend({
-  data() {
-    return {
-      banners: [
-        {
-          src: require("../assets/img/Enspire-logo.svg"),
-        },
-        {
-          src: require("../assets/img/Josh-Cena-avatar.jpg"),
-        },
-      ],
-    };
-  },
-});
+@Component
+export default class Home extends Vue {
+  banners = [
+    { src: require("../assets/img/Enspire-logo.svg") },
+    { src: require("../assets/img/Josh-Cena-avatar.jpg") },
+  ];
+}
 </script>

@@ -50,35 +50,29 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import { Component, Vue } from "vue-property-decorator";
 
-export default Vue.extend({
-  props: {
-    drawer: Boolean,
-  },
-  data() {
-    return {
-      group: null,
-      drawerItems: [
-        { title: "我们的社团", icon: "mdi-view-dashboard", to: "/clubs" },
-        { title: "预约教室", icon: "mdi-calendar", to: "/reservation" },
-      ],
-    };
-  },
-  computed: {
-    show: {
-      get(): boolean {
-        return (this as Vue).$props.drawer;
-      },
-      set(newValue: boolean) {
-        if (newValue === false) (this as Vue).$emit("hide-sidebar");
-      },
-    },
-  },
+@Component({
   watch: {
-    group() {
+    group(): void {
       (this as unknown as Vue).$emit("hide-sidebar");
     },
   },
-});
+  props: {
+    drawer: Boolean,
+  },
+})
+export default class Sidebar extends Vue {
+  group = null;
+  drawerItems = [
+    { title: "我们的社团", icon: "mdi-view-dashboard", to: "/clubs" },
+    { title: "预约教室", icon: "mdi-calendar", to: "/reservation" },
+  ];
+  get show(): boolean {
+    return this.$props.drawer;
+  }
+  set show(newValue: boolean) {
+    if (newValue === false) this.$emit("hide-sidebar");
+  }
+}
 </script>

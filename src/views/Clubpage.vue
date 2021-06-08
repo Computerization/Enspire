@@ -17,28 +17,32 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import { Component, Vue } from "vue-property-decorator";
+import Axios from "axios";
 import ClubPageMain from "../components/ClubPageMain.vue";
-import clubInfo from "../assets/data/Club-Info.json";
 import { encode } from "../utils/urlTransform";
 
-export default Vue.extend({
+@Component({
   components: {
     ClubPageMain,
   },
-  computed: {
-    club(): ClubInfo {
+})
+export default class Clubpage extends Vue {
+  club: Club = {
+    id: 0,
+    category_id: 0,
+    zh_name: "",
+    en_name: "",
+    zh_desc: "",
+    en_desc: "",
+  };
+  mounted(): void {
+    Axios.get("getClubList.php").then((response) => {
       const name = this.$route.params.name;
-      const club = clubInfo
-        .map((subCategory) =>
-          subCategory.clubs.find((it) => encode(it.engName) === name)
-        )
-        .find((it) => it != null);
-      if (club == null) {
-        throw new Error(`Club with name '${name}' not found`);
-      }
-      return club;
-    },
-  },
-});
+      const clubs = response.data as unknown as Club[];
+      const club = clubs.find((it) => encode(it.en_name) === name) as Club;
+      this.club = club;
+    });
+  }
+}
 </script>

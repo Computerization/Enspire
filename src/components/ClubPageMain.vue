@@ -8,14 +8,14 @@
     <v-row>
       <v-col class="mb-4">
         <h1 class="display-2 font-weight-bold mb-3">
-          {{ club.chnName }}
-          <small>{{ club.engName }}</small>
+          {{ club.zh_name }}
+          <small>{{ club.en_name }}</small>
         </h1>
         <p class="subheading font-weight-regular" style="white-space: pre-wrap">
-          {{ club.chnDesc }}
+          {{ club.zh_desc }}
         </p>
         <p class="subheading font-weight-regular" style="white-space: pre-wrap">
-          {{ club.engDesc }}
+          {{ club.en_desc }}
         </p>
       </v-col>
     </v-row>
@@ -23,24 +23,19 @@
 </template>
 
 <script lang="ts">
-import Vue, { PropType } from "vue";
+import { Component, Prop, Vue } from "vue-property-decorator";
 import fetchImg from "../utils/fetchImg";
 
-export default Vue.extend({
-  name: "Club",
-  props: {
-    club: Object as PropType<ClubInfo>,
-  },
-  data() {
-    return {
-      logoUrl: "",
-    };
-  },
-  mounted: function () {
+@Component
+export default class ClubPageMain extends Vue {
+  logoUrl = "";
+  @Prop() club!: Club;
+
+  mounted(): void {
     this.logoUrl = fetchImg(
       `club/${this.$props.club.id}.png`,
       "club/not-found.png"
     );
-  },
-});
+  }
+}
 </script>
