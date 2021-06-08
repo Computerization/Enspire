@@ -2,6 +2,21 @@
   <v-container>
     <v-row>
       <v-col>
+        <v-container fluid>
+          <v-layout box>
+            <v-flex xs3 item1 align="center" :align-self-center="true">
+              <v-img :src="logoUrl" contain height="200" width="300" />
+            </v-flex>
+            <v-flex xs4 item2 align="left" :align-self-center="true">
+              <h1 class="display-2 font-weight-bold mb-3">
+                {{ club.chnName }}
+                <br />
+                <small>{{ club.engName }}</small>
+              </h1>
+            </v-flex>
+          </v-layout>
+        </v-container>
+        <!--
         <v-simple-table>
           <table>
             <tbody>
@@ -20,6 +35,7 @@
             </tbody>
           </table>
         </v-simple-table>
+        -->
       </v-col>
     </v-row>
     <v-row>
