@@ -7,11 +7,28 @@
       <v-col cols="6">
         <v-menu offset-y>
           <template v-slot:activator="{ on }">
-            <v-text-field label="搜索名称" v-on="on" v-model="searchingText" @keyup="searchResult()" outlined dense />
+            <v-text-field
+              label="搜索名称"
+              v-on="on"
+              v-model="searchingText"
+              @keyup="searchResult()"
+              outlined
+              dense
+            />
           </template>
-          <v-list v-if="resultNum > 0" class="border-list overflow-y-auto overflow-x-hidden" v-on="on" max-height="35vh" dense>
-            <v-list-item v-for="item in resultList" :key="item" :to="`/clubs/${encode(item)}`">
-              <v-list-item-title> {{item}} </v-list-item-title>
+          <v-list
+            v-if="resultNum > 0"
+            class="border-list overflow-y-auto overflow-x-hidden"
+            v-on="on"
+            max-height="35vh"
+            dense
+          >
+            <v-list-item
+              v-for="item in resultList"
+              :key="item"
+              :to="`/clubs/${encode(item)}`"
+            >
+              <v-list-item-title> {{ item }} </v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>
@@ -47,7 +64,6 @@
 .border-list {
   border: 1px solid #eee !important;
 }
-
 </style>
 
 <script lang="ts">
@@ -65,7 +81,81 @@ export default Vue.extend({
     clubInfo: clubInfo,
     visible: [false, true, false, false, false, false],
     lengths: [0, 12, 30, 39, 45, 72],
-    inSearchList: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+    inSearchList: [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+    ],
     resultNum: 0,
     searchingText: "",
     resultList: new Array<string>(),
@@ -74,33 +164,110 @@ export default Vue.extend({
     toggleSection: function (index: number) {
       this.visible = this.visible.map((e, i) => (i === index ? !e : e));
     },
-    searchResult: function() {
-      var text:string = this.searchingText;
-      if(text == "") {
-        this.inSearchList = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
+    searchResult: function () {
+      var text: string = this.searchingText;
+      if (text == "") {
+        this.inSearchList = [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+        ];
         this.searchList();
         return;
       }
       this.resultNum = 0;
-      for(var i = 0; i < 6; ++i) {
-        for(var id in clubInfo[i].clubs) {
-          var club : ClubInfo = clubInfo[i].clubs[id];
-          var eng_result: boolean = club.engName.toLocaleLowerCase().indexOf(text.toLocaleLowerCase()) != -1;
+      for (var i = 0; i < 6; ++i) {
+        for (var id in clubInfo[i].clubs) {
+          var club: ClubInfo = clubInfo[i].clubs[id];
+          var eng_result: boolean =
+            club.engName
+              .toLocaleLowerCase()
+              .indexOf(text.toLocaleLowerCase()) != -1;
           var chn_result: boolean = club.chnName.indexOf(text) != -1;
           var result: boolean = eng_result || chn_result;
           var realid: number = this.lengths[i] + Number.parseInt(id);
           this.inSearchList[realid] = result;
-          if(result) this.resultNum ++;
+          if (result) this.resultNum++;
         }
       }
       this.searchList();
     },
     showThisClub(eName: string): boolean {
       var show = false;
-      for(var i = 0; i < 6; ++i) {
-        for(var id in clubInfo[i].clubs) {
-          var club : ClubInfo = clubInfo[i].clubs[id];
-          if(club.engName == eName){
+      for (var i = 0; i < 6; ++i) {
+        for (var id in clubInfo[i].clubs) {
+          var club: ClubInfo = clubInfo[i].clubs[id];
+          if (club.engName == eName) {
             var realid: number = this.lengths[i] + Number.parseInt(id);
             show = this.inSearchList[realid];
           }
@@ -108,12 +275,12 @@ export default Vue.extend({
       }
       return show;
     },
-    searchList: function() {
+    searchList: function () {
       var resultArray: Array<string> = new Array<string>();
-      for(var i = 0; i < 6; ++i) {
-        for(var id in clubInfo[i].clubs) {
-          var club : ClubInfo = clubInfo[i].clubs[id];
-          if(this.showThisClub(club.engName)){
+      for (var i = 0; i < 6; ++i) {
+        for (var id in clubInfo[i].clubs) {
+          var club: ClubInfo = clubInfo[i].clubs[id];
+          if (this.showThisClub(club.engName)) {
             resultArray.push(club.engName);
           }
         }
