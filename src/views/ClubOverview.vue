@@ -102,28 +102,26 @@ export default class ClubOverview extends Vue {
   }
 
   searchResult(): void {
-      var text: string = this.searchingText;
-      this.resultList = new Array<string>();
-      if (text == "") {
-        return;
-      }
-      this.resultNum = 0;
-      for(var id in this.clubList) {
-        var club: Club = this.clubList[id];
-        var en_result: boolean =
-          club.en_name
-              .toLocaleLowerCase()
-              .indexOf(text.toLocaleLowerCase()) != -1;
-        var zh_result: boolean = club.zh_name.indexOf(text) != -1;
-        var result: boolean = en_result || zh_result;
-        if (result) {
-          this.resultList.push(club.en_name);
-          this.resultNum++;
-        }
+    var text: string = this.searchingText;
+    this.resultList = new Array<string>();
+    if (text == "") {
+      return;
+    }
+    this.resultNum = 0;
+    for (var id in this.clubList) {
+      var club: Club = this.clubList[id];
+      var en_result: boolean =
+        club.en_name.toLocaleLowerCase().indexOf(text.toLocaleLowerCase()) !=
+        -1;
+      var zh_result: boolean = club.zh_name.indexOf(text) != -1;
+      var result: boolean = en_result || zh_result;
+      if (result) {
+        this.resultList.push(club.en_name);
+        this.resultNum++;
       }
     }
+  }
 
-  
   mounted(): void {
     Axios.get("getClubList.php").then((response) => {
       const clubList = response.data as Club[];
