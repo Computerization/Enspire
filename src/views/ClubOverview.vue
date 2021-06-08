@@ -22,6 +22,9 @@
             :key="item.id"
             :club="item"
           />
+          <v-col>
+            <p v-if="categories[index].visible && !dataLoaded">Loading...</p>
+          </v-col>
         </v-row>
       </v-container>
     </v-row>
@@ -53,6 +56,7 @@ export default class ClubOverview extends Vue {
     { name: "学术类社团", visible: false, clubs: [] },
     { name: "其他", visible: false, clubs: [] },
   ];
+  dataLoaded = false;
 
   toggleSection(index: number): void {
     this.categories = this.categories.map((e, i) =>
@@ -65,6 +69,7 @@ export default class ClubOverview extends Vue {
       this.categories = this.categories.map((cat, i) => {
         return { ...cat, clubs: clubList.filter((e) => e.category_id === i) };
       });
+      this.dataLoaded = true;
     });
   }
 }

@@ -10,7 +10,8 @@
     </v-row>
     <v-row>
       <v-col>
-        <ClubPageMain :club="club" />
+        <ClubPageMain v-if="dataLoaded" :club="club" />
+        <p v-else>Loading...</p>
       </v-col>
     </v-row>
   </v-container>
@@ -36,12 +37,14 @@ export default class Clubpage extends Vue {
     zh_desc: "",
     en_desc: "",
   };
+  dataLoaded = false;
   mounted(): void {
     Axios.get("getClubList.php").then((response) => {
       const name = this.$route.params.name;
       const clubs = response.data as Club[];
       const club = clubs.find((it) => encode(it.en_name) === name) as Club;
       this.club = club;
+      this.dataLoaded = true;
     });
   }
 }
