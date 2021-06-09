@@ -20,30 +20,22 @@
             <v-list-item-title>首页</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-divider />
-        <v-subheader>CAS管理</v-subheader>
-        <v-list-item
-          v-for="item in drawerItems"
-          :key="item.title"
-          :to="item.to"
-        >
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-divider />
-        <v-subheader>信息</v-subheader>
-        <v-list-item to="/about">
-          <v-list-item-icon>
-            <v-icon>mdi-information</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>关于我们</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+        <div v-for="section in drawerItems" :key="section.title">
+          <v-divider />
+          <v-subheader>{{ section.title }}</v-subheader>
+          <v-list-item
+            v-for="item in section.items"
+            :key="item.title"
+            :to="item.to"
+          >
+            <v-list-item-icon>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </div>
       </v-list-item-group>
     </v-list>
   </v-navigation-drawer>
@@ -65,8 +57,23 @@ import { Component, Vue } from "vue-property-decorator";
 export default class Sidebar extends Vue {
   group = null;
   drawerItems = [
-    { title: "我们的社团", icon: "mdi-view-dashboard", to: "/clubs" },
-    { title: "预约教室", icon: "mdi-calendar", to: "/reservation" },
+    {
+      title: "CAS 管理",
+      items: [
+        { title: "我们的社团", icon: "mdi-view-dashboard", to: "/clubs" },
+        { title: "预约教室", icon: "mdi-calendar", to: "/reservation" },
+      ],
+    },
+    {
+      title: "校园管理",
+      items: [
+        { title: "自修课请假", icon: "mdi-script-text", to: "/selfstudy" },
+      ],
+    },
+    {
+      title: "信息",
+      items: [{ title: "关于我们", icon: "mdi-information", to: "/about" }],
+    },
   ];
   get show(): boolean {
     return this.$props.drawer;
