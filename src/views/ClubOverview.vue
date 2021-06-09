@@ -14,26 +14,41 @@
         />
       </v-col>
     </v-row>
-    <v-row v-for="(category, index) in categories" :key="index">
-      <v-subheader class="sectionHead" @click="toggleSection(index)">
-        <v-icon>
-          {{ categories[index].visible ? "mdi-menu-down" : "mdi-menu-right" }}
-        </v-icon>
-        {{ category.name }}
-      </v-subheader>
-      <v-container fluid v-if="categories[index].visible">
-        <v-row>
-          <Club-card
-            v-for="item in category.clubs"
-            :key="item.id"
-            :club="item"
-          />
-          <v-col>
-            <p v-if="categories[index].visible && !dataLoaded">Loading...</p>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-row>
+    <template v-if="dataLoaded && searchText !== ''">
+      <v-row>
+        <v-container fluid>
+          <v-row>
+            <Club-card v-for="item in resultList" :key="item.id" :club="item" />
+          </v-row>
+        </v-container>
+      </v-row>
+    </template>
+    <template v-else-if="dataLoaded">
+      <v-row v-for="(category, index) in categories" :key="index">
+        <v-subheader class="sectionHead" @click="toggleSection(index)">
+          <v-icon>
+            {{ categories[index].visible ? "mdi-menu-down" : "mdi-menu-right" }}
+          </v-icon>
+          {{ category.name }}
+        </v-subheader>
+        <v-container fluid v-if="categories[index].visible">
+          <v-row>
+            <Club-card
+              v-for="item in category.clubs"
+              :key="item.id"
+              :club="item"
+            />
+          </v-row>
+        </v-container>
+      </v-row>
+    </template>
+    <template v-else>
+      <v-row>
+        <v-col>
+          <p>Loading...</p>
+        </v-col>
+      </v-row>
+    </template>
   </v-container>
 </template>
 
@@ -51,7 +66,7 @@ import { encode } from "../utils/urlTransform";
 
 @Component({
   components: {
-    ClubCard: ClubCard,
+    ClubCard,
   },
 })
 export default class ClubOverview extends Vue {
@@ -65,7 +80,7 @@ export default class ClubOverview extends Vue {
   ];
   dataLoaded = false;
   searchText = "";
-  resultList: string[] = [];
+  resultList: Club[] = [];
   clubList: Club[] = [];
 
   encode = encode;
@@ -79,19 +94,13 @@ export default class ClubOverview extends Vue {
   search(): void {
     const text = this.searchText;
     this.resultList = [];
-    if (text === "") {
-      return;
-    }
-    for (const id in this.clubList) {
-      const club = this.clubList[id];
-      const en_result =
-        club.en_name.toLowerCase().indexOf(text.toLowerCase()) !== -1;
-      const zh_result = club.zh_name.indexOf(text) !== -1;
-      var result = en_result || zh_result;
-      if (result) {
-        this.resultList.push(club.en_name);
-      }
-    }
+    if (text === "") return;
+    this.resultList = this.clubList.filter(
+      (club) =>
+        club.en_name.toLowerCase().indexOf(text.toLowerCase()) !== -1 ||
+        club.zh_name.toLowerCase().indexOf(text.toLowerCase()) !== -1
+    );
+    console.log(this.resultList);
   }
 
   mounted(): void {
