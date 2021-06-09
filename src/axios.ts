@@ -1,3 +1,3 @@
 import Axios from "axios";
 
-Axios.defaults.baseURL = "http://theenspire.com/php";
+Axios.defaults.baseURL = "https://theenspire.com/php";

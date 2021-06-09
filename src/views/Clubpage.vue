@@ -34,6 +34,7 @@ export default class Clubpage extends Vue {
     category_id: 0,
     zh_name: "",
     en_name: "",
+    pinyin_name: "",
     zh_desc: "",
     en_desc: "",
   };
