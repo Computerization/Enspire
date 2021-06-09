@@ -14,7 +14,7 @@
         />
       </v-col>
     </v-row>
-    <template v-if="dataLoaded && searchText !== ''">
+    <template v-if="dataLoaded && searchText.trim() !== ''">
       <v-row>
         <v-container fluid>
           <v-row>
@@ -61,6 +61,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import Axios from "axios";
+import { pinyin } from "pinyin-pro";
 import ClubCard from "../components/ClubCard.vue";
 import { encode } from "../utils/urlTransform";
 
@@ -79,6 +80,7 @@ export default class ClubOverview extends Vue {
     { name: "其他", visible: false, clubs: [] },
   ];
   dataLoaded = false;
+  includePinyin = false;
   searchText = "";
   resultList: Club[] = [];
   clubList: Club[] = [];
@@ -92,15 +94,16 @@ export default class ClubOverview extends Vue {
   }
 
   search(): void {
-    const text = this.searchText;
-    this.resultList = [];
+    const text = this.searchText.trim().toLowerCase();
     if (text === "") return;
-    this.resultList = this.clubList.filter(
-      (club) =>
-        club.en_name.toLowerCase().indexOf(text.toLowerCase()) !== -1 ||
-        club.zh_name.toLowerCase().indexOf(text.toLowerCase()) !== -1
-    );
-    console.log(this.resultList);
+    this.resultList = this.clubList.filter((club) => {
+      const allText = [club.en_name, club.zh_name];
+      if (this.includePinyin)
+        allText.push(
+          pinyin(club.zh_name, { toneType: "none" }).replaceAll(/\s/g, "")
+        );
+      return allText.filter((entry) => entry.indexOf(text) !== -1).length > 0;
+    });
   }
 
   mounted(): void {
