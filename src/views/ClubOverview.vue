@@ -80,7 +80,6 @@ export default class ClubOverview extends Vue {
     { name: "其他", visible: false, clubs: [] },
   ];
   dataLoaded = false;
-  includePinyin = false;
   searchText = "";
   resultList: Club[] = [];
   clubList: Club[] = [];
@@ -97,11 +96,11 @@ export default class ClubOverview extends Vue {
     const text = this.searchText.trim().toLowerCase();
     if (text === "") return;
     this.resultList = this.clubList.filter((club) => {
-      const allText = [club.en_name.toLowerCase(), club.zh_name.toLowerCase()];
-      if (this.includePinyin)
-        allText.push(
-          pinyin(club.zh_name, { toneType: "none" }).replaceAll(/\s/g, "")
-        );
+      const allText = [
+        club.en_name.toLowerCase(),
+        club.zh_name.toLowerCase(),
+        club.pinyin_name,
+      ];
       return allText.filter((entry) => entry.indexOf(text) !== -1).length > 0;
     });
   }
@@ -109,7 +108,15 @@ export default class ClubOverview extends Vue {
   mounted(): void {
     Axios.get("getClubList.php").then((response) => {
       const clubList = response.data as Club[];
-      this.clubList = clubList;
+      this.clubList = clubList.map((club) => {
+        return {
+          ...club,
+          pinyin_name: pinyin(club.zh_name, { toneType: "none" }).replaceAll(
+            /\s/g,
+            ""
+          ),
+        };
+      });
       this.categories = this.categories.map((cat, i) => {
         return { ...cat, clubs: clubList.filter((e) => e.category_id === i) };
       });
