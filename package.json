@@ -16,7 +16,7 @@
     "core-js": "^3.14.0",
     "highlight.js": "^11.0.1",
     "pinyin-pro": "^3.2.3",
-    "vue": "^2.6.13",
+    "vue": "^2.6.14",
     "vue-router": "^3.5.1",
     "vuetify": "^2.5.3",
     "vuex": "^3.6.2"
@@ -48,7 +48,7 @@
     "vue-class-component": "^7.2.6",
     "vue-cli-plugin-vuetify": "~2.4.1",
     "vue-property-decorator": "^9.1.2",
-    "vue-template-compiler": "^2.6.13",
+    "vue-template-compiler": "^2.6.14",
     "vuetify-loader": "^1.7.2"
   },
   "lint-staged": {
