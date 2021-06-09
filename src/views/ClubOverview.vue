@@ -97,7 +97,7 @@ export default class ClubOverview extends Vue {
     const text = this.searchText.trim().toLowerCase();
     if (text === "") return;
     this.resultList = this.clubList.filter((club) => {
-      const allText = [club.en_name, club.zh_name];
+      const allText = [club.en_name.toLowerCase(), club.zh_name.toLowerCase()];
       if (this.includePinyin)
         allText.push(
           pinyin(club.zh_name, { toneType: "none" }).replaceAll(/\s/g, "")
