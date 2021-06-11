@@ -21,9 +21,14 @@
 </template>
 
 <style scoped>
+@font-face {
+  font-family: title;
+  src: url("../assets/fonts/impact.ttf");
+}
 .art-header {
   background-color: #ffffff !important;
-  box-shadow: rgba(0, 0, 0, 0.096) 0px 0px 50px 8px !important;
+  box-shadow: rgba(0, 0, 0, 0.062) 0px 0px 50px 8px !important;
+  font-family: title;
 }
 .logo {
   border-radius: 20%;

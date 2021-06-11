@@ -2,8 +2,8 @@
   <div class="home" id="mainpage">
     <div class="art-welcome">
       <div class="art-title">
-        <h1 class="art-titleTx1">Welcome to</h1>
-        <h1 class="art-titleTx2">Enspire</h1>
+        <div class="art-titleTx1">Welcome to</div>
+        <div class="art-titleTx2">Enspire</div>
       </div>
       <v-carousel class="art-banner">
         <v-carousel-item v-for="(banner, i) in banners" :key="i">
@@ -17,11 +17,11 @@
 <style scoped>
 @font-face {
   font-family: title;
-  src: url("../assets/fonts/Britannic_Bold_T.ttf");
+  src: url("../assets/fonts/impact.ttf");
 }
 
 .art-welcome {
-  margin-top: 4.5vw;
+  margin-top: 3vh;
   width: 100vw;
   height: 18.5vw;
 }
@@ -35,11 +35,11 @@
   float: left;
 }
 .art-titleTx1 {
-  font-size: 4vw;
+  font-size: 5vw;
   color: #79b2be;
 }
 .art-titleTx2 {
-  font-size: 11vw;
+  font-size: 12vw;
   color: #0696b5;
 }
 .art-banner {
