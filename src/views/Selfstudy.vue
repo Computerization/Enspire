@@ -9,14 +9,19 @@
       <v-col cols="12" sm="7">
         <v-card class="pa-5">
           <v-card-title>请假单</v-card-title>
-          <v-card-text>
-            <v-form ref="form">
-              <v-text-field outlined dense label="姓名" />
-              <v-text-field outlined dense label="班级" />
-              <v-text-field outlined dense label="时间" />
-              <v-text-field outlined dense label="事由" />
-            </v-form>
-          </v-card-text>
+          <!-- TODO: if the status is "leave", then the approved application form should be displayed. -->
+          <div class="text">
+            <p>To whom it may concern:</p>
+            <p>
+              {{ name }} (student id: {{ studentId }}) would like to request a
+              leave during {{ selectedPeriod }} for
+              <v-text-field dense label="事由" />.
+            </p>
+            <p>
+              Date:
+              {{ new Date().toLocaleDateString("en-ZA") }}
+            </p>
+          </div>
           <v-card-actions>
             <v-spacer />
             <v-btn color="success">提交</v-btn>
@@ -26,7 +31,7 @@
       <v-col cols="12" sm="5">
         <v-card class="pa-5">
           <v-card-title>
-            我的课表（{{ transformBoundaries(getWeekBoundaries(new Date())) }}）
+            我的课表（{{ stringifyBoundaries(weekBoundaries) }}）
           </v-card-title>
           <v-card-text>
             <table class="schedule">
@@ -39,25 +44,28 @@
                 <th>Fri</th>
               </thead>
               <tbody>
-                <tr v-for="(row, ind) in schedule" :key="ind">
-                  <td class="index">{{ ind + 1 }}</td>
-                  <!-- TODO: the real schedule should not allow clicking but should be based on the registration data -->
+                <tr v-for="(row, period) in schedule" :key="period">
+                  <td class="index">{{ period + 1 }}</td>
                   <td
-                    v-for="(item, ind2) in row"
-                    :key="ind2"
-                    @click="
-                      item === 'available'
-                        ? updateCell(ind, ind2, 'leave')
-                        : updateCell(ind, ind2, 'available')
-                    "
-                    :class="item"
+                    v-for="(item, day) in row"
+                    :key="day"
+                    @click="selectCell(day, period)"
+                    :class="[
+                      item,
+                      {
+                        selected: period === selected[0] && day === selected[1],
+                      },
+                      {
+                        selectable: item !== 'notSelfstudy',
+                      },
+                    ]"
                   />
                 </tr>
               </tbody>
             </table>
             <p>
-              <span class="cell available" /> = 自修课；
-              <span class="cell leave" /> = 请假
+              <span class="cell available" /> = 空闲自修课；
+              <span class="cell leave" /> = 已请假
             </p>
           </v-card-text>
         </v-card>
@@ -67,6 +75,14 @@
 </template>
 
 <style scoped>
+.v-text-field {
+  display: inline-block;
+}
+
+.text {
+  padding: 16px;
+}
+
 .schedule {
   width: 100%;
   border-collapse: collapse;
@@ -88,6 +104,10 @@
 
 .schedule td + td {
   width: auto;
+  transition: all 0.2s;
+}
+
+.selectable {
   cursor: pointer;
 }
 
@@ -97,6 +117,10 @@
 
 .leave {
   background-color: lightcoral;
+}
+
+.selected {
+  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
 .cell {
@@ -113,30 +137,72 @@ export type status = "available" | "leave" | "notSelfstudy";
 
 @Component
 export default class Selfstudy extends Vue {
-  schedule = new Array<status[]>(9).fill(
-    new Array<status>(5).fill("notSelfstudy")
-  );
+  schedule = new Array<status[]>(9)
+    .fill([])
+    .map(() => new Array<status>(5).fill("notSelfstudy"));
+  selected = [0, 0];
+  // TODO: data below should be returned from backend
+  name = "测试者";
+  studentId = 20198000;
+  selfstudyPeriods: [number, number, status][] = [
+    [1, 0, "available"],
+    [2, 0, "available"],
+    [3, 1, "available"],
+    [4, 3, "available"],
+    [5, 3, "available"],
+  ];
 
-  updateCell(day: number, period: number, status: status): void {
-    this.schedule = this.schedule.map((row, i) => {
-      return i === day
-        ? row.map((cell, j) => (j === period ? status : cell))
-        : row;
-    });
-  }
-
-  getWeekBoundaries(today: Date): [Date, Date] {
-    today = new Date(today);
+  get weekBoundaries(): [Date, Date] {
+    const today = new Date();
     const day = today.getDay();
-    const monday = new Date(today.setDate(today.getDate() - day + 1)),
+    const monday = new Date(
+        today.setDate(today.getDate() - day + 1 + (day === 6 ? 7 : 0))
+      ),
       friday = new Date(today.setDate(monday.getDate() + 4));
     return [monday, friday];
   }
 
-  transformBoundaries(boundaries: [Date, Date]): string {
-    return `${boundaries[0].toLocaleDateString(
-      "en-ZA"
-    )} — ${boundaries[1].toLocaleDateString("en-ZA")}`;
+  get selectedPeriod(): string {
+    const selectedDate = new Date(
+      new Date().setDate(this.weekBoundaries[0].getDate() + this.selected[1])
+    );
+    return `period ${this.selected[0] + 1} on ${selectedDate.toLocaleDateString(
+      "en-ZA",
+      { month: "numeric", day: "numeric" }
+    )}`;
+  }
+
+  mounted(): void {
+    const nSchedule = this.schedule.map((row) => [...row]);
+    for (const period of this.selfstudyPeriods) {
+      nSchedule[period[0]][period[1]] = period[2];
+    }
+    this.schedule = nSchedule;
+    this.selected = this.selfstudyPeriods[0].slice(0, 2) as [number, number];
+  }
+
+  updateCell(day: number, period: number, status: status): void {
+    this.schedule = this.schedule.map((row, i) => {
+      return i === period
+        ? row.map((cell, j) => (j === day ? status : cell))
+        : row;
+    });
+  }
+
+  selectCell(day: number, period: number): void {
+    if (this.schedule[period][day] !== "notSelfstudy") {
+      this.selected = [period, day];
+    }
+  }
+
+  stringifyBoundaries(boundaries: [Date, Date]): string {
+    return `${boundaries[0].toLocaleDateString("en-ZA", {
+      month: "numeric",
+      day: "numeric",
+    })} — ${boundaries[1].toLocaleDateString("en-ZA", {
+      month: "numeric",
+      day: "numeric",
+    })}`;
   }
 }
 </script>
