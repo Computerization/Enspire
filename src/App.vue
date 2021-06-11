@@ -3,7 +3,7 @@
     <Appbar @toggle-sidebar="toggleSidebar" />
     <Sidebar :drawer="drawer" @hide-sidebar="hideSidebar" />
     <v-main>
-      <v-container fluid>
+      <v-container style="padding: 0px" fluid>
         <router-view />
       </v-container>
     </v-main>

@@ -5,7 +5,14 @@
         <div class="art-titleTx1">Welcome to</div>
         <div class="art-titleTx2">Enspire</div>
       </div>
-      <v-carousel class="art-banner">
+      <v-carousel
+        class="art-banner"
+        height="200"
+        show-arrows-on-hover
+        cycle="cycle"
+        hide-delimiter-background
+        hide-delimiters
+      >
         <v-carousel-item v-for="(banner, i) in banners" :key="i">
           <img :src="banner.src" style="height: 20vw; width: auto" />
         </v-carousel-item>
@@ -19,7 +26,6 @@
   font-family: title;
   src: url("../assets/fonts/impact.ttf");
 }
-
 .art-welcome {
   margin-top: 3vh;
   width: 100vw;
@@ -47,7 +53,7 @@
   height: 20vw !important;
   float: right;
   border-radius: 1vw;
-  outline: #e4e4e4 1px;
+  box-shadow: 0 0 0px 0.5px rgba(0, 0, 0, 0.11);
   text-align: center;
 }
 </style>
