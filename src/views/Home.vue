@@ -27,15 +27,15 @@
   src: url("../assets/fonts/impact.ttf");
 }
 .art-welcome {
-  margin-top: 3vh;
   width: 100vw;
-  height: 18.5vw;
+  height: 32vw;
+  box-shadow: 0px 0px 3vw 2vw rgba(0, 0, 0, 0.021);
 }
 .art-title {
   text-align: left;
   width: 37vw;
   height: 15vw;
-  margin: 1.5vw 0 0 5vw;
+  margin: 6vw 0 0 5vw;
   line-height: 7.5vw;
   font-family: title;
   float: left;
@@ -49,6 +49,7 @@
   color: #0696b5;
 }
 .art-banner {
+  margin-top: 6vw;
   width: 53vw;
   height: 20vw !important;
   float: right;
