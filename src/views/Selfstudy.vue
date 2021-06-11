@@ -13,8 +13,10 @@
           <div class="text">
             <p>To whom it may concern:</p>
             <p>
-              {{ name }} (student id: {{ studentId }}) would like to request a
-              leave during {{ selectedPeriod }} for
+              <span class="field">{{ name }}</span> (student id:
+              <span class="field">{{ studentId }}</span
+              >) would like to request a leave during
+              <span v-html="selectedPeriod"></span> for
               <v-text-field dense label="事由" />.
             </p>
             <p>
@@ -75,6 +77,14 @@
 </template>
 
 <style scoped>
+.field,
+span >>> .field {
+  font-size: larger;
+  font-weight: bold;
+  padding: 0px 3px;
+  border-bottom: 1px solid black;
+}
+
 .v-text-field {
   display: inline-block;
 }
@@ -166,10 +176,12 @@ export default class Selfstudy extends Vue {
     const selectedDate = new Date(
       new Date().setDate(this.weekBoundaries[0].getDate() + this.selected[1])
     );
-    return `period ${this.selected[0] + 1} on ${selectedDate.toLocaleDateString(
-      "en-ZA",
-      { month: "numeric", day: "numeric" }
-    )}`;
+    return `period <span class="field">${
+      this.selected[0] + 1
+    }</span> on <span class="field">${selectedDate.toLocaleDateString("en-ZA", {
+      month: "numeric",
+      day: "numeric",
+    })}</span>`;
   }
 
   mounted(): void {
