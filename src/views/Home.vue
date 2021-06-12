@@ -69,6 +69,62 @@
   font-family: title;
   src: url("../assets/fonts/impact.ttf");
 }
+@keyframes titleIn-1 {
+  0% {
+    opacity: 0%;
+    transform: translateX(-10vw);
+  }
+  100% {
+    opacity: 100%;
+    transform: translateX(0vw);
+  }
+}
+@keyframes titleIn-2 {
+  0% {
+    opacity: 0%;
+    transform: translateX(-10vw);
+  }
+  20% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+    transform: translateX(0vw);
+  }
+}
+@keyframes bannerIn {
+  0% {
+    opacity: 0%;
+    transform: translateX(3vw);
+  }
+  100% {
+    opacity: 100%;
+    transform: translateX(0vw);
+  }
+}
+@keyframes newsIn {
+  0% {
+    opacity: 0%;
+    transform: translateY(4vw);
+  }
+  100% {
+    opacity: 100%;
+    transform: translateY(0vw);
+  }
+}
+@keyframes communityIn {
+  0% {
+    opacity: 0%;
+    transform: translateY(4vw);
+  }
+  20% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+    transform: translateY(0vw);
+  }
+}
 
 .home {
   display: block;
@@ -92,10 +148,12 @@
 .art-titleTx1 {
   font-size: 5vw;
   color: #79b2be;
+  animation: titleIn-1 2s;
 }
 .art-titleTx2 {
   font-size: 12vw;
   color: #0696b5;
+  animation: titleIn-2 2s;
 }
 .art-banner {
   margin-top: 6vw;
@@ -105,6 +163,7 @@
   border-radius: 1vw;
   box-shadow: 0 0 0px 0.5px rgba(0, 0, 0, 0.11);
   text-align: center;
+  animation: bannerIn 2s;
 }
 .art-components {
   position: relative;
@@ -127,10 +186,12 @@
 .art-news {
   width: 50vw;
   margin: 0px;
+  animation: newsIn 1s;
 }
 .art-community {
   width: 35vw;
   margin: 0 0 0 5vw;
+  animation: communityIn 1s;
 }
 .art-Ntitle,
 .art-Ctitle {
