@@ -21,17 +21,43 @@
     <div class="art-components">
       <div class="art-news">
         <div class="art-Ntitle">News</div>
-        <v-row class="art-row"> test N </v-row>
-        <v-row class="art-row"> test N2 </v-row>
-        <v-row class="art-row">
-          test Overflow
-          222222222222222222222222222222222222222222222222222222222222222
-        </v-row>
+        <v-card
+          elevation="0"
+          v-for="(N, i) in Ncards"
+          :key="i"
+          class="art-Ncard"
+        >
+          <v-card-title
+            style="font-size: 1rem; line-height: 1.25rem; padding: 0.5rem"
+          >
+            {{ N.title }}
+          </v-card-title>
+          <v-card-subtitle
+            style="font-size: 0.75rem; line-height: 1rem; padding: 0.5rem"
+          >
+            {{ N.content }}
+          </v-card-subtitle>
+        </v-card>
       </div>
       <div class="art-community">
         <div class="art-Ctitle">Community</div>
-        <v-row class="art-row"> test C </v-row>
-        <v-row class="art-row"> test C2 </v-row>
+        <v-card
+          elevation="0"
+          v-for="(C, i) in Ccards"
+          :key="i"
+          class="art-Ccard"
+        >
+          <v-card-title
+            style="font-size: 1rem; line-height: 1.25rem; padding: 0.5rem"
+          >
+            {{ C.title }}
+          </v-card-title>
+          <v-card-subtitle
+            style="font-size: 0.75rem; line-height: 1rem; padding: 0.5rem"
+          >
+            {{ C.content }}
+          </v-card-subtitle>
+        </v-card>
       </div>
     </div>
     <div class="art-decoBar"></div>
@@ -92,7 +118,7 @@
 .art-community {
   display: inline-block;
   vertical-align: top;
-  padding: 1vw 2vw 2vw 2vw;
+  padding: 1.5vw 2vw 2vw 2vw;
   height: auto;
   background: #ffffff;
   border-radius: 1.5vw;
@@ -111,10 +137,12 @@
   font-family: title;
   color: #066d85;
   font-size: 1.5rem;
+  margin-bottom: 6px;
 }
-.art-row {
+.art-Ccard,
+.art-Ncard {
   background-color: rgb(237, 241, 243);
-  margin: 0 0 3px 0;
+  margin: 0 0 5px 0;
   padding: 1px 3px 3px 1px;
   overflow: hidden;
 }
@@ -135,6 +163,24 @@ export default class Home extends Vue {
   banners = [
     { src: require("../assets/img/Enspire-logo.svg") },
     { src: require("../assets/img/Josh-Cena-avatar.jpg") },
+  ];
+  Ncards = [
+    { title: "test1", content: "test1-C" },
+    { title: "test2", content: "test2-C" },
+    {
+      title: "testOverflow",
+      content:
+        "333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333",
+    },
+  ];
+  Ccards = [
+    { title: "test1", content: "test1-C" },
+    { title: "test2", content: "test2-C" },
+    {
+      title: "testOverflow",
+      content:
+        "333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333",
+    },
   ];
 }
 </script>
