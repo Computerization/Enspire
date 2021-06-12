@@ -170,7 +170,7 @@
   background-color: #ebba36;
   width: 100vw;
   height: auto;
-  padding: 3.5vw 4vw 4vw 4vw;
+  padding: 4vw 4vw 4vw 4vw;
   z-index: 0;
 }
 .art-news,
@@ -182,6 +182,11 @@
   background: #ffffff;
   border-radius: 1.5vw;
   box-shadow: 0 0 1vw 0.3vw rgba(0, 0, 0, 0.068);
+  transition: 0.15s ease-out;
+}
+.art-news:hover,
+.art-community:hover {
+  transform: translateY(-1px);
 }
 .art-news {
   width: 50vw;
@@ -206,6 +211,11 @@
   margin: 0 0 5px 0;
   padding: 1px 3px 3px 1px;
   overflow: hidden;
+  transition: 0.05s ease-out;
+}
+.art-Ccard:hover,
+.art-Ncard:hover {
+  opacity: 65%;
 }
 .art-decoBar {
   position: relative;
