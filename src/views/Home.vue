@@ -34,6 +34,7 @@
         <v-row class="art-row"> test C2 </v-row>
       </div>
     </div>
+    <div class="art-decoBar"></div>
   </div>
 </template>
 
@@ -47,9 +48,11 @@
   display: block;
 }
 .art-welcome {
+  position: relative;
   width: 100vw;
   height: 32vw;
-  box-shadow: 0px 0px 3vw 2vw rgba(0, 0, 0, 0.021);
+  box-shadow: 0px 0px 2vw 1.5vw rgba(0, 0, 0, 0.089);
+  z-index: 1;
 }
 .art-title {
   text-align: left;
@@ -78,10 +81,12 @@
   text-align: center;
 }
 .art-components {
+  position: relative;
   background-color: #ebba36;
   width: 100vw;
   height: auto;
   padding: 3.5vw 4vw 4vw 4vw;
+  z-index: 0;
 }
 .art-news,
 .art-community {
@@ -99,18 +104,26 @@
 }
 .art-community {
   width: 35vw;
-  margin: 0 0 0 4vw;
+  margin: 0 0 0 5vw;
 }
 .art-Ntitle,
 .art-Ctitle {
   font-family: title;
   color: #066d85;
-  font-size: 3vw;
+  font-size: 1.5rem;
 }
 .art-row {
   background-color: rgb(237, 241, 243);
   margin: 0 0 3px 0;
   padding: 1px 3px 3px 1px;
+  overflow: hidden;
+}
+.art-decoBar {
+  position: relative;
+  width: 100vw;
+  height: 50vh;
+  box-shadow: 0px 0px 2vw 1.5vw rgba(0, 0, 0, 0.068);
+  z-index: 1;
 }
 </style>
 

@@ -1,13 +1,13 @@
 <template>
   <v-app>
-    <Appbar @toggle-sidebar="toggleSidebar" />
+    <Appbar style="z-index: 999" @toggle-sidebar="toggleSidebar" />
     <Sidebar :drawer="drawer" @hide-sidebar="hideSidebar" />
     <v-main>
       <v-container style="padding: 0px" fluid>
         <router-view />
       </v-container>
     </v-main>
-    <Myfooter />
+    <Myfooter style="z-index: 5" />
   </v-app>
 </template>
 
