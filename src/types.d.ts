@@ -10,3 +10,12 @@ type Club = {
     readonly website?: string;
   };
 };
+
+type application = {
+  readonly period: number;
+  readonly date: Date;
+  readonly submissionDate: Date;
+  readonly reason: string;
+  readonly teacher: string;
+  readonly status: "approved" | "pending" | "rejected";
+};

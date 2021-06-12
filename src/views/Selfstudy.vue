@@ -7,28 +7,13 @@
     </v-row>
     <v-row>
       <v-col cols="12" sm="7">
-        <v-card class="pa-5">
-          <v-card-title>请假单</v-card-title>
-          <!-- TODO: if the status is "leave", then the approved application form should be displayed. -->
-          <div class="text">
-            <p>To whom it may concern:</p>
-            <p>
-              <span class="field">{{ name }}</span> (student id:
-              <span class="field">{{ studentId }}</span
-              >) would like to request a leave during
-              <span v-html="selectedPeriod"></span> for
-              <v-text-field dense label="事由" v-model="reason" required />.
-            </p>
-            <p>
-              Date:
-              {{ new Date().toLocaleDateString("en-ZA") }}
-            </p>
-          </div>
-          <v-card-actions>
-            <v-spacer />
-            <v-btn color="success" @click="submit()">提交</v-btn>
-          </v-card-actions>
-        </v-card>
+        <Leave-application
+          :name="name"
+          :studentId="studentId"
+          :period="selected.period"
+          :date="selectedDate"
+          :application="selectedApplication"
+        />
       </v-col>
       <v-col cols="12" sm="5">
         <v-card class="pa-5">
@@ -59,7 +44,8 @@
                     :class="[
                       item,
                       {
-                        selected: period === selected[0] && day === selected[1],
+                        selected:
+                          period === selected.period && day === selected.day,
                       },
                       {
                         selectable: item !== 'notSelfstudy',
@@ -81,22 +67,6 @@
 </template>
 
 <style scoped>
-.field,
-span >>> .field {
-  font-size: larger;
-  font-weight: bold;
-  padding: 0px 5px;
-  border-bottom: 1px solid black;
-}
-
-.v-text-field {
-  display: inline-block;
-}
-
-.text {
-  padding: 16px;
-}
-
 .schedule {
   width: 100%;
   border-collapse: collapse;
@@ -146,37 +116,53 @@ span >>> .field {
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import {
-  stringifyBoundaries,
-  stringifyDate,
-  daysAfter,
-} from "../utils/dateUtils";
+import LeaveApplication from "../components/LeaveApplication.vue";
+import { stringifyBoundaries, daysAfter } from "../utils/dateUtils";
 
 export type status = "available" | "leave" | "notSelfstudy";
+export type period = {
+  period: number;
+  day: number;
+};
 
-@Component
+@Component({
+  components: {
+    LeaveApplication,
+  },
+})
 export default class Selfstudy extends Vue {
-  /** [period, day] */
-  selected: [number, number] = [0, 0];
+  selected: period = { period: 0, day: 0 };
   currentWeek = new Date();
-  reason = "";
   // TODO: data below should be returned from backend
   name = "测试者";
   studentId = 20198000;
-  /** [period, day] */
-  selfstudyPeriods: [number, number][] = [
-    [1, 0],
-    [2, 0],
-    [3, 1],
-    [4, 3],
-    [5, 3],
+  selfstudyPeriods: period[] = [
+    { period: 1, day: 0 },
+    { period: 2, day: 0 },
+    { period: 3, day: 1 },
+    { period: 4, day: 3 },
+    { period: 5, day: 3 },
   ];
   semesterStart = new Date(2021, 0, 1);
   semesterEnd = new Date(2021, 8, 1);
-  /** [period, day] */
-  pastApplications: [number, Date][] = [
-    [4, new Date(2021, 5, 10)],
-    [1, new Date(2021, 5, 14)],
+  /** [period, day, reason] */
+  pastApplications: application[] = [
+    {
+      period: 4,
+      date: new Date(2021, 5, 10),
+      submissionDate: new Date(2021, 5, 10),
+      teacher: "老师 1",
+      reason: "推荐信",
+      status: "approved",
+    },
+    {
+      period: 1,
+      date: new Date(2021, 5, 14),
+      submissionDate: new Date(2021, 5, 10),
+      teacher: "老师 2",
+      reason: "物理 IA",
+      status: "pending",
+    },
   ];
 
   get weekBoundaries(): [Date, Date] {
@@ -188,13 +174,14 @@ export default class Selfstudy extends Vue {
   }
 
   get selectedDate(): Date {
-    return daysAfter(this.selected[1], this.weekBoundaries[0]);
+    return daysAfter(this.selected.day, this.weekBoundaries[0]);
   }
 
-  get selectedPeriod(): string {
-    return `period <span class="field">${
-      this.selected[0] + 1
-    }</span> on <span class="field">${stringifyDate(this.selectedDate)}</span>`;
+  get selectedApplication(): application | undefined {
+    return this.findApplication(
+      this.selected.period,
+      daysAfter(this.selected.day, this.weekBoundaries[0])
+    );
   }
 
   get schedule(): status[][] {
@@ -202,18 +189,16 @@ export default class Selfstudy extends Vue {
       .fill([])
       .map(() => new Array<status>(5).fill("notSelfstudy"));
     for (let i = 0; i < this.selfstudyPeriods.length; i++)
-      schedule[this.selfstudyPeriods[i][0]][this.selfstudyPeriods[i][1]] =
-        this.periodStatus[i];
+      schedule[this.selfstudyPeriods[i].period][this.selfstudyPeriods[i].day] =
+        this.periodStatuses[i];
     return schedule;
   }
 
-  get periodStatus(): status[] {
+  get periodStatuses(): status[] {
     const statuses = this.selfstudyPeriods.map((period) => {
-      return this.pastApplications.find(
-        (entry) =>
-          entry[0] === period[0] &&
-          entry[1].getDate() ===
-            daysAfter(period[1], this.weekBoundaries[0]).getDate()
+      return this.findApplication(
+        period.period,
+        daysAfter(period.day, this.weekBoundaries[0])
       ) !== undefined
         ? "leave"
         : "available";
@@ -225,9 +210,16 @@ export default class Selfstudy extends Vue {
     this.selected = this.selfstudyPeriods[0];
   }
 
+  findApplication(period: number, date: Date): application | undefined {
+    return this.pastApplications.find(
+      (entry) =>
+        entry.period === period && entry.date.getDate() === date.getDate()
+    );
+  }
+
   selectCell(day: number, period: number): void {
     if (this.schedule[period][day] !== "notSelfstudy")
-      this.selected = [period, day];
+      this.selected = { period: period, day: day };
   }
 
   stringifyBoundaries = stringifyBoundaries;
@@ -238,13 +230,6 @@ export default class Selfstudy extends Vue {
 
   next(): void {
     this.currentWeek = daysAfter(7, this.currentWeek);
-  }
-
-  submit(): void {
-    const selectedDate = this.selectedDate;
-    const selectedPeriod = this.selected[0];
-    const reason = this.reason;
-    console.log(selectedDate, selectedPeriod, reason);
   }
 }
 </script>
