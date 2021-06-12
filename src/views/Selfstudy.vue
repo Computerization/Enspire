@@ -17,7 +17,7 @@
               <span class="field">{{ studentId }}</span
               >) would like to request a leave during
               <span v-html="selectedPeriod"></span> for
-              <v-text-field dense label="事由" />.
+              <v-text-field dense label="事由" v-model="reason" required />.
             </p>
             <p>
               Date:
@@ -26,14 +26,18 @@
           </div>
           <v-card-actions>
             <v-spacer />
-            <v-btn color="success">提交</v-btn>
+            <v-btn color="success" @click="submit()">提交</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
       <v-col cols="12" sm="5">
         <v-card class="pa-5">
           <v-card-title>
-            我的课表（{{ stringifyBoundaries(weekBoundaries) }}）
+            <v-icon @click="prev()">mdi-arrow-left</v-icon>
+            <v-spacer />
+            课表 ({{ stringifyBoundaries(weekBoundaries) }})
+            <v-spacer />
+            <v-icon @click="next()">mdi-arrow-right</v-icon>
           </v-card-title>
           <v-card-text>
             <table class="schedule">
@@ -81,7 +85,7 @@
 span >>> .field {
   font-size: larger;
   font-weight: bold;
-  padding: 0px 3px;
+  padding: 0px 5px;
   border-bottom: 1px solid black;
 }
 
@@ -114,7 +118,7 @@ span >>> .field {
 
 .schedule td + td {
   width: auto;
-  transition: all 0.2s;
+  transition: box-shadow 0.2s;
 }
 
 .selectable {
@@ -142,79 +146,105 @@ span >>> .field {
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import {
+  stringifyBoundaries,
+  stringifyDate,
+  daysAfter,
+} from "../utils/dateUtils";
 
 export type status = "available" | "leave" | "notSelfstudy";
 
 @Component
 export default class Selfstudy extends Vue {
-  schedule = new Array<status[]>(9)
-    .fill([])
-    .map(() => new Array<status>(5).fill("notSelfstudy"));
-  selected = [0, 0];
+  /** [period, day] */
+  selected: [number, number] = [0, 0];
+  currentWeek = new Date();
+  reason = "";
   // TODO: data below should be returned from backend
   name = "测试者";
   studentId = 20198000;
-  selfstudyPeriods: [number, number, status][] = [
-    [1, 0, "available"],
-    [2, 0, "available"],
-    [3, 1, "available"],
-    [4, 3, "available"],
-    [5, 3, "available"],
+  /** [period, day] */
+  selfstudyPeriods: [number, number][] = [
+    [1, 0],
+    [2, 0],
+    [3, 1],
+    [4, 3],
+    [5, 3],
+  ];
+  semesterStart = new Date(2021, 0, 1);
+  semesterEnd = new Date(2021, 8, 1);
+  /** [period, day] */
+  pastApplications: [number, Date][] = [
+    [4, new Date(2021, 5, 10)],
+    [1, new Date(2021, 5, 14)],
   ];
 
   get weekBoundaries(): [Date, Date] {
-    const today = new Date();
-    const day = today.getDay();
-    const monday = new Date(
-        today.setDate(today.getDate() - day + 1 + (day === 6 ? 7 : 0))
-      ),
-      friday = new Date(today.setDate(monday.getDate() + 4));
+    const now = this.currentWeek;
+    const day = now.getDay();
+    const monday = daysAfter(-day + 1 + (day === 6 ? 7 : 0), now),
+      friday = daysAfter(4, monday);
     return [monday, friday];
   }
 
+  get selectedDate(): Date {
+    return daysAfter(this.selected[1], this.weekBoundaries[0]);
+  }
+
   get selectedPeriod(): string {
-    const selectedDate = new Date(
-      new Date().setDate(this.weekBoundaries[0].getDate() + this.selected[1])
-    );
     return `period <span class="field">${
       this.selected[0] + 1
-    }</span> on <span class="field">${selectedDate.toLocaleDateString("en-ZA", {
-      month: "numeric",
-      day: "numeric",
-    })}</span>`;
+    }</span> on <span class="field">${stringifyDate(this.selectedDate)}</span>`;
+  }
+
+  get schedule(): status[][] {
+    const schedule = new Array<status[]>(9)
+      .fill([])
+      .map(() => new Array<status>(5).fill("notSelfstudy"));
+    for (let i = 0; i < this.selfstudyPeriods.length; i++)
+      schedule[this.selfstudyPeriods[i][0]][this.selfstudyPeriods[i][1]] =
+        this.periodStatus[i];
+    return schedule;
+  }
+
+  get periodStatus(): status[] {
+    const statuses = this.selfstudyPeriods.map((period) => {
+      return this.pastApplications.find(
+        (entry) =>
+          entry[0] === period[0] &&
+          entry[1].getDate() ===
+            daysAfter(period[1], this.weekBoundaries[0]).getDate()
+      ) !== undefined
+        ? "leave"
+        : "available";
+    });
+    return statuses;
   }
 
   mounted(): void {
-    const nSchedule = this.schedule.map((row) => [...row]);
-    for (const period of this.selfstudyPeriods) {
-      nSchedule[period[0]][period[1]] = period[2];
-    }
-    this.schedule = nSchedule;
-    this.selected = this.selfstudyPeriods[0].slice(0, 2) as [number, number];
-  }
-
-  updateCell(day: number, period: number, status: status): void {
-    this.schedule = this.schedule.map((row, i) => {
-      return i === period
-        ? row.map((cell, j) => (j === day ? status : cell))
-        : row;
-    });
+    this.selected = this.selfstudyPeriods[0];
   }
 
   selectCell(day: number, period: number): void {
-    if (this.schedule[period][day] !== "notSelfstudy") {
+    if (this.schedule[period][day] !== "notSelfstudy")
       this.selected = [period, day];
-    }
   }
 
-  stringifyBoundaries(boundaries: [Date, Date]): string {
-    return `${boundaries[0].toLocaleDateString("en-ZA", {
-      month: "numeric",
-      day: "numeric",
-    })} — ${boundaries[1].toLocaleDateString("en-ZA", {
-      month: "numeric",
-      day: "numeric",
-    })}`;
+  stringifyBoundaries = stringifyBoundaries;
+
+  prev(): void {
+    this.currentWeek = daysAfter(-7, this.currentWeek);
+  }
+
+  next(): void {
+    this.currentWeek = daysAfter(7, this.currentWeek);
+  }
+
+  submit(): void {
+    const selectedDate = this.selectedDate;
+    const selectedPeriod = this.selected[0];
+    const reason = this.reason;
+    console.log(selectedDate, selectedPeriod, reason);
   }
 }
 </script>
