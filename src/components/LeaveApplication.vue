@@ -9,7 +9,7 @@
         >) would like to request a leave during period
         <span class="field">{{ this.$props.period + 1 }}</span> on
         <span class="field">{{ stringifyDate(this.$props.date) }}</span>
-        <span v-html="selected"></span> for
+        for
         <span class="field" v-if="application">
           {{ application.reason }}
         </span>
