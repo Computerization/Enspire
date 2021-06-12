@@ -18,6 +18,22 @@
         </v-carousel-item>
       </v-carousel>
     </div>
+    <div class="art-components">
+      <div class="art-news">
+        <div class="art-Ntitle">News</div>
+        <v-row class="art-row"> test N </v-row>
+        <v-row class="art-row"> test N2 </v-row>
+        <v-row class="art-row">
+          test Overflow
+          222222222222222222222222222222222222222222222222222222222222222
+        </v-row>
+      </div>
+      <div class="art-community">
+        <div class="art-Ctitle">Community</div>
+        <v-row class="art-row"> test C </v-row>
+        <v-row class="art-row"> test C2 </v-row>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -25,6 +41,10 @@
 @font-face {
   font-family: title;
   src: url("../assets/fonts/impact.ttf");
+}
+
+.home {
+  display: block;
 }
 .art-welcome {
   width: 100vw;
@@ -56,6 +76,41 @@
   border-radius: 1vw;
   box-shadow: 0 0 0px 0.5px rgba(0, 0, 0, 0.11);
   text-align: center;
+}
+.art-components {
+  background-color: #ebba36;
+  width: 100vw;
+  height: auto;
+  padding: 3.5vw 4vw 4vw 4vw;
+}
+.art-news,
+.art-community {
+  display: inline-block;
+  vertical-align: top;
+  padding: 1vw 2vw 2vw 2vw;
+  height: auto;
+  background: #ffffff;
+  border-radius: 1.5vw;
+  box-shadow: 0 0 1vw 0.3vw rgba(0, 0, 0, 0.068);
+}
+.art-news {
+  width: 50vw;
+  margin: 0px;
+}
+.art-community {
+  width: 35vw;
+  margin: 0 0 0 4vw;
+}
+.art-Ntitle,
+.art-Ctitle {
+  font-family: title;
+  color: #066d85;
+  font-size: 3vw;
+}
+.art-row {
+  background-color: rgb(237, 241, 243);
+  margin: 0 0 3px 0;
+  padding: 1px 3px 3px 1px;
 }
 </style>
 

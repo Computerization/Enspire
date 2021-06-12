@@ -8,7 +8,7 @@
         rounded
         class="art-footerBt1"
         :href="link.src"
-        style="height: 5vh; width: 15vh; font-size: 2.5vh"
+        style="height: 4vh; width: 11vh; font-size: 2vh"
       >
         {{ link.title }}
       </v-btn>
@@ -36,7 +36,7 @@
 .art-footerBt1 {
   background-color: #1baec1;
   color: #f9fbfb;
-  margin-bottom: 2vh;
+  margin-bottom: 1.5vh;
 }
 </style>
 
