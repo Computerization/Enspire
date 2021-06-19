@@ -7,7 +7,6 @@
       </div>
       <v-carousel
         class="art-banner"
-        height="200"
         show-arrows-on-hover
         cycle="cycle"
         hide-delimiter-background
