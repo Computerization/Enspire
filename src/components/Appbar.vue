@@ -13,6 +13,13 @@
       <v-toolbar-title>Enspire</v-toolbar-title>
     </div>
     <v-spacer />
+    <v-switch
+      v-model="darkTheme"
+      class="art-switch"
+      inset
+      color="rgba(0, 0, 0, 0.03)"
+      label="Switch Theme"
+    ></v-switch>
     <Login-dialog ref="loginDialog" @login-success="globalInit" />
     <v-btn fab outlined small @click="showLoginDialog">
       <v-icon>mdi-account</v-icon>
@@ -32,8 +39,10 @@
 }
 .logo {
   border-radius: 20%;
-  background-color: white;
   margin-left: 20px;
+}
+.art-switch {
+  height: 25px;
 }
 </style>
 
@@ -47,6 +56,7 @@ import LoginDialog from "./LoginDialog.vue";
   },
 })
 export default class Appbar extends Vue {
+  darkTheme = false;
   $refs!: {
     loginDialog: LoginDialog;
   };
