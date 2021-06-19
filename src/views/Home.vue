@@ -182,11 +182,11 @@
   background: #ffffff;
   border-radius: 1.5vw;
   box-shadow: 0 0 1vw 0.3vw rgba(0, 0, 0, 0.068);
-  transition: 0.15s ease-out;
+  transition: 0.25s ease-out;
 }
 .art-news:hover,
 .art-community:hover {
-  transform: translateY(-1px);
+  transform: translateY(-3px);
 }
 .art-news {
   width: 50vw;
@@ -207,15 +207,15 @@
 }
 .art-Ccard,
 .art-Ncard {
-  background-color: rgb(237, 241, 243);
+  background-color: rgba(228, 232, 235, 0.5);
   margin: 0 0 5px 0;
   padding: 1px 3px 3px 1px;
   overflow: hidden;
-  transition: 0.05s ease-out;
+  transition: 0.1s ease-out;
 }
 .art-Ccard:hover,
 .art-Ncard:hover {
-  opacity: 65%;
+  background-color: rgba(228, 232, 235, 0.911);
 }
 .art-decoBar {
   position: relative;
