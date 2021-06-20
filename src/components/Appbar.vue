@@ -42,18 +42,23 @@ import LoginDialog from "./LoginDialog.vue";
   },
 })
 export default class Appbar extends Vue {
+
   $refs!: {
     loginDialog: LoginDialog;
   };
+
   showLoginDialog(): void {
     this.$refs.loginDialog.show();
   }
+
   globalInit(): void {
     this.$refs.loginDialog.hide();
-    alert("Hi:)");
+    console.log("Hi:)");
   }
+
   toggleSidebar(): void {
     this.$emit("toggle-sidebar");
   }
+
 }
 </script>

@@ -45,6 +45,7 @@ import Axios from "axios";
 
 @Component
 export default class LoginDialog extends Vue {
+
   visible = false;
   userName = "";
   password = "";
@@ -52,22 +53,24 @@ export default class LoginDialog extends Vue {
   show(): void {
     this.visible = true;
   }
+
   hide(): void {
     this.visible = false;
   }
+
   tryLogin(): void {
     Axios.post("login.php", {
       username: this.userName,
       password: this.password,
     }).then((response) => {
       const data = response.data;
-      if (data.status == "ok") {
+      if (data.status === "ok") {
         this.hide();
         this.$emit("login-success");
-      } else {
-        alert("Login Failed");
-      }
+      } else
+        console.log("Login Failed");
     });
   }
+
 }
 </script>

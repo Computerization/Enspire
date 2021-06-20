@@ -13,9 +13,10 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+
 import Appbar from "./components/Appbar.vue";
-import Sidebar from "./components/Sidebar.vue";
 import Myfooter from "./components/Footer.vue";
+import Sidebar from "./components/Sidebar.vue";
 
 @Component({
   components: {
@@ -25,13 +26,15 @@ import Myfooter from "./components/Footer.vue";
   },
 })
 export default class App extends Vue {
-  drawer = false;
 
+  drawer = false;
   toggleSidebar(): void {
     this.drawer = !this.drawer;
   }
+
   hideSidebar(): void {
     this.drawer = false;
   }
+
 }
 </script>

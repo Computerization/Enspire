@@ -57,9 +57,11 @@ import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class Home extends Vue {
+
   banners = [
     { src: require("../assets/img/Enspire-logo.svg") },
     { src: require("../assets/img/Josh-Cena-avatar.jpg") },
   ];
+
 }
 </script>

@@ -8,6 +8,7 @@ module.exports = {
     "plugin:@typescript-eslint/recommended",
     "plugin:vue/essential",
     "@vue/typescript",
+    "eslint-config-jc",
     "prettier",
   ],
   plugins: ["@typescript-eslint"],

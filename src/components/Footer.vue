@@ -41,8 +41,10 @@ import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class Footer extends Vue {
+
   links = [
     { title: "GitHub", src: "https://github.com/Computerization/Enspire" },
   ];
+
 }
 </script>

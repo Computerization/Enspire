@@ -28,14 +28,16 @@ import fetchImg from "../utils/fetchImg";
 
 @Component
 export default class ClubPageMain extends Vue {
+
   logoUrl = "";
   @Prop() club!: Club;
 
   mounted(): void {
     this.logoUrl = fetchImg(
       `club/${this.$props.club.id}.png`,
-      "club/not-found.png"
+      "club/not-found.png",
     );
   }
+
 }
 </script>

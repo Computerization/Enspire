@@ -38,19 +38,22 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import fetchImg from "../utils/fetchImg";
+
 import { encode } from "../utils/urlTransform";
+import fetchImg from "../utils/fetchImg";
 
 @Component
 export default class ClubCard extends Vue {
+
   imgUrl = "";
   @Prop() club!: Club;
   encode = encode;
   mounted(): void {
     this.imgUrl = fetchImg(
       `club/${this.$props.club.id}.png`,
-      "club/not-found.png"
+      "club/not-found.png",
     );
   }
+
 }
 </script>

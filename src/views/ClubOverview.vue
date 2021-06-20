@@ -62,15 +62,18 @@
 import { Component, Vue } from "vue-property-decorator";
 import Axios from "axios";
 import { pinyin } from "pinyin-pro";
+
 import ClubCard from "../components/ClubCard.vue";
 import { encode } from "../utils/urlTransform";
 
+// eslint-disable-next-line new-cap
 @Component({
   components: {
     ClubCard,
   },
 })
 export default class ClubOverview extends Vue {
+
   categories: { name: string; visible: boolean; clubs: Club[] }[] = [
     { name: "体育类社团", visible: false, clubs: [] },
     { name: "服务类社团", visible: true, clubs: [] },
@@ -79,22 +82,21 @@ export default class ClubOverview extends Vue {
     { name: "学术类社团", visible: false, clubs: [] },
     { name: "其他", visible: false, clubs: [] },
   ];
+
   dataLoaded = false;
   searchText = "";
   resultList: Club[] = [];
   clubList: Club[] = [];
-
   encode = encode;
 
   toggleSection(index: number): void {
-    this.categories = this.categories.map((e, i) =>
-      i === index ? { ...e, visible: !e.visible } : e
-    );
+    this.categories = this.categories.map((e, i) => i === index ? { ...e, visible: !e.visible } : e);
   }
 
   search(): void {
     const text = this.searchText.trim().toLowerCase();
-    if (text === "") return;
+    if (text === "")
+      return;
     this.resultList = this.clubList.filter((club) => {
       const allText = [
         club.en_name.toLowerCase(),
@@ -108,20 +110,18 @@ export default class ClubOverview extends Vue {
   mounted(): void {
     Axios.get("getClubList.php").then((response) => {
       const clubList = response.data as Club[];
-      this.clubList = clubList.map((club) => {
-        return {
-          ...club,
-          pinyin_name: pinyin(club.zh_name, { toneType: "none" }).replaceAll(
-            /\s/g,
-            ""
-          ),
-        };
-      });
-      this.categories = this.categories.map((cat, i) => {
-        return { ...cat, clubs: clubList.filter((e) => e.category_id === i) };
-      });
+      this.clubList = clubList.map((club) => ({
+        ...club,
+        // To conform with API from backend
+        // eslint-disable-next-line camelcase
+        pinyin_name: pinyin(club.zh_name, { toneType: "none" }).replaceAll(/\s/g, ""),
+      }));
+      this.categories = this.categories.map((cat, i) => (
+        { ...cat, clubs: clubList.filter((e) => e.category_id === i) }
+      ));
       this.dataLoaded = true;
     });
   }
+
 }
 </script>

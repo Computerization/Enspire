@@ -63,16 +63,21 @@ import { Component, Vue } from "vue-property-decorator";
   },
 })
 export default class Sidebar extends Vue {
+
   group = null;
   drawerItems = [
     { title: "我们的社团", icon: "mdi-view-dashboard", to: "/clubs" },
     { title: "预约教室", icon: "mdi-calendar", to: "/reservation" },
   ];
+
   get show(): boolean {
     return this.$props.drawer;
   }
+
   set show(newValue: boolean) {
-    if (newValue === false) this.$emit("hide-sidebar");
+    if (newValue === false)
+      this.$emit("hide-sidebar");
   }
+
 }
 </script>

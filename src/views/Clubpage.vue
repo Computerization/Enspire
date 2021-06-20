@@ -29,16 +29,22 @@ import { encode } from "../utils/urlTransform";
   },
 })
 export default class Clubpage extends Vue {
+
   club: Club = {
     id: 0,
+    // To conform with API from backend
+    /* eslint-disable camelcase */
     category_id: 0,
     zh_name: "",
     en_name: "",
     pinyin_name: "",
     zh_desc: "",
     en_desc: "",
+    /* eslint-enable camelcase */
   };
+
   dataLoaded = false;
+
   mounted(): void {
     Axios.get("getClubList.php").then((response) => {
       const name = this.$route.params.name;
@@ -48,5 +54,6 @@ export default class Clubpage extends Vue {
       this.dataLoaded = true;
     });
   }
+
 }
 </script>

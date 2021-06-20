@@ -34,12 +34,14 @@ type Calendar = {
 
 @Component
 export default class Reservation extends Vue {
+
   type = "month";
   typeOptions = [
     { text: "Day", value: "day" },
     { text: "Week", value: "week" },
     { text: "Month", value: "month" },
   ];
+
   $refs!: {
     calendar: Calendar;
   };
@@ -47,8 +49,10 @@ export default class Reservation extends Vue {
   calendarPrev(): void {
     this.$refs.calendar.prev();
   }
+
   calendarNext(): void {
     this.$refs.calendar.next();
   }
+
 }
 </script>

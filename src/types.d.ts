@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 type Club = {
   readonly id: number;
   readonly category_id: number;

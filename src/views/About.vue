@@ -80,6 +80,7 @@ import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class About extends Vue {
+
   contributors = [
     {
       alias: "Josh-Cena",
@@ -137,5 +138,6 @@ export default class About extends Vue {
       desc: "22届社长",
     },
   ];
+
 }
 </script>
