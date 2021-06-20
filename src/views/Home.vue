@@ -63,7 +63,8 @@
   </div>
 </template>
 
-<style scoped>
+<style lang="less" scoped>
+@import url(./css/themes.less);
 @font-face {
   font-family: title;
   src: url("../assets/fonts/impact.ttf");
@@ -125,104 +126,122 @@
   }
 }
 
-.home {
-  display: block;
+.theme(@theme) {
+  @bg: "@{theme}-bg";
+  @bg-yellow: "@{theme}-bg-yellow";
+  @outline: "@{theme}-outline";
+  @card-bg: "@{theme}-card-bg";
+  @card-bg-hover: "@{theme}-card-bg-hover";
+  @title: "@{theme}-title";
+  @title-dark: "@{theme}-title-dark";
+  @subtitle: "@{theme}-subtitle";
+
+  .home {
+    display: block;
+  }
+  .art-welcome {
+    position: relative;
+    width: 100vw;
+    height: 32vw;
+    box-shadow: 0px 0px 2vw 1.5vw rgba(0, 0, 0, 0.089);
+    z-index: 1;
+  }
+  .art-title {
+    text-align: left;
+    width: 37vw;
+    height: 15vw;
+    margin: 6vw 0 0 5vw;
+    line-height: 7.5vw;
+    font-family: title;
+    float: left;
+  }
+  .art-titleTx1 {
+    font-size: 5vw;
+    color: @@subtitle;
+    animation: titleIn-1 2s;
+  }
+  .art-titleTx2 {
+    font-size: 12vw;
+    color: @@title;
+    animation: titleIn-2 2s;
+  }
+  .art-banner {
+    margin-top: 6vw;
+    width: 53vw;
+    height: 20vw !important;
+    float: right;
+    border-radius: 1vw;
+    box-shadow: 0 0 0px 0.5px @@outline;
+    text-align: center;
+    animation: bannerIn 2s;
+  }
+  .art-components {
+    position: relative;
+    background-color: @@bg-yellow;
+    width: 100vw;
+    height: auto;
+    padding: 4vw 4vw 4vw 4vw;
+    z-index: 0;
+  }
+  .art-news,
+  .art-community {
+    display: inline-block;
+    vertical-align: top;
+    padding: 1.5vw 2vw 2vw 2vw;
+    height: auto;
+    background: @@bg;
+    border-radius: 1.5vw;
+    box-shadow: 0 0 1vw 0.3vw rgba(0, 0, 0, 0.068);
+    transition: 0.25s ease-out;
+  }
+  .art-news:hover,
+  .art-community:hover {
+    transform: translateY(-3px);
+  }
+  .art-news {
+    width: 50vw;
+    margin: 0px;
+    animation: newsIn 1s;
+  }
+  .art-community {
+    width: 35vw;
+    margin: 0 0 0 5vw;
+    animation: communityIn 1s;
+  }
+  .art-Ntitle,
+  .art-Ctitle {
+    font-family: title;
+    color: @@title-dark;
+    font-size: 1.5rem;
+    margin-bottom: 6px;
+  }
+  .art-Ccard,
+  .art-Ncard {
+    background-color: @@card-bg;
+    margin: 0 0 5px 0;
+    padding: 1px 3px 3px 1px;
+    overflow: hidden;
+    transition: 0.1s ease-out;
+  }
+  .art-Ccard:hover,
+  .art-Ncard:hover {
+    background-color: @@card-bg-hover;
+  }
+  .art-decoBar {
+    position: relative;
+    width: 100vw;
+    height: 50vh;
+    box-shadow: 0px 0px 2vw 1.5vw rgba(0, 0, 0, 0.068);
+    z-index: 1;
+  }
 }
-.art-welcome {
-  position: relative;
-  width: 100vw;
-  height: 32vw;
-  box-shadow: 0px 0px 2vw 1.5vw rgba(0, 0, 0, 0.089);
-  z-index: 1;
+
+.light-theme {
+  .theme(li);
 }
-.art-title {
-  text-align: left;
-  width: 37vw;
-  height: 15vw;
-  margin: 6vw 0 0 5vw;
-  line-height: 7.5vw;
-  font-family: title;
-  float: left;
-}
-.art-titleTx1 {
-  font-size: 5vw;
-  color: #79b2be;
-  animation: titleIn-1 2s;
-}
-.art-titleTx2 {
-  font-size: 12vw;
-  color: #0696b5;
-  animation: titleIn-2 2s;
-}
-.art-banner {
-  margin-top: 6vw;
-  width: 53vw;
-  height: 20vw !important;
-  float: right;
-  border-radius: 1vw;
-  box-shadow: 0 0 0px 0.5px rgba(0, 0, 0, 0.11);
-  text-align: center;
-  animation: bannerIn 2s;
-}
-.art-components {
-  position: relative;
-  background-color: #ebba36;
-  width: 100vw;
-  height: auto;
-  padding: 4vw 4vw 4vw 4vw;
-  z-index: 0;
-}
-.art-news,
-.art-community {
-  display: inline-block;
-  vertical-align: top;
-  padding: 1.5vw 2vw 2vw 2vw;
-  height: auto;
-  background: #ffffff;
-  border-radius: 1.5vw;
-  box-shadow: 0 0 1vw 0.3vw rgba(0, 0, 0, 0.068);
-  transition: 0.25s ease-out;
-}
-.art-news:hover,
-.art-community:hover {
-  transform: translateY(-3px);
-}
-.art-news {
-  width: 50vw;
-  margin: 0px;
-  animation: newsIn 1s;
-}
-.art-community {
-  width: 35vw;
-  margin: 0 0 0 5vw;
-  animation: communityIn 1s;
-}
-.art-Ntitle,
-.art-Ctitle {
-  font-family: title;
-  color: #066d85;
-  font-size: 1.5rem;
-  margin-bottom: 6px;
-}
-.art-Ccard,
-.art-Ncard {
-  background-color: rgba(228, 232, 235, 0.5);
-  margin: 0 0 5px 0;
-  padding: 1px 3px 3px 1px;
-  overflow: hidden;
-  transition: 0.1s ease-out;
-}
-.art-Ccard:hover,
-.art-Ncard:hover {
-  background-color: rgba(228, 232, 235, 0.911);
-}
-.art-decoBar {
-  position: relative;
-  width: 100vw;
-  height: 50vh;
-  box-shadow: 0px 0px 2vw 1.5vw rgba(0, 0, 0, 0.068);
-  z-index: 1;
-}
+/* .dark-theme {
+  .theme(da);
+} */
 </style>
 
 <script lang="ts">

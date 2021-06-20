@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app class="art-header" :dark="darkTheme">
+  <v-app-bar app class="art-header light-theme" :dark="darkTheme">
     <div class="d-flex align-center">
       <v-app-bar-nav-icon @click.stop="toggleSidebar"></v-app-bar-nav-icon>
       <v-img
@@ -26,24 +26,38 @@
   </v-app-bar>
 </template>
 
-<style scoped>
+<style lang="less" scoped>
+@import url(../views/css/themes.less);
 @font-face {
   font-family: title;
   src: url("../assets/fonts/impact.ttf");
 }
-.art-header {
-  background-color: #ffffff !important;
-  box-shadow: rgba(0, 0, 0, 0.062) 0px 0px 50px 8px !important;
-  font-family: title;
+
+.theme(@theme) {
+  @bg: "@{theme}-bg";
+  @switch: "@{theme}-switch";
+
+  .art-header {
+    background-color: @@bg !important;
+    box-shadow: rgba(0, 0, 0, 0.062) 0px 0px 50px 8px !important;
+    font-family: title;
+  }
+  .logo {
+    border-radius: 20%;
+    margin-left: 20px;
+  }
+  .art-switch {
+    height: 25px;
+    color: @@switch;
+  }
 }
-.logo {
-  border-radius: 20%;
-  margin-left: 20px;
+
+.light-theme {
+  .theme(li);
 }
-.art-switch {
-  height: 25px;
-  color: rgba(0, 0, 0, 0.03);
-}
+/* .dark-theme {
+  .theme(da);
+} */
 </style>
 
 <script lang="ts">

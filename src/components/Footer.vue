@@ -20,24 +20,41 @@
   </v-footer>
 </template>
 
-<style scoped>
-.art-footer {
-  background-color: #f9fbfb !important;
-  padding: 2.5vh 0px 2.5vh 0px;
-  border: solid 1px #e4e4e4;
+<style lang="less" scoped>
+@import url(../views/css/themes.less);
+
+.theme(@theme) {
+  @bg: "@{theme}-bg";
+  @outline: "@{theme}-outline";
+  @footer-bg: "@{theme}-footer-bg";
+  @footer-tx: "@{theme}-footer-tx";
+  @footer-button: "@{theme}-footer-button";
+
+  .art-footer {
+    background-color: @@footer-bg !important;
+    padding: 2.5vh 0px 2.5vh 0px;
+    border: solid 1px @@outline;
+  }
+  .art-footerTx1 {
+    color: @@footer-tx !important;
+    letter-spacing: -0.3px;
+    height: 2.5vh;
+    line-height: 2.5vh;
+    font-size: 2vh;
+  }
+  .art-footerBt1 {
+    background-color: @@footer-button;
+    color: @@footer-bg;
+    margin-bottom: 1.5vh;
+  }
 }
-.art-footerTx1 {
-  color: #126b77 !important;
-  letter-spacing: -0.3px;
-  height: 2.5vh;
-  line-height: 2.5vh;
-  font-size: 2vh;
+
+.light-theme {
+  .theme(li);
 }
-.art-footerBt1 {
-  background-color: #1baec1;
-  color: #f9fbfb;
-  margin-bottom: 1.5vh;
-}
+/* .dark-theme {
+  .theme(da);
+} */
 </style>
 
 <script lang="ts">
