@@ -25,6 +25,7 @@
           v-for="(N, i) in Ncards"
           :key="i"
           class="art-Ncard"
+          :dark="darkTheme"
         >
           <v-card-title
             style="font-size: 1rem; line-height: 1.25rem; padding: 0.5rem"
@@ -45,6 +46,7 @@
           v-for="(C, i) in Ccards"
           :key="i"
           class="art-Ccard"
+          :dark="darkTheme"
         >
           <v-card-title
             style="font-size: 1rem; line-height: 1.25rem; padding: 0.5rem"
@@ -130,6 +132,7 @@
   @bg: "@{theme}-bg";
   @bg-yellow: "@{theme}-bg-yellow";
   @outline: "@{theme}-outline";
+  @banner-bg: "@{theme}-banner-bg";
   @card-bg: "@{theme}-card-bg";
   @card-bg-hover: "@{theme}-card-bg-hover";
   @title: "@{theme}-title";
@@ -140,6 +143,7 @@
     display: block;
   }
   .art-welcome {
+    background-color: @@bg;
     position: relative;
     width: 100vw;
     height: 32vw;
@@ -166,6 +170,7 @@
     animation: titleIn-2 2s;
   }
   .art-banner {
+    background-color: @@banner-bg;
     margin-top: 6vw;
     width: 53vw;
     height: 20vw !important;
@@ -189,7 +194,7 @@
     vertical-align: top;
     padding: 1.5vw 2vw 2vw 2vw;
     height: auto;
-    background: @@bg;
+    background-color: @@bg;
     border-radius: 1.5vw;
     box-shadow: 0 0 1vw 0.3vw rgba(0, 0, 0, 0.068);
     transition: 0.25s ease-out;
@@ -228,6 +233,7 @@
     background-color: @@card-bg-hover;
   }
   .art-decoBar {
+    background-color: @@bg;
     position: relative;
     width: 100vw;
     height: 50vh;
@@ -239,9 +245,9 @@
 .light-theme {
   .theme(li);
 }
-/* .dark-theme {
+.dark-theme {
   .theme(da);
-} */
+}
 </style>
 
 <script lang="ts">

@@ -53,9 +53,9 @@
 .light-theme {
   .theme(li);
 }
-/* .dark-theme {
+.dark-theme {
   .theme(da);
-} */
+}
 </style>
 
 <script lang="ts">

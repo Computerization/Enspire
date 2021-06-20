@@ -36,9 +36,10 @@
 .theme(@theme) {
   @bg: "@{theme}-bg";
   @switch: "@{theme}-switch";
+  @header-bg: "@{theme}-header-bg";
 
   .art-header {
-    background-color: @@bg !important;
+    background-color: @@header-bg !important;
     box-shadow: rgba(0, 0, 0, 0.062) 0px 0px 50px 8px !important;
     font-family: title;
   }
