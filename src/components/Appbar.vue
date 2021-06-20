@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app class="art-header light-theme" :dark="darkTheme">
+  <v-app-bar app class="art-header" :dark="darkTheme">
     <div class="d-flex align-center">
       <v-app-bar-nav-icon @click.stop="toggleSidebar"></v-app-bar-nav-icon>
       <v-img
@@ -55,9 +55,9 @@
 .light-theme {
   .theme(li);
 }
-/* .dark-theme {
+.dark-theme {
   .theme(da);
-} */
+}
 </style>
 
 <script lang="ts">

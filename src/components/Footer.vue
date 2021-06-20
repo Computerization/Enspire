@@ -29,6 +29,7 @@
   @footer-bg: "@{theme}-footer-bg";
   @footer-tx: "@{theme}-footer-tx";
   @footer-button: "@{theme}-footer-button";
+  @footer-buttontx: "@{theme}-footer-buttontx";
 
   .art-footer {
     background-color: @@footer-bg !important;
@@ -44,7 +45,7 @@
   }
   .art-footerBt1 {
     background-color: @@footer-button;
-    color: @@footer-bg;
+    color: @@footer-buttontx;
     margin-bottom: 1.5vh;
   }
 }

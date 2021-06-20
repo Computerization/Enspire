@@ -1,9 +1,12 @@
+//light-theme
 @li-bg: #ffffff;
+@li-header-bg: #ffffff;
 @li-bg-yellow: #ebbb36;
 @li-outline: #e4e4e4;
 @li-footer-bg: #f9fbfb;
 @li-footer-tx: #126b77;
 @li-footer-button: #1baec1;
+@da-footer-buttontx: #f9fbfb;
 @li-card-bg: #e4e8eb7f; //rgba(228, 232, 235, 0.5)
 @li-card-bg-hover: #e4e8ebe8; //rgba(228, 232, 235, 0.911)
 @li-title: #0696b5;
@@ -11,15 +14,34 @@
 @li-subtitle: #79b2be;
 @li-switch: #00000007; //rgba(0, 0, 0, 0.03)
 
+//dark-theme
+@da-bg: #2c2c2c;
+@da-header-bg: #272727;
+@da-bg-yellow: #765808;
+@da-outline: #272727;
+@da-footer-bg: #272727;
+@da-footer-tx: #c9c9c9;
+@da-footer-button: #424748;
+@da-footer-buttontx: #d1d1d1;
+@da-card-bg: #4a4a4a; //rgba(228, 232, 235, 0.5)
+@da-card-bg-hover: #757575; //rgba(228, 232, 235, 0.911)
+@da-title: #0696b5;
+@da-title-dark: #196676;
+@da-subtitle: #c4d4d8;
+@da-switch: #00000007; 
+
+
 //以下复制用
 /*
 .theme(@theme) {
   @bg: "@{theme}-bg";
+  @header-bg: "@{theme}-header-bg";
   @bg-yellow: "@{theme}-bg-yellow";
   @outline: "@{theme}-outline";
   @footer-bg: "@{theme}-footer-bg";
   @footer-tx: "@{theme}-footer-tx";
   @footer-button: "@{theme}-footer-button";
+  @footer-buttontx: "@{theme}-footer-buttontx";
   @card-bg: "@{theme}-card-bg";
   @card-bg-hover: "@{theme}-card-bg-hover";
   @title: "@{theme}-title";
@@ -30,5 +52,8 @@
 
 .light-theme {
   .theme(li);
+}
+.dark-theme {
+  .theme(da);
 }
 */
