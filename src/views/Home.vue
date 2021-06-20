@@ -253,7 +253,14 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
-@Component
+@Component({
+  props: {
+    darkTheme: {
+      type: Boolean,
+      default: false,
+    },
+  },
+})
 export default class Home extends Vue {
   banners = [
     { src: require("../assets/img/Enspire-logo.svg") },

@@ -9,7 +9,7 @@
       <Sidebar :drawer="drawer" @hide-sidebar="hideSidebar" />
       <v-main>
         <v-container style="padding: 0px" fluid>
-          <router-view />
+          <router-view :darkTheme="darkTheme" />
         </v-container>
       </v-main>
       <Myfooter style="z-index: 5" />
@@ -46,8 +46,6 @@ export default class App extends Vue {
   }
   changeTheme(): void {
     this.darkTheme = !this.darkTheme;
-    console.log("theme-changed");
-    console.log(this.darkTheme);
   }
 }
 </script>
