@@ -70,9 +70,19 @@ import LoginDialog from "./LoginDialog.vue";
   components: {
     LoginDialog,
   },
+  data: function () {
+    return {
+      darkTheme: false,
+    };
+  },
+  watch: {
+    darkTheme: function () {
+      this.$emit("change-theme");
+      console.log("change-emmited");
+    },
+  },
 })
 export default class Appbar extends Vue {
-  darkTheme = false;
   $refs!: {
     loginDialog: LoginDialog;
   };

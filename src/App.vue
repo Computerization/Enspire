@@ -1,7 +1,11 @@
 <template>
   <v-app>
     <div :class="darkTheme ? 'dark-theme' : 'light-theme'">
-      <Appbar style="z-index: 999" @toggle-sidebar="toggleSidebar" />
+      <Appbar
+        style="z-index: 999"
+        @change-theme="changeTheme"
+        @toggle-sidebar="toggleSidebar"
+      />
       <Sidebar :drawer="drawer" @hide-sidebar="hideSidebar" />
       <v-main>
         <v-container style="padding: 0px" fluid>
@@ -32,12 +36,18 @@ import Myfooter from "./components/Footer.vue";
 })
 export default class App extends Vue {
   drawer = false;
+  darkTheme = false;
 
   toggleSidebar(): void {
     this.drawer = !this.drawer;
   }
   hideSidebar(): void {
     this.drawer = false;
+  }
+  changeTheme(): void {
+    this.darkTheme = !this.darkTheme;
+    console.log("theme-changed");
+    console.log(this.darkTheme);
   }
 }
 </script>
