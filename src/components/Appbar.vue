@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app class="art-header">
+  <v-app-bar app class="art-header" :dark="darkTheme">
     <div class="d-flex align-center">
       <v-app-bar-nav-icon @click.stop="toggleSidebar"></v-app-bar-nav-icon>
       <v-img
@@ -17,7 +17,6 @@
       v-model="darkTheme"
       class="art-switch"
       inset
-      color="rgba(0, 0, 0, 0.03)"
       label="Switch Theme"
     ></v-switch>
     <Login-dialog ref="loginDialog" @login-success="globalInit" />
@@ -43,6 +42,7 @@
 }
 .art-switch {
   height: 25px;
+  color: rgba(0, 0, 0, 0.03);
 }
 </style>
 
