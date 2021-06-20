@@ -13,13 +13,13 @@
       <v-toolbar-title>Enspire</v-toolbar-title>
     </div>
     <v-spacer />
+    <Login-dialog ref="loginDialog" @login-success="globalInit" />
     <v-switch
       v-model="darkTheme"
       class="art-switch"
       inset
       label="Switch Theme"
     ></v-switch>
-    <Login-dialog ref="loginDialog" @login-success="globalInit" />
     <v-btn fab outlined small @click="showLoginDialog">
       <v-icon>mdi-account</v-icon>
     </v-btn>
@@ -50,6 +50,7 @@
   .art-switch {
     height: 25px;
     color: @@switch;
+    margin-right: 3vw;
   }
 }
 
