@@ -2,6 +2,7 @@
   <v-app>
     <div :class="darkTheme ? 'dark-theme' : 'light-theme'">
       <Appbar
+        :darkTheme="darkTheme"
         style="z-index: 999"
         @change-theme="changeTheme"
         @toggle-sidebar="toggleSidebar"

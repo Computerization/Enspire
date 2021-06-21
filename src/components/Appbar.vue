@@ -15,7 +15,7 @@
     <v-spacer />
     <Login-dialog ref="loginDialog" @login-success="globalInit" />
     <v-switch
-      v-model="darkTheme"
+      @click="changeTheme"
       class="art-switch"
       inset
       label="Switch Theme"
@@ -63,26 +63,16 @@
 </style>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Prop, Watch, Vue } from "vue-property-decorator";
 import LoginDialog from "./LoginDialog.vue";
 
 @Component({
   components: {
     LoginDialog,
   },
-  data: function () {
-    return {
-      darkTheme: false,
-    };
-  },
-  watch: {
-    darkTheme: function () {
-      this.$emit("change-theme");
-      console.log("change-emmited");
-    },
-  },
 })
 export default class Appbar extends Vue {
+  @Prop({ default: false }) darkTheme!: boolean;
   $refs!: {
     loginDialog: LoginDialog;
   };
@@ -95,6 +85,9 @@ export default class Appbar extends Vue {
   }
   toggleSidebar(): void {
     this.$emit("toggle-sidebar");
+  }
+  changeTheme(): void {
+    this.$emit("change-theme");
   }
 }
 </script>
