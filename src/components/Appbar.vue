@@ -37,10 +37,11 @@
   @bg: "@{theme}-bg";
   @switch: "@{theme}-switch";
   @header-bg: "@{theme}-header-bg";
+  @header-shadow: "@{theme}-header-shadow";
 
   .art-header {
     background-color: @@header-bg !important;
-    box-shadow: rgba(0, 0, 0, 0.062) 0px 0px 50px 8px !important;
+    box-shadow: @@header-shadow 0px 0px 50px 8px !important;
     font-family: title;
   }
   .logo {
@@ -63,7 +64,7 @@
 </style>
 
 <script lang="ts">
-import { Component, Prop, Watch, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue } from "vue-property-decorator";
 import LoginDialog from "./LoginDialog.vue";
 
 @Component({
