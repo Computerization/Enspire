@@ -4,7 +4,7 @@ jobs:
 
   build:
     docker:
-      - image: circleci/node:15.12.0
+      - image: circleci/node:15.14.0
     steps:
       - checkout
       - restore_cache:
@@ -31,7 +31,7 @@ jobs:
 
   deploy-to-server:
     docker:
-      - image: circleci/node:15.12.0
+      - image: circleci/node:15.14.0
     steps:
       - checkout
       - add_ssh_keys:
@@ -47,7 +47,7 @@ jobs:
 
   test-server-connection:
     docker:
-      - image: circleci/node:15.12.0
+      - image: circleci/node:15.14.0
     steps:
       - checkout
       - add_ssh_keys:
