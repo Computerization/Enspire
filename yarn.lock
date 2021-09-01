@@ -6808,10 +6808,10 @@ pinkie@^2.0.0:
   resolved "https://registry.yarnpkg.com/pinkie/-/pinkie-2.0.4.tgz#72556b80cfa0d48a974e80e77248e80ed4f7f870"
   integrity sha1-clVrgM+g1IqXToDnckjoDtT3+HA=
 
-pinyin-pro@3.2.3:
-  version "3.2.3"
-  resolved "https://registry.yarnpkg.com/pinyin-pro/-/pinyin-pro-3.2.3.tgz#169ac721bbb50cbe7f1d6d06a5ecb826448e6fa2"
-  integrity sha512-oATWdL72VoMVKeAkT99nJ00RU4eTIYXKZm2B5gfSFYmiABlqE9qPxCKuYWapeiHwtb9V8pqO3cgAnWf51FhPjg==
+pinyin-pro@3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/pinyin-pro/-/pinyin-pro-3.3.1.tgz#c8582b258e398e68b5275c984b94f5c154e075dd"
+  integrity sha512-v7xr7/sx3zHk011k3nEZqx4sb9rd29WA0bNUPZ0jkjHC+g3/kzZGOKC2NL/DoDCCR6jREv4aUq/dKOHMR3eJ/w==
 
 pkg-dir@^1.0.0:
   version "1.0.0"
