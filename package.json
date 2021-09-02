@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "axios": "0.21.1",
-    "core-js": "3.17.1",
+    "core-js": "3.17.2",
     "highlight.js": "11.2.0",
     "pinyin-pro": "3.3.1",
     "vue": "2.6.14",
