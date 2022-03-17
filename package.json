@@ -22,7 +22,7 @@
     "vuex": "3.6.2"
   },
   "devDependencies": {
-    "@mdi/js": "6.1.95",
+    "@mdi/js": "6.5.95",
     "@typescript-eslint/eslint-plugin": "4.33.0",
     "@typescript-eslint/parser": "4.33.0",
     "@vue/cli-plugin-babel": "4.5.13",
