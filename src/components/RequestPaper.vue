@@ -5,6 +5,7 @@
   <!-- 这里最后改一下 -->
   <div class="paper" id="app">
     <div class="date">
+<<<<<<< HEAD
       <span>{{ date }}Date</span>
       <div>Year: {{ this.$route.query.year }}</div>
       <div>Month: {{ this.$route.query.month }}</div>
@@ -12,6 +13,16 @@
       <!-- 这里最后改一下 -->
     </div>
     <br />
+=======
+      <!-- <span>{{ date }}Date</span>
+      <div>Year: {{ this.$route.query.year }}</div>
+      <div>Month: {{ this.$route.query.month }}</div> -->
+      <div> {{ this.$route.query.day }}</div>
+      <!-- 这里最后改一下 -->
+    </div>
+    <br />
+    <p>Select the period to leave:</p>
+>>>>>>> 2e6353e (feat: Update ask to leave)
     <div class="selectbar">
       <select v-model="selected" multiple style="width: 150px; height: 100px">
         <option>Period 1</option>
@@ -53,14 +64,37 @@ function sel() {
   };
 }
 
+<<<<<<< HEAD
 export default {
   submit,
   sel,
+=======
+function datee(){
+  return {
+    date
+  }
+}
+
+export default {
+  submit,
+  sel,
+  datee,
+  name:"app",
+  data(){
+    return{
+      selected:[]
+    }
+  }
+>>>>>>> 2e6353e (feat: Update ask to leave)
 };
 
 //export {selected};
 import { date } from "../components/Calendar.vue";
 
+<<<<<<< HEAD
+=======
+//yts
+>>>>>>> 2e6353e (feat: Update ask to leave)
 //gqy 这里是把你的日历上的日期传过来，你可能需要在文件里export一下日期
 //我不是很敢直接改你代码，所以可能还是要你来写一下export，然后把这里的文件名对上
 //最后改一下第9行即可
@@ -102,6 +136,7 @@ import { date } from "../components/Calendar.vue";
   border-bottom: 5px solid gainsboro;
   border-left: 5px solid gainsboro;
   border-right: 5px solid gainsboro;
+<<<<<<< HEAD
   align-items: center;
 }
 
@@ -112,15 +147,35 @@ import { date } from "../components/Calendar.vue";
   border-bottom: 5px solid grey;
   border-left: 5px solid grey;
   border-right: 5px solid grey;
+=======
+  text-align:  center;
+  font-size: 35px;
+}
+
+.selectbar {
+  height: 110px;
+  width: 160px;
+  border-top: 5px solid gainsboro;
+  border-bottom: 5px solid gainsboro;
+  border-left: 5px solid gainsboro;
+  border-right: 5px solid gainsboro;
+>>>>>>> 2e6353e (feat: Update ask to leave)
 }
 
 .text-area {
   width: 70%;
   margin-top: 30px;
+<<<<<<< HEAD
   border-top: 1px solid gainsboro;
   border-bottom: 1px solid gainsboro;
   border-left: 1px solid gainsboro;
   border-right: 1px solid gainsboro;
+=======
+  border-top: 3px solid gainsboro;
+  border-bottom: 3px solid gainsboro;
+  border-left: 3px solid gainsboro;
+  border-right: 3px solid gainsboro;
+>>>>>>> 2e6353e (feat: Update ask to leave)
 }
 .text-area textarea {
   width: 500px;
