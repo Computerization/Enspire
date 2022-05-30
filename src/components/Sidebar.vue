@@ -67,6 +67,11 @@ export default class Sidebar extends Vue {
   drawerItems = [
     { title: "我们的社团", icon: "mdi-view-dashboard", to: "/clubs" },
     { title: "预约教室", icon: "mdi-calendar", to: "/reservation" },
+    {
+      title: "申请请假",
+      icon: "mdi-checkbox-marked-outline",
+      to: "/askforleave",
+    },
   ];
   get show(): boolean {
     return this.$props.drawer;
