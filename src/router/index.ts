@@ -37,6 +37,18 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "clubpage" */ "../views/Clubpage.vue"),
   },
+  {
+    path: "/askforleave",
+    name: "AskForLeave",
+    component: () =>
+      import(/* webpackChunkName: "clubpage" */ "../views/Leave.vue"),
+  },
+  {
+    path: "/leaveRequest",
+    name: "leaveRequest",
+    component: () =>
+      import(/* webpackChunkName: "clubpage" */ "../components/RequestPaper.vue"),
+  },
 ];
 
 const router: VueRouter = new VueRouter({
