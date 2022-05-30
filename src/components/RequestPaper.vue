@@ -117,19 +117,7 @@ import { date } from "../components/Calendar.vue";
   border-bottom: 5px solid gainsboro;
   border-left: 5px solid gainsboro;
   border-right: 5px solid gainsboro;
-<<<<<<< HEAD
-  align-items: center;
-}
-
-.selectbar {
-  height: 100px;
-  width: 160px;
-  border-top: 5px solid grey;
-  border-bottom: 5px solid grey;
-  border-left: 5px solid grey;
-  border-right: 5px solid grey;
-=======
-  text-align:  center;
+  text-align: center;
   font-size: 35px;
 }
 
@@ -140,23 +128,15 @@ import { date } from "../components/Calendar.vue";
   border-bottom: 5px solid gainsboro;
   border-left: 5px solid gainsboro;
   border-right: 5px solid gainsboro;
->>>>>>> 2e6353e (feat: Update ask to leave)
 }
 
 .text-area {
   width: 70%;
   margin-top: 30px;
-<<<<<<< HEAD
-  border-top: 1px solid gainsboro;
-  border-bottom: 1px solid gainsboro;
-  border-left: 1px solid gainsboro;
-  border-right: 1px solid gainsboro;
-=======
   border-top: 3px solid gainsboro;
   border-bottom: 3px solid gainsboro;
   border-left: 3px solid gainsboro;
   border-right: 3px solid gainsboro;
->>>>>>> 2e6353e (feat: Update ask to leave)
 }
 .text-area textarea {
   width: 500px;
