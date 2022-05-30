@@ -1,0 +1,14 @@
+{
+    "name": "enspiremodules",
+    "version": "1.0.0",
+    "description": "The class to describe the infomration of students in Enspire",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Haoran Yang",
+    "license": "UNLICENSED",
+    "dependencies": {
+        "xmlhttprequest": "^1.8.0"
+    }
+}
