@@ -26,7 +26,6 @@ import Myfooter from "./components/Footer.vue";
 })
 export default class App extends Vue {
   drawer = false;
-
   toggleSidebar(): void {
     this.drawer = !this.drawer;
   }
