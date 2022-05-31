@@ -36,13 +36,14 @@ jobs:
       - checkout
       - add_ssh_keys:
           fingerprints:
-            - "cf:6e:be:38:32:ee:93:c5:83:fb:73:5c:b1:60:9b:05"
+            - "54:92:19:cf:7d:ae:cf:a0:6e:76:57:dc:b9:43:33:da"
       - attach_workspace:
           at: .
       - run:
           name: Copy files to remote server
           command: |
-            echo $HOST_FINGERPRINT >> ~/.ssh/known_hosts
+            ssh-keygen -f "/home/circleci/.ssh/known_hosts" -R "theenspire.com"
+            echo 'theenspire.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKyOSkC9iGQqwDa6VZQOS5g2gWO5PZVf6aaCtL8PIZMO' >> ~/.ssh/known_hosts
             scp -r dist/* ${REMOTE_ADDR}:${DEPLOY_DIR}
 
   test-server-connection:
@@ -52,13 +53,14 @@ jobs:
       - checkout
       - add_ssh_keys:
           fingerprints:
-            - "cf:6e:be:38:32:ee:93:c5:83:fb:73:5c:b1:60:9b:05"
+            - "54:92:19:cf:7d:ae:cf:a0:6e:76:57:dc:b9:43:33:da"
       - attach_workspace:
           at: .
       - run:
           name: Communicate with server
           command: |
-            echo $HOST_FINGERPRINT >> ~/.ssh/known_hosts
+            ssh-keygen -f "/home/circleci/.ssh/known_hosts" -R "theenspire.com"
+            echo 'theenspire.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKyOSkC9iGQqwDa6VZQOS5g2gWO5PZVf6aaCtL8PIZMO' >> ~/.ssh/known_hosts
             ls dist
             ssh $REMOTE_ADDR "ls ${DEPLOY_DIR} && echo 'Hello!' > ${DEPLOY_DIR}/test.txt"
 
