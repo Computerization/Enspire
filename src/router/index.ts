@@ -47,12 +47,14 @@ const routes = [
     path: "/leaveRequest",
     name: "leaveRequest",
     component: () =>
-      import(/* webpackChunkName: "clubpage" */ "../components/RequestPaper.vue"),
+      import(
+        /* webpackChunkName: "clubpage" */ "../components/RequestPaper.vue"
+      ),
   },
 ];
 
 const router: VueRouter = new VueRouter({
-  mode: "history",
+  // mode: "history",
   base: process.env.BASE_URL,
   routes,
   scrollBehavior() {
