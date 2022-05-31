@@ -59,7 +59,7 @@ jobs:
           name: Communicate with server
           command: |
             ssh-keygen -f "/home/circleci/.ssh/known_hosts" -R "theenspire.com"
-            echo $HOST_FINGERPRINT >> ~/.ssh/known_hosts
+            echo 'theenspire.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKyOSkC9iGQqwDa6VZQOS5g2gWO5PZVf6aaCtL8PIZMO' >> ~/.ssh/known_hosts
             ls dist
             ssh $REMOTE_ADDR "ls ${DEPLOY_DIR} && echo 'Hello!' > ${DEPLOY_DIR}/test.txt"
 
