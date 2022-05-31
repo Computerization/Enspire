@@ -42,7 +42,8 @@ jobs:
       - run:
           name: Copy files to remote server
           command: |
-            echo $HOST_FINGERPRINT >> ~/.ssh/known_hosts
+            ssh-keygen -f "/home/circleci/.ssh/known_hosts" -R "theenspire.com"
+            echo 'theenspire.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKyOSkC9iGQqwDa6VZQOS5g2gWO5PZVf6aaCtL8PIZMO' >> ~/.ssh/known_hosts
             scp -r dist/* ${REMOTE_ADDR}:${DEPLOY_DIR}
 
   test-server-connection:
