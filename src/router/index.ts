@@ -49,6 +49,12 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "clubpage" */ "../components/RequestPaper.vue"),
   },
+  {
+    path: "/gallery",
+    name: "Gallery",
+    component: () =>
+      import(/* webpackChunkName: "clubpage" */ "../components/Gallery.vue"),
+  },
 ];
 
 const router: VueRouter = new VueRouter({
