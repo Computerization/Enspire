@@ -66,7 +66,7 @@
       </v-form>
     </v-card>
     <v-row justify="center">
-      <v-btn depressed color="white" @click.stop="dialog = true" x-large>
+      <v-btn depressed dark color="indigo" @click.stop="dialog = true" x-large>
         策展人的话
       </v-btn>
       <v-dialog v-model="dialog" max-width="500">
