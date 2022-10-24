@@ -8,45 +8,48 @@
       <!-- <span>{{ date }}Date</span>
       <div>Year: {{ this.$route.query.year }}</div>
       <div>Month: {{ this.$route.query.month }}</div> -->
+
       <div>{{ this.$route.query.day }}</div>
       <!-- 这里最后改一下 -->
     </div>
     <br />
-    <p>Select the period to leave:</p>
-    <div class="selectbar">
-      <select v-model="selected" multiple style="width: 150px; height: 100px">
-        <option>Period 1</option>
-        <option>Period 2</option>
-        <option>Period 3</option>
-        <option>Period 4</option>
-        <option>Period 5</option>
-        <option>Period 6</option>
-        <option>Period 7</option>
-        <option>Period 8</option>
-        <option>Period 9</option>
-      </select>
-    </div>
-    <br />
+    <p>Select the period(s) to leave:</p>
 
-    <span style="float: left">Selected:{{ selected }}</span>
-    <br />
+    <v-container fluid>
+      <v-select
+        v-model="selected"
+        :items="items"
+        chips
+        label="Select Period(s)"
+        multiple
+        outlined
+      ></v-select>
+    </v-container>
+
     <div class="text-area">
-      <textarea v-model="textdata" placeholder="Reasons To Leave"> </textarea>
+      <v-textarea
+        clearable
+        clear-icon="mdi-close-circle"
+        counter
+        outlined
+        v-model="textdata"
+        placeholder="Reasons To Leave"
+        label="Reasons To Leave"
+      ></v-textarea>
     </div>
     <br />
-    <button class="BTN1" onclick="submit()">Submit</button>
+    <v-btn
+      depressed
+      color="primary"
+      v-on:click="submit()"
+    >
+      Submit
+    </v-btn>
   </div>
 </template>
 
 <script>
-// document.getElementById("demo").innerHTML="eee"
 
-function submit() {
-  var reason = this.textdata;
-  return {
-    reason,
-  };
-}
 
 function sel() {
   return {
@@ -61,14 +64,23 @@ function datee() {
 }
 
 export default {
-  submit,
   sel,
   datee,
   name: "app",
-  data() {
-    return {
-      selected: [],
-    };
+  data: () => ({
+    selected: [],
+    items: ['Period 1', 'Period 2', 'Period 3', 'Period 4', 'Period 5', 'Period 6', 'Period 7', 'Period 8', 'Period 9'],
+    value: [],
+    textdata: "",
+  }),
+  methods: {
+    submit() {
+      const reason = this.textdata;
+      return {
+        reason,
+      };
+    },
+
   },
 };
 
@@ -104,11 +116,11 @@ import { date } from "../components/Calendar.vue";
 </script>
 
 <style>
-.paper {
+/*.paper {
   margin-left: 75px;
   width: 75%;
   float: left;
-}
+}*/
 
 .date {
   height: 60px;
@@ -121,34 +133,34 @@ import { date } from "../components/Calendar.vue";
   font-size: 35px;
 }
 
-.selectbar {
+/*.selectbar {
   height: 110px;
   width: 160px;
   border-top: 5px solid gainsboro;
   border-bottom: 5px solid gainsboro;
   border-left: 5px solid gainsboro;
   border-right: 5px solid gainsboro;
-}
+}*/
 
-.text-area {
+/*.text-area {
   width: 70%;
   margin-top: 30px;
   border-top: 3px solid gainsboro;
   border-bottom: 3px solid gainsboro;
   border-left: 3px solid gainsboro;
   border-right: 3px solid gainsboro;
-}
-.text-area textarea {
+}*/
+/*.text-area textarea {
   width: 500px;
   margin: 0.75rem 0;
   border: none;
   outline: none;
   padding-left: 1.125rem;
   height: 6.5rem;
-}
-.text-area textarea::-webkit-input-placeholder {
+}*/
+/*.text-area textarea::-webkit-input-placeholder {
   color: #9e9e9e;
-}
+}*/
 .BTN1 {
   border-top: 1px solid gainsboro;
   border-bottom: 1px solid gainsboro;
