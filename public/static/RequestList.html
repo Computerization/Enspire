@@ -1,67 +1,61 @@
 <!DOCTYPE html>
-<html lang="en" style="background-color:antiquewhite;">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./Request.css">
+<html lang="en" style="background-color: antiquewhite">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./Request.css" />
     <title>LeaveRequest</title>
-</head>
-<!--Never mind these. Just some setup for format.-->
+  </head>
+  <!--Never mind these. Just some setup for format.-->
 
-<body>
+  <body>
     <p class="containerDate" id="showDate">1</p>
 
-
     <form class="containerList" action="" method="get">
-        Time off:<br />
-        <label><input name="Class1" type="checkbox" value="" />Period 1 </label>
-        <label><input name="Class2" type="checkbox" value="" />Period 2 </label>
-        <label><input name="Class3" type="checkbox" value="" />Period 3 </label>
-        <label><input name="Class4" type="checkbox" value="" />Period 4 </label>
-        <label><input name="Class5" type="checkbox" value="" />Period 5 </label>
-        <label><input name="Class6" type="checkbox" value="" />Period 6 </label>
-        <label><input name="Class7" type="checkbox" value="" />Period 7 </label>
-        <label><input name="Class8" type="checkbox" value="" />Period 8 </label>
-        <label><input name="Class9" type="checkbox" value="" />Period 9 </label>
+      Time off:<br />
+      <label><input name="Class1" type="checkbox" value="" />Period 1 </label>
+      <label><input name="Class2" type="checkbox" value="" />Period 2 </label>
+      <label><input name="Class3" type="checkbox" value="" />Period 3 </label>
+      <label><input name="Class4" type="checkbox" value="" />Period 4 </label>
+      <label><input name="Class5" type="checkbox" value="" />Period 5 </label>
+      <label><input name="Class6" type="checkbox" value="" />Period 6 </label>
+      <label><input name="Class7" type="checkbox" value="" />Period 7 </label>
+      <label><input name="Class8" type="checkbox" value="" />Period 8 </label>
+      <label><input name="Class9" type="checkbox" value="" />Period 9 </label>
     </form>
     <div class="containerReason">
-        <input class="containerReason" id="Reason" type="text" placeholder="Enter Your Reason">
+      <input
+        class="containerReason"
+        id="Reason"
+        type="text"
+        placeholder="Enter Your Reason"
+      />
     </div>
 
     <button class="containerSubmit" onclick="SaveData()">
-        <strong>Submit<br>Request</strong>
+      <strong>Submit<br />Request</strong>
     </button>
 
     <div class="schedule">
-        <strong>
-            Schedule<br><br>
-        </strong>
-        <li>Chinese </li>
-        <li>Chinese </li>
-        <li>Economy </li>
-        <li>Economy </li>
-        <li>Physics </li>
-        <li>Physics </li>
-        <li>Maths </li>
-        <li>Maths </li>
-        <li>Chemistry </li>
+      <strong> Schedule<br /><br /> </strong>
+      <li>Chinese</li>
+      <li>Chinese</li>
+      <li>Economy</li>
+      <li>Economy</li>
+      <li>Physics</li>
+      <li>Physics</li>
+      <li>Maths</li>
+      <li>Maths</li>
+      <li>Chemistry</li>
     </div>
 
     <!-- This part just to show the reson recorded. -->
     <div class="demo">
-        <p id="demo">Reasons Recorded</p>
-        <button onclick="ShowData()">
-            showData
-        </button>
+      <p id="demo">Reasons Recorded</p>
+      <button onclick="ShowData()">showData</button>
     </div>
+  </body>
 
-</body>
-
-<script type="text/javascript" src="./Request.js"></script>
-
-
-
-
+  <script type="text/javascript" src="./Request.js"></script>
 </html>

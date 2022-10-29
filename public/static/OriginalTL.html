@@ -1,62 +1,63 @@
 <!DOCTYPE html>
-<html lang="en" style="background-color:antiquewhite;">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./Request.css">
+<html lang="en" style="background-color: antiquewhite">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./Request.css" />
     <title>LeaveRequest</title>
-</head>
-<!--Never mind these. Just some setup for format.-->
+  </head>
+  <!--Never mind these. Just some setup for format.-->
 
-<script>
-
-</script>
-<script>
-
+  <script></script>
+  <script>
     /* 跨网页传输信息 （为了后面定位课表） 搞了好久 */
-    document.addEventListener('DOMContentLoaded', function () {
-        var oN = document.getElementById('dat');
+    document.addEventListener(
+      "DOMContentLoaded",
+      function () {
+        var oN = document.getElementById("dat");
         /*当input的数据改变的时候*/
         oN.onchange = function () {
-            /*存一个key为num的数据*/
-            localStorage.date = this.value;
+          /*存一个key为num的数据*/
+          localStorage.date = this.value;
         };
-    }, false);
-
+      },
+      false
+    );
 
     /* 传输按钮对应的日期值 */
     function uploadData() {
-        var d = document.getElementById('date');
-        localStorage.date = d;
+      var d = document.getElementById("date");
+      localStorage.date = d;
     }
 
     /* 打开对应的请假页面 */
     function gettoApplyPage() {
-        window.open('RequestList.html');
-
+      window.open("RequestList.html");
     }
 
     /* 你可能会用到的按键触发功能（进一步可能也会用到） */
     function clck() {
-        var d = document.getElementById('dat').innerHTML;
-        localStorage.date = d;
-        window.open('RequestList.html');
+      var d = document.getElementById("dat").innerHTML;
+      localStorage.date = d;
+      window.open("RequestList.html");
     }
-</script>
+  </script>
 
-
-<body>
-    日期：<input type="number" name="DATE" id="dat" min="0" max="31" step="1" value="0">
-    <button class="h1" onclick="gettoApplyPage()">
-        Apply
-    </button>
+  <body>
+    日期：<input
+      type="number"
+      name="DATE"
+      id="dat"
+      min="0"
+      max="31"
+      step="1"
+      value="0"
+    />
+    <button class="h1" onclick="gettoApplyPage()">Apply</button>
 
     <!-- 看过来看过来 这里的button的gettoApplyPage就是触发新页面的函数，需要连接到月历的每个日期按钮上，辛苦辛苦 -->
-
-</body>
-
+  </body>
 </html>
 
 <!-- const targetWindow=window.open('http://127.0.0.1:5500/RequestList.html');
