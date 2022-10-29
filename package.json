@@ -19,11 +19,11 @@
     "pinyin-pro": "3.8.2",
     "sass": "^1.51.0",
     "sass-loader": "7.x",
-    "vue": "2.7.13",
+    "vue": "3.2.41",
     "vue-event-calendar": "^1.5.2",
     "vue-router": "3.5.3",
     "vuetify": "2.6.10",
-    "vuex": "3.6.2"
+    "vuex": "4.1.0"
   },
   "devDependencies": {
     "@mdi/js": "6.6.95",
