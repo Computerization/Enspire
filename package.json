@@ -19,7 +19,7 @@
     "pinyin-pro": "3.8.2",
     "sass": "^1.51.0",
     "sass-loader": "7.x",
-    "vue": "2.6.14",
+    "vue": "2.7.13",
     "vue-event-calendar": "^1.5.2",
     "vue-router": "3.5.3",
     "vuetify": "2.6.10",
@@ -51,7 +51,7 @@
     "vue-class-component": "7.2.6",
     "vue-cli-plugin-vuetify": "2.4.8",
     "vue-property-decorator": "9.1.2",
-    "vue-template-compiler": "2.6.14",
+    "vue-template-compiler": "2.7.13",
     "vuetify-loader": "1.7.3"
   },
   "lint-staged": {
