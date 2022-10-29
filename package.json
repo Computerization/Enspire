@@ -16,7 +16,7 @@
     "core-js": "3.21.1",
     "highlight.js": "11.5.0",
     "less-loader": "7.x",
-    "pinyin-pro": "3.8.2",
+    "pinyin-pro": "3.11.0",
     "sass": "^1.51.0",
     "sass-loader": "7.x",
     "vue": "3.2.41",

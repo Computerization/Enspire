@@ -7127,10 +7127,10 @@ pinkie@^2.0.0:
   resolved "https://registry.npmmirror.com/pinkie/-/pinkie-2.0.4.tgz#72556b80cfa0d48a974e80e77248e80ed4f7f870"
   integrity sha512-MnUuEycAemtSaeFSjXKW/aroV7akBbY+Sv+RkyqFjgAe73F+MR0TBWKBRDkmfWq/HiFmdavfZ1G7h4SPZXaCSg==
 
-pinyin-pro@3.8.2:
-  version "3.8.2"
-  resolved "https://registry.npmmirror.com/pinyin-pro/-/pinyin-pro-3.8.2.tgz#b268981865142a191d842da54cb641f6df89128f"
-  integrity sha512-EQvvPA7TWCPFn/Y/B6yNnWg1fnKshVvq9o/YOmOwBogOWjvax/cm8UkhrSNWFTBs3NFKZSW8sk/7ZiNsDT8lyw==
+pinyin-pro@3.11.0:
+  version "3.11.0"
+  resolved "https://registry.yarnpkg.com/pinyin-pro/-/pinyin-pro-3.11.0.tgz#bb0c198f6bf2cb739414c790fa2781bcaa762971"
+  integrity sha512-l2JDFyEIMdTIyff3OkuoSIJCpYTwrxrR2KuMyGMjdNEcHGcEVSKIEb7mvKEKOhJaZLp2FB++Jax+MD0BWafbhg==
 
 pkg-dir@^1.0.0:
   version "1.0.0"
