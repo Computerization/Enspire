@@ -21,7 +21,7 @@
     "sass-loader": "7.x",
     "vue": "3.2.41",
     "vue-event-calendar": "^1.5.2",
-    "vue-router": "3.5.3",
+    "vue-router": "3.6.5",
     "vuetify": "2.6.10",
     "vuex": "4.1.0"
   },
