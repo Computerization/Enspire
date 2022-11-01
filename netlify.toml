@@ -11,7 +11,8 @@
   publish = "dist/"
 
   # Default build command.
-  command = "yarn build"
+  command = "npm build && npm generate"
 
   # Directory with the serverless Lambda functions to deploy to AWS.
   functions = ""
+  environment = { NODE_VERSION = "16.18.0" }
