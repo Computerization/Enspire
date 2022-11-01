@@ -13,7 +13,7 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "types": ["node", "vuetify", "vue-router/types/vue"],
-    "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost", "ES2021.String"],
     "experimentalDecorators": true
   },
   "include": [

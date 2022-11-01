@@ -1,66 +1,39 @@
 {
-  "name": "enspire",
-  "version": "0.1.0",
+  "name": "Enspire",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "type-check": "tsc && vti diagnostics",
-    "format": "prettier --write \"**/*.{js,ts,css,html,vue}\"",
-    "format:check": "prettier --check \"**/*.{js,ts,css,html,vue}\"",
-    "prepare": "husky install"
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
+    "lint": "npm run lint:js",
+    "lintfix": "npm run lint:js -- --fix"
   },
   "dependencies": {
-    "axios": "0.26.1",
-    "core-js": "3.21.1",
-    "highlight.js": "11.5.0",
-    "less-loader": "7.x",
-    "pinyin-pro": "3.8.2",
-    "sass": "^1.51.0",
-    "sass-loader": "7.x",
-    "vue": "2.6.14",
-    "vue-event-calendar": "^1.5.2",
-    "vue-router": "3.5.3",
-    "vuetify": "2.6.4",
-    "vuex": "3.6.2"
+    "@nuxtjs/axios": "^5.13.6",
+    "axios": "^1.1.3",
+    "core-js": "^3.25.3",
+    "global": "^4.4.0",
+    "less": "^4.1.3",
+    "less-loader": "^6.0.0",
+    "module": "^1.2.5",
+    "nuxt": "^2.15.8",
+    "pinyin-pro": "^3.11.0",
+    "vue": "^2.7.10",
+    "vue-server-renderer": "^2.7.10",
+    "vue-template-compiler": "^2.7.10",
+    "vuetify": "^2.6.10"
   },
   "devDependencies": {
-    "@mdi/js": "6.6.95",
-    "@typescript-eslint/eslint-plugin": "5.17.0",
-    "@typescript-eslint/parser": "5.17.0",
-    "@vue/cli-plugin-babel": "4.5.17",
-    "@vue/cli-plugin-eslint": "4.5.17",
-    "@vue/cli-plugin-router": "4.5.17",
-    "@vue/cli-plugin-typescript": "4.5.17",
-    "@vue/cli-plugin-vuex": "4.5.17",
-    "@vue/cli-service": "4.5.17",
-    "@vue/eslint-config-prettier": "7.0.0",
-    "@vue/eslint-config-typescript": "7.0.0",
-    "babel-eslint": "10.1.0",
-    "eslint": "7.32.0",
-    "eslint-config-prettier": "8.5.0",
-    "eslint-plugin-prettier": "4.0.0",
-    "eslint-plugin-vue": "7.20.0",
-    "husky": "7.0.4",
-    "less": "^4.1.2",
-    "lint-staged": "11.2.6",
-    "prettier": "2.6.1",
-    "typescript": "4.6.2",
-    "vti": "0.1.3",
-    "vue-class-component": "7.2.6",
-    "vue-cli-plugin-vuetify": "2.4.8",
-    "vue-property-decorator": "9.1.2",
-    "vue-template-compiler": "2.6.14",
-    "vuetify-loader": "1.7.3"
-  },
-  "lint-staged": {
-    "*.{js,ts,vue}": [
-      "vue-cli-service lint",
-      "prettier -w"
-    ],
-    "*.{html,css,json}": [
-      "prettier -w"
-    ]
+    "@babel/eslint-parser": "^7.19.1",
+    "@nuxtjs/eslint-config": "^11.0.0",
+    "@nuxtjs/eslint-module": "^3.1.0",
+    "@nuxtjs/vuetify": "^1.12.3",
+    "eslint": "^8.24.0",
+    "eslint-plugin-nuxt": "^4.0.0",
+    "eslint-plugin-vue": "^9.5.1",
+    "webpack": "^4.46.0"
   }
 }
