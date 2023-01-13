@@ -2,14 +2,14 @@
   <div class="about">
     <v-container>
       <v-row>
-        <v-subheader>贡献者们</v-subheader>
+        <v-subheader>Contributors</v-subheader>
       </v-row>
       <v-row>
         <v-col v-for="person in contributors" :key="person.alias">
           <v-card class="mx-auto" width="270" outlined>
             <v-list-item three-line>
               <v-list-item-content>
-                <div class="overline mb-4">C社2020</div>
+                <div class="overline mb-4">C Club 2023</div>
                 <v-list-item-title class="headline mb-1">
                   {{ person.name }}
                 </v-list-item-title>
@@ -65,7 +65,7 @@
                 target="_blank"
                 rel="noreferer"
               >
-                在 GitHub 上支持我们
+                Support us on Github
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -100,6 +100,16 @@ export default class About extends Vue {
       alias: "GeMini-220",
       name: "张驰",
       desc: "23届社员",
+    },
+    {
+      alias: "TerrificTerry",
+      name: "尹天舒",
+      desc: "24届副社长",
+    },
+    {
+      alias: "phoeniiix1203",
+      name: "顾淇元",
+      desc: "24届社长",
     },
     {
       alias: "SamChou19815",
