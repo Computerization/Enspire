@@ -24,9 +24,11 @@ git clone https://github.com/Computerization/Enspire
 
 这行指令利用代码管理工具 `git` 将线上仓库复制到本地
 
-如果你是 `macOS` 或 `linux` 系统，你的电脑应该已经预装有 `git` 程序
+如果你是 `macOS` 或 `linux` 系统，你的电脑可能已经预装有 `git` 程序。
 
 如果你是 `Windows` 系统，你很可能需要自行安装 `git`，请善用搜索引擎（推荐 `Bing` 或 `Google`）搜索**距离现在时间并不太远**的 `git` 安装教程
+
+可供参考的[安装途径](https://git-scm.com/downloads)，IOS用户需要在**隐私设置**里确认安装包的运行。
 
 ```sh
 cd Enspire
