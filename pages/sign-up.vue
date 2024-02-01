@@ -2,7 +2,7 @@
 import { SignUp } from 'vue-clerk';
 
 definePageMeta({
-  layout: "empty",
+  layout: "sign-in-or-out",
   middleware: ['public'],
 });
 </script>

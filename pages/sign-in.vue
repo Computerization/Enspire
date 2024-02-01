@@ -2,13 +2,21 @@
 import {SignIn} from 'vue-clerk';
 
 definePageMeta({
-  layout: "empty",
+  layout: "sign-in-or-out",
   middleware: ['public'],
 });
 </script>
 
 <template>
-  <div class="grid h-screen place-items-center">
+  <div class="flex flex-col space-y-2 text-center">
+    <h1 class="text-2xl font-semibold tracking-tight">
+      登陆账户
+    </h1>
+    <p class="text-sm text-muted-foreground">
+      在下方输入凭证
+    </p>
+  </div>
+  <div class="grid place-items-center">
     <SignIn sign-up-url="/sign-up"/>
   </div>
 </template>

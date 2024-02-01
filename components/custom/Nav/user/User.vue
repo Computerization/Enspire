@@ -8,9 +8,21 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import {useClerk} from 'vue-clerk'
+
+const clerk = useClerk()
+
+function signOutCallback() {
+  console.log("Sign Out")
+  window.location.replace("/sign-in");
+}
+
+function signOutHandler() {
+  return clerk.signOut(signOutCallback)
+}
+
 </script>
 
 <template>
@@ -49,9 +61,8 @@ import {
         <DropdownMenuItem>New Team</DropdownMenuItem>
       </DropdownMenuGroup>
       <DropdownMenuSeparator/>
-      <DropdownMenuItem>
-        Log out
-        <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+      <DropdownMenuItem @click="signOutHandler">
+        退出登陆
       </DropdownMenuItem>
     </DropdownMenuContent>
   </DropdownMenu>

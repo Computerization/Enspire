@@ -10,6 +10,11 @@ import type {Clubs} from "~/content/clubs";
 import ClubCard from "~/components/custom/club-card.vue";
 
 const clubs: Clubs = json as Clubs;
+
+// This page requires login
+definePageMeta({
+  middleware: ['auth'],
+});
 </script>
 
 <template>
