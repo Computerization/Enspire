@@ -1,0 +1,52 @@
+<script lang="ts" setup>
+
+import TabsList from "~/components/ui/tabs/TabsList.vue";
+import Tabs from "~/components/ui/tabs/Tabs.vue";
+import TabsContent from "~/components/ui/tabs/TabsContent.vue";
+import TabsTrigger from "~/components/ui/tabs/TabsTrigger.vue";
+import json from "~/content/clubs.json"
+
+import type {Clubs} from "~/content/clubs";
+import ClubCard from "~/components/custom/club-card.vue";
+
+const clubs: Clubs = json as Clubs;
+</script>
+
+<template>
+  <div>
+    <Tabs class="h-full space-y-6" default-value="Sports">
+      <div class="space-between flex items-center">
+        <TabsList>
+          <TabsTrigger value="Sports">
+            Sports
+          </TabsTrigger>
+          <TabsTrigger value="Service">
+            Service
+          </TabsTrigger>
+          <TabsTrigger value="Arts">
+            Arts
+          </TabsTrigger>
+          <TabsTrigger value="Life">
+            Life
+          </TabsTrigger>
+          <TabsTrigger value="Academic">
+            Academic
+          </TabsTrigger>
+        </TabsList>
+      </div>
+      <TabsContent
+          v-for="i in ['Sports', 'Service', 'Arts', 'Life', 'Academic']"
+          :value="i"
+          class="border-none p-0 outline-none"
+      >
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+          <ClubCard v-for="j in clubs[i]" :club="j"/>
+        </div>
+      </TabsContent>
+    </Tabs>
+  </div>
+</template>
+
+<style scoped>
+
+</style>
