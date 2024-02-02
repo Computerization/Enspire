@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  // Uses connection pooling
+  url       = env("POSTGRES_PRISMA_URL")
+  // Uses direct connection, ⚠️ make sure to keep this to `POSTGRES_URL_NON_POOLING`
+  // or you'll have dangling databases from migrations
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model User {
+  id               Int                @id
+  name             String
+  tsimsUsername    String             @unique
+  clubs            Club[]
+  UserClubRelation UserClubRelation[]
+}
+
+// Json types should be stored like {"zh": xxx, "en": xxx}.
+// Prisma itself doesn't validates what is in that Json, we should do it by ourselves when reading.
+model Club {
+  id               Int                @id
+  name             Json
+  users            User[]
+  description      Json
+  UserClubRelation UserClubRelation[]
+}
+
+enum UserRoleInClub {
+  President
+  Vice
+  Member
+}
+
+model UserClubRelation {
+  id     Int            @id @default(autoincrement())
+  userId Int
+  clubId Int
+  role   UserRoleInClub
+  user   User           @relation(fields: [userId], references: [id])
+  club   Club           @relation(fields: [clubId], references: [id])
+
+  @@unique([userId, clubId]) // Ensures uniqueness for the user-organization pair
+}
