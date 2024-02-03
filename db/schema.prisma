@@ -1,47 +1,33 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"] // Ignore that error. Prisma plugin for WebStorm seems to be outdated.
 }
 
 datasource db {
   provider  = "postgresql"
   // Uses connection pooling
-  url       = env("POSTGRES_PRISMA_URL")
+  url       = env("DATABASE_URL")
   // Uses direct connection, ⚠️ make sure to keep this to `POSTGRES_URL_NON_POOLING`
   // or you'll have dangling databases from migrations
-  directUrl = env("POSTGRES_URL_NON_POOLING")
+  directUrl = env("DIRECT_URL")
 }
 
 model User {
-  id               Int                @id
-  name             String
-  tsimsUsername    String             @unique
-  clubs            Club[]
-  UserClubRelation UserClubRelation[]
+  id            Int    @id
+  name          String
+  tsimsUsername String @unique
 }
 
 // Json types should be stored like {"zh": xxx, "en": xxx}.
 // Prisma itself doesn't validates what is in that Json, we should do it by ourselves when reading.
 model Club {
-  id               Int                @id
-  name             Json
-  users            User[]
-  description      Json
-  UserClubRelation UserClubRelation[]
-}
-
-enum UserRoleInClub {
-  President
-  Vice
-  Member
-}
-
-model UserClubRelation {
-  id     Int            @id @default(autoincrement())
-  userId Int
-  clubId Int
-  role   UserRoleInClub
-  user   User           @relation(fields: [userId], references: [id])
-  club   Club           @relation(fields: [clubId], references: [id])
-
-  @@unique([userId, clubId]) // Ensures uniqueness for the user-organization pair
+  id                        Int   @id
+  name                      Json // multilingual
+  foundedYear               Int?
+  // All of the members are recorded by tsimsStudentId
+  // instead of a foreign key from the user schema for sake of simplicity when batch importing club infos
+  presidentByTsimsStudentId Int // President. Only one.
+  vicesByTsimsStudentId     Int[] // Vice President
+  membersByTsimsStudentId   Int[] // Members
+  description               Json // multilingual
 }
