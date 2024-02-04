@@ -50,6 +50,7 @@ export default defineEventHandler(async (event) => {
   })
 
   await clerkClient.users.updateUser(storedData.userId, {firstName: storedData.name});
+  await clerkClient.users.updateUser(storedData.userId, {publicMetadata: {binded: true}});
 
   useStorage().removeItem(requestBody.data.token, true);
 
