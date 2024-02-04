@@ -5,7 +5,7 @@ import {toTypedSchema} from '@vee-validate/zod'
 import * as z from 'zod'
 import {useToast} from '@/components/ui/toast/use-toast'
 import Toaster from '@/components/ui/toast/Toaster.vue'
-import {useAuth} from "vue-clerk";
+import {useAuth, useClerk} from "vue-clerk";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -18,6 +18,8 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
 
+const clerk = useClerk()
+
 interface backendResponse {
   token: string,
   name: string,
@@ -28,7 +30,7 @@ const {userId} = useAuth()
 
 definePageMeta({
   layout: "sign-in-or-out",
-  middleware: ['auth'],
+  middleware: ['auth-without-bind'],
 });
 
 const {toast} = useToast()
@@ -44,6 +46,15 @@ const formSchema = toTypedSchema(z.object({
 const form = useForm({
   validationSchema: formSchema,
 })
+
+function signOutCallback() {
+  console.log("Sign Out")
+  window.location.replace("/sign-in");
+}
+
+function signOutHandler() {
+  return clerk.signOut(signOutCallback)
+}
 
 const onSubmit = form.handleSubmit(async (values) => {
   isLoading.value = true
@@ -119,36 +130,42 @@ const submitConfirm = async function () {
     </p>
   </div>
   <div class="grid place-items-center">
-    <div class="grid gap-6 w-2/5 min-w-80">
-      <form v-if="!confirmData.data" class="space-y-6" @submit="onSubmit">
+    <div class="grid w-2/5 min-w-80">
+      <div v-if="!confirmData.data">
+        <form class="space-y-6" @submit="onSubmit">
 
-        <FormField v-slot="{ componentField }" name="username">
-          <FormItem>
-            <FormLabel>用户名</FormLabel>
-            <FormControl>
-              <Input :disabled="isLoading" auto-correct="off" placeholder="TSIMS用户名" type="text"
-                     v-bind="componentField"/>
-            </FormControl>
-            <FormMessage/>
-          </FormItem>
-        </FormField>
+          <FormField v-slot="{ componentField }" name="username">
+            <FormItem>
+              <FormLabel>用户名</FormLabel>
+              <FormControl>
+                <Input :disabled="isLoading" auto-correct="off" placeholder="TSIMS用户名" type="text"
+                       v-bind="componentField"/>
+              </FormControl>
+              <FormMessage/>
+            </FormItem>
+          </FormField>
 
-        <FormField v-slot="{ componentField }" name="password">
-          <FormItem>
-            <FormLabel>密码</FormLabel>
-            <FormControl>
-              <Input :disabled="isLoading" auto-correct="off" class="mt-1" placeholder="TSIMS密码" type="password"
-                     v-bind="componentField"/>
-            </FormControl>
-            <FormMessage/>
-          </FormItem>
-        </FormField>
+          <FormField v-slot="{ componentField }" name="password">
+            <FormItem>
+              <FormLabel>密码</FormLabel>
+              <FormControl>
+                <Input :disabled="isLoading" auto-correct="off" class="mt-1" placeholder="TSIMS密码" type="password"
+                       v-bind="componentField"/>
+              </FormControl>
+              <FormMessage/>
+            </FormItem>
+          </FormField>
 
-        <Button :disabled="isLoading" class="w-full mt-1" type="submit">
-          <Icon v-if="isLoading" class="mr-2" name="svg-spinners:180-ring-with-bg"/>
-          登陆
+          <Button :disabled="isLoading" class="w-full mt-1" type="submit">
+            <Icon v-if="isLoading" class="mr-2" name="svg-spinners:180-ring-with-bg"/>
+            登陆
+          </Button>
+        </form>
+        <Button class="mt-2 w-full" variant="outline" @click="signOutHandler">
+          退出登陆
         </Button>
-      </form>
+      </div>
+
       <div v-if="confirmData.data" class="flex items-center flex-col">
         <div class="space-y-3 flex-col items-center text-center">
           <h4 class="font-medium leading-none">
@@ -160,7 +177,7 @@ const submitConfirm = async function () {
         </div>
         <AlertDialog>
           <AlertDialogTrigger class="w-full">
-            <Button class="mt-5 w-full" :disabled="isLoading">
+            <Button :disabled="isLoading" class="mt-5 w-full">
               <Icon v-if="isLoading" class="mr-2" name="svg-spinners:180-ring-with-bg"/>
               上述信息正确
             </Button>
