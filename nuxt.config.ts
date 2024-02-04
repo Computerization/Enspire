@@ -1,7 +1,14 @@
+import { wasm } from '@rollup/plugin-wasm';
+
 export default defineNuxtConfig({
   modules: ['@nuxtjs/tailwindcss', 'shadcn-nuxt', 'nuxt-icon'],
   build: {
     transpile: ['vue-clerk', '@clerk/clerk-js'],
+  },
+  nitro: {
+    rollupConfig: {
+      plugins: [wasm()]
+    }
   },
   runtimeConfig: {
     public: {

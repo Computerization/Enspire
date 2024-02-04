@@ -1,0 +1,34 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"] // Ignore that error. Prisma plugin for WebStorm seems to be outdated.
+  output          = "./generated/client"
+}
+
+datasource db {
+  provider  = "postgresql"
+  // Uses connection pooling
+  url       = env("DATABASE_URL")
+  // Uses direct connection, ⚠️ make sure to keep this to `POSTGRES_URL_NON_POOLING`
+  // or you'll have dangling databases from migrations
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id             String @id
+  name           String
+  tsimsStudentId Int    @unique
+}
+
+// Json types should be stored like {"zh": xxx, "en": xxx}.
+// Prisma itself doesn't validates what is in that Json, we should do it by ourselves when reading.
+model Club {
+  id                        Int   @id
+  name                      Json // multilingual
+  foundedYear               Int?
+  // All of the members are recorded by tsimsStudentId
+  // instead of a foreign key from the user schema for sake of simplicity when batch importing club infos
+  presidentByTsimsStudentId Int // President. Only one.
+  vicesByTsimsStudentId     Int[] // Vice President
+  membersByTsimsStudentId   Int[] // Members
+  description               Json // multilingual
+}

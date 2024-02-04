@@ -76,6 +76,9 @@ devDependencies:
   '@prisma/client':
     specifier: ^5.9.1
     version: 5.9.1(prisma@5.9.1)
+  '@rollup/plugin-wasm':
+    specifier: ^6.2.2
+    version: 6.2.2(rollup@4.9.6)
   '@types/uuid':
     specifier: ^9.0.8
     version: 9.0.8

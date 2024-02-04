@@ -13,6 +13,7 @@
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^6.11.2",
     "@prisma/client": "^5.9.1",
+    "@rollup/plugin-wasm": "^6.2.2",
     "@types/uuid": "^9.0.8",
     "@types/ws": "^8.5.10",
     "nuxt": "3.10.0",

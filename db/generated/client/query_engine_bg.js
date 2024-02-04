@@ -1,0 +1,1 @@
+/** Dummy file needed by some bundlers when using `query-engine.wasm` */
