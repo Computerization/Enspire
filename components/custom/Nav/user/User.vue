@@ -10,6 +10,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import {useUser} from 'vue-clerk'
+
+const {user} = useUser()
 import {useClerk} from 'vue-clerk'
 
 const clerk = useClerk()
@@ -39,11 +42,8 @@ function signOutHandler() {
     <DropdownMenuContent align="end" class="w-56">
       <DropdownMenuLabel class="font-normal flex">
         <div class="flex flex-col space-y-1">
-          <p class="text-sm font-medium leading-none">
-            computerization
-          </p>
-          <p class="text-xs leading-none text-muted-foreground">
-            m@example.com
+          <p class="text-sm font-medium leading-none" v-if="user">
+            {{ user.firstName }}
           </p>
         </div>
       </DropdownMenuLabel>
