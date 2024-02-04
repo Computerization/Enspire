@@ -7,7 +7,7 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
+    "postinstall": "nuxt prepare && prisma generate",
     "update-club-info": "node --loader ts-node/esm utils/update-club-info.ts"
   },
   "devDependencies": {
