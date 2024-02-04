@@ -1,7 +1,6 @@
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["driverAdapters"] // Ignore that error. Prisma plugin for WebStorm seems to be outdated.
-  output          = "./generated/client"
 }
 
 datasource db {
