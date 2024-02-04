@@ -115,7 +115,10 @@ const submitConfirm = async function () {
         description: '请稍后再试',
       });
     }
-  } else await navigateTo('/')
+  } else {
+    window.location.replace('/')
+    // await navigateTo('/', { replace: true })
+  }
   isLoading.value = false
 }
 </script>
