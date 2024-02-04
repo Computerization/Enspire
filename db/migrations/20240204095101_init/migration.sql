@@ -1,8 +1,8 @@
 -- CreateTable
 CREATE TABLE "User" (
-    "id" INTEGER NOT NULL,
+    "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
-    "tsimsUsername" TEXT NOT NULL,
+    "tsimsStudentId" INTEGER NOT NULL,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -21,4 +21,4 @@ CREATE TABLE "Club" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "User_tsimsUsername_key" ON "User"("tsimsUsername");
+CREATE UNIQUE INDEX "User_tsimsStudentId_key" ON "User"("tsimsStudentId");

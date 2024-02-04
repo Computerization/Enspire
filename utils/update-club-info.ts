@@ -1,4 +1,4 @@
-import {PrismaClient} from '@prisma/client'
+import { PrismaClient } from '@prisma/client'
 import json from "../content/clubs.json" assert {"type": "json"}
 import type {Clubs} from "../content/clubs";
 

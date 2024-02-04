@@ -13,9 +13,9 @@ datasource db {
 }
 
 model User {
-  id            Int    @id
-  name          String
-  tsimsUsername String @unique
+  id             String @id
+  name           String
+  tsimsStudentId Int    @unique
 }
 
 // Json types should be stored like {"zh": xxx, "en": xxx}.
