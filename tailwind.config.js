@@ -14,6 +14,29 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: [
+          "Inter",
+          "Noto Sans SC",
+          "ui-sans-serif",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "sans-serif",
+          "'Apple Color Emoji'",
+          "'Segoe UI Emoji'",
+          "'Segoe UI Symbol'",
+          "'Noto Color Emoji'",
+          "emoji",
+          "math",
+        ],
+        serif: [
+          "var(--font-serif)",
+          "ui-serif",
+          "serif",
+          "fangsong",
+        ],
+        mono: ["var(--font-mono)", "monospace"],
+      },
       zIndex: {
         '-1': '-1',
       },
