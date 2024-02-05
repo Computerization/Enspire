@@ -1,15 +1,11 @@
-<script lang="ts" setup>
+<script setup lang='ts'>
+import NewLeaveRequest from "~/components/custom/CAS/Leave/NewLeaveRequest.vue";
+
 definePageMeta({
   middleware: ['auth'],
 });
 </script>
 
 <template>
-  <div>
-    Leave
-  </div>
+  <NewLeaveRequest />
 </template>
-
-<style scoped>
-
-</style>

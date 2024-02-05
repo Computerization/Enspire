@@ -45,7 +45,7 @@ export default defineEventHandler(async (event) => {
 
   await prisma.user.create({
     data: {
-      id: storedData.userId, name: storedData.name, tsimsStudentId: Number(storedData.studentId),
+      clerkUserId: storedData.userId, name: storedData.name, tsimsStudentId: Number(storedData.studentId),
     },
   })
 
