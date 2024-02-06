@@ -2,19 +2,37 @@
 import {Card, CardContent, CardDescription, CardHeader, CardTitle,} from '@/components/ui/card'
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue,} from '@/components/ui/select'
 import {Button} from '@/components/ui/button'
-import type {AllClubs} from '@/types/api/user/all_clubs'
+import type {AllClubs} from '~/types/api/user/all_clubs'
 import Calendar from "~/components/ui/calendar/Calendar.vue";
 import {cn} from "~/lib/utils";
 import {Textarea} from '@/components/ui/textarea'
+import { format } from 'date-fns'
+import { useForm } from 'vee-validate'
+import { toTypedSchema } from '@vee-validate/zod'
+import * as z from 'zod'
+import { useToast } from '@/components/ui/toast/use-toast'
+import { Toaster } from "~/components/ui/toast";
+
+const { toast } = useToast()
 
 definePageMeta({
   middleware: ['auth'],
 });
 
-const {data} = await useFetch<AllClubs>('/api/user/all_clubs', {
-  headers: useRequestHeaders(),
-  method: 'get',
-})
+const isLoading = ref(false)
+
+const formSchema = toTypedSchema(z.object({
+  club: z.string(),
+  date: z.date(),
+  reason: z.string().max(100)
+}))
+
+const { data, error } = await useAsyncData<AllClubs>('allClubs', () => {
+  return $fetch('/api/user/all_clubs', {
+    headers: useRequestHeaders(),
+    method: 'GET',
+  });
+});
 
 if (!data.value) {
   throw createError({
@@ -23,7 +41,28 @@ if (!data.value) {
   })
 }
 
-// TODO: onSubmit hook
+const { handleSubmit } = useForm({
+  validationSchema: formSchema,
+})
+
+const onSubmit = handleSubmit(async (values) => {
+  isLoading.value = true
+  console.log(values)
+  const {error} = await useFetch('/api/cas/leave/new', {
+    headers: useRequestHeaders(),
+    method: 'post',
+    server: false,
+    body: values
+  })
+  if (error.value) {
+    toast({
+      title: '错误',
+      description: '请稍后再试',
+      variant: 'destructive',
+    })
+  }
+  isLoading.value = false
+})
 
 </script>
 
@@ -39,7 +78,7 @@ if (!data.value) {
     <CardContent>
 
       <form class="space-y-6" @submit="onSubmit">
-        <FormField v-slot="{ componentField, value }" name="email">
+        <FormField v-slot="{ componentField, value }" name="club">
           <FormItem>
             <FormLabel>社团</FormLabel>
 
@@ -48,7 +87,7 @@ if (!data.value) {
                 <SelectTrigger :class="cn(
                   'w-full ps-3 text-start font-normal hover:bg-muted',
                   !value && 'text-muted-foreground',
-                )" variant="outline">
+                )" variant="outline" :disabled="isLoading">
                   <SelectValue placeholder="选择您需要请假的社团..."/>
                 </SelectTrigger>
               </FormControl>
@@ -76,6 +115,7 @@ if (!data.value) {
                   'w-full ps-3 text-start font-normal',
                   !value && 'text-muted-foreground',
                 )" variant="outline"
+                      :disabled="isLoading"
                   >
                     <span>{{ value ? format(value, "PPP") : "选择日期..." }}</span>
                     <Icon class="ms-auto opacity-50" name="material-symbols:calendar-today-outline"/>
@@ -98,18 +138,21 @@ if (!data.value) {
               class="resize-none"
               placeholder="WHY? WHY? WHY??"
               v-bind="componentField"
+              :disabled="isLoading"
           />
             </FormControl>
             <FormMessage/>
           </FormItem>
         </FormField>
 
-        <Button type="submit">
-          Submit
+        <Button :disabled="isLoading" type="submit">
+          <Icon v-if="isLoading" class="mr-2" name="svg-spinners:180-ring-with-bg"/>
+          登陆
         </Button>
       </form>
 
     </CardContent>
 
   </Card>
+  <Toaster />
 </template>

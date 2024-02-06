@@ -3,8 +3,8 @@ import {PrismaClient} from '@prisma/client'
 const prisma = new PrismaClient()
 
 export default eventHandler(async (event) => {
+  console.log("all_clubs called!")
   const { auth } = event.context
-  console.log(auth)
 
   if (!auth.userId) {
     setResponseStatus(event, 403)

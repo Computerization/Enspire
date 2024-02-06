@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@clerk/clerk-sdk-node": "^4.13.7",
+    "@formkit/auto-animate": "^0.8.1",
     "@neondatabase/serverless": "^0.7.2",
     "@prisma/adapter-neon": "^5.9.1",
     "@radix-icons/vue": "^1.0.0",

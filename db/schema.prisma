@@ -13,16 +13,17 @@ datasource db {
 }
 
 model User {
-  id             Int    @id @default(autoincrement())
-  clerkUserId    String @unique
+  id             Int            @id @default(autoincrement())
+  clerkUserId    String         @unique
   name           String
-  tsimsStudentId Int    @unique
+  tsimsStudentId Int            @unique
+  LeaveRequest   LeaveRequest[]
 }
 
 // Json types should be stored like {"zh": xxx, "en": xxx}.
 // Prisma itself doesn't validates what is in that Json, we should do it by ourselves when reading.
 model Club {
-  id                        Int   @id
+  id                        Int            @id
   name                      Json // multilingual
   foundedYear               Int?
   // All of the members are recorded by tsimsStudentId
@@ -31,4 +32,27 @@ model Club {
   vicesByTsimsStudentId     Int[] // Vice President
   membersByTsimsStudentId   Int[] // Members
   description               Json // multilingual
+  LeaveRequest              LeaveRequest[]
+}
+
+enum LeaveRequestStatus {
+  PENDING
+  APPROVED
+  DENIED
+}
+
+model LeaveRequest {
+  id          Int                @id @default(autoincrement())
+  clerkUserId String // Link to User model
+  clubId      Int // Link to Club model
+  startDate   DateTime // Start date of the leave
+  endDate     DateTime // End date of the leave. Currently we will only support request for one day, but ik somebody would want to leave for a whole fucking semester.
+  reason      String
+  status      LeaveRequestStatus @default(PENDING)
+
+  // Relations
+  club Club @relation(fields: [clubId], references: [id])
+  user User @relation(fields: [clerkUserId], references: [clerkUserId])
+
+  @@unique([id, clubId, startDate, endDate]) // Same user's request for a club can't overlap in time
 }

@@ -8,6 +8,9 @@ dependencies:
   '@clerk/clerk-sdk-node':
     specifier: ^4.13.7
     version: 4.13.7(react@18.2.0)
+  '@formkit/auto-animate':
+    specifier: ^0.8.1
+    version: 0.8.1
   '@neondatabase/serverless':
     specifier: ^0.7.2
     version: 0.7.2
@@ -1215,6 +1218,10 @@ packages:
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
+    dev: false
+
+  /@formkit/auto-animate@0.8.1:
+    resolution: {integrity: sha512-0/Z2cuNXWVVIG/l0SpcHAWFhGdvLJ8DRvEfRWvmojtmRWfEy+LWNwgDazbZqY0qQYtkHcoEK3jBLkhiZaB/4Ig==}
     dev: false
 
   /@iconify/collections@1.0.388:

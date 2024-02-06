@@ -16,6 +16,5 @@ export default defineNuxtRouteMiddleware(async () => {
     await until(isClerkLoaded).toBe(true);
     if (clerk.loaded && !clerk.user?.id) return navigateTo('/sign-in');
     if (!clerk.user?.publicMetadata['binded']) return navigateTo('/account/bind')
-    console.log(clerk.user?.publicMetadata)
   }
 });

@@ -19,7 +19,6 @@ const delegatedProps = computed(() => {
 })
 
 const forwardedProps = useForwardProps(delegatedProps)
-console.log(forwardedProps)
 </script>
 
 <template>
