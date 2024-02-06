@@ -1,20 +1,19 @@
 <script lang="ts" setup>
+import TabsList from '~/components/ui/tabs/TabsList.vue'
+import Tabs from '~/components/ui/tabs/Tabs.vue'
+import TabsContent from '~/components/ui/tabs/TabsContent.vue'
+import TabsTrigger from '~/components/ui/tabs/TabsTrigger.vue'
+import json from '~/content/clubs.json'
 
-import TabsList from "~/components/ui/tabs/TabsList.vue";
-import Tabs from "~/components/ui/tabs/Tabs.vue";
-import TabsContent from "~/components/ui/tabs/TabsContent.vue";
-import TabsTrigger from "~/components/ui/tabs/TabsTrigger.vue";
-import json from "~/content/clubs.json"
+import type { Clubs } from '~/content/clubs'
+import ClubCard from '~/components/custom/club-card.vue'
 
-import type {Clubs} from "~/content/clubs";
-import ClubCard from "~/components/custom/club-card.vue";
-
-const clubs: Clubs = json as Clubs;
+const clubs: Clubs = json as Clubs
 
 // This page requires login
 definePageMeta({
   middleware: ['auth'],
-});
+})
 </script>
 
 <template>
@@ -40,12 +39,13 @@ definePageMeta({
         </TabsList>
       </div>
       <TabsContent
-          v-for="i in ['Sports', 'Service', 'Arts', 'Life', 'Academic']"
-          :value="i"
-          class="border-none p-0 outline-none"
+        v-for="i in ['Sports', 'Service', 'Arts', 'Life', 'Academic']"
+        :key="i"
+        :value="i"
+        class="border-none p-0 outline-none"
       >
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-          <ClubCard v-for="j in clubs[i]" :club="j"/>
+          <ClubCard v-for="j in clubs[i]" :key="j.groups[0].C_NameE" :club="j" />
         </div>
       </TabsContent>
     </Tabs>

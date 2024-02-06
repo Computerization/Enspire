@@ -1,13 +1,13 @@
 export interface ClubName {
-  zh: string,
+  zh: string
   en: string
 }
 export interface Club {
-  name: ClubName,
+  name: ClubName
   id: number
 }
 export interface AllClubs {
-  "president": Club[]
-  "vice": Club[]
-  "member": Club[]
+  president: Club[]
+  vice: Club[]
+  member: Club[]
 }

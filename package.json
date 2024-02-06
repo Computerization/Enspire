@@ -1,30 +1,16 @@
 {
   "name": "nuxt-app",
-  "private": true,
   "type": "module",
+  "private": true,
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare && prisma generate",
-    "update-club-info": "node --loader ts-node/esm utils/update-club-info.ts"
-  },
-  "devDependencies": {
-    "@nuxtjs/google-fonts": "^3.1.3",
-    "@nuxtjs/tailwindcss": "^6.11.2",
-    "@prisma/client": "^5.9.1",
-    "@rollup/plugin-wasm": "^6.2.2",
-    "@types/uuid": "^9.0.8",
-    "@types/ws": "^8.5.10",
-    "nuxt": "3.10.0",
-    "nuxt-icon": "^0.6.8",
-    "prisma": "^5.9.1",
-    "shadcn-nuxt": "^0.8.7",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.3.3",
-    "vue": "^3.4.14",
-    "vue-router": "^4.2.5"
+    "update-club-info": "node --loader ts-node/esm utils/update-club-info.ts",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@clerk/clerk-sdk-node": "^4.13.7",
@@ -51,6 +37,24 @@
     "vue-clerk": "^0.1.2",
     "ws": "^8.16.0",
     "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.6.4",
+    "@nuxtjs/google-fonts": "^3.1.3",
+    "@nuxtjs/tailwindcss": "^6.11.2",
+    "@prisma/client": "^5.9.1",
+    "@rollup/plugin-wasm": "^6.2.2",
+    "@types/uuid": "^9.0.8",
+    "@types/ws": "^8.5.10",
+    "eslint": "^8.56.0",
+    "nuxt": "3.10.0",
+    "nuxt-icon": "^0.6.8",
+    "prisma": "^5.9.1",
+    "shadcn-nuxt": "^0.8.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3",
+    "vue": "^3.4.14",
+    "vue-router": "^4.2.5"
   },
   "prisma": {
     "schema": "db/schema.prisma"

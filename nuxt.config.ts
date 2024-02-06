@@ -1,3 +1,5 @@
+import process from 'node:process'
+
 export default defineNuxtConfig({
   modules: ['@nuxtjs/tailwindcss', 'shadcn-nuxt', 'nuxt-icon'],
   build: {
@@ -11,9 +13,9 @@ export default defineNuxtConfig({
   },
   googleFonts: {
     families: {
-      Inter: true,
+      'Inter': true,
       'Noto Sans SC': true,
-    }
+    },
   },
   shadcn: {
     /**
@@ -24,6 +26,6 @@ export default defineNuxtConfig({
      * Directory that the component lives in.
      * @default "./components/ui"
      */
-    componentDir: './components/ui'
-  }
+    componentDir: './components/ui',
+  },
 })

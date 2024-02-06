@@ -1,15 +1,15 @@
 <script lang="ts" setup>
-import type {PropType} from 'vue'
-import type {Club} from "~/content/clubs";
-import {Button} from '@/components/ui/button'
-import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle,} from '@/components/ui/card'
-import {cn} from '@/lib/utils'
-import Badge from "~/components/ui/badge/Badge.vue";
+import type { PropType } from 'vue'
+import type { Club } from '~/content/clubs'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { cn } from '@/lib/utils'
+import Badge from '~/components/ui/badge/Badge.vue'
 
 const props = defineProps({
   club: {
     type: Object as PropType<Club>,
-    required: true
+    required: true,
   },
 })
 </script>
@@ -21,20 +21,20 @@ const props = defineProps({
         <div>
           {{ props.club.groups[0].C_NameC }}
         </div>
-        <Badge v-if="props.club.gmember.length == 0" variant="destructive">
+        <Badge v-if="props.club.gmember.length === 0" variant="destructive">
           已解散
         </Badge>
       </CardTitle>
       <CardDescription v-if="props.club.gmember" class="flex items-center">
         <div class="flex items-center">
-          <Icon name="material-symbols:person"/>
+          <Icon name="material-symbols:person" />
           <div class="ml-1">
             <div> {{ props.club.gmember.length }}</div>
           </div>
         </div>
 
         <div v-if="props.club.groups" class="flex items-center ml-2">
-          <Icon name="material-symbols:language"/>
+          <Icon name="material-symbols:language" />
           <div class="ml-1">
             {{ props.club.groups[0].C_NameE }}
           </div>

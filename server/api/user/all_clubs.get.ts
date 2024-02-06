@@ -1,9 +1,8 @@
-import {PrismaClient} from '@prisma/client'
+import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
 export default eventHandler(async (event) => {
-  console.log("all_clubs called!")
   const { auth } = event.context
 
   if (!auth.userId) {
@@ -13,41 +12,41 @@ export default eventHandler(async (event) => {
 
   const tsimsStudentId = (await prisma.user.findUniqueOrThrow({
     where: {
-      clerkUserId: auth.userId
-    }
+      clerkUserId: auth.userId,
+    },
   })).tsimsStudentId
 
   return {
-    "president": await prisma.club.findMany({
+    president: await prisma.club.findMany({
       where: {
-        presidentByTsimsStudentId: tsimsStudentId
+        presidentByTsimsStudentId: tsimsStudentId,
       },
       select: {
         id: true,
-        name: true
-      }
+        name: true,
+      },
     }),
-    "vice": await prisma.club.findMany({
+    vice: await prisma.club.findMany({
       where: {
         vicesByTsimsStudentId: {
-          has: tsimsStudentId
+          has: tsimsStudentId,
         },
       },
       select: {
         id: true,
-        name: true
-      }
+        name: true,
+      },
     }),
-    "member": await prisma.club.findMany({
+    member: await prisma.club.findMany({
       where: {
         membersByTsimsStudentId: {
-          has: tsimsStudentId
+          has: tsimsStudentId,
         },
       },
       select: {
         id: true,
-        name: true
-      }
+        name: true,
+      },
     }),
   }
 })

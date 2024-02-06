@@ -95,7 +95,7 @@ const vCalendarSlots = computed(() => {
       :model-modifiers="modelModifiers"
       class="calendar"
       trim-weeks
-      :transition="'none'"
+      transition="none"
       :columns="columns"
     >
       <template v-for="(_, slot) of vCalendarSlots" #[slot]="scope">
@@ -154,10 +154,10 @@ const vCalendarSlots = computed(() => {
   @apply text-muted-foreground rounded-md w-full font-normal text-[0.8rem];
 }
 .calendar .vc-weekday-1 {
-	@apply pr-3;
+  @apply pr-3;
 }
 .calendar .vc-weekday-7 {
-	@apply pl-3;
+  @apply pl-3;
 }
 .calendar .vc-weeks {
   @apply w-full space-y-2 flex flex-col [&>_div]:grid [&>_div]:grid-cols-7;
@@ -216,19 +216,19 @@ const vCalendarSlots = computed(() => {
 .calendar .vc-slide-down-leave-active,
 .calendar .vc-slide-fade-enter-active,
 .calendar .vc-slide-fade-leave-active {
-	transition:
-		opacity var(--vc-slide-duration) var(--vc-slide-timing),
-		-webkit-transform var(--vc-slide-duration) var(--vc-slide-timing);
-	transition:
-		transform var(--vc-slide-duration) var(--vc-slide-timing),
-		opacity var(--vc-slide-duration) var(--vc-slide-timing);
-	transition:
-		transform var(--vc-slide-duration) var(--vc-slide-timing),
-		opacity var(--vc-slide-duration) var(--vc-slide-timing),
-		-webkit-transform var(--vc-slide-duration) var(--vc-slide-timing);
-	-webkit-backface-visibility: hidden;
-	backface-visibility: hidden;
-	pointer-events: none;
+  transition:
+    opacity var(--vc-slide-duration) var(--vc-slide-timing),
+    -webkit-transform var(--vc-slide-duration) var(--vc-slide-timing);
+  transition:
+    transform var(--vc-slide-duration) var(--vc-slide-timing),
+    opacity var(--vc-slide-duration) var(--vc-slide-timing);
+  transition:
+    transform var(--vc-slide-duration) var(--vc-slide-timing),
+    opacity var(--vc-slide-duration) var(--vc-slide-timing),
+    -webkit-transform var(--vc-slide-duration) var(--vc-slide-timing);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  pointer-events: none;
 }
 .calendar .vc-none-leave-active,
 .calendar .vc-fade-leave-active,

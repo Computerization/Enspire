@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import {FormControl, FormField, FormItem, FormLabel, FormMessage,} from '@/components/ui/form'
-import {useForm} from 'vee-validate'
-import {toTypedSchema} from '@vee-validate/zod'
+import { useForm } from 'vee-validate'
+import { toTypedSchema } from '@vee-validate/zod'
 import * as z from 'zod'
-import {useToast} from '@/components/ui/toast/use-toast'
+import { useAuth, useClerk } from 'vue-clerk'
+import { useToast } from '@/components/ui/toast/use-toast'
 import Toaster from '@/components/ui/toast/Toaster.vue'
-import {useAuth, useClerk} from "vue-clerk";
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -21,26 +21,26 @@ import {
 const clerk = useClerk()
 
 interface backendResponse {
-  token: string,
-  name: string,
+  token: string
+  name: string
   studentNumber: string
 }
 
-const {userId} = useAuth()
+const { userId } = useAuth()
 
 definePageMeta({
-  layout: "sign-in-or-out",
+  layout: 'sign-in-or-out',
   middleware: ['auth-without-bind'],
-});
+})
 
-const {toast} = useToast()
+const { toast } = useToast()
 
 const isLoading = ref(false)
 const confirmData = ref<{ data?: backendResponse }>({})
 
 const formSchema = toTypedSchema(z.object({
-  username: z.string().length(9).startsWith("s"),
-  password: z.string()
+  username: z.string().length(9).startsWith('s'),
+  password: z.string(),
 }))
 
 const form = useForm({
@@ -48,8 +48,7 @@ const form = useForm({
 })
 
 function signOutCallback() {
-  console.log("Sign Out")
-  window.location.replace("/sign-in");
+  window.location.replace('/sign-in')
 }
 
 function signOutHandler() {
@@ -58,64 +57,69 @@ function signOutHandler() {
 
 const onSubmit = form.handleSubmit(async (values) => {
   isLoading.value = true
-  const {data: data, error: error} = await useFetch<backendResponse>('/api/bind', {
+  const { data, error } = await useFetch<backendResponse>('/api/bind', {
     method: 'post',
-    body: {...values, ...{"userId": userId}}
+    body: { ...values, ...{ userId } },
   })
   if (error.value) {
-    if (error.value.statusCode == 403) {
+    if (error.value.statusCode === 403) {
       toast({
-        variant: "destructive",
+        variant: 'destructive',
         title: '凭证错误',
         description: '请检查您输入的帐号密码',
-      });
-    } else if (error.value.statusCode == 500) {
+      })
+    }
+    else if (error.value.statusCode === 500) {
       toast({
-        variant: "destructive",
+        variant: 'destructive',
         title: '服务器错误',
         description: '请稍后再试',
-      });
-    } else {
+      })
+    }
+    else {
       toast({
-        variant: "destructive",
+        variant: 'destructive',
         title: '错误',
         description: '请稍后再试',
-      });
+      })
     }
   }
   isLoading.value = false
-  if (data.value) confirmData.value = {data: data.value}
+  if (data.value)
+    confirmData.value = { data: data.value }
 })
 
 const submitConfirm = async function () {
   isLoading.value = true
   if (!confirmData.value.data) {
     toast({
-      variant: "destructive",
+      variant: 'destructive',
       title: '错误',
       description: '请稍后再试',
-    });
+    })
     return
   }
-  const {error: error} = await useFetch('/api/bind/confirm', {
+  const { error } = await useFetch('/api/bind/confirm', {
     method: 'post',
-    body: {"token": confirmData.value.data.token}
+    body: { token: confirmData.value.data.token },
   })
   if (error.value) {
-    if (error.value.statusCode == 403) {
+    if (error.value.statusCode === 403) {
       toast({
-        variant: "destructive",
+        variant: 'destructive',
         title: '该TSIMS账户已被绑定',
         description: '请重试',
-      });
-    } else {
+      })
+    }
+    else {
       toast({
-        variant: "destructive",
+        variant: 'destructive',
         title: '错误',
         description: '请稍后再试',
-      });
+      })
     }
-  } else {
+  }
+  else {
     window.location.replace('/')
     // await navigateTo('/', { replace: true })
   }
@@ -136,15 +140,16 @@ const submitConfirm = async function () {
     <div class="grid w-2/5 min-w-80">
       <div v-if="!confirmData.data">
         <form class="space-y-6" @submit="onSubmit">
-
           <FormField v-slot="{ componentField }" name="username">
             <FormItem>
               <FormLabel>用户名</FormLabel>
               <FormControl>
-                <Input :disabled="isLoading" auto-correct="off" placeholder="TSIMS用户名" type="text"
-                       v-bind="componentField"/>
+                <Input
+                  :disabled="isLoading" auto-correct="off" placeholder="TSIMS用户名" type="text"
+                  v-bind="componentField"
+                />
               </FormControl>
-              <FormMessage/>
+              <FormMessage />
             </FormItem>
           </FormField>
 
@@ -152,15 +157,17 @@ const submitConfirm = async function () {
             <FormItem>
               <FormLabel>密码</FormLabel>
               <FormControl>
-                <Input :disabled="isLoading" auto-correct="off" class="mt-1" placeholder="TSIMS密码" type="password"
-                       v-bind="componentField"/>
+                <Input
+                  :disabled="isLoading" auto-correct="off" class="mt-1" placeholder="TSIMS密码" type="password"
+                  v-bind="componentField"
+                />
               </FormControl>
-              <FormMessage/>
+              <FormMessage />
             </FormItem>
           </FormField>
 
           <Button :disabled="isLoading" class="w-full mt-1" type="submit">
-            <Icon v-if="isLoading" class="mr-2" name="svg-spinners:180-ring-with-bg"/>
+            <Icon v-if="isLoading" class="mr-2" name="svg-spinners:180-ring-with-bg" />
             登陆
           </Button>
         </form>
@@ -181,7 +188,7 @@ const submitConfirm = async function () {
         <AlertDialog>
           <AlertDialogTrigger class="w-full">
             <Button :disabled="isLoading" class="mt-5 w-full">
-              <Icon v-if="isLoading" class="mr-2" name="svg-spinners:180-ring-with-bg"/>
+              <Icon v-if="isLoading" class="mr-2" name="svg-spinners:180-ring-with-bg" />
               上述信息正确
             </Button>
           </AlertDialogTrigger>
@@ -194,12 +201,14 @@ const submitConfirm = async function () {
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction @click="submitConfirm">Continue</AlertDialogAction>
+              <AlertDialogAction @click="submitConfirm">
+                Continue
+              </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
       </div>
     </div>
   </div>
-  <Toaster/>
+  <Toaster />
 </template>

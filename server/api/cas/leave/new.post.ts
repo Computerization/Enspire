@@ -1,17 +1,18 @@
-import {PrismaClient} from '@prisma/client'
-import * as z from "zod";
+import { PrismaClient } from '@prisma/client'
+import * as z from 'zod'
 
 const prisma = new PrismaClient()
 
 const requestSchema = z.object({
-  club: z.string(), date: z.string().datetime(), reason: z.string()
+  club: z.string(),
+  date: z.string().datetime(),
+  reason: z.string(),
 })
 
 export default eventHandler(async (event) => {
-  const {auth} = event.context
+  const { auth } = event.context
 
   if (!auth.userId) {
-    console.log("?")
     setResponseStatus(event, 403)
     return
   }
@@ -23,9 +24,7 @@ export default eventHandler(async (event) => {
       clubId: Number(requestBody.data.club),
       startDate: requestBody.data.date,
       endDate: requestBody.data.date,
-      reason: requestBody.data.reason
-    }
+      reason: requestBody.data.reason,
+    },
   })
-
-  return
 })

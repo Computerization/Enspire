@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import {cn} from '@/lib/utils'
-import {Button} from '@/components/ui/button'
+import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
 </script>
 
 <template>
@@ -9,8 +9,8 @@ import {Button} from '@/components/ui/button'
       <div class="px-3 py-2">
         <div class="space-y-1 mt-2">
           <NuxtLink to="/">
-            <Button :variant="$route.name=='index' ? 'secondary' : 'ghost'" class="w-full justify-start">
-              <Icon class="mr-2 h-4 w-4" name="material-symbols:home-outline-rounded"/>
+            <Button :variant="$route.name === 'index' ? 'secondary' : 'ghost'" class="w-full justify-start">
+              <Icon class="mr-2 h-4 w-4" name="material-symbols:home-outline-rounded" />
               首页
             </Button>
           </NuxtLink>
@@ -22,20 +22,20 @@ import {Button} from '@/components/ui/button'
         </h2>
         <div class="mt-2">
           <NuxtLink to="/cas/clubs">
-            <Button :variant="$route.name=='cas-clubs' ? 'secondary' : 'ghost'" class="w-full justify-start">
-              <Icon class="mr-2 h-4 w-4" name="material-symbols:grid-view-outline-rounded"/>
+            <Button :variant="$route.name === 'cas-clubs' ? 'secondary' : 'ghost'" class="w-full justify-start">
+              <Icon class="mr-2 h-4 w-4" name="material-symbols:grid-view-outline-rounded" />
               我们的社团
             </Button>
           </NuxtLink>
           <NuxtLink to="/cas/reservation">
-            <Button :variant="$route.name=='cas-reservation' ? 'secondary' : 'ghost'" class="w-full justify-start mt-1">
-              <Icon class="mr-2 h-4 w-4" name="material-symbols:calendar-today-outline"/>
+            <Button :variant="$route.name === 'cas-reservation' ? 'secondary' : 'ghost'" class="w-full justify-start mt-1">
+              <Icon class="mr-2 h-4 w-4" name="material-symbols:calendar-today-outline" />
               预约教室
             </Button>
           </NuxtLink>
           <NuxtLink to="/cas/leave">
-            <Button :variant="$route.name=='cas-leave' ? 'secondary' : 'ghost'" class="w-full justify-start mt-1">
-              <Icon class="mr-2 h-4 w-4" name="charm:tick-double"/>
+            <Button :variant="$route.name === 'cas-leave' ? 'secondary' : 'ghost'" class="w-full justify-start mt-1">
+              <Icon class="mr-2 h-4 w-4" name="charm:tick-double" />
               申请请假
             </Button>
           </NuxtLink>
@@ -47,8 +47,8 @@ import {Button} from '@/components/ui/button'
         </h2>
         <div class="space-y-1 mt-2">
           <NuxtLink to="/about">
-            <Button :variant="$route.name=='about' ? 'secondary' : 'ghost'" class="w-full justify-start">
-              <Icon class="mr-2 h-4 w-4" name="material-symbols:info-outline"/>
+            <Button :variant="$route.name === 'about' ? 'secondary' : 'ghost'" class="w-full justify-start">
+              <Icon class="mr-2 h-4 w-4" name="material-symbols:info-outline" />
               关于我们
             </Button>
           </NuxtLink>

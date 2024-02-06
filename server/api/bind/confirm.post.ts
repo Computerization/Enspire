@@ -1,27 +1,29 @@
-import {z} from "zod";
-import {PrismaClient} from '@prisma/client'
+import { z } from 'zod'
+import { PrismaClient } from '@prisma/client'
+
+import clerkClient from '@clerk/clerk-sdk-node'
 
 const prisma = new PrismaClient()
 
-import clerkClient from '@clerk/clerk-sdk-node';
-
 interface StoredData {
-  "userId": string,
-  "name": string,
-  "studentId": string
+  userId: string
+  name: string
+  studentId: string
 }
 
 const requestSchema = z.object({
-  token: z.string().uuid()
+  token: z.string().uuid(),
 })
 
 export default defineEventHandler(async (event) => {
   const requestBody = await readValidatedBody(event, body => requestSchema.safeParse(body))
-  if (!requestBody.success) throw requestBody.error.issues
+  if (!requestBody.success)
+    throw requestBody.error.issues
 
   if (!await useStorage().hasItem(requestBody.data.token)) {
     throw createError({
-      statusCode: 403, statusMessage: 'Token Incorrect',
+      statusCode: 403,
+      statusMessage: 'Token Incorrect',
     })
   }
 
@@ -29,31 +31,34 @@ export default defineEventHandler(async (event) => {
 
   if (!storedData) {
     throw createError({
-      statusCode: 403, statusMessage: 'Token Incorrect',
+      statusCode: 403,
+      statusMessage: 'Token Incorrect',
     })
   }
 
   if (await prisma.user.findFirst({
     where: {
-      tsimsStudentId: Number(storedData.studentId)
-    }
+      tsimsStudentId: Number(storedData.studentId),
+    },
   }) !== null) {
     throw createError({
-      statusCode: 403, statusMessage: 'TSIMS Account already binded',
+      statusCode: 403,
+      statusMessage: 'TSIMS Account already binded',
     })
   }
 
   await prisma.user.create({
     data: {
-      clerkUserId: storedData.userId, name: storedData.name, tsimsStudentId: Number(storedData.studentId),
+      clerkUserId: storedData.userId,
+      name: storedData.name,
+      tsimsStudentId: Number(storedData.studentId),
     },
   })
 
-  await clerkClient.users.updateUser(storedData.userId, {firstName: storedData.name});
-  await clerkClient.users.updateUser(storedData.userId, {publicMetadata: {binded: true}});
+  await clerkClient.users.updateUser(storedData.userId, { firstName: storedData.name })
+  await clerkClient.users.updateUser(storedData.userId, { publicMetadata: { binded: true } })
 
-  useStorage().removeItem(requestBody.data.token, true);
+  useStorage().removeItem(requestBody.data.token, true)
 
-  return {"success": true}
-
+  return { success: true }
 })

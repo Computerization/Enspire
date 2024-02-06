@@ -1,7 +1,7 @@
-import { clerkPlugin } from 'vue-clerk/plugin';
+import { clerkPlugin } from 'vue-clerk/plugin'
 
 export default defineNuxtPlugin(async (nuxtApp) => {
-  const publishableKey = useRuntimeConfig().public.clerkPublishableKey as string;
+  const publishableKey = useRuntimeConfig().public.clerkPublishableKey as string
 
   nuxtApp.vueApp.use(clerkPlugin, {
     publishableKey,
@@ -10,5 +10,5 @@ export default defineNuxtPlugin(async (nuxtApp) => {
         variables: { colorPrimary: '#570DF8' },
       },
     },
-  });
-});
+  })
+})

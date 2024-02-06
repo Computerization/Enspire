@@ -1,11 +1,11 @@
 <script setup lang='ts'>
-import LazyNewLeaveRequest from "~/components/custom/CAS/Leave/NewLeaveRequest.vue";
-import Skeleton from "~/components/ui/skeleton/Skeleton.vue";
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "~/components/ui/card";
+import LazyNewLeaveRequest from '~/components/custom/CAS/Leave/NewLeaveRequest.vue'
+import Skeleton from '~/components/ui/skeleton/Skeleton.vue'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card'
 
 definePageMeta({
   middleware: ['auth'],
-});
+})
 </script>
 
 <template>
@@ -15,13 +15,12 @@ definePageMeta({
       <Card class="w-full">
         <CardHeader>
           <CardTitle class="flex items-center gap-x-1">
-            <Icon name="material-symbols:add-circle-outline"/>
+            <Icon name="material-symbols:add-circle-outline" />
             新增
           </CardTitle>
           <CardDescription>在此处新增请假申请</CardDescription>
         </CardHeader>
         <CardContent>
-
           <form class="space-y-6">
             <FormField name="email">
               <FormItem>
@@ -30,7 +29,7 @@ definePageMeta({
                 </FormLabel>
 
                 <Skeleton class="w-full h-9" />
-                <FormMessage/>
+                <FormMessage />
               </FormItem>
             </FormField>
 
@@ -54,9 +53,7 @@ definePageMeta({
 
             <Skeleton class="w-20 h-9" />
           </form>
-
         </CardContent>
-
       </Card>
     </template>
   </Suspense>

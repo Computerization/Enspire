@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import {SignIn} from 'vue-clerk';
+import { SignIn } from 'vue-clerk'
 
 definePageMeta({
-  layout: "sign-in-or-out",
+  layout: 'sign-in-or-out',
   middleware: ['public'],
-});
+})
 </script>
 
 <template>
@@ -17,6 +17,6 @@ definePageMeta({
     </p>
   </div>
   <div class="grid place-items-center">
-    <SignIn sign-up-url="/sign-up"/>
+    <SignIn sign-up-url="/sign-up" />
   </div>
 </template>

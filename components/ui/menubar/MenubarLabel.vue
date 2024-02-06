@@ -2,7 +2,7 @@
 import { MenubarLabel, type MenubarLabelProps } from 'radix-vue'
 import { cn } from '@/lib/utils'
 
-const props = defineProps<MenubarLabelProps & { inset?: boolean; class?: string }>()
+const props = defineProps<MenubarLabelProps & { inset?: boolean, class?: string }>()
 </script>
 
 <template>
