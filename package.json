@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "axios": "0.26.1",
-    "core-js": "3.21.1",
+    "core-js": "3.36.0",
     "highlight.js": "11.5.0",
     "less-loader": "7.x",
     "pinyin-pro": "3.8.2",
