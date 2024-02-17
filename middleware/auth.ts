@@ -1,4 +1,3 @@
-import process from 'node:process'
 import { useClerk, useClerkProvide } from 'vue-clerk'
 import { until } from '@vueuse/core'
 

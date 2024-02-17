@@ -1,4 +1,3 @@
-import process from 'node:process'
 import { useClerk } from 'vue-clerk'
 
 export default defineNuxtRouteMiddleware(() => {
