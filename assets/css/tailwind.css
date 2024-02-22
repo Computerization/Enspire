@@ -77,6 +77,5 @@
 
     body {
         @apply bg-background text-foreground;
-        font-family: Inter, 'Noto Sans SC', ui-sans-serif, -apple-system, BlinkMacSystemFont, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', emoji, math;
     }
 }

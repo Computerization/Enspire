@@ -18,13 +18,15 @@ export default eventHandler(async (event) => {
   }
 
   const requestBody = await readValidatedBody(event, body => requestSchema.safeParse(body))
-  await prisma.leaveRequest.create({
-    data: {
-      clerkUserId: auth.userId,
-      clubId: Number(requestBody.data.club),
-      startDate: requestBody.data.date,
-      endDate: requestBody.data.date,
-      reason: requestBody.data.reason,
-    },
-  })
+  if (requestBody.success) {
+    await prisma.leaveRequest.create({
+      data: {
+        clerkUserId: auth.userId,
+        clubId: Number(requestBody.data.club),
+        startDate: requestBody.data.date,
+        endDate: requestBody.data.date,
+        reason: requestBody.data.reason,
+      },
+    })
+  }
 })

@@ -1,4 +1,9 @@
 export default defineNuxtConfig({
+  nitro: {
+    experimental: {
+      openAPI: true,
+    },
+  },
   modules: ['@nuxtjs/tailwindcss', 'shadcn-nuxt', 'nuxt-icon'],
   build: {
     transpile: ['vue-clerk', '@clerk/clerk-js', '@nuxtjs/google-fonts'],
@@ -13,6 +18,7 @@ export default defineNuxtConfig({
     families: {
       'Inter': true,
       'Noto Sans SC': true,
+      'IBM+Plex+Mono': true,
     },
   },
   shadcn: {

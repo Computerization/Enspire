@@ -148,7 +148,7 @@ const onSubmit = handleSubmit(async (values) => {
 
         <Button :disabled="isLoading" type="submit">
           <Icon v-if="isLoading" class="mr-2" name="svg-spinners:180-ring-with-bg" />
-          登陆
+          提交
         </Button>
       </form>
     </CardContent>

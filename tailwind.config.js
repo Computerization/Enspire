@@ -35,7 +35,7 @@ module.exports = {
           'serif',
           'fangsong',
         ],
-        mono: ['var(--font-mono)', 'monospace'],
+        mono: ['IBM Plex Mono', 'monospace'],
       },
       zIndex: {
         '-1': '-1',

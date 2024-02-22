@@ -2,6 +2,7 @@
 import LazyNewLeaveRequest from '~/components/custom/CAS/Leave/NewLeaveRequest.vue'
 import Skeleton from '~/components/ui/skeleton/Skeleton.vue'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card'
+import { ViewLeaveRequests } from '~/components/custom/CAS/Leave/view-leave-requests'
 
 definePageMeta({
   middleware: ['auth'],
@@ -9,6 +10,7 @@ definePageMeta({
 </script>
 
 <template>
+  <ViewLeaveRequests />
   <Suspense>
     <LazyNewLeaveRequest />
     <template #fallback>
