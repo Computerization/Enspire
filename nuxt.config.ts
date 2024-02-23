@@ -12,6 +12,7 @@ export default defineNuxtConfig({
     public: {
       clerkPublishableKey: process.env.CLERK_PUBLISHABLE_KEY,
     },
+    tsimsUrl: process.env.TSIMS_URL,
     clerkSecretKey: process.env.CLERK_SECRET_KEY,
   },
   googleFonts: {

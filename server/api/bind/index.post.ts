@@ -58,7 +58,7 @@ export default defineEventHandler(async (event) => {
    * First stage of request: login and get session cookies
    */
   // tsims is so dumb that it returns text/html as the MIME type so we have to first receive it as string
-  const tsimsRawLoginResult = await $fetch<string>('http://101.230.1.173:6300/php/login.php', {
+  const tsimsRawLoginResult = await $fetch<string>(`${useRuntimeConfig().tsimsUrl}/php/login.php`, {
     method: 'POST',
     credentials: 'include',
     headers: {
@@ -79,7 +79,7 @@ export default defineEventHandler(async (event) => {
   /**
    * Second stage of request: get information of the user
    */
-  const tsimsRawInfoResult = await $fetch<string>('http://101.230.1.173:6300/php/init_info.php', {
+  const tsimsRawInfoResult = await $fetch<string>(`${useRuntimeConfig().tsimsUrl}/php/init_info.php`, {
     method: 'POST',
     credentials: 'include',
     headers: {
