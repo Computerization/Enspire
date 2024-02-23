@@ -2,7 +2,7 @@
 import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import * as z from 'zod'
-import { useAuth, useClerk } from 'vue-clerk'
+import { useClerk } from 'vue-clerk'
 import { useToast } from '@/components/ui/toast/use-toast'
 import Toaster from '@/components/ui/toast/Toaster.vue'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
@@ -26,8 +26,6 @@ interface backendResponse {
   studentNumber: string
 }
 
-const { userId } = useAuth()
-
 definePageMeta({
   layout: 'sign-in-or-out',
   middleware: ['auth-without-bind'],
@@ -38,9 +36,15 @@ const { toast } = useToast()
 const isLoading = ref(false)
 const confirmData = ref<{ data?: backendResponse }>({})
 
+interface InitDataSchema {
+  token: string
+  img: string
+}
+
 const formSchema = toTypedSchema(z.object({
   username: z.string().length(9).startsWith('s'),
   password: z.string(),
+  captcha: z.string().length(4),
 }))
 
 const form = useForm({
@@ -55,11 +59,15 @@ function signOutHandler() {
   return clerk.signOut(signOutCallback)
 }
 
+const { data: initData } = await useFetch<InitDataSchema>('/api/bind/init')
+
+console.log(initData.value)
+
 const onSubmit = form.handleSubmit(async (values) => {
   isLoading.value = true
   const { data, error } = await useFetch<backendResponse>('/api/bind', {
     method: 'post',
-    body: { ...values, ...{ userId } },
+    body: { ...values, ...{ token: initData.value?.token } },
   })
   if (error.value) {
     if (error.value.statusCode === 403) {
@@ -161,6 +169,22 @@ const submitConfirm = async function () {
                   :disabled="isLoading" auto-correct="off" class="mt-1" placeholder="TSIMS密码" type="password"
                   v-bind="componentField"
                 />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          </FormField>
+
+          <FormField v-slot="{ componentField }" name="captcha">
+            <FormItem>
+              <FormLabel>验证码</FormLabel>
+              <FormControl>
+                <div class="flex space-x-2">
+                  <Input
+                    :disabled="isLoading" auto-correct="off" class="mt-1" placeholder="四位验证码" type="text"
+                    v-bind="componentField"
+                  />
+                  <img :src="`data:image/jpeg;base64, ${initData?.img}`" alt="captcha" class="rounded my-1">
+                </div>
               </FormControl>
               <FormMessage />
             </FormItem>

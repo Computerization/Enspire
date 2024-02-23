@@ -7,6 +7,10 @@ interface TsimsLoginResult {
   password: string
 }
 
+interface StoredData {
+  sessionCookie: string
+}
+
 interface TsimsInfoResult {
   studentname: string
   nickname: string
@@ -18,14 +22,37 @@ interface TsimsInfoResult {
 const requestSchema = z.object({
   username: z.string().length(9).startsWith('s'),
   password: z.string(),
-  userId: z.string(),
+  token: z.string().uuid(),
+  captcha: z.string(),
 })
 
 export default defineEventHandler(async (event) => {
-  let sessionCookie = ''
-  const result = await readValidatedBody(event, body => requestSchema.safeParse(body))
-  if (!result.success)
-    throw result.error.issues
+  const { auth } = event.context
+
+  if (!auth.userId) {
+    setResponseStatus(event, 403)
+    return
+  }
+
+  const requestBody = await readValidatedBody(event, body => requestSchema.parse(body))
+
+  if (!await useStorage().hasItem(requestBody.token)) {
+    throw createError({
+      statusCode: 403,
+      statusMessage: 'Token Incorrect',
+    })
+  }
+
+  const storedData = await useStorage().getItem<StoredData>(requestBody.token)
+
+  if (!storedData) {
+    throw createError({
+      statusCode: 403,
+      statusMessage: 'Token Incorrect',
+    })
+  }
+
+  const sessionCookie = storedData.sessionCookie
 
   /**
    * First stage of request: login and get session cookies
@@ -36,11 +63,9 @@ export default defineEventHandler(async (event) => {
     credentials: 'include',
     headers: {
       'content-type': 'application/x-www-form-urlencoded',
+      'Cookie': sessionCookie,
     },
-    body: `username=${result.data.username}&password=${result.data.password}`,
-    onResponse(context) {
-      sessionCookie = context.response.headers.get('set-cookie') ?? ''
-    },
+    body: `username=${requestBody.username}&password=${requestBody.password}&code=${requestBody.captcha}`,
   })
   const tsimsLoginResult: TsimsLoginResult = JSON.parse(tsimsRawLoginResult)
 
@@ -92,7 +117,7 @@ export default defineEventHandler(async (event) => {
   const continueToken = uuidv4()
 
   await useStorage().setItem(continueToken, {
-    userId: result.data.userId,
+    userId: auth.userId,
     name: tsimsInfoResult.studentname,
     studentId: tsimsInfoResult.studentid,
   })
