@@ -5,15 +5,23 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Toaster } from '~/components/ui/toast'
 import type { MyRequests } from '~/types/api/cas/leave/my'
 
+const props = defineProps<{
+  refreshWatcher: Ref<boolean>
+}>()
+
 definePageMeta({
   middleware: ['auth'],
 })
 
-const { data } = await useAsyncData<MyRequests>('allRequests', () => {
+const { data, refresh } = await useAsyncData<MyRequests>('allRequests', () => {
   return $fetch('/api/cas/leave/my', {
     headers: useRequestHeaders(),
     method: 'GET',
   })
+})
+
+watch(() => props.refreshWatcher, () => {
+  refresh()
 })
 
 if (!data.value) {
@@ -28,13 +36,13 @@ if (!data.value) {
   <Card class="w-full">
     <CardHeader>
       <CardTitle class="flex items-center gap-x-1">
-        <Icon name="material-symbols:add-circle-outline" />
-        新增
+        <Icon name="ic:sharp-remove-red-eye" />
+        我的申请
       </CardTitle>
-      <CardDescription>在此处新增请假申请</CardDescription>
+      <CardDescription>在此处浏览您的请假申请</CardDescription>
     </CardHeader>
     <CardContent v-if="data">
-      <DataTable :columns="columns" :data="data.data" />
+      <DataTable :columns="columns" :data="data.data" :refresh-function="refresh" />
     </CardContent>
   </Card>
   <Toaster />

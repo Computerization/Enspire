@@ -26,6 +26,11 @@ export default eventHandler(async (event) => {
           name: true, // Only select the club's name
         },
       },
+      user: {
+        select: {
+          name: true, // Only select the club's name
+        },
+      },
     },
   })
 

@@ -13,6 +13,8 @@ import { Textarea } from '@/components/ui/textarea'
 import { useToast } from '@/components/ui/toast/use-toast'
 import { Toaster } from '~/components/ui/toast'
 
+const emit = defineEmits(['refresh'])
+
 const { toast } = useToast()
 
 definePageMeta({
@@ -41,7 +43,7 @@ if (!data.value) {
   })
 }
 
-const { handleSubmit } = useForm({
+const { handleSubmit, resetForm } = useForm({
   validationSchema: formSchema,
 })
 
@@ -61,6 +63,8 @@ const onSubmit = handleSubmit(async (values) => {
     })
   }
   isLoading.value = false
+  emit('refresh')
+  resetForm()
 })
 </script>
 
@@ -137,7 +141,7 @@ const onSubmit = handleSubmit(async (values) => {
             <FormControl>
               <Textarea
                 class="resize-none"
-                placeholder="WHY? WHY? WHY??"
+                placeholder="请假原因，最多一百字..."
                 v-bind="componentField"
                 :disabled="isLoading"
               />
