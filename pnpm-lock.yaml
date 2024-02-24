@@ -12,11 +12,11 @@ dependencies:
     specifier: ^0.8.1
     version: 0.8.1
   '@neondatabase/serverless':
-    specifier: ^0.7.2
-    version: 0.7.2
+    specifier: ^0.8.0
+    version: 0.8.1
   '@prisma/adapter-neon':
     specifier: ^5.10.2
-    version: 5.10.2(@neondatabase/serverless@0.7.2)
+    version: 5.10.2(@neondatabase/serverless@0.8.1)
   '@radix-icons/vue':
     specifier: ^1.0.0
     version: 1.0.0(vue@3.4.19)
@@ -1527,8 +1527,8 @@ packages:
       - encoding
       - supports-color
 
-  /@neondatabase/serverless@0.7.2:
-    resolution: {integrity: sha512-wU3WA2uTyNO7wjPs3Mg0G01jztAxUxzd9/mskMmtPwPTjf7JKWi9AW5/puOGXLxmZ9PVgRFeBVRVYq5nBPhsCg==}
+  /@neondatabase/serverless@0.8.1:
+    resolution: {integrity: sha512-nxZfTLbGqvDrw0W9WnQxzoPn4KC6SLjkvK4grdf6eWVMQSc24X+8udz9inZWOGu8f0O3wJAq586fCZ32r22lwg==}
     dependencies:
       '@types/pg': 8.6.6
     dev: false
@@ -2177,12 +2177,12 @@ packages:
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
     dev: false
 
-  /@prisma/adapter-neon@5.10.2(@neondatabase/serverless@0.7.2):
+  /@prisma/adapter-neon@5.10.2(@neondatabase/serverless@0.8.1):
     resolution: {integrity: sha512-SuCDPK4A/FVBuYdr5wrUc2OOHj3jCSy1V7oIetvZ+m/Xyqcc/5j3ft4doUp82Nu2l7KEq5Hf1FSN1qzFLPNnFg==}
     peerDependencies:
       '@neondatabase/serverless': ^0.6.0 || ^0.7.0 || ^0.8.0
     dependencies:
-      '@neondatabase/serverless': 0.7.2
+      '@neondatabase/serverless': 0.8.1
       '@prisma/driver-adapter-utils': 5.10.2
       postgres-array: 3.0.2
     dev: false
