@@ -75,8 +75,8 @@ dependencies:
     specifier: ^4.12.5
     version: 4.12.5(vue@3.4.19)
   vue-clerk:
-    specifier: ^0.1.7
-    version: 0.1.7(react-dom@18.2.0)(react@18.2.0)(vue@3.4.19)
+    specifier: ^0.2.0
+    version: 0.2.0(react-dom@18.2.0)(react@18.2.0)(vue@3.4.19)
   ws:
     specifier: ^8.16.0
     version: 8.16.0
@@ -9275,8 +9275,8 @@ packages:
       ufo: 1.4.0
     dev: true
 
-  /vue-clerk@0.1.7(react-dom@18.2.0)(react@18.2.0)(vue@3.4.19):
-    resolution: {integrity: sha512-oUbGqqmw2H1fTmHspki1n29zXxdmbqYSzGiwd2ajqMEvh9SGFKqCi9ZsfX3qmfmXu21EM4EAbBFpYq+rdc7/wQ==}
+  /vue-clerk@0.2.0(react-dom@18.2.0)(react@18.2.0)(vue@3.4.19):
+    resolution: {integrity: sha512-QJ+u0U7C7wqfawVjPPsVt6T4Mxz4j5WfYD0X9yHlaLPvGrTR80ZNoTgFUbhpgFYewYYsCGH4vNoPcAjKVPB5Qw==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
