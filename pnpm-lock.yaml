@@ -119,8 +119,8 @@ devDependencies:
     specifier: ^5.10.2
     version: 5.10.2
   shadcn-nuxt:
-    specifier: ^0.8.7
-    version: 0.8.7
+    specifier: ^0.9.0
+    version: 0.9.0
   ts-node:
     specifier: ^10.9.2
     version: 10.9.2(@types/node@20.11.20)(typescript@5.3.3)
@@ -1700,7 +1700,7 @@ packages:
       '@antfu/utils': 0.7.7
       '@nuxt/devtools-kit': 1.0.8(nuxt@3.10.0)(vite@5.1.4)
       '@nuxt/devtools-wizard': 1.0.8
-      '@nuxt/kit': 3.10.0
+      '@nuxt/kit': 3.10.3
       birpc: 0.2.17
       consola: 3.2.3
       destr: 2.0.3
@@ -1729,7 +1729,7 @@ packages:
       sirv: 2.0.4
       unimport: 3.7.1(rollup@4.12.0)
       vite: 5.1.4(@types/node@20.11.20)
-      vite-plugin-inspect: 0.8.3(@nuxt/kit@3.10.0)(vite@5.1.4)
+      vite-plugin-inspect: 0.8.3(@nuxt/kit@3.10.3)(vite@5.1.4)
       vite-plugin-vue-inspector: 4.0.2(vite@5.1.4)
       which: 3.0.1
       ws: 8.16.0
@@ -1839,7 +1839,7 @@ packages:
     resolution: {integrity: sha512-Ghv2MgWbJcUM9G5Dy3oQP0cJkUwEgaiuQxEF61FXJdn0a69Q4StZEP/hLF0MWPM9m6EvAwI7orxkJHM7MrmtVg==}
     hasBin: true
     dependencies:
-      '@nuxt/kit': 3.10.0
+      '@nuxt/kit': 3.10.3
       ci-info: 4.0.0
       consola: 3.2.3
       create-require: 1.1.1
@@ -5338,8 +5338,8 @@ packages:
       - react
     dev: false
 
-  /h3-nightly@1.10.3-1708644486.ddffb0e:
-    resolution: {integrity: sha512-xrNm14UV16h26ENL/3c7sSwGUbasU3k5s6YfsTkZHW+sV2MASvisAaRHRILOYu+xP1izijmjRa49Hgp0MpII0w==}
+  /h3-nightly@1.10.3-1708707965.5e3b5e5:
+    resolution: {integrity: sha512-OSKmS9t6J0oySzAuzECXW1bcnDfvaCJoIxobMKOIK15wj7DQCZtbXT/NKWttUREiGjuiFqO7z1vR6BxuTe4ueQ==}
     dependencies:
       cookie-es: 1.0.0
       defu: 6.1.4
@@ -6456,7 +6456,7 @@ packages:
       fs-extra: 11.2.0
       globby: 14.0.1
       gzip-size: 7.0.0
-      h3: /h3-nightly@1.10.3-1708644486.ddffb0e
+      h3: /h3-nightly@1.10.3-1708707965.5e3b5e5
       hookable: 5.5.3
       httpxy: 0.1.5
       is-primitive: 3.0.1
@@ -8142,8 +8142,8 @@ packages:
   /setprototypeof@1.2.0:
     resolution: {integrity: sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw==}
 
-  /shadcn-nuxt@0.8.7:
-    resolution: {integrity: sha512-svkbVvb7H38vTRhOtoaGODTEVAb22sKFjrW/3cayn9mj0VKh54Mp+9WMBgO9j9Y3sYylvAqY8EN4afJblDRvOQ==}
+  /shadcn-nuxt@0.9.0:
+    resolution: {integrity: sha512-07TT7U6J6QsuQ4UptNI36C+bYaLfuACcQS3sp1DO/qGyRSlCUc2K1hQzVFigWpiG1fcdHXmBZKzwtLtkuh/nLQ==}
     dependencies:
       '@nuxt/kit': 3.10.3
       oxc-parser: 0.2.0
@@ -9194,7 +9194,7 @@ packages:
       vscode-uri: 3.0.8
     dev: true
 
-  /vite-plugin-inspect@0.8.3(@nuxt/kit@3.10.0)(vite@5.1.4):
+  /vite-plugin-inspect@0.8.3(@nuxt/kit@3.10.3)(vite@5.1.4):
     resolution: {integrity: sha512-SBVzOIdP/kwe6hjkt7LSW4D0+REqqe58AumcnCfRNw4Kt3mbS9pEBkch+nupu2PBxv2tQi69EQHQ1ZA1vgB/Og==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -9205,7 +9205,7 @@ packages:
         optional: true
     dependencies:
       '@antfu/utils': 0.7.7
-      '@nuxt/kit': 3.10.0
+      '@nuxt/kit': 3.10.3
       '@rollup/pluginutils': 5.1.0(rollup@4.12.0)
       debug: 4.3.4
       error-stack-parser-es: 0.1.1
