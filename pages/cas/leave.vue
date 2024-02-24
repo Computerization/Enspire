@@ -2,7 +2,7 @@
 import LazyNewLeaveRequest from '~/components/custom/CAS/Leave/NewLeaveRequest.vue'
 import Skeleton from '~/components/ui/skeleton/Skeleton.vue'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card'
-import { ViewLeaveRequests } from '~/components/custom/CAS/Leave/view-leave-requests'
+import ViewMyLeaveRequests from '~/components/custom/CAS/Leave/ViewMyLeaveRequests.vue'
 
 definePageMeta({
   middleware: ['auth'],
@@ -14,7 +14,7 @@ const refreshState = ref(false)
 <template>
   <div class="space-y-4">
     <Suspense>
-      <ViewLeaveRequests :refresh-watcher="ref(refreshState)" />
+      <ViewMyLeaveRequests :refresh-watcher="ref(refreshState)" />
       <template #fallback>
         <Card class="w-full">
           <CardHeader>

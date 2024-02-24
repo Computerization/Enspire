@@ -1,6 +1,6 @@
 <script lang='ts' setup>
-import { columns } from './columns'
-import DataTable from './DataTable.vue'
+import { columns } from './view-leave-requests/columns'
+import DataTable from './view-leave-requests/DataTable.vue'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Toaster } from '~/components/ui/toast'
 import type { MyRequests } from '~/types/api/cas/leave/my'
