@@ -40,10 +40,10 @@ dependencies:
     version: 3.3.1
   h3:
     specifier: ^1.10.2
-    version: 1.10.2
+    version: 1.11.0
   h3-clerk:
     specifier: ^0.3.8
-    version: 0.3.8(h3@1.10.2)(react@18.2.0)
+    version: 0.3.8(h3@1.11.0)(react@18.2.0)
   lucide-vue-next:
     specifier: ^0.334.0
     version: 0.334.0(vue@3.4.19)
@@ -1839,7 +1839,7 @@ packages:
       externality: 1.0.2
       fs-extra: 11.2.0
       get-port-please: 3.1.2
-      h3: 1.10.2
+      h3: 1.11.0
       knitwork: 1.0.0
       magic-string: 0.30.7
       mlly: 1.6.0
@@ -1874,6 +1874,7 @@ packages:
       - supports-color
       - terser
       - typescript
+      - uWebSockets.js
       - vls
       - vti
       - vue-tsc
@@ -1899,7 +1900,7 @@ packages:
       clear-module: 4.1.2
       consola: 3.2.3
       defu: 6.1.4
-      h3: 1.10.2
+      h3: 1.11.0
       micromatch: 4.0.5
       pathe: 1.1.2
       postcss: 8.4.35
@@ -1912,6 +1913,7 @@ packages:
       - rollup
       - supports-color
       - ts-node
+      - uWebSockets.js
     dev: true
 
   /@oxc-parser/binding-darwin-arm64@0.2.0:
@@ -3920,8 +3922,21 @@ packages:
       shebang-command: 2.0.0
       which: 2.0.2
 
-  /crossws@0.1.1:
-    resolution: {integrity: sha512-c9c/o7bS3OjsdpSkvexpka0JNlesBF2JU9B2V1yNsYGwRbAafxhJQ7VI9b48D5bpONz/oxbPGMzBojy9sXoQIQ==}
+  /crossws@0.1.3:
+    resolution: {integrity: sha512-uZwy53h6ITBxXdzsw7UcGQZ1QSyjBSkAknu70Zb7+JWmJ1LstE1hVFEgt34RVoCQJn8kstSOnNmRjK93SG1LBg==}
+    peerDependencies:
+      uWebSockets.js: '*'
+    peerDependenciesMeta:
+      uWebSockets.js:
+        optional: true
+
+  /crossws@0.2.1:
+    resolution: {integrity: sha512-NCFCpxTCUQxUiLZUkICT0Pc5J2XJF50IAYiw1wwzVN9m4gpKsUWdvbVb4ZLAzNlTL32SrJmk7cOKUJNCdAWKmA==}
+    peerDependencies:
+      uWebSockets.js: '*'
+    peerDependenciesMeta:
+      uWebSockets.js:
+        optional: true
 
   /css-declaration-sorter@7.1.1(postcss@8.4.35):
     resolution: {integrity: sha512-dZ3bVTEEc1vxr3Bek9vGwfB5Z6ESPULhcRvO472mfjVnj8jRcTnKO8/JTczlvxM10Myb+wBM++1MtdO76eWcaQ==}
@@ -5279,22 +5294,23 @@ packages:
     dependencies:
       duplexer: 0.1.2
 
-  /h3-clerk@0.3.8(h3@1.10.2)(react@18.2.0):
+  /h3-clerk@0.3.8(h3@1.11.0)(react@18.2.0):
     resolution: {integrity: sha512-6bWTJd6AsqwEBF5JIW38nPAEFhwPxqMKJWhkE69aVIWMxWHoY0tMC02XUoV5IcTRMk6DCXQXBdDlAeU6sL3Jpg==}
     peerDependencies:
       h3: ^1.8.0
     dependencies:
       '@clerk/backend': 0.34.3(react@18.2.0)
       '@clerk/clerk-sdk-node': 4.12.22(react@18.2.0)
-      h3: 1.10.2
+      h3: 1.11.0
     transitivePeerDependencies:
       - react
     dev: false
 
-  /h3-nightly@1.10.3-1708707965.5e3b5e5:
-    resolution: {integrity: sha512-OSKmS9t6J0oySzAuzECXW1bcnDfvaCJoIxobMKOIK15wj7DQCZtbXT/NKWttUREiGjuiFqO7z1vR6BxuTe4ueQ==}
+  /h3-nightly@1.11.1-1708885331.5ff5be9:
+    resolution: {integrity: sha512-fImiqPisIeZHtWGNQ4/NevEpONd+RARIrsKYc0Kth/12MofAA/mOQyd/Ix9OFIof36CBmyv0a9rYtVviHoUqSQ==}
     dependencies:
       cookie-es: 1.0.0
+      crossws: 0.2.1
       defu: 6.1.4
       destr: 2.0.3
       iron-webcrypto: 1.0.0
@@ -5303,12 +5319,15 @@ packages:
       ufo: 1.4.0
       uncrypto: 0.1.3
       unenv: 1.9.0
+    transitivePeerDependencies:
+      - uWebSockets.js
     dev: false
 
-  /h3@1.10.2:
-    resolution: {integrity: sha512-r1iNNcFGL4G9pL3lgYxwX0O2ZmqdKqhILAJsnlw5icn5I1QHnADM4TgVdYRtHUqy+NntVpHIEFwnw/XCbebICg==}
+  /h3@1.11.0:
+    resolution: {integrity: sha512-j0AFJlyJfYl5EhWk9aiFYaA1ZXKupsIPfQRm5xy7niBbQFSqdDFRkZ6Hzyg73srW/jt0AU5pB42xS2XXfHlBiA==}
     dependencies:
       cookie-es: 1.0.0
+      crossws: 0.2.1
       defu: 6.1.4
       destr: 2.0.3
       iron-webcrypto: 1.0.0
@@ -5317,6 +5336,8 @@ packages:
       ufo: 1.4.0
       uncrypto: 0.1.3
       unenv: 1.9.0
+    transitivePeerDependencies:
+      - uWebSockets.js
 
   /has-flag@3.0.0:
     resolution: {integrity: sha512-sKJf1+ceQBr4SMkvQnBDNDtf4TXpVhVGateu0t918bl30FnbE2m4vNLX+VWe/dpjlb+HugGYzW7uQXH98HPEYw==}
@@ -5960,10 +5981,10 @@ packages:
       citty: 0.1.6
       clipboardy: 4.0.0
       consola: 3.2.3
-      crossws: 0.1.1
+      crossws: 0.1.3
       defu: 6.1.4
       get-port-please: 3.1.2
-      h3: 1.10.2
+      h3: 1.11.0
       http-shutdown: 1.2.2
       jiti: 1.21.0
       mlly: 1.6.0
@@ -5973,6 +5994,8 @@ packages:
       ufo: 1.4.0
       untun: 0.1.3
       uqr: 0.1.2
+    transitivePeerDependencies:
+      - uWebSockets.js
 
   /local-pkg@0.4.3:
     resolution: {integrity: sha512-SFppqq5p42fe2qcZQqqEOiVRXl+WCP1MdT6k7BDEW1j++sp5fIY+/fdRQitvKgB5BrBcmrs5m/L0v2FrU5MY1g==}
@@ -6409,7 +6432,7 @@ packages:
       fs-extra: 11.2.0
       globby: 14.0.1
       gzip-size: 7.0.0
-      h3: /h3-nightly@1.10.3-1708707965.5e3b5e5
+      h3: /h3-nightly@1.11.1-1708885331.5ff5be9
       hookable: 5.5.3
       httpxy: 0.1.5
       is-primitive: 3.0.1
@@ -6459,6 +6482,7 @@ packages:
       - encoding
       - idb-keyval
       - supports-color
+      - uWebSockets.js
     dev: false
 
   /nitropack@2.8.1:
@@ -6501,7 +6525,7 @@ packages:
       fs-extra: 11.2.0
       globby: 14.0.1
       gzip-size: 7.0.0
-      h3: 1.10.2
+      h3: 1.11.0
       hookable: 5.5.3
       httpxy: 0.1.5
       is-primitive: 3.0.1
@@ -6550,6 +6574,7 @@ packages:
       - encoding
       - idb-keyval
       - supports-color
+      - uWebSockets.js
     dev: true
 
   /no-case@3.0.4:
@@ -6803,7 +6828,7 @@ packages:
       estree-walker: 3.0.3
       fs-extra: 11.2.0
       globby: 14.0.1
-      h3: 1.10.2
+      h3: 1.11.0
       hookable: 5.5.3
       jiti: 1.21.0
       klona: 2.0.6
@@ -6864,6 +6889,7 @@ packages:
       - supports-color
       - terser
       - typescript
+      - uWebSockets.js
       - utf-8-validate
       - vite
       - vls
@@ -8935,7 +8961,7 @@ packages:
       anymatch: 3.1.3
       chokidar: 3.6.0
       destr: 2.0.3
-      h3: 1.10.2
+      h3: 1.11.0
       ioredis: 5.3.2
       listhen: 1.6.0
       lru-cache: 10.2.0
@@ -8945,6 +8971,7 @@ packages:
       ufo: 1.4.0
     transitivePeerDependencies:
       - supports-color
+      - uWebSockets.js
 
   /untun@0.1.3:
     resolution: {integrity: sha512-4luGP9LMYszMRZwsvyUd9MrxgEGZdZuZgpVQHEEX0lCYFESasVRvZd0EYpCkOIbJKHMuv0LskpXc/8Un+MJzEQ==}
