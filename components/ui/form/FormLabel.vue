@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import { Label, type LabelProps } from 'radix-vue'
 import { useFormField } from './useFormField'
 import { cn } from '@/lib/utils'

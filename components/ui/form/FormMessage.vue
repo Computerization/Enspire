@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import { ErrorMessage } from 'vee-validate'
 import { toValue } from 'vue'
 import { useFormField } from './useFormField'
