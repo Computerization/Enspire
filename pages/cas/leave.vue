@@ -1,4 +1,4 @@
-<script setup lang='ts'>
+<script setup lang="ts">
 import LazyNewLeaveRequest from '~/components/custom/CAS/Leave/NewLeaveRequest.vue'
 import Skeleton from '~/components/ui/skeleton/Skeleton.vue'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card'

@@ -1,4 +1,4 @@
-<script lang='ts' setup>
+<script setup lang="ts">
 import { format } from 'date-fns'
 import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'

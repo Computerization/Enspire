@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import TabsList from '~/components/ui/tabs/TabsList.vue'
 import Tabs from '~/components/ui/tabs/Tabs.vue'
 import TabsContent from '~/components/ui/tabs/TabsContent.vue'
