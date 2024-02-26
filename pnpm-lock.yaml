@@ -55,7 +55,7 @@ dependencies:
     version: 1.6.2
   radix-vue:
     specifier: ^1.4.8
-    version: 1.4.8(vue@3.4.19)
+    version: 1.4.9(vue@3.4.19)
   tailwind-merge:
     specifier: ^2.2.1
     version: 2.2.1
@@ -3938,6 +3938,15 @@ packages:
       uWebSockets.js:
         optional: true
 
+  /crossws@0.2.1:
+    resolution: {integrity: sha512-NCFCpxTCUQxUiLZUkICT0Pc5J2XJF50IAYiw1wwzVN9m4gpKsUWdvbVb4ZLAzNlTL32SrJmk7cOKUJNCdAWKmA==}
+    peerDependencies:
+      uWebSockets.js: '*'
+    peerDependenciesMeta:
+      uWebSockets.js:
+        optional: true
+    dev: false
+
   /css-declaration-sorter@7.1.1(postcss@8.4.35):
     resolution: {integrity: sha512-dZ3bVTEEc1vxr3Bek9vGwfB5Z6ESPULhcRvO472mfjVnj8jRcTnKO8/JTczlvxM10Myb+wBM++1MtdO76eWcaQ==}
     engines: {node: ^14 || ^16 || >=18}
@@ -7763,8 +7772,8 @@ packages:
     engines: {node: '>=8'}
     dev: false
 
-  /radix-vue@1.4.8(vue@3.4.19):
-    resolution: {integrity: sha512-DDCA9QjyBpV9iOyUrSWjK8B5j78aFKZFl8DRGKYeR7l4nIejtxulVyWzaCk4lv+KXmupyP9SXC4LlC3AGjeR5w==}
+  /radix-vue@1.4.9(vue@3.4.19):
+    resolution: {integrity: sha512-xGY29nUqaAJTncubdhevwGuv5ZSHGvZjUinWBXVrwHvo6oeJ/SLudxYuc3qRcAU+DK+OcthEQFq255wLJJe4Rw==}
     dependencies:
       '@floating-ui/dom': 1.6.3
       '@floating-ui/vue': 1.0.6(vue@3.4.19)
@@ -9086,7 +9095,7 @@ packages:
   /vaul-vue@0.0.3(typescript@5.3.3):
     resolution: {integrity: sha512-1v8uzeXajKhoYrnhy9W1IweHoDBw8C0xtEYa/lJFI+vgrvPRHmXNqgpaO/l6serTZ/xfFcl+wQbvcURClXk5sA==}
     dependencies:
-      radix-vue: 1.4.8(vue@3.4.19)
+      radix-vue: 1.4.9(vue@3.4.19)
       vue: 3.4.19(typescript@5.3.3)
     transitivePeerDependencies:
       - '@vue/composition-api'
