@@ -27,6 +27,12 @@ import { Button } from '@/components/ui/button'
               我们的社团
             </Button>
           </NuxtLink>
+          <NuxtLink to="/cas/checkin">
+            <Button :variant="$route.name === 'cas-checkin' ? 'secondary' : 'ghost'" class="w-full justify-start mt-1">
+              <Icon class="mr-2 h-4 w-4" name="material-symbols:check-circle-outline" />
+              签到
+            </Button>
+          </NuxtLink>
           <NuxtLink to="/cas/reservation">
             <Button :variant="$route.name === 'cas-reservation' ? 'secondary' : 'ghost'" class="w-full justify-start mt-1">
               <Icon class="mr-2 h-4 w-4" name="material-symbols:calendar-today-outline" />
