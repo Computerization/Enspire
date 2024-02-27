@@ -45,8 +45,8 @@ dependencies:
     specifier: ^0.3.8
     version: 0.3.8(h3@1.11.1)(react@18.2.0)
   lucide-vue-next:
-    specifier: ^0.340.0
-    version: 0.340.0(vue@3.4.19)
+    specifier: ^0.341.0
+    version: 0.341.0(vue@3.4.19)
   nitropack:
     specifier: npm:nitropack-nightly@latest
     version: /nitropack-nightly@2.9.0-28481592.5374429
@@ -6071,8 +6071,8 @@ packages:
     dependencies:
       yallist: 4.0.0
 
-  /lucide-vue-next@0.340.0(vue@3.4.19):
-    resolution: {integrity: sha512-529tcsDPhxxlQl4pzzrc7cPbataPCONa7jHjXGvmlU2RAr8L886YYHqyPf3K7yek6G3hoULs04U1NsLHkPGUZg==}
+  /lucide-vue-next@0.341.0(vue@3.4.19):
+    resolution: {integrity: sha512-JmSfYVVxi/NhuE/xodVaa9vlRd9YyRDApbqguGJZ4P/MpGzFErS/zKtwI6ZibCXiqbBYJVYdltqlHX76BGcBnw==}
     peerDependencies:
       vue: '>=3.0.1'
     dependencies:
