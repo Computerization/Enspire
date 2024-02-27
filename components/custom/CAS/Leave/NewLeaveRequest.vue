@@ -3,6 +3,17 @@ import { format } from 'date-fns'
 import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import * as z from 'zod'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
@@ -150,10 +161,26 @@ const onSubmit = handleSubmit(async (values) => {
           </FormItem>
         </FormField>
 
-        <Button :disabled="isLoading" type="submit">
-          <Icon v-if="isLoading" class="mr-2" name="svg-spinners:180-ring-with-bg" />
-          提交
-        </Button>
+        <AlertDialog>
+          <AlertDialogTrigger as-child>
+            <Button :disabled="isLoading" type="submit">
+              <Icon v-if="isLoading" class="mr-2" name="svg-spinners:180-ring-with-bg" />
+              提交
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>您是否确认提交此请假申请?</AlertDialogTitle>
+            </AlertDialogHeader>
+            <AlertDialogDescription>
+              请在确认提交前请确认您的请假信息无误
+            </AlertDialogDescription>
+            <AlertDialogFooter>
+              <AlertDialogCancel>取消</AlertDialogCancel>
+              <AlertDialogAction @click="onSubmit">确认</AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </form>
     </CardContent>
   </Card>
