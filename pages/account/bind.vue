@@ -224,9 +224,9 @@ const submitConfirm = async function () {
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogCancel>取消</AlertDialogCancel>
               <AlertDialogAction @click="submitConfirm">
-                Continue
+                继续
               </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
