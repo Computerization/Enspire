@@ -163,7 +163,7 @@ const onSubmit = handleSubmit(async (values) => {
 
         <AlertDialog>
           <AlertDialogTrigger as-child>
-            <Button :disabled="isLoading" type="submit">
+            <Button :disabled="isLoading" type="button">
               <Icon v-if="isLoading" class="mr-2" name="svg-spinners:180-ring-with-bg" />
               提交
             </Button>
