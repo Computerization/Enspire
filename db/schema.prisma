@@ -1,19 +1,15 @@
-generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["driverAdapters"] // Ignore that error. Prisma plugin for WebStorm seems to be outdated.
-}
+// generator client {
+//   provider        = "prisma-client-js"
+//   previewFeatures = ["driverAdapters"] // Ignore that error. Prisma plugin for WebStorm seems to be outdated.
+// }
 
 datasource db {
-  provider  = "postgresql"
-  // Uses connection pooling
-  url       = env("DATABASE_URL")
-  // Uses direct connection, ⚠️ make sure to keep this to `POSTGRES_URL_NON_POOLING`
-  // or you'll have dangling databases from migrations
-  directUrl = env("DIRECT_URL")
+  provider = "cockroachdb"
+  url      = env("DATABASE_URL")
 }
 
 model User {
-  id             Int            @id @default(autoincrement())
+  id             BigInt         @id @default(autoincrement())
   clerkUserId    String         @unique
   name           String
   tsimsStudentId Int            @unique
@@ -42,7 +38,7 @@ enum LeaveRequestStatus {
 }
 
 model LeaveRequest {
-  id          Int                @id @default(autoincrement())
+  id          BigInt             @id @default(autoincrement())
   clerkUserId String // Link to User model
   clubId      Int // Link to Club model
   startDate   DateTime // Start date of the leave
