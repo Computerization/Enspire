@@ -10,6 +10,10 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
+      sentry: {
+        dsn: process.env.SENTRY_DSM,
+        environment: 'development',
+      },
       clerkPublishableKey: process.env.CLERK_PUBLISHABLE_KEY,
     },
     tsimsUrl: process.env.TSIMS_URL,
