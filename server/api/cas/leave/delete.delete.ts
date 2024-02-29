@@ -4,7 +4,7 @@ import * as z from 'zod'
 const prisma = new PrismaClient()
 
 const requestSchema = z.object({
-  id: z.number(),
+  id: z.string().uuid(),
 })
 
 export default eventHandler(async (event) => {

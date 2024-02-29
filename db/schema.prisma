@@ -8,7 +8,7 @@ datasource db {
 }
 
 model User {
-  id             BigInt         @id @default(autoincrement())
+  id             String         @id @default(dbgenerated("gen_random_uuid()"))
   clerkUserId    String         @unique
   name           String
   tsimsStudentId Int            @unique
@@ -37,7 +37,7 @@ enum LeaveRequestStatus {
 }
 
 model LeaveRequest {
-  id          BigInt             @id @default(autoincrement())
+  id          String             @id @default(dbgenerated("gen_random_uuid()"))
   clerkUserId String // Link to User model
   clubId      Int // Link to Club model
   startDate   DateTime // Start date of the leave
