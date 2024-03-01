@@ -21,6 +21,7 @@ export default defineEventHandler(async (event) => {
       sessionCookie = context.response.headers.get('set-cookie') ?? ''
     },
   }) as Blob
+  // eslint-disable-next-line node/prefer-global/buffer
   const buffer = Buffer.from(await blob.arrayBuffer()).toString('base64') as string
 
   const token = uuidv4()

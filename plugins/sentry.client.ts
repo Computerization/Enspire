@@ -4,7 +4,8 @@ export default defineNuxtPlugin((nuxtApp) => {
   const router = useRouter()
   const { public: { sentry } } = useRuntimeConfig()
 
-  if (!sentry.dsn) return
+  if (!sentry.dsn)
+    return
   Sentry.init({
     app: nuxtApp.vueApp,
     dsn: sentry.dsn,

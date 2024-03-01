@@ -61,8 +61,6 @@ function signOutHandler() {
 
 const { data: initData } = await useFetch<InitDataSchema>('/api/bind/init')
 
-console.log(initData.value)
-
 const onSubmit = form.handleSubmit(async (values) => {
   isLoading.value = true
   const { data, error } = await useFetch<backendResponse>('/api/bind', {
