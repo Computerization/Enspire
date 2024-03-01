@@ -1,0 +1,50 @@
+name: Quality checks
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+on:
+  pull_request:
+    paths-ignore:
+      - "**/*.md"
+  workflow_dispatch:
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+        with:
+          show-progress: false
+
+      - name: Setup node environment
+        uses: actions/setup-node@v4.0.2
+        with:
+          node-version: 20
+          check-latest: true
+
+      - name: Install dependencies
+        run: pnpm i
+
+      - name: Run linter ✏️
+        run: pnpm run lint
+
+  conventional_commits:
+    name: Conventional commits check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+        with:
+          show-progress: false
+
+      - name: Check if all commits comply with the specification
+        uses: webiny/action-conventional-commits@v1.3.0
