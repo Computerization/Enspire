@@ -45,8 +45,8 @@ dependencies:
     specifier: ^0.3.8
     version: 0.3.8(h3@1.11.1)(react@18.2.0)
   lucide-vue-next:
-    specifier: ^0.341.0
-    version: 0.341.0(vue@3.4.20)
+    specifier: ^0.343.0
+    version: 0.343.0(vue@3.4.20)
   nitropack:
     specifier: npm:nitropack-nightly@latest
     version: /nitropack-nightly@2.9.0-28481592.5374429
@@ -4047,6 +4047,15 @@ packages:
       uWebSockets.js:
         optional: true
 
+  /crossws@0.2.4:
+    resolution: {integrity: sha512-DAxroI2uSOgUKLz00NX6A8U/8EE3SZHmIND+10jkVSaypvyt57J5JEOxAQOL6lQxyzi/wZbTIwssU1uy69h5Vg==}
+    peerDependencies:
+      uWebSockets.js: '*'
+    peerDependenciesMeta:
+      uWebSockets.js:
+        optional: true
+    dev: false
+
   /css-declaration-sorter@7.1.1(postcss@8.4.35):
     resolution: {integrity: sha512-dZ3bVTEEc1vxr3Bek9vGwfB5Z6ESPULhcRvO472mfjVnj8jRcTnKO8/JTczlvxM10Myb+wBM++1MtdO76eWcaQ==}
     engines: {node: ^14 || ^16 || >=18}
@@ -5415,11 +5424,11 @@ packages:
       - react
     dev: false
 
-  /h3-nightly@1.11.2-1708890252.107ec8e:
-    resolution: {integrity: sha512-ywdwfCae6mumj7abRQ1PmZtunLqABFHOB8PccB8+iCDja/0IsrZFauAyGEznLVJxaMfAhjRau8tZ0VNZpge0WA==}
+  /h3-nightly@1.11.2-1709170351.107ec8e:
+    resolution: {integrity: sha512-pHyGRmR9rfo4X0MR1dPVANBnFtPnOPjR9cnN0ZEy+a1OhUyt8Tw9RPrqLj5hZHWmofmEmfgrZjyhllLU24ocmw==}
     dependencies:
       cookie-es: 1.0.0
-      crossws: 0.2.3
+      crossws: 0.2.4
       defu: 6.1.4
       destr: 2.0.3
       iron-webcrypto: 1.0.0
@@ -6189,8 +6198,8 @@ packages:
     dependencies:
       yallist: 4.0.0
 
-  /lucide-vue-next@0.341.0(vue@3.4.20):
-    resolution: {integrity: sha512-JmSfYVVxi/NhuE/xodVaa9vlRd9YyRDApbqguGJZ4P/MpGzFErS/zKtwI6ZibCXiqbBYJVYdltqlHX76BGcBnw==}
+  /lucide-vue-next@0.343.0(vue@3.4.20):
+    resolution: {integrity: sha512-mDp/hL7HM5tGuoa8AcJMfbcpmJWxZT917RMeS4/dPTqiUS+fVxD0UT2qKuuYlEzvJedkJTApuDJ6N2ZbsJMAYA==}
     peerDependencies:
       vue: '>=3.0.1'
     dependencies:
@@ -6542,7 +6551,7 @@ packages:
       fs-extra: 11.2.0
       globby: 14.0.1
       gzip-size: 7.0.0
-      h3: /h3-nightly@1.11.2-1708890252.107ec8e
+      h3: /h3-nightly@1.11.2-1709170351.107ec8e
       hookable: 5.5.3
       httpxy: 0.1.5
       is-primitive: 3.0.1
