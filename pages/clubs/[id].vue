@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card'
+import { cleanHTML } from '~/components/custom/cleanHTML.d.ts';
 import json from '~/content/clubs.json'
 import type { Clubs } from '~/content/clubs'
 
@@ -15,6 +16,8 @@ const filteredClubs = Object.values(clubs).flatMap(clubCategory =>
 
 // Get the number of members in each group
 // const groupMemberCounts = filteredClubs.map(group => group.gmember.length)
+
+const Description_C = cleanHTML(filteredClubs[0].C_DescriptionC) || '<div class="text-sm italic text-muted-foreground text-center w-full">暂无简介 ;-(</div>';
 
 // This page requires login
 definePageMeta({
@@ -35,10 +38,10 @@ definePageMeta({
             <CardDescription>{{ group.C_NameE }}</CardDescription>
           </CardHeader>
           <CardContent>
-            <p>{{ group.C_DescriptionC ? group.C_DescriptionC : '暂无简介 ;-(' }}</p>
+            <p v-html="Description_C"></p>
             <!-- Don't show the English Description until i18n is completed -->
             <!-- <br> -->
-            <!-- <p>{{ group.C_DescriptionE ? group.C_DescriptionE : 'There\'s no description here ;-(' }}</p> -->
+            <!-- <p v-html="cleanDescription(group.C_DescriptionE)"></p> -->
           </CardContent>
         </Card>
         <Card class="lg:w-1/4 w-full mt-4 lg:mt-0">

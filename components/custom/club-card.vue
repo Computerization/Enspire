@@ -4,6 +4,7 @@ import type { Club } from '~/content/clubs'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
+import { cleanHTML } from '~/components/custom/cleanHTML.d.ts';
 import Badge from '~/components/ui/badge/Badge.vue'
 
 const props = defineProps({
@@ -12,6 +13,8 @@ const props = defineProps({
     required: true,
   },
 })
+
+const Description_C = cleanHTML(props.club.groups[0].C_DescriptionC)
 </script>
 
 <template>
@@ -44,8 +47,8 @@ const props = defineProps({
     <CardContent class="grid gap-4">
       <div class=" flex items-center space-x-4 rounded-md">
         <div class="flex-1 space-y-1">
-          <ScrollArea v-if="props.club.groups[0].C_DescriptionC" class="text-sm h-32">
-            {{ props.club.groups[0].C_DescriptionC }}
+          <ScrollArea v-if="Description_C" class="text-sm h-32">
+            {{ Description_C }}
           </ScrollArea>
           <!-- idk why some clubs have no description -->
           <div v-else class="h-32 flex items-center">
