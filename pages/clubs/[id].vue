@@ -1,8 +1,9 @@
-<script setup lang="ts">
+<script setup lang="ts" xmlns="http://www.w3.org/1999/html">
 import { useRoute } from 'vue-router'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card'
-import { cleanHTML } from '~/components/custom/cleanHTML.d.ts'
+
+import { cleanHTML } from '~/utils/cleanHTML.d.ts'
 import json from '~/content/clubs.json'
 import type { Clubs } from '~/content/clubs'
 
@@ -40,7 +41,7 @@ definePageMeta({
   <div v-if="filteredClubs.length > 0">
     <div v-for="club in filteredClubs" :key="club.id">
       <div v-for="group in club.groups" :key="group.C_GroupsID">
-        <div class="flex flex-col lg:flex-row lg:space-x-2">
+        <div class="flex flex-col-reverse lg:flex-row lg:space-x-2 mb-2">
           <Card class="lg:w-3/4 w-full">
             <CardHeader>
               <CardTitle class="flex justify-between items-center">
@@ -79,16 +80,43 @@ definePageMeta({
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p>社团类型: {{ group.C_Category }}</p>
-              <p>社团人数: {{ groupMemberCounts }} 人</p>
+              <div>
+                <span style="font-weight: bold">社团类型</span>: {{ group.C_Category }}
+              </div>
+              <div>
+                <span style="font-weight: bold">社团人数</span>: {{ groupMemberCounts }} 人
+              </div>
               <div style="display: flex; align-items: center;">
-                <span>指导老师:</span>
+                <span style="font-weight: bold">指导老师:</span>
                 <span v-for="supervisor in club.supervisor" :key="supervisor.TeacherID" style="margin-left: 8px;">
                   {{ supervisor.T_Name }} ({{ supervisor.T_Nickname }})
                 </span>
               </div>
+            </CardContent>
+          </Card>
+        </div>
+        <div style="display:none">
+          <Card v-if="club.grecord.length > 0" class="w-full">
+            <CardHeader>
+              <CardTitle class="flex justify-between items-center">
+                <div>
+                  近期活动
+                </div>
+              </CardTitle>
 
-              <!-- <p>社团人数: {{ groupMemberCounts }}</p> -->
+              <CardDescription class="flex items-center">
+                <Icon name="material-symbols:language" />
+                <div class="ml-1">
+                  Recent Activities
+                </div>
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <span v-for="grecord in club.grecord" :key="grecord.C_Theme">
+                <div style="font-weight: bold">{{ grecord.C_Theme }}</div>
+                <div class="text-sm text-muted-foreground mb-1"><Icon name="material-symbols:schedule-outline" /> {{ grecord.C_Date }}</div>
+                <div class="text-sm">{{ grecord.C_Reflection }}</div><br>
+              </span>
             </CardContent>
           </Card>
         </div>
