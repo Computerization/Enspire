@@ -66,9 +66,11 @@ definePageMeta({
   </div>
   <div v-else>
     <div class="flex flex-col justify-center h-1/2 text-center">
-      <h3 style="font-weight: bold;font-size: x-large">你当前访问的页面不存在，也许你应该考虑...</h3>
+      <h3 style="font-weight: bold;font-size: x-large">
+        你当前访问的页面不存在，也许你应该考虑...
+      </h3>
       <br>
-      <NuxtLink :to="`/`" class="w-full">
+      <NuxtLink to="`/`" class="w-full">
         <Button>回到主页</Button>
       </NuxtLink>
     </div>
