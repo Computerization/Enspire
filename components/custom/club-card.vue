@@ -4,7 +4,7 @@ import type { Club } from '~/content/clubs'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
-import { cleanHTML } from '~/components/custom/cleanHTML.d.ts';
+import { cleanHTML } from '~/components/custom/cleanHTML.d.ts'
 import Badge from '~/components/ui/badge/Badge.vue'
 
 const props = defineProps({
