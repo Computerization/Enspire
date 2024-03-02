@@ -6,6 +6,7 @@ export interface Clubs {
   Academic: (Club)[]
   Personal?: (Club)[] | null
 }
+type ClubCategoryKey = Exclude<keyof Clubs, 'Personal'>
 export interface Groups {
   C_GroupsID: string
   C_GroupNo: string
@@ -44,8 +45,8 @@ export interface Clubrecord {
 
 export interface Club {
   groups: (Groups)[]
-  supervisor?: (Supervisor | null)[] | null
+  supervisor?: (Supervisor)[]
   gmember: (Clubmember)[]
-  grecord?: (Clubrecord | null)[] | null
+  grecord?: (Clubrecord)[]
   projectyes: number
 }

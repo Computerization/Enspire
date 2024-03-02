@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import TabsList from '~/components/ui/tabs/TabsList.vue'
-import Tabs from '~/components/ui/tabs/Tabs.vue'
-import TabsContent from '~/components/ui/tabs/TabsContent.vue'
-import TabsTrigger from '~/components/ui/tabs/TabsTrigger.vue'
-import json from '~/content/clubs.json'
+import TabsList from '@/components/ui/tabs/TabsList.vue'
+import Tabs from '@/components/ui/tabs/Tabs.vue'
+import TabsContent from '@/components/ui/tabs/TabsContent.vue'
+import TabsTrigger from '@/components/ui/tabs/TabsTrigger.vue'
+import json from '@/content/clubs.json'
 
-import type { Clubs } from '~/content/clubs'
-import ClubCard from '~/components/custom/club-card.vue'
+import type { ClubCategoryKey, Clubs } from '@/content/clubs'
+import ClubCard from '@/components/custom/club-card.vue'
 
 const clubs: Clubs = json as Clubs
 
@@ -14,6 +14,8 @@ const clubs: Clubs = json as Clubs
 definePageMeta({
   middleware: ['auth'],
 })
+
+const categories = (['Sports', 'Service', 'Arts', 'Life', 'Academic'] as const).map(c => c as ClubCategoryKey)
 </script>
 
 <template>
@@ -39,7 +41,7 @@ definePageMeta({
         </TabsList>
       </div>
       <TabsContent
-        v-for="i in ['Sports', 'Service', 'Arts', 'Life', 'Academic']"
+        v-for="i in categories"
         :key="i"
         :value="i"
         class="border-none p-0 outline-none"
