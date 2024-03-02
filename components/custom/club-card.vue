@@ -57,9 +57,11 @@ const props = defineProps({
       </div>
     </CardContent>
     <CardFooter>
-      <Button class="w-full">
-        详细信息
-      </Button>
+      <nuxt-link :to="`/clubs/${props.club.groups[0].C_GroupsID}`">
+        <Button class="w-full">
+          详细信息
+        </Button>
+      </nuxt-link>
     </CardFooter>
   </Card>
 </template>

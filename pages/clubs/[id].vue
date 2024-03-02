@@ -1,0 +1,64 @@
+<script setup lang="ts">
+import { useRoute } from 'vue-router'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card'
+import json from '~/content/clubs.json'
+import type { Clubs } from '~/content/clubs'
+
+const clubs: Clubs = json as Clubs
+const route = useRoute()
+const id = route.params.id // Fetch current Club ID via route params
+
+// Filter clubs based on C_GroupsID
+// It just works ;)
+const filteredClubs = Object.values(clubs).flatMap(clubCategory =>
+    clubCategory.flatMap(club => club.groups.filter(group => group.C_GroupsID === id))
+)
+
+// Get the number of members in each group
+// const groupMemberCounts = filteredClubs.map(group => group.gmember.length)
+
+// This page requires login
+definePageMeta({
+  middleware: ['auth'],
+})
+</script>
+
+<template>
+  <div v-if="filteredClubs.length > 0">
+    <div v-for="group in filteredClubs" :key="group.C_GroupsID">
+      <!-- Add other properties you want to display -->
+      <div class="flex">
+      <Card class="w-3/4">
+        <CardHeader>
+          <CardTitle class="flex items-center gap-x-1">
+            {{ group.C_NameC }}
+          </CardTitle>
+          <CardDescription>{{ group.C_NameE }}</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p>{{ group.C_DescriptionC }}</p>
+          <br>
+          <p>{{ group.C_DescriptionE }}</p>
+        </CardContent>
+      </Card>
+      <Card class="w-1/4">
+        <CardHeader>
+          <CardTitle class="flex items-center gap-x-1">
+            社团属性
+          </CardTitle>
+          <CardDescription>Club Info</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p>社团类型: {{ group.C_Category }}</p>
+<!--          <p>社团人数: {{ groupMemberCounts }}</p>-->
+        </CardContent>
+      </Card>
+      </div>
+    </div>
+  </div>
+  <p v-else>Sorry, but we didn't find anything here.</p>
+</template>
+
+<style scoped>
+
+</style>
