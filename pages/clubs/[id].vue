@@ -25,21 +25,23 @@ definePageMeta({
 <template>
   <div v-if="filteredClubs.length > 0">
     <div v-for="group in filteredClubs" :key="group.C_GroupsID">
-      <div class="flex">
-        <Card class="w-3/4">
+      <div class="flex flex-col lg:flex-row lg:space-x-2">
+        <Card class="lg:w-3/4 w-full">
           <CardHeader>
             <CardTitle class="flex items-center gap-x-1">
               {{ group.C_NameC }}
             </CardTitle>
+
             <CardDescription>{{ group.C_NameE }}</CardDescription>
           </CardHeader>
           <CardContent>
             <p>{{ group.C_DescriptionC }}</p>
-            <br>
-            <p>{{ group.C_DescriptionE }}</p>
+            <!-- Don't show the English Description until i18n is completed -->
+            <!-- <br> -->
+            <!-- <p>{{ group.C_DescriptionE }}</p> -->
           </CardContent>
         </Card>
-        <Card class="w-1/4">
+        <Card class="lg:w-1/4 w-full mt-4 lg:mt-0">
           <CardHeader>
             <CardTitle class="flex items-center gap-x-1">
               社团属性
