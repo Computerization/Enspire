@@ -24,7 +24,7 @@ import { Button } from '@/components/ui/button'
           <NuxtLink to="/cas/clubs">
             <Button :variant="$route.name === 'cas-clubs' ? 'secondary' : 'ghost'" class="w-full justify-start">
               <Icon class="mr-2 h-4 w-4" name="material-symbols:grid-view-outline-rounded" />
-              我们的社团
+              社团列表
             </Button>
           </NuxtLink>
           <NuxtLink to="/cas/checkin">
