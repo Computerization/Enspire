@@ -2,8 +2,7 @@
 import { useRoute } from 'vue-router'
 import { Button } from '~/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card'
-
-import { cleanHTML } from '~/utils/cleanHTML.d.ts'
+import { cleanHTML } from '~/lib/utils'
 import json from '~/content/clubs.json'
 import type { Clubs } from '~/content/clubs'
 
