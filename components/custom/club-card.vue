@@ -60,7 +60,7 @@ const Description_C = cleanHTML(props.club.groups[0].C_DescriptionC)
       </div>
     </CardContent>
     <CardFooter>
-      <NuxtLink :to="`/clubs/${props.club.groups[0].C_GroupsID}`" class="w-full">
+      <NuxtLink :to="`/cas/clubs/${props.club.groups[0].C_GroupsID}`" class="w-full">
         <Button class="w-full">
           详细信息
         </Button>
