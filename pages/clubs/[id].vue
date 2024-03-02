@@ -37,7 +37,7 @@ definePageMeta({
           </CardHeader>
           <CardContent>
             <p>{{ group.C_DescriptionC }}</p>
-            <br />
+            <br>
             <p>{{ group.C_DescriptionE }}</p>
           </CardContent>
         </Card>
@@ -56,7 +56,9 @@ definePageMeta({
       </div>
     </div>
   </div>
-  <p v-else>Sorry, but we didn't find anything here.</p>
+  <p v-else>
+    Sorry, but we didn't find anything here.
+  </p>
 </template>
 
 <style scoped>
