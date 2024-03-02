@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import TabsList from '~/components/ui/tabs/TabsList.vue'
-import Tabs from '~/components/ui/tabs/Tabs.vue'
-import TabsContent from '~/components/ui/tabs/TabsContent.vue'
-import TabsTrigger from '~/components/ui/tabs/TabsTrigger.vue'
-import json from '~/content/clubs.json'
+import TabsList from '@/components/ui/tabs/TabsList.vue'
+import Tabs from '@/components/ui/tabs/Tabs.vue'
+import TabsContent from '@/components/ui/tabs/TabsContent.vue'
+import TabsTrigger from '@/components/ui/tabs/TabsTrigger.vue'
+import json from '@/content/clubs.json'
 
-import type { Clubs } from '~/content/clubs'
-import ClubCard from '~/components/custom/club-card.vue'
+import type { Clubs } from '@/content/clubs'
+import ClubCard from '@/components/custom/club-card.vue'
 
 const clubs: Clubs = json as Clubs
 

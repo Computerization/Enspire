@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
-import { Button } from '~/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card'
-import { cleanHTML } from '~/lib/utils'
-import json from '~/content/clubs.json'
-import type { Clubs } from '~/content/clubs'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { cleanHTML } from '@/lib/utils'
+import json from '@/content/clubs.json'
+import type { Clubs } from '@/content/clubs'
 
 const clubs: Clubs = json as Clubs
 const route = useRoute()
@@ -107,7 +107,7 @@ definePageMeta({
               </CardTitle>
 
               <CardDescription class="flex items-center">
-                <Icon name="material-symbols:language" />
+                <Icon name="material-symbols:draw-outline" />
                 <div class="ml-1">
                   Recent Activities
                 </div>
