@@ -6,6 +6,7 @@ export interface Clubs {
   Academic: (Club)[]
   Personal?: (Club)[] | null
 }
+type ClubCategoryKey = Exclude<keyof Clubs, 'Personal'>
 export interface Groups {
   C_GroupsID: string
   C_GroupNo: string

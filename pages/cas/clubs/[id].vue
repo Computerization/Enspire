@@ -12,9 +12,9 @@ const id = route.params.id // Fetch current Club ID via route params
 
 // Filter clubs based on C_GroupsID and include information at the same level as groups
 const filteredClubs = Object.values(clubs).flatMap(clubCategory =>
-  clubCategory.filter(club =>
+  clubCategory.filter((club: Club) =>
     club.groups.some(group => group.C_GroupsID === id),
-  ).map(club => ({
+  ).map((club: Club) => ({
     ...club, // Spread to include all same-level information
     groups: club.groups.filter(group => group.C_GroupsID === id), // Filter groups to only include those that match the ID
   })),
@@ -42,7 +42,7 @@ definePageMeta({
   <div v-if="filteredClubs.length > 0">
     <div v-for="club in filteredClubs" :key="club.id">
       <div v-for="group in club.groups" :key="group.C_GroupsID">
-        <div class="flex flex-col-reverse lg:flex-row lg:space-x-2 mb-2">
+        <div class="flex flex-col-reverse lg:flex-row lg:space-2 mb-2">
           <Card class="lg:w-3/4 w-full">
             <CardHeader>
               <CardTitle class="flex justify-between items-center">
@@ -114,11 +114,19 @@ definePageMeta({
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <span v-for="grecord in club.grecord" :key="grecord.C_Theme">
-                <div style="font-weight: bold">{{ grecord.C_Theme }}</div>
-                <div class="text-sm text-muted-foreground mb-1"><Icon name="material-symbols:schedule-outline" /> {{ grecord.C_Date }}</div>
-                <div class="text-sm">{{ grecord.C_Reflection }}</div><br>
-              </span>
+              <div v-for="grecord in club.grecord" :key="grecord.C_Theme">
+                <div class="font-bold">
+                  {{ grecord.C_Theme }}
+                </div>
+                <div class="text-sm text-muted-foreground mb-1">
+                  <Icon name="material-symbols:schedule-outline" />
+                  {{ grecord.C_Date }}
+                </div>
+                <div class="text-sm">
+                  {{ grecord.C_Reflection }}
+                </div>
+                <br>
+              </div>
             </CardContent>
           </Card>
         </div>
@@ -131,7 +139,7 @@ definePageMeta({
         你当前访问的页面不存在，也许你应该考虑...
       </h3>
       <br>
-      <NuxtLink to="/" class="w-full">
+      <NuxtLink class="w-full" to="/">
         <Button>回到主页</Button>
       </NuxtLink>
     </div>
