@@ -25,7 +25,6 @@ definePageMeta({
 <template>
   <div v-if="filteredClubs.length > 0">
     <div v-for="group in filteredClubs" :key="group.C_GroupsID">
-      <!-- Add other properties you want to display -->
       <div class="flex">
         <Card class="w-3/4">
           <CardHeader>
