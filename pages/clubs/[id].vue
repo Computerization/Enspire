@@ -4,23 +4,22 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/com
 import json from '~/content/clubs.json'
 import type { Clubs } from '~/content/clubs'
 
-const clubs: Clubs = json as Clubs
-const route = useRoute()
-const id = route.params.id // Fetch current Club ID via route params
+const clubs: Clubs = json as Clubs;
+const route = useRoute();
+const id = route.params.id; // Fetch current Club ID via route params
 
 // Filter clubs based on C_GroupsID
 // It just works ;)
 const filteredClubs = Object.values(clubs).flatMap(clubCategory =>
-  clubCategory.flatMap(club => club.groups.filter(group => group.C_GroupsID === id))
-);
+  clubCategory.flatMap(club => club.groups.filter(group => group.C_GroupsID === id)));
 
 // Get the number of members in each group
-// const groupMemberCounts = filteredClubs.map(group => group.gmember.length)
+// const groupMemberCounts = filteredClubs.map(group => group.gmember.length);
 
 // This page requires login
 definePageMeta({
-  middleware: ['auth'],
-})
+  middleware: ['auth']
+});
 </script>
 
 <template>
