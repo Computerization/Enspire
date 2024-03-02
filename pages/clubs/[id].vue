@@ -28,31 +28,31 @@ definePageMeta({
     <div v-for="group in filteredClubs" :key="group.C_GroupsID">
       <!-- Add other properties you want to display -->
       <div class="flex">
-      <Card class="w-3/4">
-        <CardHeader>
-          <CardTitle class="flex items-center gap-x-1">
-            {{ group.C_NameC }}
-          </CardTitle>
-          <CardDescription>{{ group.C_NameE }}</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p>{{ group.C_DescriptionC }}</p>
-          <br>
-          <p>{{ group.C_DescriptionE }}</p>
-        </CardContent>
-      </Card>
-      <Card class="w-1/4">
-        <CardHeader>
-          <CardTitle class="flex items-center gap-x-1">
-            社团属性
-          </CardTitle>
-          <CardDescription>Club Info</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p>社团类型: {{ group.C_Category }}</p>
-<!--          <p>社团人数: {{ groupMemberCounts }}</p>-->
-        </CardContent>
-      </Card>
+        <Card class="w-3/4">
+          <CardHeader>
+            <CardTitle class="flex items-center gap-x-1">
+              {{ group.C_NameC }}
+            </CardTitle>
+            <CardDescription>{{ group.C_NameE }}</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p>{{ group.C_DescriptionC }}</p>
+            <br />
+            <p>{{ group.C_DescriptionE }}</p>
+          </CardContent>
+        </Card>
+        <Card class="w-1/4">
+          <CardHeader>
+            <CardTitle class="flex items-center gap-x-1">
+              社团属性
+            </CardTitle>
+            <CardDescription>Club Info</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p>社团类型: {{ group.C_Category }}</p>
+            <!-- <p>社团人数: {{ groupMemberCounts }}</p> -->
+          </CardContent>
+        </Card>
       </div>
     </div>
   </div>
