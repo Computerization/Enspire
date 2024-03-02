@@ -25,11 +25,13 @@ const filteredClubs = Object.values(clubs).flatMap(clubCategory =>
 const groupMemberCounts = filteredClubs.length > 0 ? filteredClubs[0].gmember.length : 0
 
 // Get the Chinese Description of the club
-let Description_C
-if (filteredClubs[0] && filteredClubs[0].groups[0].C_DescriptionC)
-  Description_C = cleanHTML(filteredClubs[0].groups[0].C_DescriptionC) || '<div class="text-sm italic text-muted-foreground text-center w-full">暂无简介 ;-(</div>'
-else
-  Description_C = '<div class="text-sm italic text-muted-foreground text-center w-full">暂无简介 ;-(</div>'
+let hasDescriptionC = false
+let Description_C = ''
+
+if (filteredClubs[0] && filteredClubs[0].groups[0].C_DescriptionC) {
+  Description_C = cleanHTML(filteredClubs[0].groups[0].C_DescriptionC)
+  hasDescriptionC = true
+}
 
 // This page requires login
 definePageMeta({
@@ -61,10 +63,11 @@ definePageMeta({
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p v-html="Description_C" />
+              <div v-if="hasDescriptionC" v-text="Description_C" />
+              <div v-else class="text-sm italic text-muted-foreground text-center w-full">
+                暂无简介 ;-(
+              </div>
               <!-- Don't show the English Description until i18n is completed -->
-              <!-- <br> -->
-              <!-- <p v-html="cleanDescription(group.C_DescriptionE)"></p> -->
             </CardContent>
           </Card>
           <Card class="lg:w-1/4 w-full mt-4 lg:mt-0">
