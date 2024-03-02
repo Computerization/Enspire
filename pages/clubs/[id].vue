@@ -18,12 +18,11 @@ const filteredClubs = Object.values(clubs).flatMap(clubCategory =>
 // Get the number of members in each group
 // const groupMemberCounts = filteredClubs.map(group => group.gmember.length)
 
-let Description_C;
-if (filteredClubs[0] && filteredClubs[0].C_DescriptionC) {
-  Description_C = cleanHTML(filteredClubs[0].C_DescriptionC) || '<div class="text-sm italic text-muted-foreground text-center w-full">暂无简介 ;-(</div>';
-} else {
-  Description_C = '<div class="text-sm italic text-muted-foreground text-center w-full">暂无简介 ;-(</div>';
-}
+let Description_C
+if (filteredClubs[0] && filteredClubs[0].C_DescriptionC)
+  Description_C = cleanHTML(filteredClubs[0].C_DescriptionC) || '<div class="text-sm italic text-muted-foreground text-center w-full">暂无简介 ;-(</div>'
+else
+  Description_C = '<div class="text-sm italic text-muted-foreground text-center w-full">暂无简介 ;-(</div>'
 
 // This page requires login
 definePageMeta({
@@ -65,7 +64,7 @@ definePageMeta({
       </div>
     </div>
   </div>
-  <p v-else>
+  <div v-else>
     <div class="flex flex-col justify-center h-1/2 text-center">
       <h3 style="font-weight: bold;font-size: x-large">你当前访问的页面不存在，也许你应该考虑...</h3>
       <br>
@@ -73,9 +72,5 @@ definePageMeta({
         <Button>回到主页</Button>
       </NuxtLink>
     </div>
-  </p>
+  </div>
 </template>
-
-<style scoped>
-
-</style>
