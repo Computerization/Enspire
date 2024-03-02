@@ -70,7 +70,7 @@ definePageMeta({
         你当前访问的页面不存在，也许你应该考虑...
       </h3>
       <br>
-      <NuxtLink to="`/`" class="w-full">
+      <NuxtLink to="/" class="w-full">
         <Button>回到主页</Button>
       </NuxtLink>
     </div>
