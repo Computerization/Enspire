@@ -45,8 +45,8 @@ export interface Clubrecord {
 
 export interface Club {
   groups: (Groups)[]
-  supervisor?: (Supervisor | null)[] | null
+  supervisor?: (Supervisor)[]
   gmember: (Clubmember)[]
-  grecord?: (Clubrecord | null)[] | null
+  grecord?: (Clubrecord)[]
   projectyes: number
 }

@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { useRoute } from 'vue-router'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -83,59 +83,59 @@ definePageMeta({
             </CardHeader>
             <CardContent>
               <div>
-                <span style="font-weight: bold">社团类型</span>: {{ group.C_Category }}
+                <span class="font-bold">社团类型</span>: {{ group.C_Category }}
               </div>
               <div>
-                <span style="font-weight: bold">社团人数</span>: {{ groupMemberCounts }} 人
+                <span class="font-bold">社团人数</span>: {{ groupMemberCounts }} 人
               </div>
-              <div style="display: flex; align-items: center;">
-                <span style="font-weight: bold">指导老师:</span>
-                <span v-for="supervisor in club.supervisor" :key="supervisor.TeacherID" style="margin-left: 8px;">
+              <div class="flex">
+                <span class="font-bold">指导老师:</span>
+                <span v-for="supervisor in club.supervisor" :key="supervisor.TeacherID" class="ml-2">
                   {{ supervisor.T_Name }} ({{ supervisor.T_Nickname }})
                 </span>
               </div>
             </CardContent>
           </Card>
         </div>
-        <div style="display:none">
-          <Card v-if="club.grecord.length > 0" class="w-full">
-            <CardHeader>
-              <CardTitle class="flex justify-between items-center">
-                <div>
-                  近期活动
-                </div>
-              </CardTitle>
+        <!--        <div style="display:none"> -->
+        <!--          <Card v-if="club.grecord.length > 0" class="w-full"> -->
+        <!--            <CardHeader> -->
+        <!--              <CardTitle class="flex justify-between items-center"> -->
+        <!--                <div> -->
+        <!--                  近期活动 -->
+        <!--                </div> -->
+        <!--              </CardTitle> -->
 
-              <CardDescription class="flex items-center">
-                <Icon name="material-symbols:draw-outline" />
-                <div class="ml-1">
-                  Recent Activities
-                </div>
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div v-for="grecord in club.grecord" :key="grecord.C_Theme">
-                <div class="font-bold">
-                  {{ grecord.C_Theme }}
-                </div>
-                <div class="text-sm text-muted-foreground mb-1">
-                  <Icon name="material-symbols:schedule-outline" />
-                  {{ grecord.C_Date }}
-                </div>
-                <div class="text-sm">
-                  {{ grecord.C_Reflection }}
-                </div>
-                <br>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        <!--              <CardDescription class="flex items-center"> -->
+        <!--                <Icon name="material-symbols:draw-outline" /> -->
+        <!--                <div class="ml-1"> -->
+        <!--                  Recent Activities -->
+        <!--                </div> -->
+        <!--              </CardDescription> -->
+        <!--            </CardHeader> -->
+        <!--            <CardContent> -->
+        <!--              <div v-for="grecord in club.grecord" :key="grecord.C_Theme"> -->
+        <!--                <div class="font-bold"> -->
+        <!--                  {{ grecord.C_Theme }} -->
+        <!--                </div> -->
+        <!--                <div class="text-sm text-muted-foreground mb-1"> -->
+        <!--                  <Icon name="material-symbols:schedule-outline" /> -->
+        <!--                  {{ grecord.C_Date }} -->
+        <!--                </div> -->
+        <!--                <div class="text-sm"> -->
+        <!--                  {{ grecord.C_Reflection }} -->
+        <!--                </div> -->
+        <!--                <br> -->
+        <!--              </div> -->
+        <!--            </CardContent> -->
+        <!--          </Card> -->
+        <!--        </div> -->
       </div>
     </div>
   </div>
   <div v-else>
     <div class="flex flex-col justify-center h-1/2 text-center">
-      <h3 style="font-weight: bold;font-size: x-large">
+      <h3 class="font-bold text-xl">
         你当前访问的页面不存在，也许你应该考虑...
       </h3>
       <br>
