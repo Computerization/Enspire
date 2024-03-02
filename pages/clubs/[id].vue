@@ -35,10 +35,10 @@ definePageMeta({
             <CardDescription>{{ group.C_NameE }}</CardDescription>
           </CardHeader>
           <CardContent>
-            <p>{{ group.C_DescriptionC }}</p>
+            <p>{{ group.C_DescriptionC ? group.C_DescriptionC : '暂无简介 ;-(' }}</p>
             <!-- Don't show the English Description until i18n is completed -->
             <!-- <br> -->
-            <!-- <p>{{ group.C_DescriptionE }}</p> -->
+            <!-- <p>{{ group.C_DescriptionE ? group.C_DescriptionE : 'There\'s no description here ;-(' }}</p> -->
           </CardContent>
         </Card>
         <Card class="lg:w-1/4 w-full mt-4 lg:mt-0">
