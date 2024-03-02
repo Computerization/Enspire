@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { cleanHTML } from '@/lib/utils'
 import json from '@/content/clubs.json'
-import type { Clubs } from '@/content/clubs'
+import type { Club, Clubs } from '@/content/clubs'
 
 const clubs: Clubs = json as Clubs
 const route = useRoute()
@@ -18,7 +18,7 @@ const filteredClubs = Object.values(clubs).flatMap(clubCategory =>
     ...club, // Spread to include all same-level information
     groups: club.groups.filter(group => group.C_GroupsID === id), // Filter groups to only include those that match the ID
   })),
-)
+) as Club[]
 
 // Get the number of members in each group
 const groupMemberCounts = filteredClubs.length > 0 ? filteredClubs[0].gmember.length : 0
@@ -40,10 +40,10 @@ definePageMeta({
 
 <template>
   <div v-if="filteredClubs.length > 0">
-    <div v-for="club in filteredClubs" :key="club.id">
+    <div v-for="club in filteredClubs" :key="club.groups[0].C_GroupNo">
       <div v-for="group in club.groups" :key="group.C_GroupsID">
-        <div class="flex flex-col-reverse lg:flex-row lg:space-2 mb-2">
-          <Card class="lg:w-3/4 w-full">
+        <div class="flex flex-col-reverse xl:flex-row">
+          <Card class="xl:w-3/4 w-full mt-2 xl:mt-0">
             <CardHeader>
               <CardTitle class="flex justify-between items-center">
                 <div>
@@ -69,7 +69,7 @@ definePageMeta({
               <!-- Don't show the English Description until i18n is completed -->
             </CardContent>
           </Card>
-          <Card class="lg:w-1/4 w-full mt-4 lg:mt-0">
+          <Card class="xl:w-1/4 w-full xl:ml-2">
             <CardHeader>
               <CardTitle class="flex items-center gap-x-1">
                 社团属性
