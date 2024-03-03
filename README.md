@@ -48,9 +48,9 @@ pnpm run dev
 - 每次更新 Prisma 后于左侧文件目录中查找 node_modules/.pnpm/@prisma+client@x.x.x
 - 右键 > Mark Directory as > Not Excluded
 
-#### Eslint 错误
+#### ESLint 错误
 
-如果您遇到 WebStorm 于代码窗口上提示 `ESLint: Error: invalid Options`，请尝试将更新 WebStorm IDE 至最新版本。
+如果您遇到 WebStorm 于代码窗口上提示 `ESLint: Error: invalid Options`，请尝试将 WebStorm IDE 更新至最新版本。
 
 ## 技术细节
 
