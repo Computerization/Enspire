@@ -23,7 +23,7 @@ export default defineEventHandler(async (event) => {
   if (!await useStorage().hasItem(requestBody.data.token)) {
     throw createError({
       statusCode: 403,
-      statusMessage: 'Token Incorrect',
+      message: 'Token Incorrect',
     })
   }
 
@@ -32,7 +32,7 @@ export default defineEventHandler(async (event) => {
   if (!storedData) {
     throw createError({
       statusCode: 403,
-      statusMessage: 'Token Incorrect',
+      message: 'Token Incorrect',
     })
   }
 
@@ -43,7 +43,7 @@ export default defineEventHandler(async (event) => {
   }) !== null) {
     throw createError({
       statusCode: 403,
-      statusMessage: 'TSIMS Account already binded',
+      message: 'TSIMS Account already bound',
     })
   }
 
