@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineProps<{
   club: {
-    id: number
+    id: string
   }
 }>()
 </script>

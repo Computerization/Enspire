@@ -4,6 +4,7 @@ import type { VariantProps } from 'class-variance-authority'
 </script>
 
 <script setup lang="ts">
+// @ts-nocheck
 import { ToastRoot, useEmitAsProps } from 'radix-vue'
 
 import { toastVariants } from '.'

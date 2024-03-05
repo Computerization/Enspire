@@ -55,7 +55,7 @@ const deleteDialogOpen = ref(false)
 
 table.setPageSize(5)
 
-async function submitDeletion(id: number) {
+async function submitDeletion(id: string) {
   isLoading.value = true
   await useFetch('/api/cas/leave/delete', {
     method: 'DELETE',
