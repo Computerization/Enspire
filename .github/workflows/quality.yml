@@ -91,7 +91,7 @@ jobs:
         run: pnpm install
 
       - name: Run typecheck
-        run: vue-tsc --noEmit --skipLibCheck
+        run: pnpm run typecheck
 
   conventional_commits:
     name: Conventional commits check
