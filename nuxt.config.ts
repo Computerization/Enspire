@@ -4,9 +4,26 @@ export default defineNuxtConfig({
       openAPI: true,
     },
   },
-  modules: ['@nuxtjs/tailwindcss', 'shadcn-nuxt', 'nuxt-icon'],
+  modules: ['@nuxtjs/tailwindcss', 'shadcn-nuxt', 'nuxt-icon', '@nuxt/fonts'],
   build: {
-    transpile: ['vue-clerk', '@clerk/clerk-js', '@nuxtjs/google-fonts'],
+    transpile: ['vue-clerk', '@clerk/clerk-js'],
+  },
+  fonts: {
+    families: [
+      { name: 'Inter', provider: 'google' },
+      { name: 'IBM Plex Mono', provider: 'google' },
+    ],
+    defaults: {
+      weights: [400],
+      styles: ['normal', 'italic'],
+      subsets: [
+        'latin-ext',
+        'latin',
+      ],
+    },
+    assets: {
+      prefix: '/_fonts',
+    },
   },
   runtimeConfig: {
     public: {
@@ -20,13 +37,7 @@ export default defineNuxtConfig({
     tsimsUrl: process.env.TSIMS_URL,
     clerkSecretKey: process.env.CLERK_SECRET_KEY,
   },
-  googleFonts: {
-    families: {
-      'Inter': true,
-      'Noto Sans SC': true,
-      'IBM+Plex+Mono': true,
-    },
-  },
+
   shadcn: {
     /**
      * Prefix for all the imported component
