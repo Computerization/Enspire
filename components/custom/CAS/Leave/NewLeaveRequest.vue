@@ -39,7 +39,7 @@ const { data } = await useAsyncData<AllClubs>('allClubs', () => {
 if (!data.value) {
   throw createError({
     statusCode: 500,
-    statusMessage: '服务器错误',
+    message: '服务器错误',
   })
 }
 
