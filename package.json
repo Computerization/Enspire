@@ -24,7 +24,7 @@
     "h3": "^1.10.2",
     "h3-clerk": "^0.3.8",
     "lucide-vue-next": "^0.343.0",
-    "nitropack": "npm:nitropack-nightly@latest",
+    "nitropack": "2.9.1",
     "radix-vue": "^1.4.8",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
