@@ -45,7 +45,7 @@ export const columns: ColumnDef<LeaveRequest>[] = [
       else if (requestStatus === 'APPROVED')
         return h('div', { class: 'bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300 w-[70px]' }, '审批通过')
       else if (requestStatus === 'DENIED')
-        return h('div', { class: 'bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300 w-[70px]' }, '审批被拒绝')
+        return h('div', { class: 'bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300 w-[70px]' }, '审批拒绝')
       else return h('div', { class: 'font-medium' }, row.getValue('status'))
     },
   },
