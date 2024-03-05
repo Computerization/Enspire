@@ -1,10 +1,10 @@
 {
   // https://nuxt.com/docs/guide/concepts/typescript
   "extends": "./.nuxt/tsconfig.json",
-  "exclude": [
-    "components/ui"
-  ],
   "compilerOptions": {
     "resolveJsonModule": true
   },
+  "exclude": [
+    "components/ui"
+  ]
 }

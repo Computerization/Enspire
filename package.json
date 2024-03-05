@@ -10,7 +10,8 @@
     "postinstall": "nuxt prepare && prisma generate",
     "update-club-info": "node --loader ts-node/esm utils/update-club-info.ts",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "typecheck": "vue-tsc --noEmit --skipLibCheck"
   },
   "dependencies": {
     "@clerk/clerk-sdk-node": "^4.13.9",
