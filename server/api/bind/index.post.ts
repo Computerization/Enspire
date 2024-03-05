@@ -39,7 +39,7 @@ export default defineEventHandler(async (event) => {
   if (!await useStorage().hasItem(requestBody.token)) {
     throw createError({
       statusCode: 403,
-      statusMessage: 'Token Incorrect',
+      message: 'Token Incorrect',
     })
   }
 
@@ -48,7 +48,7 @@ export default defineEventHandler(async (event) => {
   if (!storedData) {
     throw createError({
       statusCode: 403,
-      statusMessage: 'Token Incorrect',
+      message: 'Token Incorrect',
     })
   }
 
@@ -72,7 +72,7 @@ export default defineEventHandler(async (event) => {
   if (tsimsLoginResult.status !== 'ok') {
     throw createError({
       statusCode: 403,
-      statusMessage: 'Login Credentials Incorrect',
+      message: 'Login Credentials Incorrect',
     })
   }
 
