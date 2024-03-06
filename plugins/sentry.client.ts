@@ -21,7 +21,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     tracesSampleRate: 0.2, // Change in prod
 
     // Set `tracePropagationTargets` to control for which URLs distributed tracing should be enabled
-    tracePropagationTargets: ['localhost:3000', 'https://enspire.one'],
+    tracePropagationTargets: ['https://enspire.one'],
 
     replaysSessionSampleRate: 1.0, // Change in prod
     replaysOnErrorSampleRate: 1.0, // Change in prod if necessary
