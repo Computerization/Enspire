@@ -36,8 +36,8 @@ dependencies:
     specifier: ^0.3.8
     version: 0.3.9(h3@1.11.1)(react@18.2.0)
   lucide-vue-next:
-    specifier: ^0.343.0
-    version: 0.343.0(vue@3.4.20)
+    specifier: ^0.344.0
+    version: 0.344.0(vue@3.4.20)
   nitropack:
     specifier: 2.9.1
     version: 2.9.1
@@ -4574,7 +4574,7 @@ packages:
     resolution: {integrity: sha512-Kv5nKlh6yRrdrGvxeJ2e5y2eRUpkUosIW4A2AS38zwSz27zu7ufDwQPi5Jhs3XAlGNetl3bmnGhQsMtkKJnj3w==}
     dependencies:
       no-case: 3.0.4
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: false
 
   /dot-prop@8.0.2:
@@ -6384,7 +6384,7 @@ packages:
   /lower-case@2.0.2:
     resolution: {integrity: sha512-7fm3l3NAF9WfN6W3JOmf5drwpVqX78JtoGJ3A6W0a6ZnldM41w2fV5D490psKFTpMds8TJse/eHLFFsNHHjHgg==}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: false
 
   /lru-cache@10.2.0:
@@ -6403,8 +6403,8 @@ packages:
     dependencies:
       yallist: 4.0.0
 
-  /lucide-vue-next@0.343.0(vue@3.4.20):
-    resolution: {integrity: sha512-mDp/hL7HM5tGuoa8AcJMfbcpmJWxZT917RMeS4/dPTqiUS+fVxD0UT2qKuuYlEzvJedkJTApuDJ6N2ZbsJMAYA==}
+  /lucide-vue-next@0.344.0(vue@3.4.20):
+    resolution: {integrity: sha512-YvexWTTzcRScmOKUvbQvexDmIK63x6NT8lV3Cot9TShQyy3PpFxfx5i2wZNhaZfV8bKqTMRXgCs372rnrtPYKQ==}
     peerDependencies:
       vue: '>=3.0.1'
     dependencies:
@@ -6838,7 +6838,7 @@ packages:
     resolution: {integrity: sha512-fgAN3jGAh+RoxUGZHTSOLJIqUc2wmoBwGR4tbpNAKmmovFoWq0OdRkb0VkldReO2a2iBT/OEulG9XSUc10r3zg==}
     dependencies:
       lower-case: 2.0.2
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: false
 
   /node-abi@3.56.0:
