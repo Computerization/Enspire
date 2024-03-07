@@ -14,7 +14,7 @@ export default defineNuxtConfig({
       { name: 'IBM Plex Mono', provider: 'google' },
     ],
     defaults: {
-      weights: [400],
+      weights: [400, 500, 600, 700, 800],
       styles: ['normal', 'italic'],
       subsets: [
         'latin-ext',
