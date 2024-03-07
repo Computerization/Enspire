@@ -18,7 +18,7 @@ import { Button } from '@/components/ui/button'
       </div>
       <div class="px-3 py-2">
         <h2 class="relative px-4 text-lg font-semibold tracking-tight">
-          CAS管理
+          社团信息
         </h2>
         <div class="mt-2">
           <NuxtLink to="/cas/clubs">
@@ -27,22 +27,29 @@ import { Button } from '@/components/ui/button'
               社团列表
             </Button>
           </NuxtLink>
-          <NuxtLink to="/cas/checkin">
-            <Button :variant="$route.name === 'cas-checkin' ? 'secondary' : 'ghost'" class="w-full justify-start mt-1">
-              <Icon class="mr-2 h-4 w-4" name="material-symbols:check-circle-outline" />
-              签到
+          <NuxtLink to="/cas/rating">
+            <Button :variant="$route.name === 'cas-rating' ? 'secondary' : 'ghost'" class="w-full justify-start mt-1">
+              <Icon class="mr-2 h-4 w-4" name="material-symbols:rate-review-outline" />
+              期末评价
             </Button>
           </NuxtLink>
-          <NuxtLink to="/cas/reservation">
-            <Button :variant="$route.name === 'cas-reservation' ? 'secondary' : 'ghost'" class="w-full justify-start mt-1">
+        </div>
+      </div>
+      <div class="px-3 py-2">
+        <h2 class="relative px-4 text-lg font-semibold tracking-tight">
+          CAS管理
+        </h2>
+        <div class="mt-2">
+          <NuxtLink to="/manage/reservation">
+            <Button :variant="$route.name === 'manage-reservation' ? 'secondary' : 'ghost'" class="w-full justify-start">
               <Icon class="mr-2 h-4 w-4" name="material-symbols:calendar-today-outline" />
               预约教室
             </Button>
           </NuxtLink>
-          <NuxtLink to="/cas/leave">
-            <Button :variant="$route.name === 'cas-leave' ? 'secondary' : 'ghost'" class="w-full justify-start mt-1">
+          <NuxtLink to="/manage/leave">
+            <Button :variant="$route.name === 'manage-leave' ? 'secondary' : 'ghost'" class="w-full justify-start mt-1">
               <Icon class="mr-2 h-4 w-4" name="charm:tick-double" />
-              申请请假
+              社团请假
             </Button>
           </NuxtLink>
         </div>
