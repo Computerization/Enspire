@@ -74,7 +74,7 @@ definePageMeta({
           </Card>
           <Card class="xl:w-1/4 w-full xl:ml-2">
             <CardHeader>
-              <CardTitle class="flex items-center gap-x-1">
+              <CardTitle class="flex items-center h-min gap-x-1">
                 社团属性
               </CardTitle>
               <CardDescription class="flex items-center">
