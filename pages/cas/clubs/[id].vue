@@ -28,8 +28,11 @@ let hasDescriptionC = false
 let Description_C = ''
 
 if (filteredClubs[0] && filteredClubs[0].groups[0].C_DescriptionC) {
-  Description_C = cleanHTML(filteredClubs[0].groups[0].C_DescriptionC)
-  hasDescriptionC = true
+  const tempDescription = cleanHTML(filteredClubs[0].groups[0].C_DescriptionC)
+  if (tempDescription.trim() !== '') {
+    Description_C = tempDescription
+    hasDescriptionC = true
+  }
 }
 
 // This page requires login
