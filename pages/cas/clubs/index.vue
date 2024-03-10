@@ -27,19 +27,18 @@ const filteredClubs = computed(() => {
     return clubs
 
   // ignore capitalization
-  const regex = new RegExp(searchTerm.value, 'i')
+  const lowerCaseSearchTerm = searchTerm.value.toLowerCase()
 
   // return zh/en name match the search term
   return Object.entries(clubs).reduce((acc, [category]) => {
     acc[category as ClubCategoryKey] = allClubs.value.filter(club =>
       club.groups.some((group: Groups) =>
-        (group.C_NameC as string).match(regex) || (group.C_NameE as string).match(regex),
+        (group.C_NameC as string).toLowerCase().includes(lowerCaseSearchTerm) || (group.C_NameE as string).toLowerCase().includes(lowerCaseSearchTerm),
       ),
     )
     return acc
   }, {} as Clubs)
-},
-)
+})
 
 const isSearchActive = computed(() => searchTerm.value !== '')
 </script>
