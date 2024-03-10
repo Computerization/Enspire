@@ -59,7 +59,7 @@ function signOutHandler() {
       </DropdownMenuGroup>
       <DropdownMenuSeparator />
       <DropdownMenuItem @click="signOutHandler">
-        退出登陆
+        退出登录
       </DropdownMenuItem>
     </DropdownMenuContent>
   </DropdownMenu>
