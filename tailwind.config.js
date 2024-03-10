@@ -6,6 +6,9 @@ module.exports = {
   safelist: ['dark'],
 
   theme: {
+    screens: {
+      ssm: '500px',
+    },
     container: {
       center: true,
       padding: '2rem',
