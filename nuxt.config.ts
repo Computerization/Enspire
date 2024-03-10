@@ -8,7 +8,6 @@ export default defineNuxtConfig({
   build: {
     transpile: ['vue-clerk', '@clerk/clerk-js'],
   },
-  // @ts-expect-error This is a valid configuration. Just a type bug from the module.
   googleFonts: {
     families: {
       'Inter': true,
@@ -28,7 +27,11 @@ export default defineNuxtConfig({
     tsimsUrl: process.env.TSIMS_URL,
     clerkSecretKey: process.env.CLERK_SECRET_KEY,
   },
-
+  features: {
+    // Solves the weird issue where netlify's Functions bundling process fails.
+    // ref: https://answers.netlify.com/t/typeerror-pattern-is-too-long/98172/5
+    inlineStyles: false,
+  },
   shadcn: {
     /**
      * Prefix for all the imported component
