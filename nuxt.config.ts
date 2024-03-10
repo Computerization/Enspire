@@ -4,25 +4,16 @@ export default defineNuxtConfig({
       openAPI: true,
     },
   },
-  modules: ['@nuxtjs/tailwindcss', 'shadcn-nuxt', 'nuxt-icon', '@nuxt/fonts'],
+  modules: ['@nuxtjs/tailwindcss', 'shadcn-nuxt', 'nuxt-icon', '@nuxtjs/google-fonts'],
   build: {
     transpile: ['vue-clerk', '@clerk/clerk-js'],
   },
-  fonts: {
-    families: [
-      { name: 'Inter', provider: 'google' },
-      { name: 'IBM Plex Mono', provider: 'google' },
-    ],
-    defaults: {
-      weights: [400, 500, 600, 700, 800],
-      styles: ['normal', 'italic'],
-      subsets: [
-        'latin-ext',
-        'latin',
-      ],
-    },
-    assets: {
-      prefix: '/_fonts',
+  // @ts-expect-error This is a valid configuration. Just a type bug from the module.
+  googleFonts: {
+    families: {
+      'Inter': true,
+      'Noto Sans SC': true,
+      'IBM+Plex+Mono': true,
     },
   },
   runtimeConfig: {
