@@ -10,7 +10,7 @@ definePageMeta({
 <template>
   <div class="flex flex-col space-y-2 text-center">
     <h1 class="text-2xl font-semibold tracking-tight">
-      登陆账户
+      登录账户
     </h1>
     <p class="text-sm text-muted-foreground">
       在下方输入凭证
