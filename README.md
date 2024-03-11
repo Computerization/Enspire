@@ -38,7 +38,7 @@ pnpm run update-club-info
 ```bash
 pnpm run dev
 ```
-浏览器登陆`http://localhost:3000`即可。
+浏览器访问 `http://localhost:3000` 即可。
 
 ### WebStorm 兼容性问题
 #### pnpm & Prisma
