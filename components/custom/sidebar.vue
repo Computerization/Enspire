@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 
 <template>
   <div :class="cn('h-full', $attrs.class ?? '')">
-    <div class="space-y-3 py-4 backdrop-blur-3xl border-r-2 h-full mt-14">
+    <div class="space-y-3 py-4 backdrop-blur-3xl border-r-2 h-full">
       <div class="px-3 py-2">
         <div class="space-y-1 mt-2">
           <NuxtLink to="/">
@@ -18,7 +18,11 @@ import { Button } from '@/components/ui/button'
       </div>
       <div class="px-3 py-2">
         <h2 class="relative px-4 text-lg font-semibold tracking-tight">
+<<<<<<< Updated upstream
           社团信息
+=======
+          CAS 管理
+>>>>>>> Stashed changes
         </h2>
         <div class="mt-2">
           <NuxtLink to="/cas/clubs">
@@ -62,7 +66,7 @@ import { Button } from '@/components/ui/button'
           <NuxtLink to="/about">
             <Button :variant="$route.name === 'about' ? 'secondary' : 'ghost'" class="w-full justify-start">
               <Icon class="mr-2 h-4 w-4" name="material-symbols:info-outline" />
-              关于我们
+              关于 Enspire
             </Button>
           </NuxtLink>
         </div>

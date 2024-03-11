@@ -4,7 +4,16 @@ export default defineNuxtConfig({
       openAPI: true,
     },
   },
+<<<<<<< Updated upstream
   modules: ['@nuxtjs/tailwindcss', 'shadcn-nuxt', 'nuxt-icon', '@nuxtjs/google-fonts'],
+=======
+  modules: [
+    '@nuxtjs/tailwindcss',
+    '@nuxt/content',
+    'shadcn-nuxt',
+    'nuxt-icon',
+  ],
+>>>>>>> Stashed changes
   build: {
     transpile: ['vue-clerk', '@clerk/clerk-js'],
   },
