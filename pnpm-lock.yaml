@@ -61,7 +61,7 @@ dependencies:
     version: 3.1.2(@popperjs/core@2.11.8)(vue@3.4.21)
   vee-validate:
     specifier: ^4.12.5
-    version: 4.12.5(vue@3.4.21)
+    version: 4.12.6(vue@3.4.21)
   vue-clerk:
     specifier: ^0.2.0
     version: 0.2.0(react-dom@18.2.0)(react@18.2.0)(vue@3.4.21)
@@ -9612,6 +9612,11 @@ packages:
     engines: {node: '>=16'}
     dev: false
 
+  /type-fest@4.12.0:
+    resolution: {integrity: sha512-5Y2/pp2wtJk8o08G0CMkuFPCO354FGwk/vbidxrdhRGZfd0tFnb4Qb8anp9XxXriwBgVPjdWbKpGl4J9lJY2jQ==}
+    engines: {node: '>=16'}
+    dev: false
+
   /type-is@1.6.18:
     resolution: {integrity: sha512-TkRKr9sUTxEH8MdfuCSP7VizJyzRNMjj2J2do2Jr3Kym598JVdEksuzPQCnlFPW4ky9Q+iA+ma9BGm06XQBy8g==}
     engines: {node: '>= 0.6'}
@@ -9970,6 +9975,16 @@ packages:
     dependencies:
       '@vue/devtools-api': 6.6.1
       type-fest: 4.10.3
+      vue: 3.4.21(typescript@5.4.2)
+    dev: false
+
+  /vee-validate@4.12.6(vue@3.4.21):
+    resolution: {integrity: sha512-EKM3YHy8t1miPh30d5X6xOrfG/Ctq0nbN4eMpCK7ezvI6T98/S66vswP+ihL4QqAK/k5KqreWOxof09+JG7N/A==}
+    peerDependencies:
+      vue: ^3.3.11
+    dependencies:
+      '@vue/devtools-api': 6.6.1
+      type-fest: 4.12.0
       vue: 3.4.21(typescript@5.4.2)
     dev: false
 
