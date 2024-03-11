@@ -28,8 +28,11 @@ let hasDescriptionC = false
 let Description_C = ''
 
 if (filteredClubs[0] && filteredClubs[0].groups[0].C_DescriptionC) {
-  Description_C = cleanHTML(filteredClubs[0].groups[0].C_DescriptionC)
-  hasDescriptionC = true
+  const tempDescription = cleanHTML(filteredClubs[0].groups[0].C_DescriptionC)
+  if (tempDescription.trim() !== '') {
+    Description_C = tempDescription
+    hasDescriptionC = true
+  }
 }
 
 // This page requires login
@@ -71,7 +74,7 @@ definePageMeta({
           </Card>
           <Card class="xl:w-1/4 w-full xl:ml-2">
             <CardHeader>
-              <CardTitle class="flex items-center gap-x-1">
+              <CardTitle class="flex items-center h-min gap-x-1">
                 社团属性
               </CardTitle>
               <CardDescription class="flex items-center">
