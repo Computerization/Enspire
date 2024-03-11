@@ -65,7 +65,7 @@ definePageMeta({
               <div class="font-bold">
                 简介
               </div>
-              <div v-if="hasDescriptionC" class="my-4" v-text="Description_C" />
+              <div v-if="hasDescriptionC" class="my-3" v-text="Description_C" />
               <div v-else class="text-sm italic text-muted-foreground text-center w-full my-2">
                 暂无简介 ;-(
               </div>
@@ -74,22 +74,21 @@ definePageMeta({
               <div class="font-bold">
                 成员
               </div>
-              <br>
               <div v-if="club.gmember.length === 0" class="text-sm italic text-muted-foreground text-center w-full my-2">
                 暂无成员 ;-(
               </div>
-              <div v-else>
+              <div v-else class="mt-3">
                 <div class="flex flex-wrap">
                   <div v-for="(member, index) in club.gmember" :key="member.StudentID" class="flex items-center">
-                    <div class="ml-2">
-                      <span class="">{{ member.S_Name }}</span> <span class="">({{ member.S_Nickname }})</span>
-                      <Badge v-if="Number(member.LeaderYes) === 2" variant="default" class="ml-2">
+                    <div class="flex items-center">
+                      <span class="">{{ member.S_Name }}</span> <span class="text-muted-foreground">({{ member.S_Nickname }})</span>
+                      <Badge v-if="Number(member.LeaderYes) === 2" variant="default" class="ml-1">
                         社长
                       </Badge>
-                      <Badge v-else-if="Number(member.LeaderYes) === 1" variant="secondary" class="ml-2">
+                      <Badge v-else-if="Number(member.LeaderYes) === 1" variant="secondary" class="ml-1">
                         副社
                       </Badge>
-                      <Badge v-else variant="outline" class="ml-2">
+                      <Badge v-else variant="outline" class="ml-1">
                         社员
                       </Badge>
                       <span v-if="index < club.gmember.length - 1" class="mx-2">/</span>
@@ -99,7 +98,7 @@ definePageMeta({
               </div>
             </CardContent>
           </Card>
-          <Card class="xl:w-1/4 w-full xl:ml-2">
+          <Card class="xl:w-1/4 w-full xl:ml-2 h-min">
             <CardHeader>
               <CardTitle class="flex items-center gap-x-1">
                 社团属性

@@ -10,9 +10,9 @@ export default defineNuxtConfig({
   },
   googleFonts: {
     families: {
-      'Inter': true,
-      'Noto Sans SC': true,
-      'IBM+Plex+Mono': true,
+      'Inter': [400, 500],
+      'Noto Sans SC': [400, 500],
+      'IBM+Plex+Mono': [400, 500],
     },
   },
   runtimeConfig: {
