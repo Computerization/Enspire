@@ -1,0 +1,23 @@
+{
+  "eslint.enable": true,
+  "eslint.format.enable": true,
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+    "svelte"
+  ],
+  "eslint.workingDirectories": [
+    "./*",
+    "."
+  ],
+  "eslint.options": {
+    "overrideConfigFile": "./eslint.config.js"
+  },
+  "eslint.experimental.useFlatConfig": true,
+  "eslint.lintTask.enable": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2
+}
