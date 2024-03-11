@@ -18,6 +18,14 @@ watch(
 </script>
 
 <template>
+  <!--
+    Current main layout structure
+    column flex [overflow-hidden, 100vh]:
+      navbar [fixed height]
+      row flex [occupies the rest of the screen]:
+        sidebar [100% height, overflow-scroll]
+        main content [100% height, overflow-scroll, additional whitespace in the bottom (that fills the space clipped by the main container)]
+   -->
   <div class="h-screen">
     <div class="top-0 flex flex-col h-full overflow-hidden">
       <!-- Navbar -->
