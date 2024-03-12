@@ -63,7 +63,7 @@ definePageMeta({
                   {{ group.C_NameE }}
                 </div>
                 <div v-else class="ml-1">
-                  Club Name
+                  Club Description
                 </div>
               </CardDescription>
             </CardHeader>
