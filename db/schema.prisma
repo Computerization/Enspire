@@ -60,7 +60,7 @@ model ClubRating {
   clubId    Int // Link to Club model
   rating    Int           @default(0) // 0 as initial rate lol
   comment   String? // Optional comment for a rating
-  // ratedAt   DateTime      @default(now()) // I guess we don't need this as we already have `rateScope`
+  ratedAt   DateTime      @default(now()) // I guess we don't need this as we already have `rateScope`
   rateScope String // Identifier for the current semester, required since one can only vote once in one semester; stored as <year><a|b>, i.e., 2024a
 
   // Relations
