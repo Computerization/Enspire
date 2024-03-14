@@ -31,7 +31,7 @@ function signOutHandler() {
     <DropdownMenuTrigger as-child>
       <Button class="relative h-8 w-8 rounded-full" variant="ghost">
         <Avatar class="h-8 w-8">
-          <AvatarImage alt="@shadcn" src="/avatars/01.png" />
+          <AvatarImage :src="user?.imageUrl!" />
           <AvatarFallback>C</AvatarFallback>
         </Avatar>
       </Button>
