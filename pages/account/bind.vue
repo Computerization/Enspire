@@ -190,11 +190,11 @@ const submitConfirm = async function () {
 
           <Button :disabled="isLoading" class="w-full mt-1" type="submit">
             <Icon v-if="isLoading" class="mr-2" name="svg-spinners:180-ring-with-bg" />
-            登陆
+            登录
           </Button>
         </form>
         <Button class="mt-2 w-full" variant="outline" @click="signOutHandler">
-          退出登陆
+          退出登录
         </Button>
       </div>
 

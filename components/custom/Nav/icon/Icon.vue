@@ -6,9 +6,9 @@
   <!-- TODO: Just a placeholder lol nobody would want a skull to be their icon -->
   <NuxtLink class="flex items-center" to="/">
     <Icon name="mdi:skull-crossbones" />
-    <h1 class="font-black">
+    <div class="font-black">
       Enspire
-    </h1>
+    </div>
   </NuxtLink>
 </template>
 
