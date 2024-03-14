@@ -88,7 +88,7 @@ definePageMeta({
                   <div v-for="(member, index) in club.gmember" :key="member.StudentID" class="flex items-center">
                     <div class="flex items-center">
                       <span class="">{{ member.S_Name }}</span>
-                      <span v-if="member.S_Nickname" class="text-muted-foreground">&nbsp;({{ member.S_Nickname }})</span>
+                      <span v-if="member.S_Nickname" class="text-muted-foreground ml-2">({{ member.S_Nickname }})</span>
                       <Badge v-if="Number(member.LeaderYes) === 2" variant="default" class="ml-1">
                         社长
                       </Badge>
