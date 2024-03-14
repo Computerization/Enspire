@@ -35,7 +35,7 @@ const Description_C = cleanHTML(props.club.groups[0].C_DescriptionC)
           </div>
         </div>
 
-        <div v-if="props.club.groups" class="flex items-center ml-2">
+        <div v-if="props.club.groups[0].C_NameE" class="flex items-center ml-2">
           <Icon name="material-symbols:language" />
           <div class="ml-1">
             {{ props.club.groups[0].C_NameE }}

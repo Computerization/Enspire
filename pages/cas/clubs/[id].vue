@@ -59,8 +59,11 @@ definePageMeta({
 
               <CardDescription class="flex items-center">
                 <Icon name="material-symbols:language" />
-                <div class="ml-1">
+                <div v-if="group.C_NameE" class="ml-1">
                   {{ group.C_NameE }}
+                </div>
+                <div v-else class="ml-1">
+                  Club Description
                 </div>
               </CardDescription>
             </CardHeader>
@@ -68,7 +71,7 @@ definePageMeta({
               <div class="font-bold">
                 简介
               </div>
-              <div v-if="hasDescriptionC" class="my-3" v-text="Description_C" />
+              <div v-if="hasDescriptionC" class="my-3 text-sm" v-text="Description_C" />
               <div v-else class="text-sm italic text-muted-foreground text-center w-full my-2">
                 暂无简介 ;-(
               </div>
@@ -83,16 +86,14 @@ definePageMeta({
               <div v-else class="mt-3">
                 <div class="flex flex-wrap">
                   <div v-for="(member, index) in club.gmember" :key="member.StudentID" class="flex items-center">
-                    <div class="flex items-center">
-                      <span class="">{{ member.S_Name }}</span> <span class="text-muted-foreground">({{ member.S_Nickname }})</span>
-                      <Badge v-if="Number(member.LeaderYes) === 2" variant="default" class="ml-1">
+                    <div class="flex items-center text-sm mt-0.5">
+                      <span class="">{{ member.S_Name }}</span>
+                      <span v-if="member.S_Nickname" class="text-muted-foreground ml-1">({{ member.S_Nickname }})</span>
+                      <Badge v-if="Number(member.LeaderYes) === 2" variant="default" class="ml-1 -py-0.5">
                         社长
                       </Badge>
-                      <Badge v-else-if="Number(member.LeaderYes) === 1" variant="secondary" class="ml-1">
+                      <Badge v-else-if="Number(member.LeaderYes) === 1" variant="secondary" class="ml-1 -py-0.5">
                         副社
-                      </Badge>
-                      <Badge v-else variant="outline" class="ml-1">
-                        社员
                       </Badge>
                       <span v-if="index < club.gmember.length - 1" class="mx-2">/</span>
                     </div>
@@ -120,7 +121,7 @@ definePageMeta({
               <div>
                 <span class="font-bold">社团人数</span>: {{ groupMemberCounts }} 人
               </div>
-              <div class="flex">
+              <div v-if="club.supervisor" class="flex">
                 <span class="font-bold">指导老师:</span>
                 <span v-for="supervisor in club.supervisor" :key="supervisor.TeacherID" class="ml-2">
                   {{ supervisor.T_Name }} ({{ supervisor.T_Nickname }})
