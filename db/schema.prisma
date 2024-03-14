@@ -13,6 +13,7 @@ model User {
   name           String
   tsimsStudentId Int            @unique
   LeaveRequest   LeaveRequest[]
+  ClubRating     ClubRating[] 
 }
 
 // Json types should be stored like {"zh": xxx, "en": xxx}.
@@ -28,6 +29,7 @@ model Club {
   membersByTsimsStudentId   Int[] // Members
   description               Json // multilingual
   LeaveRequest              LeaveRequest[]
+  ClubRating                ClubRating[]
 }
 
 enum LeaveRequestStatus {
@@ -50,4 +52,20 @@ model LeaveRequest {
   user User @relation(fields: [clerkUserId], references: [clerkUserId])
 
   @@unique([id, clubId, startDate, endDate]) // Same user's request for a club can't overlap in time
+}
+
+model ClubRating {
+  id        String        @id @default(dbgenerated("gen_random_uuid()"))
+  rateBy    String // Link to User model
+  clubId    Int // Link to Club model
+  rating    Int           @default(0) // 0 as initial rate lol
+  comment   String? // Optional comment for a rating
+  ratedAt   DateTime      @default(now()) // I guess we don't need this as we already have `rateScope`
+  rateScope String // Identifier for the current semester, required since one can only vote once in one semester; stored as <year><a|b>, i.e., 2024a
+
+  // Relations
+  user User @relation(fields: [rateBy], references: [clerkUserId])
+  club Club @relation(fields: [clubId], references: [id])
+
+  @@unique([id, clubId, rateBy, rateScope]) // One student can vote only once in one semester
 }
