@@ -1,4 +1,6 @@
-# Enspire
+![311505571-b232584c-691c-4078-b097-b4de168bd09f](https://github.com/Computerization/Enspire/assets/46770502/3776fe8f-dda5-472a-ba6a-bd5ced88a030)
+
+---
 
 C 社是服务类社团，其创始初心是为学校生活提供便利，如今我们发现，同学们 CAS 活动中遇到的管理、技术、宣传问题，是一个巨大的需求缺口
 
