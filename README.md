@@ -1,4 +1,6 @@
-![311505571-b232584c-691c-4078-b097-b4de168bd09f](https://github.com/Computerization/Enspire/assets/46770502/3776fe8f-dda5-472a-ba6a-bd5ced88a030)
+![logo-bg-white](https://github.com/Computerization/Enspire/assets/46770502/27133de7-efd7-4860-8f83-e160a25ab042)
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/9caa53f8-a904-4abc-8bda-9e3c2899f44a/deploy-status)](https://app.netlify.com/sites/computerization-enspire-next/deploys) ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/computerization/enspire/quality.yml) ![GitHub License](https://img.shields.io/github/license/computerization/enspire) ![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/m/computerization/enspire/next)
 
 ---
 
