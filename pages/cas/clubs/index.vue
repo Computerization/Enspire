@@ -46,22 +46,37 @@ const isSearchActive = computed(() => searchTerm.value !== '')
 <template>
   <div>
     <Tabs class="h-full space-y-6" :value="isSearchActive ? '' : undefined" :default-value="isSearchActive ? '' : 'Sports'">
-      <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-        <TabsList>
-          <TabsTrigger :value="isSearchActive ? '' : 'Sports'" :disabled="isSearchActive">
-            Sports
+      <div class="flex flex-row items-center justify-between">
+        <TabsList class="w-min">
+          <TabsTrigger :value="isSearchActive ? '' : 'Sports'" :disabled="isSearchActive" class="flex items-center">
+            <Icon name="material-symbols:sports-basketball" />
+            <div class="hidden sm:block ml-1">
+              Sports
+            </div>
           </TabsTrigger>
-          <TabsTrigger :value="isSearchActive ? '' : 'Service'" :disabled="isSearchActive">
-            Service
+          <TabsTrigger :value="isSearchActive ? '' : 'Service'" :disabled="isSearchActive" class="flex items-center">
+            <Icon name="material-symbols:home-repair-service" />
+            <div class="hidden sm:block ml-1">
+              Service
+            </div>
           </TabsTrigger>
-          <TabsTrigger :value="isSearchActive ? '' : 'Arts'" :disabled="isSearchActive">
-            Arts
+          <TabsTrigger :value="isSearchActive ? '' : 'Arts'" :disabled="isSearchActive" class="flex items-center">
+            <Icon name="material-symbols:format-paint" />
+            <div class="hidden sm:block ml-1">
+              Arts
+            </div>
           </TabsTrigger>
-          <TabsTrigger :value="isSearchActive ? '' : 'Life'" :disabled="isSearchActive">
-            Life
+          <TabsTrigger :value="isSearchActive ? '' : 'Life'" :disabled="isSearchActive" class="flex items-center">
+            <Icon name="material-symbols:nightlife" />
+            <div class="hidden sm:block ml-1">
+              Life
+            </div>
           </TabsTrigger>
-          <TabsTrigger :value="isSearchActive ? '' : 'Academic'" :disabled="isSearchActive">
-            Academic
+          <TabsTrigger :value="isSearchActive ? '' : 'Academic'" :disabled="isSearchActive" class="flex items-center">
+            <Icon name="material-symbols:book" />
+            <div class="hidden sm:block ml-1">
+              Academic
+            </div>
           </TabsTrigger>
         </TabsList>
         <Input v-model="searchTerm" type="text" placeholder="Search..." class="float-right w-1/4" />
