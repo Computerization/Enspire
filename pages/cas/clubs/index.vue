@@ -46,7 +46,7 @@ const isSearchActive = computed(() => searchTerm.value !== '')
 <template>
   <div>
     <Tabs class="h-full space-y-6" :value="isSearchActive ? '' : undefined" :default-value="isSearchActive ? '' : 'Sports'">
-      <div class="flex justify-between items-center flex-col-reverse ssm:flex-row">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between">
         <TabsList>
           <TabsTrigger :value="isSearchActive ? '' : 'Sports'" :disabled="isSearchActive">
             Sports
@@ -64,7 +64,7 @@ const isSearchActive = computed(() => searchTerm.value !== '')
             Academic
           </TabsTrigger>
         </TabsList>
-        <Input v-model="searchTerm" type="text" placeholder="Search..." class="float-right max-w-[340px] mb-2 ssm:mb-0 ssm:ml-2" />
+        <Input v-model="searchTerm" type="text" placeholder="Search..." class="float-right w-1/4" />
       </div>
       <TabsContent
         v-for="i in categories"
