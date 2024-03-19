@@ -23,8 +23,10 @@ const searchTerm = ref('')
 function sortClubs(clubA: any, clubB: any): number {
   const aDissolved = clubA.gmember.length === 0
   const bDissolved = clubB.gmember.length === 0
-  if (aDissolved && !bDissolved) return 1
-  if (!aDissolved && bDissolved) return -1
+  if (aDissolved && !bDissolved)
+    return 1
+  if (!aDissolved && bDissolved)
+    return -1
   return 0
 }
 
@@ -37,7 +39,8 @@ const sortedClubs = Object.entries(clubs).reduce((acc, [category, clubsInCategor
 const allClubs = computed(() => Object.values(sortedClubs).flat())
 
 const filteredClubs = computed(() => {
-  if (!searchTerm.value) return sortedClubs
+  if (!searchTerm.value)
+    return sortedClubs
 
   const lowerCaseSearchTerm = searchTerm.value.toLowerCase()
 
