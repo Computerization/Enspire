@@ -19,47 +19,35 @@ definePageMeta({
 const categories = (['Sports', 'Service', 'Arts', 'Life', 'Academic'] as const).map(c => c as ClubCategoryKey)
 
 const searchTerm = ref('')
-const allClubs = computed(() => Object.values(clubs).flat())
+
+function sortClubs(clubA: any, clubB: any): number {
+  const aDissolved = clubA.gmember.length === 0
+  const bDissolved = clubB.gmember.length === 0
+  if (aDissolved && !bDissolved) return 1
+  if (!aDissolved && bDissolved) return -1
+  return 0
+}
+
+// pre-arrange the club list
+const sortedClubs = Object.entries(clubs).reduce((acc, [category, clubsInCategory]) => {
+  acc[category as ClubCategoryKey] = clubsInCategory.sort(sortClubs)
+  return acc
+}, {} as Clubs)
+
+const allClubs = computed(() => Object.values(sortedClubs).flat())
 
 const filteredClubs = computed(() => {
-  // return all clubs if no search term
-  if (!searchTerm.value) {
-    // Sort clubs, putting dissolved clubs at the end
-    return Object.entries(clubs).reduce((acc, [category, clubs]) => {
-      acc[category as ClubCategoryKey] = clubs.sort((a: any, b: any) => {
-        const aDissolved = a.gmember.length === 0
-        const bDissolved = b.gmember.length === 0
-        if (aDissolved && !bDissolved)
-          return 1 // a should come after b
-        if (!aDissolved && bDissolved)
-          return -1 // a should come before b
-        return 0 // keep original order if both are dissolved or not dissolved
-      })
-      return acc
-    }, {} as Clubs)
-  }
+  if (!searchTerm.value) return sortedClubs
 
-  // ignore capitalization
   const lowerCaseSearchTerm = searchTerm.value.toLowerCase()
 
-  // return zh/en name match the search term
-  return Object.entries(clubs).reduce((acc, [category]) => {
-    const filteredClubs = allClubs.value.filter(club =>
+  return Object.entries(sortedClubs).reduce((acc, [category]) => {
+    const filtered = allClubs.value.filter(club =>
       club.groups.some((group: Groups) =>
-        (group.C_NameC as string).toLowerCase().includes(lowerCaseSearchTerm) || (group.C_NameE as string).toLowerCase().includes(lowerCaseSearchTerm),
+        group.C_NameC.toLowerCase().includes(lowerCaseSearchTerm) || group.C_NameE.toLowerCase().includes(lowerCaseSearchTerm),
       ),
     )
-
-    // Sort filtered clubs, putting dissolved clubs at the end
-    acc[category as ClubCategoryKey] = filteredClubs.sort((a, b) => {
-      const aDissolved = a.gmember.length === 0
-      const bDissolved = b.gmember.length === 0
-      if (aDissolved && !bDissolved)
-        return 1
-      if (!aDissolved && bDissolved)
-        return -1
-      return 0
-    })
+    acc[category as ClubCategoryKey] = filtered
     return acc
   }, {} as Clubs)
 })
