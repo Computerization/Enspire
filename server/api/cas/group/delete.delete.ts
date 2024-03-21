@@ -50,7 +50,7 @@ export default eventHandler(async (event) => {
   if (!isPresidentOrVicePresident)
     setResponseStatus(event, 403)
 
-  await prisma.joinClub.delete({
+  await prisma.joinGroup.delete({
     where: {
       clubId: Number(requestBody.clubId),
     },
