@@ -9,17 +9,10 @@ export default defineNuxtConfig({
     '@nuxt/content',
     'shadcn-nuxt',
     'nuxt-icon',
-    '@nuxtjs/google-fonts',
+    '@nuxt/fonts',
   ],
   build: {
     transpile: ['vue-clerk', '@clerk/clerk-js'],
-  },
-  googleFonts: {
-    families: {
-      'Inter': [400, 500],
-      'Noto Sans SC': [400, 500],
-      'IBM+Plex+Mono': [400, 500],
-    },
   },
   runtimeConfig: {
     public: {
