@@ -35,7 +35,15 @@ export default eventHandler(async (event) => {
     // },
   })
 
+  if (!joinGroup) {
+    return {
+      data: null,
+      status: 'No joinGroup information found for the club',
+    }
+  }
+
   return {
     data: joinGroup,
+    status: 'success',
   }
 })
