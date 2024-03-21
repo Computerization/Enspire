@@ -119,8 +119,8 @@ devDependencies:
     specifier: ^5.11.0
     version: 5.11.0
   shadcn-nuxt:
-    specifier: ^0.9.0
-    version: 0.9.0
+    specifier: ^0.10.0
+    version: 0.10.2
   ts-node:
     specifier: ^10.9.2
     version: 10.9.2(@types/node@20.11.30)(typescript@5.4.3)
@@ -1721,7 +1721,7 @@ packages:
     resolution: {integrity: sha512-Ghv2MgWbJcUM9G5Dy3oQP0cJkUwEgaiuQxEF61FXJdn0a69Q4StZEP/hLF0MWPM9m6EvAwI7orxkJHM7MrmtVg==}
     hasBin: true
     dependencies:
-      '@nuxt/kit': 3.10.3
+      '@nuxt/kit': 3.11.1
       ci-info: 4.0.0
       consola: 3.2.3
       create-require: 1.1.1
@@ -1885,48 +1885,64 @@ packages:
       - uWebSockets.js
     dev: true
 
-  /@oxc-parser/binding-darwin-arm64@0.2.0:
-    resolution: {integrity: sha512-PucRCzEkSHlvByLaD1oVrrxaY3Lq5mqnaKCJxNdoMoPlTO/Qkqb5+enNOedKLaWhp3J4PSVOCCMMGAvzx32J0Q==}
+  /@oxc-parser/binding-darwin-arm64@0.8.0:
+    resolution: {integrity: sha512-3Dws5Wzj9efojjqvhS4ZF+Abh0EoiI5ciOE2kdLifMzSg4fnmYAIOktoUnPEo87TNIb4SiFJ5JgPBgEyq42Eow==}
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
     dev: true
     optional: true
 
-  /@oxc-parser/binding-darwin-x64@0.2.0:
-    resolution: {integrity: sha512-Z6DIZx22rDo9++qWAC/d1IaS0oIT/iws0oeLBPR7iwD6dWnwflNCF/OxzTTbLwnDI6EtJj/jUBhGn580mCHQ7w==}
+  /@oxc-parser/binding-darwin-x64@0.8.0:
+    resolution: {integrity: sha512-DAUJ/mfq0Jn2VDYn69bhHTsIWj+aZ/viamexFwaLL7ntkIFmGpzAJZUlWofpY1IRJynKWW+P5AOLYXMllw4qUw==}
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
     dev: true
     optional: true
 
-  /@oxc-parser/binding-linux-arm64-gnu@0.2.0:
-    resolution: {integrity: sha512-kA12rHcL4tjr87crj7foaHhc8rpG6VuvDUqy+FxAQEYQ+f/TmBV/8tMEezQGLC4yT0ZzCrnCySc+YurGbWy/+Q==}
+  /@oxc-parser/binding-linux-arm64-gnu@0.8.0:
+    resolution: {integrity: sha512-ZHQVey/O4K3zTIKtpfsbtJIE8MPTRHRxgY3dejaoeFQGf9C3HasgF132Yp4zN/jOUx+x8czKPVa/Af40ViyhGQ==}
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /@oxc-parser/binding-linux-x64-gnu@0.2.0:
-    resolution: {integrity: sha512-70RXjlZKfoCxZmaiSzZCuM4tfomg2JXuu7Gdy+JIwl+lQJTnQiX9asA4Smq76vOfsuxSx7ywCZHI50rJxA1LIQ==}
+  /@oxc-parser/binding-linux-arm64-musl@0.8.0:
+    resolution: {integrity: sha512-Diw+Tnf5v+zAYXzDoSKCZsMaroU6GoqZMS7smfDtFnZYTHWZrsTmPBLUQe7AFiG7O7tkhsCdcWjOYgbVkrSVOA==}
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@oxc-parser/binding-linux-x64-gnu@0.8.0:
+    resolution: {integrity: sha512-WloqcRrtQUVEP/Sy8ZeEgF0HgBKQjOv3zLFZqbC5ipkerKriGcVbsq3fOIMOi/55AM6/UhIAjeZGnoeco72JjQ==}
     cpu: [x64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /@oxc-parser/binding-win32-arm64-msvc@0.2.0:
-    resolution: {integrity: sha512-HrA/hHaaJXyyGDyKuSSPpfQUSmKSaX2AsdOhuIl5sqjCdYvyP2EC1/4hRjO9J1Vl2MovQfzgj5NQ0uxY8lonqQ==}
+  /@oxc-parser/binding-linux-x64-musl@0.8.0:
+    resolution: {integrity: sha512-2j7BD9szwSXTvSj0Q8VE98UHGYvrgZzdLy4EyB0FilhQnopEfz+YV674rWGY2Il1VYxHJwGctrTJHvARolu37g==}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@oxc-parser/binding-win32-arm64-msvc@0.8.0:
+    resolution: {integrity: sha512-mcomr1og17yCmnwn8Q7CRzrH9Va0HccWe4Ld3/u/elBsw0SEzYGVvECRzCyRglYAbKTtusz7as9Jee0RiMOMmg==}
     cpu: [arm64]
     os: [win32]
     requiresBuild: true
     dev: true
     optional: true
 
-  /@oxc-parser/binding-win32-x64-msvc@0.2.0:
-    resolution: {integrity: sha512-0xnuCSnkXY4dfBTUdlu2lF3YCyBbxqeo4qeED7CQfE0vd8CrVGL/U/ycvZlYurVhMaI/x0fZe6HYBJuMYssI8g==}
+  /@oxc-parser/binding-win32-x64-msvc@0.8.0:
+    resolution: {integrity: sha512-nIBkc1KZOVYUaHT3+U+gM354P3byMAIXMvlmLMbs0kWVRcI4vrzL8qwWpC6QdBQxWKZGqPEqGolv8H4dDYA9nQ==}
     cpu: [x64]
     os: [win32]
     requiresBuild: true
@@ -6860,7 +6876,7 @@ packages:
   /lower-case@2.0.2:
     resolution: {integrity: sha512-7fm3l3NAF9WfN6W3JOmf5drwpVqX78JtoGJ3A6W0a6ZnldM41w2fV5D490psKFTpMds8TJse/eHLFFsNHHjHgg==}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: false
 
   /lru-cache@10.2.0:
@@ -7704,7 +7720,7 @@ packages:
     resolution: {integrity: sha512-fgAN3jGAh+RoxUGZHTSOLJIqUc2wmoBwGR4tbpNAKmmovFoWq0OdRkb0VkldReO2a2iBT/OEulG9XSUc10r3zg==}
     dependencies:
       lower-case: 2.0.2
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: false
 
   /node-abi@3.56.0:
@@ -8146,15 +8162,17 @@ packages:
       prelude-ls: 1.2.1
       type-check: 0.4.0
 
-  /oxc-parser@0.2.0:
-    resolution: {integrity: sha512-mjRsPpDdVqLOqgvafF0gh1dy1O5Frn+VVKsrAbQ2IQPN619JpnzsEb4xV5MyeR6/3bAH609qHzP6Uja5y7mB8A==}
+  /oxc-parser@0.8.0:
+    resolution: {integrity: sha512-ObPeMkbDX7igb7NyyAC8CbVC3fY+YmlMsxsRQ2oyFBkpQtI5tjoyqSDKbS9A9EcJvt2q89C4UoC+HjVBdLYYJg==}
     optionalDependencies:
-      '@oxc-parser/binding-darwin-arm64': 0.2.0
-      '@oxc-parser/binding-darwin-x64': 0.2.0
-      '@oxc-parser/binding-linux-arm64-gnu': 0.2.0
-      '@oxc-parser/binding-linux-x64-gnu': 0.2.0
-      '@oxc-parser/binding-win32-arm64-msvc': 0.2.0
-      '@oxc-parser/binding-win32-x64-msvc': 0.2.0
+      '@oxc-parser/binding-darwin-arm64': 0.8.0
+      '@oxc-parser/binding-darwin-x64': 0.8.0
+      '@oxc-parser/binding-linux-arm64-gnu': 0.8.0
+      '@oxc-parser/binding-linux-arm64-musl': 0.8.0
+      '@oxc-parser/binding-linux-x64-gnu': 0.8.0
+      '@oxc-parser/binding-linux-x64-musl': 0.8.0
+      '@oxc-parser/binding-win32-arm64-msvc': 0.8.0
+      '@oxc-parser/binding-win32-x64-msvc': 0.8.0
     dev: true
 
   /p-limit@2.3.0:
@@ -9357,11 +9375,11 @@ packages:
   /setprototypeof@1.2.0:
     resolution: {integrity: sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw==}
 
-  /shadcn-nuxt@0.9.0:
-    resolution: {integrity: sha512-07TT7U6J6QsuQ4UptNI36C+bYaLfuACcQS3sp1DO/qGyRSlCUc2K1hQzVFigWpiG1fcdHXmBZKzwtLtkuh/nLQ==}
+  /shadcn-nuxt@0.10.2:
+    resolution: {integrity: sha512-97et6ArSKS/oclRIH80lLgs8f3ks/gvEVogOpQUsXBZ92omoC24/6JgxBpOzjHba10i5wqGGkuHa2QgJ8CP5ig==}
     dependencies:
       '@nuxt/kit': 3.11.1
-      oxc-parser: 0.2.0
+      oxc-parser: 0.8.0
     transitivePeerDependencies:
       - rollup
       - supports-color
