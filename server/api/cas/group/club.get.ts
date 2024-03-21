@@ -16,16 +16,18 @@ export default eventHandler(async (event) => {
   }
 
   // get clubId from request body
-  const requestBody = await readValidatedBody(event, body => requestSchema.safeParse(body))
+  const result = await readValidatedBody(event, body => requestSchema.safeParse(body))
 
-  if (!requestBody.success) {
+  if (!result.success) {
     setResponseStatus(event, 400)
     return
   }
 
+  const requestBody = result.data
+
   const joinGroup = await prisma.joinGroup.findUnique({
     where: {
-      clubId: Number(requestBody.data.club),
+      clubId: Number(requestBody.club),
     },
     // only use include if the value required is not a scalar
     // include: {
