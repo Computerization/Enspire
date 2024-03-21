@@ -5,11 +5,9 @@ import Tabs from '@/components/ui/tabs/Tabs.vue'
 import TabsContent from '@/components/ui/tabs/TabsContent.vue'
 import TabsTrigger from '@/components/ui/tabs/TabsTrigger.vue'
 import json from '@/content/clubs.json'
-
-import type { ClubCategoryKey, Clubs, Groups } from '@/content/clubs'
 import ClubCard from '@/components/custom/club-card.vue'
 
-const clubs: Clubs = json as Clubs
+import type { Club, ClubCategoryKey, Clubs, Groups } from '@/content/clubs'
 
 // This page requires login
 definePageMeta({
@@ -20,42 +18,30 @@ const categories = (['Sports', 'Service', 'Arts', 'Life', 'Academic'] as const).
 
 const searchTerm = ref('')
 
-function sortClubs(clubA: any, clubB: any): number {
-  const aDissolved = clubA.gmember.length === 0
-  const bDissolved = clubB.gmember.length === 0
-  if (aDissolved && !bDissolved)
-    return 1
-  if (!aDissolved && bDissolved)
-    return -1
-  return 0
-}
-
-// pre-arrange the club list
-const sortedClubs = Object.entries(clubs).reduce((acc, [category, clubsInCategory]) => {
-  acc[category as ClubCategoryKey] = clubsInCategory.sort(sortClubs)
+// sort the club
+const clubs = Object.entries(json as Clubs).reduce((acc, [category, clubsInCategory]) => {
+  acc[category as ClubCategoryKey] = clubsInCategory.sort(
+    (a: Club, b: Club) => (a.gmember.length === 0) === (b.gmember.length === 0) ? 0 : (a.gmember.length === 0) ? 1 : -1,
+  )
   return acc
 }, {} as Clubs)
 
-const allClubs = computed(() => Object.values(sortedClubs).flat())
+const allClubs = computed(() => Object.values(clubs).flat())
+const isSearchActive = computed(() => searchTerm.value !== '')
 
 const filteredClubs = computed(() => {
   if (!searchTerm.value)
-    return sortedClubs
+    return clubs
 
-  const lowerCaseSearchTerm = searchTerm.value.toLowerCase()
-
-  return Object.entries(sortedClubs).reduce((acc, [category]) => {
-    const filtered = allClubs.value.filter(club =>
+  return Object.entries(clubs).reduce((acc, [category]) => {
+    acc[category as ClubCategoryKey] = allClubs.value.filter(club =>
       club.groups.some((group: Groups) =>
-        group.C_NameC.toLowerCase().includes(lowerCaseSearchTerm) || group.C_NameE.toLowerCase().includes(lowerCaseSearchTerm),
+        group.C_NameC.toLowerCase().includes(searchTerm.value.toLowerCase()) || group.C_NameE.toLowerCase().includes(searchTerm.value.toLowerCase()),
       ),
     )
-    acc[category as ClubCategoryKey] = filtered
     return acc
   }, {} as Clubs)
 })
-
-const isSearchActive = computed(() => searchTerm.value !== '')
 </script>
 
 <template>
