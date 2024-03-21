@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     'shadcn-nuxt',
     'nuxt-icon',
     '@nuxt/fonts',
+    'nuxt-svgo',
   ],
   build: {
     transpile: ['vue-clerk', '@clerk/clerk-js'],

@@ -115,6 +115,9 @@ devDependencies:
   nuxt-icon:
     specifier: ^0.6.10
     version: 0.6.10(nuxt@3.10.3)(vite@5.2.2)(vue@3.4.21)
+  nuxt-svgo:
+    specifier: ^4.0.0
+    version: 4.0.0(vue@3.4.21)
   prisma:
     specifier: ^5.11.0
     version: 5.11.0
@@ -7434,6 +7437,11 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
+  /mini-svg-data-uri@1.4.4:
+    resolution: {integrity: sha512-r9deDe9p5FJUPZAk3A59wGH7Ii9YrjjWw0jmw/liSbHl2CHiyXj6FcDXDu2K3TjVAXqiJdaw3xxwlZZr9E6nHg==}
+    hasBin: true
+    dev: true
+
   /minimatch@3.1.2:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
     dependencies:
@@ -7914,6 +7922,30 @@ packages:
       - supports-color
       - vite
       - vue
+    dev: true
+
+  /nuxt-svgo@4.0.0(vue@3.4.21):
+    resolution: {integrity: sha512-Oeeexe6F+z64RlYl++0JaiCqiTazrnGO/Xtg8Nw1knhcb+qnzOxm12tiHKDyt8PRvbSGUo8rgjggdbRuossLxA==}
+    peerDependencies:
+      svgo-loader: ^4.0.0
+      vue: '>=3.2.13'
+      vue-loader: ^17.0.0
+      vue-svg-loader: 0.17.0-beta.2
+    peerDependenciesMeta:
+      svgo-loader:
+        optional: true
+      vue-loader:
+        optional: true
+      vue-svg-loader:
+        optional: true
+    dependencies:
+      '@nuxt/kit': 3.11.1
+      mini-svg-data-uri: 1.4.4
+      svgo: 3.2.0
+      vue: 3.4.21(typescript@5.4.3)
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
     dev: true
 
   /nuxt@3.10.3(@types/node@20.11.30)(@unocss/reset@0.58.6)(eslint@8.57.0)(floating-vue@5.2.2)(typescript@5.4.3)(unocss@0.58.6)(vite@5.2.2)(vue-tsc@2.0.7):

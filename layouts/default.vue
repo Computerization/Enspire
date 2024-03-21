@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Sidebar from '~/components/custom/sidebar.vue'
 import Toggle from '~/components/ui/toggle/Toggle.vue'
+import IconLogo from "assets/logo.svg";
 
 const isSidebarOpen = ref(false)
 const route = useRoute()
@@ -8,6 +9,15 @@ const route = useRoute()
 function toggleSidebar() {
   isSidebarOpen.value = !isSidebarOpen.value
 }
+
+const routeNameMap: Map<string, string> = new Map([
+  ['index', 'home'],
+  ['cas', 'club'],
+  ['clubs', 'list'],
+  ['rating', 'rating'],
+])
+
+const navList = computed(() => (route.name! as string).split('-'))
 
 watch(
   () => route.path,
@@ -34,7 +44,15 @@ watch(
           <Toggle class="lg:hidden" data-state="off" @click="toggleSidebar">
             <Icon name="ph:list" size="1.3em" />
           </Toggle>
-          <CustomNavIcon class="ml-4" />
+          <CustomNavIcon class="ml-4 h-full" />
+          <div v-for="(nav, index) in navList" :key="index" class="flex items-center">
+            <div class="ml-2 text-muted-foreground">
+              /
+            </div>
+            <div class="ml-2">
+              {{ routeNameMap.get(nav) ?? nav }}
+            </div>
+          </div>
 
           <div class="ml-auto flex items-center space-x-4">
             <CustomNavUser />
