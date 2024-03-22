@@ -1,7 +1,12 @@
 <script setup lang="ts">
+import { useFavicon, usePreferredDark } from '@vueuse/core'
 import Sidebar from '~/components/custom/sidebar.vue'
 import Toggle from '~/components/ui/toggle/Toggle.vue'
-import IconLogo from "assets/logo.svg";
+
+const isDark = usePreferredDark()
+const favicon = computed(() => isDark.value ? 'favicon-dark.ico' : 'favicon.ico')
+
+useFavicon(favicon)
 
 const isSidebarOpen = ref(false)
 const route = useRoute()
