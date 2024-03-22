@@ -25,7 +25,7 @@
     "date-fns": "^3.6.0",
     "h3": "^1.11.1",
     "h3-clerk": "^0.3.9",
-    "lucide-vue-next": "^0.354.0",
+    "lucide-vue-next": "^0.363.0",
     "nitropack": "2.9.4",
     "radix-vue": "^1.5.3",
     "tailwind-merge": "^2.2.2",
