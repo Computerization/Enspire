@@ -4,7 +4,7 @@ import Sidebar from '~/components/custom/sidebar.vue'
 import Toggle from '~/components/ui/toggle/Toggle.vue'
 
 const isDark = usePreferredDark()
-const favicon = computed(() => isDark.value ? 'favicon-dark.ico' : 'favicon.ico')
+const favicon = computed(() => isDark.value ? '/favicon-dark.ico' : '/favicon.ico')
 
 useFavicon(favicon)
 
