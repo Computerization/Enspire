@@ -14,6 +14,10 @@ definePageMeta({
   middleware: ['auth'],
 })
 
+useHead({
+  title: 'Clubs | Enspire',
+})
+
 const categories = (['Sports', 'Service', 'Arts', 'Life', 'Academic'] as const).map(c => c as ClubCategoryKey)
 
 const searchTerm = ref('')

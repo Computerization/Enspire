@@ -2,7 +2,7 @@
 import { useFavicon, usePreferredDark } from '@vueuse/core'
 
 const isDark = usePreferredDark()
-const favicon = computed(() => isDark.value ? 'favicon-dark.ico' : 'favicon.ico')
+const favicon = computed(() => isDark.value ? '/favicon-dark.ico' : '/favicon.ico')
 
 useFavicon(favicon)
 </script>
