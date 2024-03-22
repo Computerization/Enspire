@@ -2,6 +2,10 @@
 definePageMeta({
   middleware: ['auth'],
 })
+
+useHead({
+  title: 'Classroom Reservation | Enspire',
+})
 </script>
 
 <template>

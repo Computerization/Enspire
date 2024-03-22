@@ -30,7 +30,6 @@ const formSchema = toTypedSchema(z.object({
 }))
 
 const { data } = await useAsyncData<AllClubs>('allClubs', () => {
-  // @ts-expect-error An excessive stack error is thrown because of a bug in nitro. See unjs/nitro#470.
   return $fetch('/api/user/all_clubs', {
     headers: useRequestHeaders(),
     method: 'GET',

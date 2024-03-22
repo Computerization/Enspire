@@ -1,4 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useFavicon, usePreferredDark } from '@vueuse/core'
+
+const isDark = usePreferredDark()
+const favicon = computed(() => isDark.value ? '/favicon-dark.ico' : '/favicon.ico')
+
+useFavicon(favicon)
+</script>
 
 <template>
   <div class="md:hidden" />

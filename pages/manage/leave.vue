@@ -8,6 +8,10 @@ definePageMeta({
   middleware: ['auth'],
 })
 
+useHead({
+  title: 'Leave Request | Enspire',
+})
+
 const refreshState = ref(false)
 </script>
 

@@ -39,6 +39,10 @@ if (filteredClubs[0] && filteredClubs[0].groups[0].C_DescriptionC) {
 definePageMeta({
   middleware: ['auth'],
 })
+
+useHead({
+  title: 'Clubs | Enspire',
+})
 </script>
 
 <template>
