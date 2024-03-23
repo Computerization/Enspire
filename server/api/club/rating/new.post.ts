@@ -21,6 +21,21 @@ export default eventHandler(async (event) => {
 
   const requestBody = await readValidatedBody(event, body => requestSchema.safeParse(body))
   if (requestBody.success) {
+    const record = await prisma.clubRating.findUnique({
+      where: {
+        clubId_rateBy_rateScope: {
+          clubId: Number(requestBody.data.club),
+          rateBy: auth.userId,
+          rateScope: requestBody.data.scope,
+        },
+      },
+    })
+
+    if (record) {
+      setResponseStatus(event, 403)
+      return
+    }
+
     await prisma.clubRating.create({
       data: {
         rateBy: auth.userId,
