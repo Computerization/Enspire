@@ -21,6 +21,7 @@ const formData = ref({
   applicant: '',
   note: '',
 })
+
 const loop = ref<boolean>()
 </script>
 
@@ -42,7 +43,7 @@ const loop = ref<boolean>()
       </div>
       <div class="py-5" />
       <form class="space-y-2">
-        <FormField v-slot="{ componentField }" name="classroom-reservation">
+        <FormField name="main">
           <FormItem>
             <FormLabel>预约时间</FormLabel>
             <FormControl>
@@ -50,11 +51,11 @@ const loop = ref<boolean>()
                 <PopoverTrigger as-child>
                   <Button variant="outline" class="w-full">
                     <CalendarIcon class="mr-2 h-4 w-4" />
-                    <span>{{ date.base ? format(date.base, 'PPP') : "选择日期" }}</span>
+                    <span>{{ formData.time.date ? format(formData.time.date, 'PPP') : "选择日期" }}</span>
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent class="w-auto p-0">
-                  <Calendar v-model="date.base" mode="date" required />
+                  <Calendar v-model="formData.time.date" mode="date" required />
                 </PopoverContent>
               </Popover>
               <!-- TODO: change the following container to a ToggleGroup -->
@@ -80,20 +81,26 @@ const loop = ref<boolean>()
                 <Switch :checked="loop" @update:checked="(v) => (loop = v)" />
                 <Label>循环</Label>
               </div>
-              <!-- TODO: after the ToggleGroup element is properly implemented,
-                the following condition should be (data.base || [something in the ToggleGroup selected]) -->
-              <Popover v-if="date.base || loop">
+              <Popover>
                 <PopoverTrigger as-child>
                   <Button variant="outline" class="w-full">
                     <CalendarIcon class="mr-2 h-4 w-4" />
-                    <span>{{ date.start ? `${format(date.start, 'hh:mm')} ~ ${format(date.end, 'hh:mm')}` : "选择时间范围" }}</span>
+                    <span>{{
+                      formData.time.start.getTime() !== new Date(0).getTime() && formData.time.end.getTime() !== new Date(0).getTime()
+                        ? `${format(formData.time.start, 'hh:mm')} ~ ${format(formData.time.end, 'hh:mm')}`
+                        : `选择
+                          ${formData.time.start.getTime() === new Date(0).getTime() ? "开始" : ""}
+                          ${formData.time.end.getTime() === new Date(0).getTime() ? "结束" : ""}
+                        时间`
+                    }}
+                    </span>
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent class="w-auto pt-5 text-center">
                   开始时间
-                  <Calendar v-model="date.start" mode="time" hide-time-header required />
+                  <Calendar v-model="formData.time.start" mode="time" hide-time-header required />
                   结束时间
-                  <Calendar v-model="date.end" mode="time" hide-time-header required />
+                  <Calendar v-model="formData.time.end" mode="time" hide-time-header required />
                 </PopoverContent>
               </Popover>
             </formcontrol>
@@ -101,7 +108,7 @@ const loop = ref<boolean>()
           <FormItem>
             <FormLabel>选择教室</FormLabel>
             <FormControl>
-              <Select v-bind="componentField" required>
+              <Select v-model="formData.classroom" required>
                 <SelectTrigger>
                   <SelectValue placeholder="选择教室" />
                 </SelectTrigger>
@@ -142,14 +149,14 @@ const loop = ref<boolean>()
           <FormItem>
             <FormLabel>活动描述</FormLabel>
             <FormControl>
-              <Input type="text" placeholder="简短描述所预约教室的用途" v-bind="componentField" required />
+              <Input v-model="formData.description" type="text" placeholder="简短描述所预约教室的用途" required />
             </FormControl>
             <FormMessage />
           </FormItem>
           <FormItem>
             <FormLabel>申请人</FormLabel>
             <FormControl>
-              <Select v-bind="componentField" required>
+              <Select v-model="formData.applicant" required>
                 <SelectTrigger>
                   <SelectValue placeholder="选择申请人" />
                 </SelectTrigger>
@@ -174,7 +181,7 @@ const loop = ref<boolean>()
           <FormItem>
             <FormLabel>备注</FormLabel>
             <FormControl>
-              <Textarea type="text" placeholder="备注" v-bind="componentField" class="resize-none" rows="3" required />
+              <Textarea v-model="formData.note" type="text" placeholder="备注" class="resize-none" rows="3" />
             </FormControl>
             <FormDescription>
               非必填
