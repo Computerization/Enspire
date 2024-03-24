@@ -11,8 +11,16 @@ useHead({
 })
 
 const formData = ref({
+  date: null,
+  loop: false,
+  day: {
+    mon: false,
+    tue: false,
+    wed: false,
+    thu: false,
+    fri: false,
+  },
   time: {
-    date: null,
     start: new Date(0),
     end: new Date(0),
   },
@@ -21,8 +29,6 @@ const formData = ref({
   applicant: '',
   note: '',
 })
-
-const loop = ref<boolean>()
 </script>
 
 <template>
@@ -47,38 +53,39 @@ const loop = ref<boolean>()
           <FormItem>
             <FormLabel>预约时间</FormLabel>
             <FormControl>
-              <Popover v-if="!loop">
+              <Popover v-if="!formData.loop">
                 <PopoverTrigger as-child>
                   <Button variant="outline" class="w-full">
                     <CalendarIcon class="mr-2 h-4 w-4" />
-                    <span>{{ formData.time.date ? format(formData.time.date, 'PPP') : "选择日期" }}</span>
+                    <span>{{ formData.date ? format(formData.date, 'PPP') : "选择日期" }}</span>
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent class="w-auto p-0">
-                  <Calendar v-model="formData.time.date" mode="date" required />
+                  <Calendar v-model="formData.date" mode="date" required />
                 </PopoverContent>
               </Popover>
               <!-- TODO: change the following container to a ToggleGroup -->
-              <div v-if="loop" class="flex space-x-2 items-center">
+              <!-- BUG: Toggle does not work with formData -->
+              <div v-if="formData.loop" class="flex space-x-2 items-center">
                 <div>每周</div>
-                <Toggle variant="outline">
+                <Toggle v-model="formData.day.mon" variant="outline">
                   一
                 </Toggle>
-                <Toggle variant="outline">
+                <Toggle v-model="formData.day.tue" variant="outline">
                   二
                 </Toggle>
-                <Toggle variant="outline">
+                <Toggle v-model="formData.day.wed" variant="outline">
                   三
                 </Toggle>
-                <Toggle variant="outline">
+                <Toggle v-model="formData.day.thu" variant="outline">
                   四
                 </Toggle>
-                <Toggle variant="outline">
+                <Toggle v-model="formData.day.fri" variant="outline">
                   五
                 </Toggle>
               </div>
               <div class="flex space-x-2 items-center">
-                <Switch :checked="loop" @update:checked="(v) => (loop = v)" />
+                <Switch :checked="formData.loop" @update:checked="(v) => (formData.loop = v)" />
                 <Label>循环</Label>
               </div>
               <Popover>
