@@ -10,15 +10,15 @@ export default eventHandler(async (event) => {
     return
   }
 
-  const now = new Date();
-  var semester = now.getFullYear().toString(); // string for storing scope: yyyy[a|b] 
+  const now = new Date()
+  let semester = now.getFullYear().toString() // string for storing scope: yyyy[a|b]
 
-  if (([0, 1]).includes(now.getMonth())) {
-    semester += "a"; // the `a` period of year
-  } else if (([5, 6]).includes(now.getMonth())) {
-    semester += "b"; // the `b` period of year
-  } else {
-    semester += "x" // one should ensure that this api will never be called when the current month is not in [0, 1, 5, 6]
+  if (([0, 1]).includes(now.getMonth()))
+    semester += 'a' // the `a` period of year
+  else if (([5, 6]).includes(now.getMonth()))
+    semester += 'b' // the `b` period of year
+  else {
+    semester += 'x' // one should ensure that this api will never be called when the current month is not in [0, 1, 5, 6]
   }
 
   const tsimsStudentId = (await prisma.user.findUniqueOrThrow({
@@ -27,7 +27,7 @@ export default eventHandler(async (event) => {
     },
   })).tsimsStudentId
 
-  var clubsUnrated = await prisma.club.findMany({
+  const clubsUnrated = await prisma.club.findMany({
     where: {
       membersByTsimsStudentId: {
         has: tsimsStudentId,
@@ -36,8 +36,8 @@ export default eventHandler(async (event) => {
         none: {
           rateBy: { equals: auth.userId },
           rateScope: { equals: semester },
-        }
-      }
+        },
+      },
     },
     select: {
       id: true,
