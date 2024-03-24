@@ -9,11 +9,17 @@ definePageMeta({
 useHead({
   title: 'Classroom Reservation | Enspire',
 })
-// TODO: integrate the following stuff into the form
-const date = ref({
-  base: null,
-  start: new Date(0),
-  end: new Date(0),
+
+const formData = ref({
+  time: {
+    date: null,
+    start: new Date(0),
+    end: new Date(0),
+  },
+  classroom: '',
+  description: '',
+  applicant: '',
+  note: '',
 })
 const loop = ref<boolean>()
 </script>
@@ -22,7 +28,12 @@ const loop = ref<boolean>()
   <div>
     <div class="inline-block align-top w-full lg:w-1/2 p-5">
       <div class="flex rounded border h-[50vh] lg:h-[80vh] items-center justify-center">
-        map
+        <div>
+          map placeholder
+          <div class="my-5" />
+          FORMDATA: (for testing only)
+          <pre>{{ JSON.stringify(formData, null, 2) }}</pre>
+        </div>
       </div>
     </div>
     <div class="inline-block align-top w-full lg:w-1/2 lg:max-w-[480px] p-5">
