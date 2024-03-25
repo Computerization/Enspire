@@ -4,7 +4,7 @@ import * as z from 'zod'
 const prisma = new PrismaClient()
 
 const requestSchema = z.object({
-  club: z.string(),
+  club: z.number(),
 })
 
 export default eventHandler(async (event) => {
@@ -18,7 +18,7 @@ export default eventHandler(async (event) => {
   // get clubId from request body
   const requestBody = await readValidatedBody(event, body => requestSchema.parse(body))
 
-  const joinGroup = await prisma.joinGroup.findUnique({
+  const clubInfo = await prisma.joinGroup.findUnique({
     where: {
       clubId: Number(requestBody.club),
     },
@@ -28,15 +28,5 @@ export default eventHandler(async (event) => {
     // },
   })
 
-  if (!joinGroup) {
-    return {
-      data: null,
-      status: 'No joinGroup information found for the club',
-    }
-  }
-
-  return {
-    data: joinGroup,
-    status: 'success',
-  }
+  return clubInfo
 })
