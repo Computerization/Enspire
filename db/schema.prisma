@@ -30,7 +30,7 @@ model Club {
   description               Json // multilingual
   LeaveRequest              LeaveRequest[]
   ClubRating                ClubRating[]
-  JoinGroup                 JoinGroup[]
+  GroupInfo                 GroupInfo[]
 }
 
 enum LeaveRequestStatus {
@@ -71,7 +71,7 @@ model ClubRating {
   @@unique([id, clubId, rateBy, rateScope]) // One student can vote only once in one semester
 }
 
-model JoinGroup {
+model GroupInfo {
   id                    String   @id @default(dbgenerated("gen_random_uuid()"))
   clubId                Int // Link to Club model
   wechatGroupUrl        String
