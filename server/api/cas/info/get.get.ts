@@ -18,7 +18,7 @@ export default eventHandler(async (event) => {
   // get clubId from request body
   const requestBody = await readValidatedBody(event, body => requestSchema.parse(body))
 
-  const clubInfo = await prisma.groupInfo.findUnique({
+  return await prisma.groupInfo.findUnique({
     where: {
       clubId: Number(requestBody.club),
     },
@@ -27,6 +27,4 @@ export default eventHandler(async (event) => {
     //   wechatGroupUrl: true,
     // },
   })
-
-  return clubInfo
 })
