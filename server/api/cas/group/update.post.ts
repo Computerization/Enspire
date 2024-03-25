@@ -5,7 +5,7 @@ const prisma = new PrismaClient()
 
 const requestSchema = z.object({
   clubId: z.string(),
-  wechatGroupUrl: z.string().url({ message: 'Invalid URL' }),
+  wechatGroupUrl: z.string().startsWith('https://weixin.qq.com/g/', { message: 'WeChat Group URL required' }),
   wechatGroupExpiration: z.string().datetime(),
 })
 
