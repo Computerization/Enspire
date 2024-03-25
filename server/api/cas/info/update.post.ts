@@ -36,9 +36,11 @@ export default eventHandler(async (event) => {
   if (!club)
     setResponseStatus(event, 404)
 
-  await prisma.joinGroup.create({
-    data: {
+  await prisma.groupInfo.update({
+    where: {
       clubId: Number(requestBody.clubId),
+    },
+    data: {
       wechatGroupUrl: requestBody.wechatGroupUrl,
       wechatGroupExpiration: new Date(requestBody.wechatGroupExpiration),
     },
