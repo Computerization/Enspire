@@ -18,7 +18,7 @@ export default eventHandler(async (event) => {
   else if (([5, 6]).includes(now.getMonth()))
     semester += 'b' // the `b` period of year
   else
-    semester += 'x' // one should ensure that this api will never be called when the current month is not in [0, 1, 5, 6]
+    return [] // one should ensure that this api will never be called when the current month is not in [0, 1, 5, 6]
 
   const tsimsStudentId = (await prisma.user.findUniqueOrThrow({
     where: {
@@ -44,8 +44,5 @@ export default eventHandler(async (event) => {
     },
   })
 
-  return {
-    scope: semester,
-    clubs: clubsUnrated,
-  }
+  return clubsUnrated
 })
