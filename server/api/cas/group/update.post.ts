@@ -23,14 +23,7 @@ export default eventHandler(async (event) => {
     },
   }).then(user => user?.tsimsStudentId)
 
-  const result = await readValidatedBody(event, body => requestSchema.safeParse(body))
-
-  if (!result.success) {
-    setResponseStatus(event, 400)
-    return
-  }
-
-  const requestBody = result.data
+  const requestBody = await readValidatedBody(event, body => requestSchema.parse(body))
 
   // check if the user is in the presidentByTsimsStudentId or vicePresidentByTsimsStudentId of the club
   const isPresidentOrVicePresident = await prisma.club.findFirst({

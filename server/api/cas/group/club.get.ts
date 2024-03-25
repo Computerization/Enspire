@@ -16,14 +16,7 @@ export default eventHandler(async (event) => {
   }
 
   // get clubId from request body
-  const result = await readValidatedBody(event, body => requestSchema.safeParse(body))
-
-  if (!result.success) {
-    setResponseStatus(event, 400)
-    return
-  }
-
-  const requestBody = result.data
+  const requestBody = await readValidatedBody(event, body => requestSchema.parse(body))
 
   const joinGroup = await prisma.joinGroup.findUnique({
     where: {
