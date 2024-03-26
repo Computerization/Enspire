@@ -30,6 +30,7 @@ model Club {
   description               Json // multilingual
   LeaveRequest              LeaveRequest[]
   ClubRating                ClubRating[]
+  GroupInfo                 GroupInfo[]
 }
 
 enum LeaveRequestStatus {
@@ -55,12 +56,12 @@ model LeaveRequest {
 }
 
 model ClubRating {
-  id        String        @id @default(dbgenerated("gen_random_uuid()"))
+  id        String   @id @default(dbgenerated("gen_random_uuid()"))
   rateBy    String // Link to User model
   clubId    Int // Link to Club model
-  rating    Int           @default(0) // 0 as initial rate lol
+  rating    Int      @default(0) // 0 as initial rate lol
   comment   String? // Optional comment for a rating
-  ratedAt   DateTime      @default(now()) // I guess we don't need this as we already have `rateScope`
+  ratedAt   DateTime @default(now()) // I guess we don't need this as we already have `rateScope`
   rateScope String // Identifier for the current semester, required since one can only vote once in one semester; stored as <year><a|b>, i.e., 2024a
 
   // Relations
@@ -68,4 +69,16 @@ model ClubRating {
   club Club @relation(fields: [clubId], references: [id])
 
   @@unique([clubId, rateBy, rateScope]) // One student can vote only once in one semester
+}
+
+model GroupInfo {
+  id                    String   @id @default(dbgenerated("gen_random_uuid()"))
+  clubId                Int // Link to Club model
+  wechatGroupUrl        String
+  wechatGroupExpiration DateTime @default(now())
+
+  // Relations
+  club Club @relation(fields: [clubId], references: [id])
+
+  @@unique([clubId])
 }
