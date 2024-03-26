@@ -5,42 +5,47 @@ import Tabs from '@/components/ui/tabs/Tabs.vue'
 import TabsContent from '@/components/ui/tabs/TabsContent.vue'
 import TabsTrigger from '@/components/ui/tabs/TabsTrigger.vue'
 import json from '@/content/clubs.json'
-
-import type { ClubCategoryKey, Clubs, Groups } from '@/content/clubs'
 import ClubCard from '@/components/custom/club-card.vue'
 
-const clubs: Clubs = json as Clubs
+import type { Club, ClubCategoryKey, Clubs, Groups } from '@/content/clubs'
 
 // This page requires login
 definePageMeta({
   middleware: ['auth'],
 })
 
+useHead({
+  title: 'Clubs | Enspire',
+})
+
 const categories = (['Sports', 'Service', 'Arts', 'Life', 'Academic'] as const).map(c => c as ClubCategoryKey)
 
 const searchTerm = ref('')
+
+// sort the club
+const clubs = Object.entries(json as Clubs).reduce((acc, [category, clubsInCategory]) => {
+  acc[category as ClubCategoryKey] = clubsInCategory.sort(
+    (a: Club, b: Club) => (a.gmember.length === 0) === (b.gmember.length === 0) ? 0 : (a.gmember.length === 0) ? 1 : -1,
+  )
+  return acc
+}, {} as Clubs)
+
 const allClubs = computed(() => Object.values(clubs).flat())
+const isSearchActive = computed(() => searchTerm.value !== '')
 
 const filteredClubs = computed(() => {
-  // return all clubs if no search term
   if (!searchTerm.value)
     return clubs
 
-  // ignore capitalization
-  const lowerCaseSearchTerm = searchTerm.value.toLowerCase()
-
-  // return zh/en name match the search term
   return Object.entries(clubs).reduce((acc, [category]) => {
     acc[category as ClubCategoryKey] = allClubs.value.filter(club =>
       club.groups.some((group: Groups) =>
-        (group.C_NameC as string).toLowerCase().includes(lowerCaseSearchTerm) || (group.C_NameE as string).toLowerCase().includes(lowerCaseSearchTerm),
+        group.C_NameC.toLowerCase().includes(searchTerm.value.toLowerCase()) || group.C_NameE.toLowerCase().includes(searchTerm.value.toLowerCase()),
       ),
     )
     return acc
   }, {} as Clubs)
 })
-
-const isSearchActive = computed(() => searchTerm.value !== '')
 </script>
 
 <template>

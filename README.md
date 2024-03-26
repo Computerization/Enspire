@@ -1,6 +1,7 @@
 ![logo-bg-white](https://github.com/Computerization/Enspire/assets/46770502/27133de7-efd7-4860-8f83-e160a25ab042)
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/9caa53f8-a904-4abc-8bda-9e3c2899f44a/deploy-status)](https://app.netlify.com/sites/computerization-enspire-next/deploys) ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/computerization/enspire/quality.yml) ![GitHub License](https://img.shields.io/github/license/computerization/enspire) ![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/m/computerization/enspire/next)
+![GitHub deployments](https://img.shields.io/github/deployments/computerization/enspire/production?logo=vercel&label=vercel)
+ ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/computerization/enspire/quality.yml) ![GitHub License](https://img.shields.io/github/license/computerization/enspire) ![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/m/computerization/enspire/next)
 
 ---
 
