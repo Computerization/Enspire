@@ -17,11 +17,11 @@ export default eventHandler(async (event) => {
     return
   }
 
-  const tsimsStudentId = (await prisma.user.findUnique({
+  const tsimsStudentId = (await prisma.user.findUniqueOrThrow({
     where: {
       id: auth.userId,
     },
-  }))!.tsimsStudentId
+  })).tsimsStudentId
 
   const requestBody = await readValidatedBody(event, body => requestSchema.parse(body))
 
