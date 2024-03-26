@@ -10,14 +10,18 @@ useHead({
   title: 'Classroom Reservation | Enspire',
 })
 
+const BASE_DATE = new Date(1970, 0, 1)
 const formData = ref({
-  date: null,
+  date: null, // Date() object => ISO 8601 date string; use the date only
   loop: false,
-  time: {
-    start: new Date(0),
-    end: new Date(0),
   day: [false, false, false, false, false], // Monday ~ Friday
+  utcTime: {
+    // Date() object => ISO 8601 date string;
+    // add the timezone offset to this time to reveal the user input; use the time only
+    start: BASE_DATE,
+    end: BASE_DATE,
   },
+  timezoneOffset: -BASE_DATE.getTimezoneOffset() / 60, // in hours
   classroom: '',
   description: '',
   applicant: '',
@@ -92,22 +96,23 @@ const formData = ref({
                 <PopoverTrigger as-child>
                   <Button variant="outline" class="w-full">
                     <CalendarIcon class="mr-2 h-4 w-4" />
-                    <span>{{
-                      formData.time.start.getTime() !== new Date(0).getTime() && formData.time.end.getTime() !== new Date(0).getTime()
-                        ? `${format(formData.time.start, 'hh:mm')} ~ ${format(formData.time.end, 'hh:mm')}`
-                        : `选择
-                          ${formData.time.start.getTime() === new Date(0).getTime() ? "开始" : ""}
-                          ${formData.time.end.getTime() === new Date(0).getTime() ? "结束" : ""}
+                    <span>
+                      {{
+                        formData.utcTime.start.getTime() !== BASE_DATE.getTime() && formData.utcTime.end.getTime() !== BASE_DATE.getTime()
+                          ? `${format(formData.utcTime.start, 'hh:mm')} ~ ${format(formData.utcTime.end, 'hh:mm')}`
+                          : `选择
+                          ${formData.utcTime.start.getTime() === BASE_DATE.getTime() ? "开始" : ""}
+                          ${formData.utcTime.end.getTime() === BASE_DATE.getTime() ? "结束" : ""}
                         时间`
-                    }}
+                      }}
                     </span>
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent class="w-auto pt-5 text-center">
                   开始时间
-                  <Calendar v-model="formData.time.start" mode="time" hide-time-header required />
+                  <Calendar v-model="formData.utcTime.start" mode="time" hide-time-header required />
                   结束时间
-                  <Calendar v-model="formData.time.end" mode="time" hide-time-header required />
+                  <Calendar v-model="formData.utcTime.end" mode="time" hide-time-header required />
                 </PopoverContent>
               </Popover>
             </formcontrol>
