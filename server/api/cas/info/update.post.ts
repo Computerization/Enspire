@@ -26,15 +26,17 @@ export default eventHandler(async (event) => {
   const requestBody = await readValidatedBody(event, body => requestSchema.parse(body))
 
   // check if the user is in the presidentByTsimsStudentId or vicePresidentByTsimsStudentId of the club
-  const club = (await prisma.club.findFirst({
+  const club = await prisma.club.findFirst({
     where: {
       id: requestBody.clubId,
       presidentByTsimsStudentId: tsimsStudentId,
     },
-  }))
+  })
 
-  if (!club)
+  if (!club) {
     setResponseStatus(event, 404)
+    return
+  }
 
   await prisma.groupInfo.update({
     where: {
