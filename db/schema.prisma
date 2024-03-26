@@ -13,7 +13,7 @@ model User {
   name           String
   tsimsStudentId Int            @unique
   LeaveRequest   LeaveRequest[]
-  ClubRating     ClubRating[] 
+  ClubRating     ClubRating[]
 }
 
 // Json types should be stored like {"zh": xxx, "en": xxx}.
@@ -67,5 +67,5 @@ model ClubRating {
   user User @relation(fields: [rateBy], references: [clerkUserId])
   club Club @relation(fields: [clubId], references: [id])
 
-  @@unique([id, clubId, rateBy, rateScope]) // One student can vote only once in one semester
+  @@unique([clubId, rateBy, rateScope]) // One student can vote only once in one semester
 }
