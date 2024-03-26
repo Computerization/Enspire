@@ -13,16 +13,10 @@ useHead({
 const formData = ref({
   date: null,
   loop: false,
-  day: {
-    mon: false,
-    tue: false,
-    wed: false,
-    thu: false,
-    fri: false,
-  },
   time: {
     start: new Date(0),
     end: new Date(0),
+  day: [false, false, false, false, false], // Monday ~ Friday
   },
   classroom: '',
   description: '',
@@ -64,28 +58,34 @@ const formData = ref({
                   <Calendar v-model="formData.date" mode="date" required />
                 </PopoverContent>
               </Popover>
-              <!-- TODO: change the following container to a ToggleGroup -->
-              <!-- BUG: Toggle does not work with formData -->
-              <div v-if="formData.loop" class="flex space-x-2 items-center">
-                <div>每周</div>
-                <Toggle v-model="formData.day.mon" variant="outline">
+              <!-- This ToggleGroup should be implemented in a better way but anyway it works -->
+              <ToggleGroup v-if="formData.loop" variant="outline">
+                每周
+                <ToggleGroupItem value="mon" @click="formData.day[0] = !formData.day[0]">
                   一
-                </Toggle>
-                <Toggle v-model="formData.day.tue" variant="outline">
+                </ToggleGroupItem>
+                <ToggleGroupItem value="tue" @click="formData.day[1] = !formData.day[1]">
                   二
-                </Toggle>
-                <Toggle v-model="formData.day.wed" variant="outline">
+                </ToggleGroupItem>
+                <ToggleGroupItem value="wed" @click="formData.day[2] = !formData.day[2]">
                   三
-                </Toggle>
-                <Toggle v-model="formData.day.thu" variant="outline">
+                </ToggleGroupItem>
+                <ToggleGroupItem value="thu" @click="formData.day[3] = !formData.day[3]">
                   四
-                </Toggle>
-                <Toggle v-model="formData.day.fri" variant="outline">
+                </ToggleGroupItem>
+                <ToggleGroupItem value="fri" @click="formData.day[4] = !formData.day[4]">
                   五
-                </Toggle>
-              </div>
+                </ToggleGroupItem>
+              </ToggleGroup>
               <div class="flex space-x-2 items-center">
-                <Switch :checked="formData.loop" @update:checked="(v) => (formData.loop = v)" />
+                <Switch
+                  :checked="formData.loop" @update:checked="(v) => {
+                    formData.loop = v
+                    // The following line is to fix a temporary problem caused by the implementation of ToggleGroup above
+                    // If a v-model is applied to the ToggleGroup, this can be safely removed
+                    formData.day = [false, false, false, false, false]
+                  }"
+                />
                 <Label>循环</Label>
               </div>
               <Popover>
