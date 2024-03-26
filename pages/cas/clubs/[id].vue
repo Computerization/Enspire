@@ -124,7 +124,8 @@ definePageMeta({
               <div v-if="club.supervisor" class="flex">
                 <span class="font-bold">指导老师:</span>
                 <span v-for="supervisor in club.supervisor" :key="supervisor.TeacherID" class="ml-2">
-                  {{ supervisor.T_Name }} ({{ supervisor.T_Nickname }})
+                  {{ supervisor.T_Name }}
+                  <span v-if="supervisor.T_Nickname" class="text-muted-foreground ml-1">({{ supervisor.T_Nickname }})</span>
                 </span>
               </div>
             </CardContent>
