@@ -8,7 +8,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare && prisma generate",
-    "update-club-info": "node --loader ts-node/esm utils/update-club-info.ts",
+    "update-club-info": "tsx utils/update-club-info.ts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "vue-tsc --noEmit --skipLibCheck"
@@ -56,6 +56,7 @@
     "prisma": "^5.11.0",
     "shadcn-nuxt": "^0.10.2",
     "ts-node": "^10.9.2",
+    "tsx": "^4.7.1",
     "typescript": "^5.4.3",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0",

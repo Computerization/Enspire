@@ -1,9 +1,9 @@
 import { PrismaClient } from '@prisma/client'
-import json from '../content/clubs.json' assert {'type': 'json'}
-import type { Clubs } from '../content/clubs'
+import crawler from './crawler'
+import type { Clubs } from '~/content/clubs'
 
 const prisma = new PrismaClient()
-const clubs: Clubs = json as Clubs
+const clubs: Clubs = await crawler() as Clubs
 
 const categories: (keyof Clubs)[] = ['Sports', 'Service', 'Arts', 'Life', 'Academic']
 
@@ -16,6 +16,11 @@ async function main() {
     const categoryClubs = clubs[category]
     if (categoryClubs) {
       for (const club of categoryClubs) {
+        /**
+         * TSIMS is so funny lol there's even a test club in there
+         */
+        if (club.groups[0].C_GroupsID === '86')
+          continue
         /**
          * Get the foundedYear of the club
          */
