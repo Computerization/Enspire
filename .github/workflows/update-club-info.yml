@@ -47,5 +47,7 @@ jobs:
         shell: bash
         env:
           PHPSESSID: ${{ secrets.PHPSESSID }}
+          TSIMS_URL: ${{ secrets.TSIMS_URL }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
           pnpm run update-club-info
