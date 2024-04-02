@@ -6,7 +6,7 @@ name: Update club info
 on:
   workflow_dispatch:
   schedule:
-    - cron:  '0 */12 * * *'
+    - cron: '0 */12 * * *'
 
 jobs:
   update-club-info:
