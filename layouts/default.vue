@@ -44,7 +44,7 @@ watch(
   <div class="h-screen">
     <div class="top-0 flex flex-col h-full overflow-hidden">
       <!-- Navbar -->
-      <div class="border-b px-4 w-full backdrop-blur-3xl">
+      <div class="border-b px-4 w-full backdrop-blur-3xl z-30">
         <div class="flex h-14 items-center">
           <Toggle class="lg:hidden" data-state="off" @click="toggleSidebar">
             <Icon name="ph:list" size="1.3em" />
