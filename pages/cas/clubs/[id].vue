@@ -1,17 +1,23 @@
 <script lang="ts" setup>
+import fs from 'node:fs'
 import { useRoute } from 'vue-router'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { cleanHTML } from '@/lib/utils'
-import json from '@/content/clubs.json'
 import type { Club, Clubs } from '@/content/clubs'
+import { decrypt } from '~/utils/crypto'
 
-const clubs: Clubs = json as Clubs
 const route = useRoute()
 const id = route.params.id // Fetch current Club ID via route params
 
+const encrypted = {
+  cipherText: new Uint8Array(fs.readFileSync('content/clubs.json.encrypted')).buffer,
+  iv: new Uint8Array(fs.readFileSync('content/clubs.json.iv')),
+}
+const decryptedClubs = JSON.parse(await decrypt(encrypted, 'password')) as Clubs
+
 // Filter clubs based on C_GroupsID and include information at the same level as groups
-const filteredClubs = Object.values(clubs).flatMap(clubCategory =>
+const filteredClubs = Object.values(decryptedClubs).flatMap(clubCategory =>
   clubCategory.filter((club: Club) =>
     club.groups.some(group => group.C_GroupsID === id),
   ).map((club: Club) => ({

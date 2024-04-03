@@ -1,5 +1,8 @@
+import { Buffer } from 'node:buffer'
+import fs from 'node:fs'
 import fetch, { Headers } from 'node-fetch'
 import * as dotenv from 'dotenv'
+import { decrypt, encrypt } from './crypto'
 import type { Club, Clubs } from '~/content/clubs'
 
 dotenv.config()
@@ -63,6 +66,14 @@ export default async function main(): Promise<Clubs> {
       output[category.C_Category as keyof Clubs]!.push(clubDetails)
     }
   }
+
+  const encrypted = await encrypt(JSON.stringify(output), 'password')
+
+  fs.writeFileSync('content/clubs.json.encrypted', Buffer.from(encrypted.cipherText))
+  fs.writeFileSync('content/clubs.json.iv', encrypted.iv)
+
+  console.log(await decrypt(encrypted, 'password'))
+  // console.log(await decrypt(await encrypt(JSON.stringify(output), 'password'), 'password'))
 
   return output
 }

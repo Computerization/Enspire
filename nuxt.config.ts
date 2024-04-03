@@ -1,4 +1,7 @@
 export default defineNuxtConfig({
+  routeRules: {
+    '/cas/clubs': { prerender: true },
+  },
   nitro: {
     experimental: {
       openAPI: true,
