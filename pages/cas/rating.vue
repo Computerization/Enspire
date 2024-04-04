@@ -119,7 +119,7 @@ function onSubmitRating() {
                 <SelectContent>
                   <SelectGroup>
                     <SelectLabel>Scores</SelectLabel>
-                    <SelectItem v-for="n in 5" :key="n" :value=n>
+                    <SelectItem v-for="n in 5" :key="String(n)" :value=n>
                       {{ n }}
                     </SelectItem>
                   </SelectGroup>
