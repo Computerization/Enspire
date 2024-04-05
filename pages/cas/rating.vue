@@ -95,13 +95,13 @@ function onSubmitRating() {
               <Select v-bind="componentField">
                 <FormControl>
                   <SelectTrigger :class="cn('w-full ps-3 text-start font-normal hover:bg-muted', !value && 'text-muted-foreground')" variant="outline" :disabled="isLoading">
-                    <SelectValue placeholder="选择您需要評分的社团..." />
+                    <SelectValue placeholder="选择您需要评分的社团..." />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
                   <SelectGroup v-if="data">
                     <SelectItem v-for="club in data" :key="club.id" :value="String(club.id)">
-                      {{ club.name.zh }}
+                      {{ club.name![zh] }}
                     </SelectItem>
                   </SelectGroup>
                 </SelectContent>
