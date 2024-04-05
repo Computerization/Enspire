@@ -101,7 +101,7 @@ function onSubmitRating() {
                 <SelectContent>
                   <SelectGroup v-if="data">
                     <SelectItem v-for="club in data" :key="club.id" :value="String(club.id)">
-                      {{ club.name![zh] }}
+                      {{ club.name!['zh'] }}
                     </SelectItem>
                   </SelectGroup>
                 </SelectContent>
