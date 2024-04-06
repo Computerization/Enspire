@@ -5,12 +5,10 @@ import { toTypedSchema } from '@vee-validate/zod'
 import * as z from 'zod'
 import { cn } from '~/lib/utils'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import { Textarea } from '@/components/ui/textarea'
 import { useToast } from '@/components/ui/toast/use-toast'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select'
-
-const emit = defineEmits(['refresh'])
 
 const { toast } = useToast()
 
@@ -71,7 +69,6 @@ function onSubmitRating() {
       })
     }
     isLoading.value = false
-    emit('refresh')
     resetForm()
   })
 }
@@ -80,18 +77,11 @@ function onSubmitRating() {
 <template>
   <div class="w-full">
     <Card class="w-full">
-      <CardHeader>
-        <CardTitle class="flex items-center gap-x-1">
-          <Icon name="material-symbols:add-circle-outline" />
-          新增
-        </CardTitle>
-        <CardDescription>在此处加入社团进行评分</CardDescription>
-      </CardHeader>
-      <CardContent>
+      <CardContent class="mt-6">
         <form class="space-y-6" @submit="onSubmitRating">
           <FormField v-slot="{ componentField, value }" name="club">
             <FormItem>
-              <FormLabel>社团</FormLabel>
+              <FormLabel>社团*</FormLabel>
               <Select v-bind="componentField">
                 <FormControl>
                   <SelectTrigger :class="cn('w-full ps-3 text-start font-normal hover:bg-muted', !value && 'text-muted-foreground')" variant="outline" :disabled="isLoading">
@@ -101,7 +91,7 @@ function onSubmitRating() {
                 <SelectContent>
                   <SelectGroup v-if="data">
                     <SelectItem v-for="club in data" :key="club.id" :value="String(club.id)">
-                      {{ club.name!['zh'] }}
+                      {{ typeof club.name === 'object' && 'zh' in club.name! ? club.name.zh : '' }}
                     </SelectItem>
                   </SelectGroup>
                 </SelectContent>
@@ -111,7 +101,7 @@ function onSubmitRating() {
           </FormField>
           <FormField v-slot="{ componentField, value }" name="score">
             <FormItem class="flex flex-col">
-              <FormLabel>社团评分：</FormLabel>
+              <FormLabel>社团评分*</FormLabel>
               <Select v-bind="componentField">
                 <SelectTrigger :class="cn('w-full ps-3 text-start font-normal hover:bg-muted', !value && 'text-muted-foreground')" variant="outline" :disabled="isLoading">
                   <SelectValue placeholder="选取该社团的评分" />
@@ -119,7 +109,7 @@ function onSubmitRating() {
                 <SelectContent>
                   <SelectGroup>
                     <SelectLabel>Scores</SelectLabel>
-                    <SelectItem v-for="n in 5" :key="String(n)" :value="n">
+                    <SelectItem v-for="n in 5" :key="String(n)" :value="String(n)">
                       {{ n }}
                     </SelectItem>
                   </SelectGroup>
