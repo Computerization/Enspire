@@ -4,7 +4,6 @@ import TabsList from '@/components/ui/tabs/TabsList.vue'
 import Tabs from '@/components/ui/tabs/Tabs.vue'
 import TabsContent from '@/components/ui/tabs/TabsContent.vue'
 import TabsTrigger from '@/components/ui/tabs/TabsTrigger.vue'
-import json from '@/content/clubs.json'
 import ClubCard from '@/components/custom/club-card.vue'
 
 import type { Club, ClubCategoryKey, Clubs, Groups } from '@/content/clubs'
@@ -22,8 +21,10 @@ const categories = (['Sports', 'Service', 'Arts', 'Life', 'Academic'] as const).
 
 const searchTerm = ref('')
 
+const { data } = await useFetch<Clubs>('/api/club/all_details')
+
 // sort the club
-const clubs = Object.entries(json as Clubs).reduce((acc, [category, clubsInCategory]) => {
+const clubs = Object.entries(data.value!).reduce((acc, [category, clubsInCategory]) => {
   acc[category as ClubCategoryKey] = clubsInCategory.sort(
     (a: Club, b: Club) => (a.gmember.length === 0) === (b.gmember.length === 0) ? 0 : (a.gmember.length === 0) ? 1 : -1,
   )

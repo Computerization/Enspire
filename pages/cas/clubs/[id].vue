@@ -3,10 +3,12 @@ import { useRoute } from 'vue-router'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { cleanHTML } from '@/lib/utils'
-import json from '@/content/clubs.json'
 import type { Club, Clubs } from '@/content/clubs'
 
-const clubs: Clubs = json as Clubs
+const { data } = await useFetch<Clubs>('/api/club/all_details')
+
+const clubs = data.value!
+
 const route = useRoute()
 const id = route.params.id // Fetch current Club ID via route params
 

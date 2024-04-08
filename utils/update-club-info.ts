@@ -7,9 +7,6 @@ const clubs: Clubs = await crawler() as Clubs
 
 const categories: (keyof Clubs)[] = ['Sports', 'Service', 'Arts', 'Life', 'Academic']
 
-/*
- TODO: Current clubs.json downloading process is done with a Python script. We should rewrite it with javascript.
- */
 async function main() {
   const runSequence = []
   for (const category of categories) {
