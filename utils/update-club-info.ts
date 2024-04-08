@@ -1,15 +1,12 @@
 import { PrismaClient } from '@prisma/client'
 import crawler from './crawler'
-import type { Clubs } from '~/content/clubs'
+import type { Clubs } from '~/types/clubs'
 
 const prisma = new PrismaClient()
 const clubs: Clubs = await crawler() as Clubs
 
 const categories: (keyof Clubs)[] = ['Sports', 'Service', 'Arts', 'Life', 'Academic']
 
-/*
- TODO: Current clubs.json downloading process is done with a Python script. We should rewrite it with javascript.
- */
 async function main() {
   const runSequence = []
   for (const category of categories) {
