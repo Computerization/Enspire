@@ -3,6 +3,14 @@ export default defineNuxtConfig({
     experimental: {
       openAPI: true,
     },
+    storage: {
+      github: {
+        driver: 'github',
+        branch: 'next',
+        dir: '/data',
+        repo: 'computerization/enspire',
+      },
+    },
   },
   modules: [
     '@nuxtjs/tailwindcss',

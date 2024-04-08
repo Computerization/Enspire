@@ -1,13 +1,6 @@
 import * as Iron from 'iron-webcrypto'
 import crypto from 'uncrypto'
 
-import { createStorage } from 'unstorage'
-import fsLiteDriver from 'unstorage/drivers/fs-lite'
-
-const storage = createStorage({
-  driver: fsLiteDriver({ base: './data' }),
-})
-
 export default defineCachedEventHandler(async (event) => {
   const { auth } = event.context
 
@@ -16,5 +9,5 @@ export default defineCachedEventHandler(async (event) => {
     return
   }
 
-  return (await Iron.unseal(crypto, (await storage.getItem('clubs:encrypted'))!, useRuntimeConfig().clubDataSecretKey!, Iron.defaults))
+  return (await Iron.unseal(crypto, (await useStorage('github').getItem('clubs:encrypted'))!, useRuntimeConfig().clubDataSecretKey!, Iron.defaults))
 }, { maxAge: 60 * 60 * 4 /* 4 hours */ })
