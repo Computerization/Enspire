@@ -6,7 +6,7 @@ import TabsContent from '@/components/ui/tabs/TabsContent.vue'
 import TabsTrigger from '@/components/ui/tabs/TabsTrigger.vue'
 import ClubCard from '@/components/custom/club-card.vue'
 
-import type { Club, ClubCategoryKey, Clubs, Groups } from '@/content/clubs'
+import type { Club, ClubCategoryKey, Clubs, Groups } from '~/types/clubs'
 
 // This page requires login
 definePageMeta({

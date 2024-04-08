@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import crawler from './crawler'
-import type { Clubs } from '~/content/clubs'
+import type { Clubs } from '~/types/clubs'
 
 const prisma = new PrismaClient()
 const clubs: Clubs = await crawler() as Clubs

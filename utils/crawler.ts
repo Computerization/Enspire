@@ -4,7 +4,7 @@ import crypto from 'uncrypto'
 import * as Iron from 'iron-webcrypto'
 import { createStorage } from 'unstorage'
 import fsLiteDriver from 'unstorage/drivers/fs-lite'
-import type { Club, Clubs } from '~/content/clubs'
+import type { Club, Clubs } from '~/types/clubs'
 
 const storage = createStorage({
   driver: fsLiteDriver({ base: './data' }),

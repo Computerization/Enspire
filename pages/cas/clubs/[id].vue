@@ -3,7 +3,7 @@ import { useRoute } from 'vue-router'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { cleanHTML } from '@/lib/utils'
-import type { Club, Clubs } from '@/content/clubs'
+import type { Club, Clubs } from '~/types/clubs'
 
 const { data } = await useFetch<Clubs>('/api/club/all_details')
 
