@@ -8,7 +8,7 @@ const storage = createStorage({
   driver: fsLiteDriver({ base: './data' }),
 })
 
-export default eventHandler(async (event) => {
+export default defineCachedEventHandler(async (event) => {
   const { auth } = event.context
 
   if (!auth.userId) {
@@ -17,4 +17,4 @@ export default eventHandler(async (event) => {
   }
 
   return (await Iron.unseal(crypto, (await storage.getItem('clubs:encrypted'))!, useRuntimeConfig().clubDataSecretKey!, Iron.defaults))
-})
+}, { maxAge: 60 * 60 * 4 /* 4 hours */ })
