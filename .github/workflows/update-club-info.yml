@@ -50,6 +50,7 @@ jobs:
           PHPSESSID: ${{ secrets.PHPSESSID }}
           TSIMS_URL: ${{ secrets.TSIMS_URL }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          CLUB_DATA_SECRET_KEY: ${{ secrets.CLUB_DATA_SECRET_KEY }}
         run: |
           pnpm run update-club-info
       - name: Commit files
