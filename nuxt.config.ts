@@ -3,6 +3,14 @@ export default defineNuxtConfig({
     experimental: {
       openAPI: true,
     },
+    storage: {
+      github: {
+        driver: 'github',
+        branch: 'next',
+        dir: '/data',
+        repo: 'computerization/enspire',
+      },
+    },
   },
   modules: [
     '@nuxtjs/tailwindcss',
@@ -21,9 +29,9 @@ export default defineNuxtConfig({
         dsn: process.env.SENTRY_DSM,
         environment: 'development',
       },
-
       clerkPublishableKey: process.env.CLERK_PUBLISHABLE_KEY,
     },
+    clubDataSecretKey: process.env.CLUB_DATA_SECRET_KEY,
     tsimsUrl: process.env.TSIMS_URL,
     clerkSecretKey: process.env.CLERK_SECRET_KEY,
   },
