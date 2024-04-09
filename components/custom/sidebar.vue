@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 const isEvaluationPeriod = computed(() => {
   const currentMonth = new Date().getMonth();
   return [0, 1, 5, 6].includes(currentMonth); // JavaScript months are 0-based
-});
+})
 </script>
 
 <template>
