@@ -1,6 +1,12 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
+
+const isEvaluationPeriod = computed(() => {
+  const currentMonth = new Date().getMonth();
+  return [0, 1, 5, 6].includes(currentMonth); // JavaScript months are 0-based
+});
 </script>
 
 <template>
@@ -27,7 +33,7 @@ import { Button } from '@/components/ui/button'
               社团列表
             </Button>
           </NuxtLink>
-          <NuxtLink to="/cas/rating">
+          <NuxtLink to="/cas/rating" v-if="isEvaluationPeriod">
             <Button :variant="$route.name === 'cas-rating' ? 'secondary' : 'ghost'" class="w-full justify-start mt-1">
               <Icon class="mr-2 h-4 w-4" name="material-symbols:rate-review-outline" />
               期末评价
