@@ -27,7 +27,7 @@ import { Button } from '@/components/ui/button'
               社团列表
             </Button>
           </NuxtLink>
-          <NuxtLink to="/cas/rating">
+          <NuxtLink v-if="[0, 1, 5, 6].includes(new Date().getMonth())" to="/cas/rating">
             <Button :variant="$route.name === 'cas-rating' ? 'secondary' : 'ghost'" class="w-full justify-start mt-1">
               <Icon class="mr-2 h-4 w-4" name="material-symbols:rate-review-outline" />
               期末评价
