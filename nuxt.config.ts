@@ -13,6 +13,7 @@ export default defineNuxtConfig({
     },
   },
   modules: [
+    '@vite-pwa/nuxt',
     '@nuxtjs/tailwindcss',
     '@nuxt/content',
     'shadcn-nuxt',
@@ -50,5 +51,8 @@ export default defineNuxtConfig({
      * @default "./components/ui"
      */
     componentDir: './components/ui',
+  },
+  pwa: {
+    /* your pwa options */
   },
 })
