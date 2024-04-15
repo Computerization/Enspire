@@ -21,12 +21,12 @@ const id = route.params.id // Fetch current Club ID via route params
 
 // Filter clubs based on C_GroupsID and include information at the same level as groups
 const filteredClubs = Object.values(clubs).flatMap(clubCategory =>
-    clubCategory.filter((club: Club) =>
-        club.groups.some(group => group.C_GroupsID === id),
-    ).map((club: Club) => ({
-      ...club, // Spread to include all same-level information
-      groups: club.groups.filter(group => group.C_GroupsID === id), // Filter groups to only include those that match the ID
-    })),
+  clubCategory.filter((club: Club) =>
+    club.groups.some(group => group.C_GroupsID === id),
+  ).map((club: Club) => ({
+    ...club, // Spread to include all same-level information
+    groups: club.groups.filter(group => group.C_GroupsID === id), // Filter groups to only include those that match the ID
+  })),
 ) as Club[]
 
 const { toast } = useToast()
@@ -99,11 +99,11 @@ const onSubmit = handleSubmit(async (values) => {
               <PopoverTrigger as-child>
                 <FormControl>
                   <Button
-                      :class="cn(
+                    :class="cn(
                       'w-full ps-3 text-start font-normal',
                       !value && 'text-muted-foreground',
                     )" variant="outline"
-                      :disabled="isLoading"
+                    :disabled="isLoading"
                   >
                     <span>{{ value ? format(value, "PPP") : "选择日期..." }}</span>
                     <Icon class="ms-auto opacity-50" name="material-symbols:calendar-today-outline" />
@@ -123,10 +123,10 @@ const onSubmit = handleSubmit(async (values) => {
             <FormLabel>WeChat Group URL</FormLabel>
             <FormControl>
               <Textarea
-                  class="resize-none"
-                  placeholder="WeChat Group URL"
-                  v-bind="componentField"
-                  :disabled="isLoading"
+                class="resize-none"
+                placeholder="WeChat Group URL"
+                v-bind="componentField"
+                :disabled="isLoading"
               />
             </FormControl>
             <FormMessage />
