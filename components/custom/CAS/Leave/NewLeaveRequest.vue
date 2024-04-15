@@ -30,7 +30,7 @@ const formSchema = toTypedSchema(z.object({
 }))
 
 const { data } = await useAsyncData<AllClubs>('allClubs', () => {
-  return $fetch('/api/user/all_clubs', {
+  return $fetch<AllClubs>('/api/user/all_clubs', {
     headers: useRequestHeaders(),
     method: 'GET',
   })
