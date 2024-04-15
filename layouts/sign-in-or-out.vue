@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useFavicon, usePreferredDark } from '@vueuse/core'
+import IconLogo from '@/assets/logo.svg'
 
 const isDark = usePreferredDark()
 const favicon = computed(() => isDark.value ? '/favicon-dark.ico' : '/favicon.ico')
@@ -16,9 +17,9 @@ useFavicon(favicon)
     <div class="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
       <div class="absolute inset-0 bg-zinc-900" />
       <div class="relative z-20 flex items-center text-lg font-medium">
-        <Icon name="mdi:skull-crossbones" />
-        <div class="ml-2">
-          Enspire
+        <IconLogo class="text-3xl mt-1.5 hover:animate-spin" />
+        <div class="ml-0.5 text-2xl tracking-tight">
+          enspire
         </div>
       </div>
       e
