@@ -143,14 +143,14 @@ useHead({
                 </CardHeader>
                 <CardContent>
                   <div>
-                    <span class="font-bold">社团类型</span>: {{ group.C_Category }}
+                    <span class="font-bold mr-1">社团类型:</span>{{ group.C_Category }}
                   </div>
                   <div>
-                    <span class="font-bold">社团人数</span>: {{ groupMemberCounts }} 人
+                    <span class="font-bold mr-1">社团人数:</span>{{ groupMemberCounts }} 人
                   </div>
                   <div v-if="club.supervisor" class="flex">
-                    <span class="font-bold">指导老师:</span>
-                    <span v-for="supervisor in club.supervisor" :key="supervisor.TeacherID" class="ml-2">
+                    <span class="font-bold mr-1">指导老师:</span>
+                    <span v-for="supervisor in club.supervisor" :key="supervisor.TeacherID">
                       {{ supervisor.T_Name }}
                       <span v-if="supervisor.T_Nickname" class="text-muted-foreground">
                         ({{ supervisor.T_Nickname }})
