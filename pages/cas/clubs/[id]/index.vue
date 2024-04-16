@@ -75,7 +75,7 @@ useHead({
                 <Badge v-if="club.gmember.length === 0" variant="destructive">
                   已解散
                 </badge>
-                <NuxtLink v-if="!isPresident" :to="`/cas/clubs/${id}/edit`">
+                <NuxtLink v-if="isPresident" :to="`/cas/clubs/${id}/edit`">
                   <Button variant="outline">
                     编辑
                   </Button>
