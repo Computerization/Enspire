@@ -40,7 +40,7 @@ if (filteredClubs[0] && filteredClubs[0].groups[0].C_DescriptionC) {
 
 // Get privilege information
 const { data: privilegeData } = await useFetch<{ isPresident: boolean }>('/api/cas/info/privilege', {
-  method: 'POST',
+  method: 'GET',
   body: {
     clubId: Number(id),
   },
