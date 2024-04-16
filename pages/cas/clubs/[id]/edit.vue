@@ -86,6 +86,8 @@ const { data: privilegeData } = await useFetch<{ isPresident: boolean }>('/api/c
 
 const isPresident = privilegeData.value?.isPresident || false
 
+let title
+
 if (isPresident)
   title = 'Edit Club Info | Enspire'
 else
