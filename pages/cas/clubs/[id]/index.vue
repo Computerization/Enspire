@@ -149,8 +149,8 @@ useHead({
                     <span class="font-bold mr-1">社团人数:</span>{{ groupMemberCounts }} 人
                   </div>
                   <div v-if="club.supervisor" class="flex">
-                    <span class="font-bold mr-1">指导老师:</span>
-                    <span v-for="supervisor in club.supervisor" :key="supervisor.TeacherID">
+                    <span class="font-bold">指导老师:</span>
+                    <span v-for="supervisor in club.supervisor" :key="supervisor.TeacherID" class="ml-1">
                       {{ supervisor.T_Name }}
                       <span v-if="supervisor.T_Nickname" class="text-muted-foreground">
                         ({{ supervisor.T_Nickname }})
