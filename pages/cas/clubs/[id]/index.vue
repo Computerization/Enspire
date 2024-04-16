@@ -160,7 +160,7 @@ useHead({
                 </CardContent>
               </Card>
             </div>
-            <div class="xl:w-full mt-2">
+            <div v-if="club.gmember.length > 0" class="xl:w-full mt-2">
               <ViewClubInfo :club="id" />
             </div>
           </div>
