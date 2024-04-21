@@ -14,7 +14,7 @@ useFavicon(favicon)
   <div
     class="container h-screen relative flex-col items-center justify-center grid lg:max-w-none lg:grid-cols-2 lg:px-0"
   >
-    <div class="relative hidden h-full flex-col bg-muted p-10 text-foreground dark:border-r lg:flex -mt-3 bg-zinc-900">
+    <div class="relative hidden h-screen flex-col bg-muted text-white dark:border-r p-10 lg:flex bg-zinc-900">
       <div class="relative z-20 flex items-center text-lg font-medium">
         <IconLogo class="text-3xl mt-1.5 hover:animate-spin" />
         <div class="ml-0.5 text-2xl tracking-tight">
