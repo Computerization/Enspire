@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { format } from 'date-fns'
-import { Calendar as CalendarIcon } from 'lucide-vue-next'
+import { Calendar as CalendarIcon, Clock as ClockIcon } from 'lucide-vue-next'
+import { record } from 'zod'
 
 definePageMeta({
   middleware: ['auth'],
@@ -10,23 +11,39 @@ useHead({
   title: 'Classroom Reservation | Enspire',
 })
 
-const BASE_DATE = new Date(1970, 0, 1)
+const date = ref(new Date())
+const start = ref(new Date(1970, 0, 1, 17))
+const end = ref(new Date(1970, 0, 1, 18))
+
+function toHHMM(d: Date) {
+  return d.getHours() * 100 + d.getMinutes()
+}
+
 const formData = ref({
-  date: null, // Date() object => ISO 8601 date string; use the date only
+  date: computed(() => {
+    const d = date.value
+    return d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate()
+  }), // yyyymmdd as an integer
   loop: false,
   day: [false, false, false, false, false], // Monday ~ Friday
-  utcTime: {
-    // Date() object => ISO 8601 date string;
-    // add the timezone offset to this time to reveal the user input; use the time only
-    start: BASE_DATE,
-    end: BASE_DATE,
-  },
-  timezoneOffset: -BASE_DATE.getTimezoneOffset() / 60, // in hours
+  start: computed(() => toHHMM(start.value)), // hhmm as an integer
+  end: computed(() => toHHMM(end.value)),
   classroom: '',
   description: '',
   applicant: '',
   note: '',
 })
+
+async function handleSubmit() {
+  const { data } = await useFetch('/api/reservation/new', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ hi: 'good' }),
+  })
+  alert(data.value)
+}
 </script>
 
 <template>
@@ -55,11 +72,11 @@ const formData = ref({
                 <PopoverTrigger as-child>
                   <Button variant="outline" class="w-full">
                     <CalendarIcon class="mr-2 h-4 w-4" />
-                    <span>{{ formData.date ? format(formData.date, 'PPP') : "选择日期" }}</span>
+                    <span>{{ date ? format(date, 'PPP') : "选择日期" }}</span>
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent class="w-auto p-0">
-                  <Calendar v-model="formData.date" mode="date" required />
+                  <Calendar v-model="date" mode="date" required />
                 </PopoverContent>
               </Popover>
               <!-- This ToggleGroup should be implemented in a better way but anyway it works -->
@@ -95,24 +112,17 @@ const formData = ref({
               <Popover>
                 <PopoverTrigger as-child>
                   <Button variant="outline" class="w-full">
-                    <CalendarIcon class="mr-2 h-4 w-4" />
+                    <ClockIcon class="mr-2 h-4 w-4" />
                     <span>
-                      {{
-                        formData.utcTime.start.getTime() !== BASE_DATE.getTime() && formData.utcTime.end.getTime() !== BASE_DATE.getTime()
-                          ? `${format(formData.utcTime.start, 'hh:mm')} ~ ${format(formData.utcTime.end, 'hh:mm')}`
-                          : `选择
-                          ${formData.utcTime.start.getTime() === BASE_DATE.getTime() ? "开始" : ""}
-                          ${formData.utcTime.end.getTime() === BASE_DATE.getTime() ? "结束" : ""}
-                        时间`
-                      }}
+                      {{ `${format(start, 'HH:mm')} ~ ${format(end, 'HH:mm')}` }}
                     </span>
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent class="w-auto pt-5 text-center">
-                  开始时间
-                  <Calendar v-model="formData.utcTime.start" mode="time" hide-time-header required />
-                  结束时间
-                  <Calendar v-model="formData.utcTime.end" mode="time" hide-time-header required />
+                <PopoverContent class="w-auto items-center flex p-0">
+                  <!-- 开始时间 -->
+                  <Calendar v-model="start" mode="time" hide-time-header required is24hr />
+                  ~
+                  <Calendar v-model="end" mode="time" hide-time-header required is24hr />
                 </PopoverContent>
               </Popover>
             </formcontrol>
@@ -202,7 +212,7 @@ const formData = ref({
           </FormItem>
         </FormField>
         <div class="py-2" />
-        <Button type="submit">
+        <Button type="submit" @click="handleSubmit()">
           提交预约申请
         </Button>
       </form>
