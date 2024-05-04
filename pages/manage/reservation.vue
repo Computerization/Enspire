@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { format } from 'date-fns'
-import { Calendar as CalendarIcon, Clock as ClockIcon } from 'lucide-vue-next'
-import { record } from 'zod'
+import { Calendar as CalendarIcon, Clock as ClockIcon, Loader, LoaderCircle } from 'lucide-vue-next'
+import { record, string } from 'zod'
 
 definePageMeta({
   middleware: ['auth'],
@@ -14,6 +14,9 @@ useHead({
 const date = ref(new Date())
 const start = ref(new Date(1970, 0, 1, 17))
 const end = ref(new Date(1970, 0, 1, 18))
+const day = ref([false, false, false, false, false, false, false])
+
+const pending = ref(false)
 
 function toHHMM(d: Date) {
   return d.getHours() * 100 + d.getMinutes()
@@ -25,8 +28,14 @@ const formData = ref({
     return d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate()
   }), // yyyymmdd as an integer
   loop: false,
-  day: [false, false, false, false, false], // Monday ~ Friday
-  start: computed(() => toHHMM(start.value)), // hhmm as an integer
+  day: computed(() => {
+    let r = ''
+    day.value.forEach((e) => {
+      r += e ? '1' : '0'
+    })
+    return r
+  }), // Sunday ~ Saturday
+  start: computed(() => toHHMM(start.value)), // HHmm as an integer
   end: computed(() => toHHMM(end.value)),
   classroom: '',
   description: '',
@@ -35,14 +44,36 @@ const formData = ref({
 })
 
 async function handleSubmit() {
-  const { data } = await useFetch('/api/reservation/new', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ hi: 'good' }),
-  })
-  alert(data.value)
+  if (pending.value)
+    return
+  pending.value = true
+  try {
+    const { data, error } = await useFetch('/api/reservation/new', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData.value),
+    })
+    if (error.value)
+      console.log(error.value.data.message)
+
+    else console.log(data.value)
+  }
+  catch (error) {
+    console.log('ERROR DURING REQUEST')
+    console.log(error)
+  }
+  // .then(({ data, error }) => {
+  //   if (error.value)
+  //     console.log(error.value.message)
+  //   else
+  //     console.log('Data', data.value)
+  // })
+  // .catch((error) => {
+  //   console.log('ERR', error)
+  // })
+  pending.value = false
 }
 </script>
 
@@ -82,19 +113,19 @@ async function handleSubmit() {
               <!-- This ToggleGroup should be implemented in a better way but anyway it works -->
               <ToggleGroup v-if="formData.loop" variant="outline">
                 每周
-                <ToggleGroupItem value="mon" @click="formData.day[0] = !formData.day[0]">
+                <ToggleGroupItem value="mon" @click="day[1] = !day[1]">
                   一
                 </ToggleGroupItem>
-                <ToggleGroupItem value="tue" @click="formData.day[1] = !formData.day[1]">
+                <ToggleGroupItem value="tue" @click="day[2] = !day[2]">
                   二
                 </ToggleGroupItem>
-                <ToggleGroupItem value="wed" @click="formData.day[2] = !formData.day[2]">
+                <ToggleGroupItem value="wed" @click="day[3] = !day[3]">
                   三
                 </ToggleGroupItem>
-                <ToggleGroupItem value="thu" @click="formData.day[3] = !formData.day[3]">
+                <ToggleGroupItem value="thu" @click="day[4] = !day[4]">
                   四
                 </ToggleGroupItem>
-                <ToggleGroupItem value="fri" @click="formData.day[4] = !formData.day[4]">
+                <ToggleGroupItem value="fri" @click="day[5] = !day[5]">
                   五
                 </ToggleGroupItem>
               </ToggleGroup>
@@ -104,7 +135,7 @@ async function handleSubmit() {
                     formData.loop = v
                     // The following line is to fix a temporary problem caused by the implementation of ToggleGroup above
                     // If a v-model is applied to the ToggleGroup, this can be safely removed
-                    formData.day = [false, false, false, false, false]
+                    day = [false, false, false, false, false, false, false]
                   }"
                 />
                 <Label>循环</Label>
@@ -212,8 +243,10 @@ async function handleSubmit() {
           </FormItem>
         </FormField>
         <div class="py-2" />
-        <Button type="submit" @click="handleSubmit()">
-          提交预约申请
+        <Button type="submit" :disabled="pending" class="mr-3" @click="handleSubmit()">
+          <LoaderCircle v-if="pending" class="animate-spin mr-2" />
+          <span v-if="!pending">提交预约申请</span>
+          <span v-if="pending">处理中...</span>
         </Button>
       </form>
     </div>

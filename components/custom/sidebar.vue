@@ -46,6 +46,12 @@ import { Button } from '@/components/ui/button'
               预约教室
             </Button>
           </NuxtLink>
+          <NuxtLink to="/manage/statuses">
+            <Button :variant="$route.name === 'manage-statuses' ? 'secondary' : 'ghost'" class="w-full justify-start">
+              <Icon class="mr-2 h-4 w-4" name="material-symbols:calendar-today-outline" />
+              教室状态
+            </Button>
+          </NuxtLink>
           <NuxtLink to="/manage/leave">
             <Button :variant="$route.name === 'manage-leave' ? 'secondary' : 'ghost'" class="w-full justify-start mt-1">
               <Icon class="mr-2 h-4 w-4" name="charm:tick-double" />

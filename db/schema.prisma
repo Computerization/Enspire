@@ -82,3 +82,23 @@ model GroupInfo {
 
   @@unique([clubId])
 }
+
+model ReservationRecord {
+  id                Int      @id @unique @default(sequence())
+  creationTimestamp DateTime @default(now())
+  userId            String?
+  date              Int // yyyymmdd
+  loop              Boolean
+  day               String // bitset with size of 7
+  start             Int // HHmm
+  end               Int
+  description       String
+  note              String?
+}
+
+model Statuses {
+  id   Int      @id @default(dbgenerated("gen_random_uuid()"))
+  date DateTime @db.Date
+  // format JSON to string
+  test String?
+}
