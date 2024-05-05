@@ -20,13 +20,13 @@ function isValidTime(t: number) {
   return Number.isInteger(t) && (t >= 0 && t <= 2359) && (t % 100 <= 59)
 }
 
-const requestSchema = z.object({
+const regularSchema = z.object({
   date: z.number().min(toYYYYMMDD(new Date()), '预约时间必须在未来').refine((val) => {
     DATE = val
     return true
   }),
   loop: z.boolean(),
-  day: z.string().length(7).regex(/^[01]+$/),
+  day: z.any(),
   start: z.number().refine((val) => {
     START = val
     if ((DATE === toYYYYMMDD(new Date())) && (val <= toHHMM(new Date())))
@@ -36,7 +36,19 @@ const requestSchema = z.object({
   }),
   end: z.number().refine(val => (isValidTime(val) && val > START)),
   classroom: z.any(), // TODO: classroom id
-  description: z.string().min(5, { message: 'hi' }).max(100),
+  description: z.string().min(5, { message: 'hi' }).max(35),
+  applicant: z.any(), // TODO: club id
+  note: z.string().max(500),
+})
+
+const loopSchema = z.object({
+  date: z.any(),
+  loop: z.boolean(),
+  day: z.string().length(7).regex(/^[01]+$/),
+  start: z.number().refine(val => isValidTime(val)),
+  end: z.number().refine(val => (isValidTime(val) && val > START)),
+  classroom: z.any(), // TODO: classroom id
+  description: z.string().min(5, { message: 'hi' }).max(35),
   applicant: z.any(), // TODO: club id
   note: z.string().max(500),
 })
@@ -49,7 +61,8 @@ export default eventHandler(async (event) => {
     return
   }
 
-  return readValidatedBody(event, body => requestSchema.parse(body))
+  return readBody(event)
+    .then(body => body.loop ? loopSchema.parse(body) : regularSchema.parse(body))
     .then(async (body) => {
       const r = await prisma.reservationRecord.create({
         data: {

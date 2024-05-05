@@ -83,17 +83,25 @@ model GroupInfo {
   @@unique([clubId])
 }
 
+enum ReservationStatuses {
+  PENDING
+  DENIED
+  APPROVED
+}
+
 model ReservationRecord {
-  id                Int      @id @unique @default(sequence())
-  creationTimestamp DateTime @default(now())
+  id                Int                 @id @unique @default(sequence())
+  creationTimestamp DateTime            @default(now())
   userId            String?
   date              Int // yyyymmdd
   loop              Boolean
   day               String // bitset with size of 7
   start             Int // HHmm
   end               Int
+  classroom         String // classroom ID
   description       String
   note              String?
+  status            ReservationStatuses @default(PENDING)
 }
 
 model Statuses {
