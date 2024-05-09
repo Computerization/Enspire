@@ -1,9 +1,12 @@
 <script lang="ts" setup>
 import { useRoute } from 'vue-router'
+import { getEditableClub } from './utils'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+
 import { cleanHTML } from '@/lib/utils'
 import type { Club, Clubs } from '~/types/clubs'
+import EditClubInfo from '~/components/custom/CAS/Info/EditClubInfo.vue'
 import ViewClubInfo from '~/components/custom/CAS/Info/ViewClubInfo.vue'
 
 const { data } = await useFetch<Clubs>('/api/club/all_details')
@@ -39,17 +42,8 @@ if (filteredClubs[0] && filteredClubs[0].groups[0].C_DescriptionC) {
 }
 
 // Get privilege information
-const { data: privilegeData } = await useFetch<{ isPresident: boolean }>('/api/cas/info/privilege', {
-  method: 'GET',
-  body: {
-    clubId: Number(id),
-  },
-  headers: {
-    'Content-Type': 'application/json',
-  },
-})
-
-const isPresident = privilegeData.value?.isPresident || false
+const clubEdit = await getEditableClub(Number(id))
+const isPresident = (clubEdit !== undefined)
 
 // This page requires login
 definePageMeta({
@@ -75,11 +69,7 @@ useHead({
                 <Badge v-if="club.gmember.length === 0" variant="destructive">
                   已解散
                 </badge>
-                <NuxtLink v-if="isPresident" :to="`/cas/clubs/${id}/edit`">
-                  <Button variant="outline">
-                    编辑
-                  </Button>
-                </NuxtLink>
+                <EditClubInfo v-if="isPresident" :club="Number(id)" />
               </CardTitle>
 
               <CardDescription class="flex items-center">
