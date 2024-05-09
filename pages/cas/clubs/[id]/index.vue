@@ -1,9 +1,13 @@
 <script lang="ts" setup>
 import { useRoute } from 'vue-router'
+import { getEditableClub } from './utils'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+
 import { cleanHTML } from '@/lib/utils'
 import type { Club, Clubs } from '~/types/clubs'
+import EditClubInfo from '~/components/custom/CAS/Info/EditClubInfo.vue'
+import ViewClubInfo from '~/components/custom/CAS/Info/ViewClubInfo.vue'
 
 const { data } = await useFetch<Clubs>('/api/club/all_details')
 
@@ -37,6 +41,10 @@ if (filteredClubs[0] && filteredClubs[0].groups[0].C_DescriptionC) {
   }
 }
 
+// Get privilege information
+const clubEdit = await getEditableClub(Number(id))
+const isPresident = (clubEdit !== undefined)
+
 // This page requires login
 definePageMeta({
   middleware: ['auth'],
@@ -61,6 +69,7 @@ useHead({
                 <Badge v-if="club.gmember.length === 0" variant="destructive">
                   已解散
                 </badge>
+                <EditClubInfo v-if="isPresident" :club="Number(id)" />
               </CardTitle>
 
               <CardDescription class="flex items-center">
@@ -108,33 +117,43 @@ useHead({
               </div>
             </CardContent>
           </Card>
-          <Card class="xl:w-1/4 w-full xl:ml-2 h-min">
-            <CardHeader>
-              <CardTitle class="flex items-center h-min gap-x-1">
-                社团属性
-              </CardTitle>
-              <CardDescription class="flex items-center">
-                <Icon name="material-symbols:info-outline" />
-                <div class="ml-1">
-                  Club Information
-                </div>
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div>
-                <span class="font-bold">社团类型</span>: {{ group.C_Category }}
-              </div>
-              <div>
-                <span class="font-bold">社团人数</span>: {{ groupMemberCounts }} 人
-              </div>
-              <div v-if="club.supervisor" class="flex">
-                <span class="font-bold">指导老师:</span>
-                <span v-for="supervisor in club.supervisor" :key="supervisor.TeacherID" class="ml-2">
-                  {{ supervisor.T_Name }} ({{ supervisor.T_Nickname }})
-                </span>
-              </div>
-            </CardContent>
-          </Card>
+          <div class="xl:w-1/4 w-full xl:ml-2 h-min">
+            <div class="xl:w-full">
+              <Card class="w-full">
+                <CardHeader>
+                  <CardTitle class="flex items-center h-min gap-x-1">
+                    社团属性
+                  </CardTitle>
+                  <CardDescription class="flex items-center">
+                    <Icon name="material-symbols:info-outline" />
+                    <div class="ml-1">
+                      Club Information
+                    </div>
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div>
+                    <span class="font-bold mr-1">社团类型:</span>{{ group.C_Category }}
+                  </div>
+                  <div>
+                    <span class="font-bold mr-1">社团人数:</span>{{ groupMemberCounts }} 人
+                  </div>
+                  <div v-if="club.supervisor" class="flex">
+                    <span class="font-bold">指导老师:</span>
+                    <span v-for="supervisor in club.supervisor" :key="supervisor.TeacherID" class="ml-1">
+                      {{ supervisor.T_Name }}
+                      <span v-if="supervisor.T_Nickname" class="text-muted-foreground">
+                        ({{ supervisor.T_Nickname }})
+                      </span>
+                    </span>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+            <div v-if="club.gmember.length > 0" class="xl:w-full mt-2">
+              <ViewClubInfo :club="id" />
+            </div>
+          </div>
         </div>
         <!--        <div style="display:none"> -->
         <!--          <Card v-if="club.grecord.length > 0" class="w-full"> -->

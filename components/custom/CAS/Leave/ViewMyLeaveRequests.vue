@@ -14,7 +14,7 @@ definePageMeta({
 })
 
 const { data, refresh } = await useAsyncData<MyRequests>('allRequests', () => {
-  return $fetch('/api/cas/leave/my', {
+  return $fetch<MyRequests>('/api/cas/leave/my', {
     headers: useRequestHeaders(),
     method: 'GET',
   })
