@@ -3,7 +3,6 @@ import { useRoute } from 'vue-router'
 import { getEditableClub } from './utils'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-
 import { cleanHTML } from '@/lib/utils'
 import type { Club, Clubs } from '~/types/clubs'
 import EditClubInfo from '~/components/custom/CAS/Info/EditClubInfo.vue'

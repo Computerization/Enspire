@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import {
+  renderSVG,
+} from 'uqr'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card'
 
 const props = defineProps({
@@ -8,9 +11,13 @@ const props = defineProps({
   },
 })
 
+let svg: string
+
 definePageMeta({
   middleware: ['auth'],
 })
+
+let clubInfo: any
 
 const { data } = await useAsyncData('allInfo', () => {
   return $fetch('/api/cas/info/get', {
@@ -22,10 +29,16 @@ const { data } = await useAsyncData('allInfo', () => {
   })
 })
 
+// eslint-disable-next-line prefer-const
+clubInfo = data.value
+
 let noGroup = false
 
 if (!data.value)
   noGroup = true
+
+if (!data.value)
+  svg = renderSVG(clubInfo.wechatGroupUrl)
 </script>
 
 <template>
@@ -42,7 +55,7 @@ if (!data.value)
       </CardDescription>
     </CardHeader>
     <CardContent v-if="!noGroup">
-      <div>微信群聊链接: {{ data }}</div>
+      <div v-html="svg" />
     </CardContent>
     <CardContent v-if="noGroup">
       <div class="text-sm italic text-muted-foreground text-center w-full my-2">
