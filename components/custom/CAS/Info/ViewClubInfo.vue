@@ -37,7 +37,7 @@ let noGroup = false
 if (!data.value)
   noGroup = true
 
-if (!data.value)
+if (data.value)
   svg = renderSVG(clubInfo.wechatGroupUrl)
 </script>
 
