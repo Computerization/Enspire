@@ -3,6 +3,11 @@ import { useRoute } from 'vue-router'
 import { getEditableClub } from './utils'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from '@/components/ui/hover-card'
 import { cleanHTML } from '@/lib/utils'
 import type { Club, Clubs } from '~/types/clubs'
 import EditClubInfo from '~/components/custom/CAS/Info/EditClubInfo.vue'
@@ -140,10 +145,38 @@ useHead({
                   <div v-if="club.supervisor" class="flex">
                     <span class="font-bold">指导老师:</span>
                     <span v-for="supervisor in club.supervisor" :key="supervisor.TeacherID" class="ml-1">
-                      {{ supervisor.T_Name }}
-                      <span v-if="supervisor.T_Nickname" class="text-muted-foreground">
-                        ({{ supervisor.T_Nickname }})
-                      </span>
+                      <HoverCard>
+                        <HoverCardTrigger as-child>
+                          <span>
+                            {{ supervisor.T_Name }}
+                            <span v-if="supervisor.T_Nickname" class="text-muted-foreground">
+                              ({{ supervisor.T_Nickname }})
+                            </span>
+                          </span>
+                        </HoverCardTrigger>
+                        <HoverCardContent class="w-80">
+                          <div class="flex justify-between space-x-4">
+                            <div class="space-y-1">
+                              <h4 class="text-sm font-semibold">
+                                {{ supervisor.T_Name }} 老师
+                                <span v-if="supervisor.T_Nickname" class="text-muted-foreground">
+                                  ({{ supervisor.T_Nickname }})
+                                </span>
+                              </h4>
+                              <div class="flex items-center pt-2">
+                                <span v-if="supervisor.T_Email" class="text-sm text-muted-foreground">
+                                  Email: <NuxtLink :to="`mailto:${supervisor.T_Email}`">{{ supervisor.T_Email }}</NuxtLink>
+                                </span>
+                              </div>
+                              <div class="flex items-center">
+                                <span class="text-sm text-muted-foreground">
+                                  ID: {{ supervisor.TeacherID }}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </HoverCardContent>
+                      </HoverCard>
                     </span>
                   </div>
                 </CardContent>
