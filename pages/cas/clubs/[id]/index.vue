@@ -105,9 +105,13 @@ useHead({
               <div v-else class="mt-3">
                 <div class="flex flex-wrap">
                   <div v-for="(member, index) in club.gmember" :key="member.StudentID" class="flex items-center">
+                    <!--                    <HoverCard> -->
+                    <!--                      <HoverCardTrigger as-child> -->
                     <div class="flex items-center text-sm mt-0.5">
-                      <span class="">{{ member.S_Name }}</span>
-                      <span v-if="member.S_Nickname" class="text-muted-foreground ml-1">({{ member.S_Nickname }})</span>
+                      <span class="hover:underline">
+                        <span>{{ member.S_Name }}</span>
+                        <span v-if="member.S_Nickname" class="text-muted-foreground ml-1">({{ member.S_Nickname }})</span>
+                      </span>
                       <Badge v-if="Number(member.LeaderYes) === 2" variant="default" class="ml-1 -py-0.5">
                         社长
                       </Badge>
@@ -116,6 +120,30 @@ useHead({
                       </Badge>
                       <span v-if="index < club.gmember.length - 1" class="mx-2">/</span>
                     </div>
+                    <!--                      </HoverCardTrigger> -->
+                    <!--                      <HoverCardContent class="w-80"> -->
+                    <!--                        <div class="flex justify-between space-x-4"> -->
+                    <!--                          <div class="space-y-1"> -->
+                    <!--                            <h4 class="text-sm font-semibold"> -->
+                    <!--                              {{ member.S_Name }} -->
+                    <!--                              <span v-if="member.S_Nickname" class="text-muted-foreground"> -->
+                    <!--                                ({{ member.S_Nickname }}) -->
+                    <!--                              </span> -->
+                    <!--                            </h4> -->
+                    <!--                            <div class="flex items-center pt-2"> -->
+                    <!--                              <span v-if="member.S_Email" class="text-sm text-muted-foreground hover:underline"> -->
+                    <!--                                Email: <NuxtLink :to="`mailto:${member.S_Email}`">{{ member.S_Email }}</NuxtLink> -->
+                    <!--                              </span> -->
+                    <!--                            </div> -->
+                    <!--                            <div class="flex items-center"> -->
+                    <!--                              <span class="text-sm text-muted-foreground"> -->
+                    <!--                                ID: {{ member.StudentID }} -->
+                    <!--                              </span> -->
+                    <!--                            </div> -->
+                    <!--                          </div> -->
+                    <!--                        </div> -->
+                    <!--                      </HoverCardContent> -->
+                    <!--                    </HoverCard> -->
                   </div>
                 </div>
               </div>
@@ -170,7 +198,7 @@ useHead({
                               </div>
                               <div class="flex items-center">
                                 <span class="text-sm text-muted-foreground">
-                                  ID: {{ supervisor.TeacherID }}
+                                  Teacher ID: {{ supervisor.TeacherID }}
                                 </span>
                               </div>
                             </div>
