@@ -50,7 +50,7 @@ definePageMeta({
 })
 
 useHead({
-  title: 'Clubs | Enspire',
+  title: `${filteredClubs[0].groups[0].C_NameC} | Clubs | Enspire`,
 })
 </script>
 
