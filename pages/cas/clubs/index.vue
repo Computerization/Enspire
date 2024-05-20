@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { onMounted, ref, watch } from 'vue'
 import { Input } from '@/components/ui/input'
 import TabsList from '@/components/ui/tabs/TabsList.vue'
 import Tabs from '@/components/ui/tabs/Tabs.vue'
@@ -20,6 +21,7 @@ useHead({
 const categories = (['Sports', 'Service', 'Arts', 'Life', 'Academic'] as const).map(c => c as ClubCategoryKey)
 
 const searchTerm = ref('')
+const selectedTab = ref('Sports')
 
 const { data } = await useFetch<Clubs>('/api/club/all_details')
 
@@ -47,54 +49,65 @@ const filteredClubs = computed(() => {
     return acc
   }, {} as Clubs)
 })
+
+onMounted(() => {
+  const storedTab = localStorage.getItem('selectedTab')
+  if (storedTab)
+    selectedTab.value = storedTab
+})
+
+watch(selectedTab, (newTab) => {
+  if (typeof window !== 'undefined')
+    localStorage.setItem('selectedTab', newTab)
+})
+
+function iconName(category: ClubCategoryKey) {
+  switch (category) {
+    case 'Sports':
+      return 'material-symbols:sports-basketball'
+    case 'Service':
+      return 'material-symbols:home-repair-service'
+    case 'Arts':
+      return 'material-symbols:format-paint'
+    case 'Life':
+      return 'material-symbols:nightlife'
+    case 'Academic':
+      return 'material-symbols:book'
+    default:
+      return ''
+  }
+}
 </script>
 
 <template>
   <div>
-    <Tabs class="h-full space-y-6" :value="isSearchActive ? '' : undefined" :default-value="isSearchActive ? '' : 'Sports'">
+    <Tabs v-model="selectedTab" class="h-full space-y-6" :default-value="selectedTab">
       <div class="flex flex-row items-center justify-between">
         <TabsList class="w-min">
-          <TabsTrigger :value="isSearchActive ? '' : 'Sports'" :disabled="isSearchActive" class="flex items-center">
-            <Icon name="material-symbols:sports-basketball" />
+          <TabsTrigger
+            v-for="category in categories"
+            :key="category"
+            :value="category"
+            :disabled="isSearchActive"
+            class="flex items-center"
+          >
+            <Icon :name="iconName(category)" />
             <div class="hidden sm:block ml-1">
-              Sports
-            </div>
-          </TabsTrigger>
-          <TabsTrigger :value="isSearchActive ? '' : 'Service'" :disabled="isSearchActive" class="flex items-center">
-            <Icon name="material-symbols:home-repair-service" />
-            <div class="hidden sm:block ml-1">
-              Service
-            </div>
-          </TabsTrigger>
-          <TabsTrigger :value="isSearchActive ? '' : 'Arts'" :disabled="isSearchActive" class="flex items-center">
-            <Icon name="material-symbols:format-paint" />
-            <div class="hidden sm:block ml-1">
-              Arts
-            </div>
-          </TabsTrigger>
-          <TabsTrigger :value="isSearchActive ? '' : 'Life'" :disabled="isSearchActive" class="flex items-center">
-            <Icon name="material-symbols:nightlife" />
-            <div class="hidden sm:block ml-1">
-              Life
-            </div>
-          </TabsTrigger>
-          <TabsTrigger :value="isSearchActive ? '' : 'Academic'" :disabled="isSearchActive" class="flex items-center">
-            <Icon name="material-symbols:book" />
-            <div class="hidden sm:block ml-1">
-              Academic
+              {{ category }}
             </div>
           </TabsTrigger>
         </TabsList>
+
         <Input v-model="searchTerm" type="text" placeholder="Search..." class="float-right w-1/4" />
       </div>
       <TabsContent
-        v-for="i in categories"
-        :key="i"
-        :value="i"
+        v-for="category in categories"
+        :key="category"
+        :value="category"
         class="border-none p-0 outline-none"
       >
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-          <ClubCard v-for="j in filteredClubs[i]" :key="j.groups[0].C_NameE" :club="j" />
+          <ClubCard v-for="club in filteredClubs[category]" :key="club.groups[0].C_NameE" :club="club" />
         </div>
       </TabsContent>
     </Tabs>
