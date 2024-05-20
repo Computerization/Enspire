@@ -49,6 +49,18 @@ if (filteredClubs[0] && filteredClubs[0].groups[0].C_DescriptionC) {
 const clubEdit = await getEditableClub(Number(id))
 const isPresident = (clubEdit !== undefined)
 
+// Format Club Found Time
+function formatFoundTime(foundTime: string): string {
+  if (!foundTime || foundTime === '0000-00-00 00:00:00')
+    return ''
+
+  const date = new Date(foundTime)
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
+
 // This page requires login
 definePageMeta({
   middleware: ['auth'],
@@ -169,6 +181,9 @@ useHead({
                   </div>
                   <div>
                     <span class="font-bold mr-1">社团人数:</span>{{ groupMemberCounts }} 人
+                  </div>
+                  <div v-if="formatFoundTime(group.C_FoundTime)">
+                    <span class="font-bold mr-1">成立日期:</span>{{ formatFoundTime(group.C_FoundTime) }}
                   </div>
                   <div v-if="club.supervisor" class="flex">
                     <span class="font-bold">指导老师:</span>
