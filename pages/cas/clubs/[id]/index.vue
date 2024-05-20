@@ -67,7 +67,12 @@ definePageMeta({
 })
 
 useHead({
-  title: `${filteredClubs[0].groups[0].C_NameC} | Clubs | Enspire`,
+  title: `${filteredClubs[0].groups[0].C_NameC} | Enspire`,
+  meta: [
+    { property: 'og:type', content: 'website' },
+    { property: 'og:title', content: `${filteredClubs[0].groups[0].C_NameC} - Enspire` },
+    { property: 'og:description', content: `社团 "${filteredClubs[0].groups[0].C_NameC}" 的详情页面` },
+  ],
 })
 </script>
 
