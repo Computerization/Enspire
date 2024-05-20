@@ -98,7 +98,12 @@ function iconName(category: ClubCategoryKey) {
           </TabsTrigger>
         </TabsList>
 
-        <Input v-model="searchTerm" type="text" placeholder="Search..." class="float-right w-1/4" />
+        <div class="relative w-1/3 xl:w-1/4">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <Icon name="material-symbols:search" />
+          </div>
+          <Input v-model="searchTerm" type="text" placeholder="Search..." class="pl-10" />
+        </div>
       </div>
       <TabsContent
         v-for="category in categories"
