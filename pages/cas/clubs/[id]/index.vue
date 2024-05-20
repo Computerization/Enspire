@@ -147,7 +147,7 @@ useHead({
                     <span v-for="supervisor in club.supervisor" :key="supervisor.TeacherID" class="ml-1">
                       <HoverCard>
                         <HoverCardTrigger as-child>
-                          <span>
+                          <span class="hover:underline">
                             {{ supervisor.T_Name }}
                             <span v-if="supervisor.T_Nickname" class="text-muted-foreground">
                               ({{ supervisor.T_Nickname }})
@@ -164,7 +164,7 @@ useHead({
                                 </span>
                               </h4>
                               <div class="flex items-center pt-2">
-                                <span v-if="supervisor.T_Email" class="text-sm text-muted-foreground">
+                                <span v-if="supervisor.T_Email" class="text-sm text-muted-foreground hover:underline">
                                   Email: <NuxtLink :to="`mailto:${supervisor.T_Email}`">{{ supervisor.T_Email }}</NuxtLink>
                                 </span>
                               </div>
