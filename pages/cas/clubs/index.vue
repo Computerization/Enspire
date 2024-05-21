@@ -61,7 +61,7 @@ watch(selectedTab, (newTab) => {
     localStorage.setItem('selectedTab', newTab)
 })
 
-function iconName(category: ClubCategoryKey) {
+function categoryIcon(category: ClubCategoryKey) {
   switch (category) {
     case 'Sports':
       return 'material-symbols:sports-basketball'
@@ -91,7 +91,7 @@ function iconName(category: ClubCategoryKey) {
             :disabled="isSearchActive"
             class="flex items-center"
           >
-            <Icon :name="iconName(category)" />
+            <Icon :name="categoryIcon(category)" />
             <div class="hidden sm:block ml-1">
               {{ category }}
             </div>
