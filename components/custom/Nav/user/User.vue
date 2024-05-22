@@ -47,18 +47,28 @@ function signOutHandler() {
       <DropdownMenuSeparator />
       <DropdownMenuGroup>
         <DropdownMenuItem>
+          <Icon class="mr-1" name="material-symbols:person-outline" />
           Profile
         </DropdownMenuItem>
         <DropdownMenuItem>
-          Billing
-        </DropdownMenuItem>
-        <DropdownMenuItem>
+          <Icon class="mr-1" name="material-symbols:tune" />
           Settings
         </DropdownMenuItem>
-        <DropdownMenuItem>New Team</DropdownMenuItem>
+      </DropdownMenuGroup>
+      <DropdownMenuSeparator />
+      <DropdownMenuGroup>
+        <DropdownMenuItem>
+          <Icon class="mr-1" name="material-symbols:open-in-new" />
+          GitHub
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <Icon class="mr-1" name="material-symbols:help-outline" />
+          Feedback
+        </DropdownMenuItem>
       </DropdownMenuGroup>
       <DropdownMenuSeparator />
       <DropdownMenuItem @click="signOutHandler">
+        <Icon class="mr-1" name="material-symbols:logout" />
         退出登录
       </DropdownMenuItem>
     </DropdownMenuContent>
