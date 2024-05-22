@@ -47,30 +47,42 @@ function signOutHandler() {
       <DropdownMenuSeparator />
       <DropdownMenuGroup>
         <DropdownMenuItem>
-          <Icon class="mr-1" name="material-symbols:person-outline" />
-          Profile
+          <NuxtLink to="/profile">
+            <Icon class="mr-1" name="material-symbols:person-outline" />
+            <span>Profile</span>
+          </NuxtLink>
         </DropdownMenuItem>
         <DropdownMenuItem>
           <Icon class="mr-1" name="material-symbols:tune" />
-          Settings
+          <span>Settings</span>
         </DropdownMenuItem>
       </DropdownMenuGroup>
       <DropdownMenuSeparator />
       <DropdownMenuGroup>
         <DropdownMenuItem>
-          <Icon class="mr-1" name="material-symbols:open-in-new" />
-          GitHub
+          <NuxtLink to="https://github.com/Computerization/Enspire">
+            <Icon class="mr-1" name="material-symbols:open-in-new" />
+            <span>GitHub</span>
+          </NuxtLink>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <Icon class="mr-1" name="material-symbols:help-outline" />
-          Feedback
+          <NuxtLink to="https://github.com/Computerization/Enspire/issues/new/choose">
+            <Icon class="mr-1" name="material-symbols:help-outline" />
+            <span>Feedback</span>
+          </NuxtLink>
         </DropdownMenuItem>
       </DropdownMenuGroup>
       <DropdownMenuSeparator />
       <DropdownMenuItem @click="signOutHandler">
         <Icon class="mr-1" name="material-symbols:logout" />
-        退出登录
+        <span>退出登录</span>
       </DropdownMenuItem>
     </DropdownMenuContent>
   </DropdownMenu>
 </template>
+
+<style>
+a {
+  cursor: default;
+}
+</style>
