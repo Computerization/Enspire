@@ -60,13 +60,13 @@ function signOutHandler() {
       <DropdownMenuSeparator />
       <DropdownMenuGroup>
         <DropdownMenuItem>
-          <NuxtLink to="https://github.com/Computerization/Enspire">
+          <NuxtLink to="https://github.com/Computerization/Enspire" target="_blank">
             <Icon class="mr-1" name="material-symbols:open-in-new" />
             <span>GitHub</span>
           </NuxtLink>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <NuxtLink to="https://github.com/Computerization/Enspire/issues/new/choose">
+          <NuxtLink to="https://github.com/Computerization/Enspire/issues/new/choose" target="_blank">
             <Icon class="mr-1" name="material-symbols:help-outline" />
             <span>Feedback</span>
           </NuxtLink>
