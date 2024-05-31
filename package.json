@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.13.3",
-    "@nuxt/fonts": "^0.6.1",
+    "@nuxt/fonts": "^0.7.0",
     "@nuxtjs/google-fonts": "^3.2.0",
     "@nuxtjs/tailwindcss": "^6.11.4",
     "@prisma/client": "^5.12.1",
