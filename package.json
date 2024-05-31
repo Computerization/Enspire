@@ -25,7 +25,7 @@
     "clsx": "^2.1.0",
     "date-fns": "^3.6.0",
     "h3": "^1.11.1",
-    "h3-clerk": "^0.3.10",
+    "h3-clerk": "^0.4.0",
     "iron-webcrypto": "^1.1.0",
     "lucide-vue-next": "^0.368.0",
     "nitropack": "2.9.6",
