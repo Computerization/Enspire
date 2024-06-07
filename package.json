@@ -37,7 +37,7 @@
     "uuid": "^9.0.1",
     "v-calendar": "^3.1.2",
     "vee-validate": "^4.12.6",
-    "vue-clerk": "^0.2.2",
+    "vue-clerk": "^0.4.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {
