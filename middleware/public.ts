@@ -9,8 +9,9 @@ export default defineNuxtRouteMiddleware(() => {
   if (
     process.server
     && nuxtApp.ssrContext?.event.context.auth?.userId
-  )
+  ) {
     return navigateTo('/profile')
+  }
 
   // On client, check if clerk is loaded and if user is authenticated
   // and redirect to /profile.
