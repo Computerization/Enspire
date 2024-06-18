@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import { SignIn } from 'vue-clerk'
+import { usePreferredDark } from '@vueuse/core'
+import { dark } from '@clerk/themes'
+
+const isDark = usePreferredDark()
 
 definePageMeta({
   layout: 'sign-in-or-out',
@@ -17,6 +21,6 @@ definePageMeta({
     </p>
   </div>
   <div class="grid place-items-center">
-    <SignIn sign-up-url="/sign-up" />
+    <SignIn sign-up-url="/sign-up" :appearance="{ baseTheme: isDark ? dark : undefined }" />
   </div>
 </template>
