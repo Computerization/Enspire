@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { PrismaClient } from '@prisma/client'
 
-import clerkClient from '@clerk/clerk-sdk-node'
+import { clerkClient } from '@clerk/clerk-sdk-node'
 
 const prisma = new PrismaClient()
 
@@ -58,7 +58,7 @@ export default defineEventHandler(async (event) => {
   await clerkClient.users.updateUser(storedData.userId, { firstName: storedData.name })
   await clerkClient.users.updateUser(storedData.userId, { publicMetadata: { binded: true } })
 
-  useStorage().removeItem(requestBody.data.token, true)
+  await useStorage().removeItem(requestBody.data.token, true)
 
   return { success: true }
 })
