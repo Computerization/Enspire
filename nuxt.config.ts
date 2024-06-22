@@ -20,6 +20,7 @@ export default defineNuxtConfig({
     'nuxt-icon',
     '@nuxt/fonts',
     'nuxt-svgo',
+    'dayjs-nuxt',
   ],
   build: {
     transpile: ['vue-clerk', '@clerk/clerk-js'],
@@ -51,6 +52,12 @@ export default defineNuxtConfig({
      * @default "./components/ui"
      */
     componentDir: './components/ui',
+  },
+  dayjs: {
+    locales: ['en', 'zh-CN'],
+    plugins: ['relativeTime', 'utc', 'timezone'],
+    defaultLocale: 'zh-CN',
+    defaultTimezone: 'Asia/Shanghai',
   },
   pwa: {
     /* your pwa options */

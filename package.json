@@ -54,6 +54,7 @@
     "@tailwindcss/typography": "^0.5.13",
     "@types/uuid": "^9.0.8",
     "@types/ws": "^8.5.10",
+    "dayjs-nuxt": "^2.1.9",
     "eslint": "^9.5.0",
     "nuxt": "3.12.2",
     "nuxt-icon": "^0.6.10",
