@@ -21,6 +21,7 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     'nuxt-svgo',
     'dayjs-nuxt',
+    'nuxt-security',
   ],
   build: {
     transpile: ['vue-clerk', '@clerk/clerk-js'],
@@ -58,8 +59,5 @@ export default defineNuxtConfig({
     plugins: ['relativeTime', 'utc', 'timezone'],
     defaultLocale: 'zh-cn',
     defaultTimezone: 'Asia/Shanghai',
-  },
-  pwa: {
-    /* your pwa options */
   },
 })
