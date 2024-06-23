@@ -33,6 +33,7 @@ export default defineNuxtConfig({
         environment: 'development',
       },
       clerkPublishableKey: process.env.CLERK_PUBLISHABLE_KEY,
+      payloadCmsUrl: process.env.PAYLOAD_CMS_URL,
     },
     clubDataSecretKey: process.env.CLUB_DATA_SECRET_KEY,
     tsimsUrl: process.env.TSIMS_URL,

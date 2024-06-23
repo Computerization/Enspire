@@ -2,7 +2,7 @@
 import type { Announcements } from '~/types/payloadcms/announcements'
 
 const { data } = await useAsyncData<Announcements>('allRequests', () => {
-  return $fetch('https://admin.enspire.one/api/announcements', {
+  return $fetch('/api/cms/api/announcements', {
     method: 'GET',
   })
 })
