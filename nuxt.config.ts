@@ -54,9 +54,9 @@ export default defineNuxtConfig({
     componentDir: './components/ui',
   },
   dayjs: {
-    locales: ['en', 'zh-CN'],
+    locales: ['en', 'zh-cn'],
     plugins: ['relativeTime', 'utc', 'timezone'],
-    defaultLocale: 'zh-CN',
+    defaultLocale: 'zh-cn',
     defaultTimezone: 'Asia/Shanghai',
   },
   pwa: {
