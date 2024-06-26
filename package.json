@@ -58,7 +58,6 @@
     "eslint": "^9.5.0",
     "nuxt": "3.12.2",
     "nuxt-icon": "^0.6.10",
-    "nuxt-security": "2.0.0-rc.6",
     "nuxt-svgo": "^4.0.1",
     "prisma": "^5.15.0",
     "shadcn-nuxt": "^0.10.4",

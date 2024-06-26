@@ -21,7 +21,6 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     'nuxt-svgo',
     'dayjs-nuxt',
-    'nuxt-security',
   ],
   build: {
     transpile: ['vue-clerk', '@clerk/clerk-js'],
