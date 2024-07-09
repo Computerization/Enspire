@@ -22,7 +22,7 @@ jobs:
           show-progress: false
 
       - name: Setup node environment
-        uses: actions/setup-node@v4.0.2
+        uses: actions/setup-node@v4.0.3
         with:
           node-version: 20
           check-latest: true
@@ -63,7 +63,7 @@ jobs:
           show-progress: false
 
       - name: Setup node environment
-        uses: actions/setup-node@v4.0.2
+        uses: actions/setup-node@v4.0.3
         with:
           node-version: 20
           check-latest: true
