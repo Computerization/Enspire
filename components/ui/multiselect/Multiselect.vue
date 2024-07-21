@@ -1,24 +1,16 @@
 <!-- Translated into Vue from this beautiful piece of React <del>shit</del>code : https://github.com/sersavan/shadcn-multi-select-component -->
 
 <script setup lang="ts">
-import { type VariantProps, cva } from 'class-variance-authority'
-import { ref } from 'vue'
+import {cva, type VariantProps} from 'class-variance-authority'
+import {ref} from 'vue'
 
-import {
-  CheckIcon,
-  ChevronDown,
-  XCircle,
-  XIcon,
-} from 'lucide-vue-next'
-import { cn } from '@/lib/utils'
-import { Separator } from '@/components/ui/separator'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover'
+import {CheckIcon, ChevronDown, XCircle, XIcon} from 'lucide-vue-next'
+import {useVModel} from '@vueuse/core'
+import {cn} from '@/lib/utils'
+import {Separator} from '@/components/ui/separator'
+import {Button} from '@/components/ui/button'
+import {Badge} from '@/components/ui/badge'
+import {Popover, PopoverContent, PopoverTrigger} from '@/components/ui/popover'
 import {
   Command,
   CommandEmpty,
@@ -29,10 +21,13 @@ import {
   CommandSeparator,
 } from '@/components/ui/command'
 
-import { ScrollArea } from '@/components/ui/scroll-area'
-import {useVModel} from "@vueuse/core";
+import {ScrollArea} from '@/components/ui/scroll-area'
 
 const props = defineProps<MultiSelectProps>()
+
+const emits = defineEmits<{
+  (e: 'update:modelValue', payload: string[]): void
+}>()
 
 const multiSelectVariants = cva(
   'm-1 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300',
@@ -65,8 +60,6 @@ interface MultiSelectVariantProps extends VariantProps<typeof multiSelectVariant
 interface MultiSelectProps {
   variant?: MultiSelectVariantProps['variant']
   options: Option[]
-  onValueChange: (value: string[]) => void
-  defaultValue: string[]
   placeholder?: string
   animation?: number
   maxCount?: number
@@ -74,48 +67,40 @@ interface MultiSelectProps {
   class?: string
   modelValue?: string[]
 }
+
 const isPopoverOpen = ref(false)
 const isAnimating = ref(false)
 const buttonRef = ref(undefined)
 
-
-
-const emits = defineEmits<{
-  (e: 'update:modelValue', payload: string[]): void
-}>()
-
 const selectedValues = useVModel(props, 'modelValue', emits, {
-  passive: true,
-  defaultValue: props.defaultValue,
+  passive: false,
+  defaultValue: [],
 })
 
 function toggleOption(value: string) {
-  const newSelectedValues = selectedValues.value.includes(value)
-    ? selectedValues.value!.filter(v => v !== value)
-    : [...selectedValues.value, value]
-  selectedValues.value = newSelectedValues
-  props.onValueChange(newSelectedValues)
+  selectedValues.value = selectedValues.value
+    ? (selectedValues.value.includes(value)
+        ? selectedValues.value!.filter(v => v !== value)
+        : [...selectedValues.value, value])
+    : []
 }
 
 function handleClear() {
   selectedValues.value = []
-  props.onValueChange([])
 }
 
 function clearExtraOptions() {
-  const newSelectedValues = selectedValues.value.slice(0, props.maxCount)
-  selectedValues.value = newSelectedValues
-  props.onValueChange(newSelectedValues)
+  selectedValues.value = selectedValues.value
+    ? selectedValues.value.slice(0, props.maxCount)
+    : []
 }
 
 function toggleAll() {
-  if (selectedValues.value.length === props.options.length) {
+  if (selectedValues.value && (selectedValues.value.length === props.options.length)) {
     handleClear()
   }
   else {
-    const allValues = props.options.map(option => option.value)
-    selectedValues.value = allValues
-    props.onValueChange(allValues)
+    selectedValues.value = props.options.map(option => option.value)
   }
 }
 
@@ -124,13 +109,11 @@ function handleInputKeyDown(event: KeyboardEvent) {
     isPopoverOpen.value = true
   }
   else if (event.key === 'Backspace' && !event.currentTarget) {
-    const newSelectedValues = [...selectedValues.value]
+    const newSelectedValues = selectedValues.value ? [...selectedValues.value] : []
     newSelectedValues.pop()
     selectedValues.value = newSelectedValues
-    props.onValueChange(newSelectedValues)
   }
 }
-
 </script>
 
 <template>
@@ -229,6 +212,7 @@ function handleInputKeyDown(event: KeyboardEvent) {
                   @select="toggleAll"
                 >
                   <div
+                    v-if="selectedValues"
                     :class="cn(
                       'mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
                       selectedValues.length
@@ -249,6 +233,7 @@ function handleInputKeyDown(event: KeyboardEvent) {
                   @select="() => toggleOption(option.value)"
                 >
                   <div
+                    v-if="selectedValues"
                     :class="cn(
                       'mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
                       selectedValues.includes(option.value)
@@ -267,7 +252,7 @@ function handleInputKeyDown(event: KeyboardEvent) {
             <CommandGroup>
               <div class="flex items-center justify-between">
                 <CommandItem
-                  v-if="selectedValues.length > 0"
+                  v-if="selectedValues && selectedValues.length > 0"
                   value="clear"
                   class="flex-1 justify-center cursor-pointer"
                   @click="handleClear"
@@ -275,7 +260,7 @@ function handleInputKeyDown(event: KeyboardEvent) {
                   Clear
                 </CommandItem>
                 <Separator
-                  v-if="selectedValues.length > 0"
+                  v-if="selectedValues && selectedValues.length > 0"
                   orientation="vertical"
                   class="min-h-6 h-full"
                 />
