@@ -16,6 +16,9 @@ model User {
   ClubRating     ClubRating[]
 }
 
+// -----------------------------------------
+// ------------------CLUBS------------------
+// -----------------------------------------
 // Json types should be stored like {"zh": xxx, "en": xxx}.
 // Prisma itself doesn't validates what is in that Json, we should do it by ourselves when reading.
 model Club {
@@ -31,8 +34,31 @@ model Club {
   LeaveRequest              LeaveRequest[]
   ClubRating                ClubRating[]
   GroupInfo                 GroupInfo[]
+
+  memberships ClubMembership[]
 }
 
+enum ClubMemberRole {
+  PRESIDENT
+  VICE_PRESIDENT
+  MEMBER
+}
+
+model ClubMembership {
+  id             String         @id @default(dbgenerated("gen_random_uuid()"))
+  tsimsStudentId Int
+  name           String
+  clubId         Int
+  role           ClubMemberRole
+
+  club Club @relation(fields: [clubId], references: [id])
+
+  @@unique([tsimsStudentId, clubId]) // Ensure unique membership per club
+}
+
+// -----------------------------------------
+// ---------------LEAVE REQUESTS------------
+// -----------------------------------------
 enum LeaveRequestStatus {
   PENDING
   APPROVED
