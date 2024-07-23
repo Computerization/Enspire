@@ -76,6 +76,15 @@ const refreshState = ref(false)
                 </FormItem>
               </FormField>
 
+              <FormField name="text">
+                <FormItem>
+                  <FormLabel>
+                    <Skeleton class="w-16 h-4" />
+                  </FormLabel>
+                  <Skeleton class="w-full h-14" />
+                </FormItem>
+              </FormField>
+
               <Skeleton class="w-20 h-9" />
             </form>
           </CardContent>
