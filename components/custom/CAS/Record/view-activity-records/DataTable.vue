@@ -142,7 +142,7 @@ async function submitDeletion(id: string) {
           日期
         </div>
         <div class="text-sm rounded border p-2 mt-1">
-          {{ new Date(String(currentRequestInDialog?.startDate)).toLocaleDateString() }}
+          {{ new Date(String(currentRequestInDialog?.date)).toLocaleDateString() }}
         </div>
       </div>
 
