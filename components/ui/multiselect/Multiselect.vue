@@ -26,7 +26,7 @@ import {ScrollArea} from '@/components/ui/scroll-area'
 const props = defineProps<MultiSelectProps>()
 
 const emits = defineEmits<{
-  (e: 'update:modelValue', payload: string[]): void
+  (e: 'update:modelValue', payload: (string | number)[]): void
 }>()
 
 const multiSelectVariants = cva(
@@ -51,7 +51,7 @@ const multiSelectVariants = cva(
 
 interface Option {
   label: string
-  value: string
+  value: string | number
   // icon?: (props: { className?: string }) => JSX.Element;
 }
 
@@ -65,19 +65,19 @@ interface MultiSelectProps {
   maxCount?: number
   asChild?: boolean
   class?: string
-  modelValue?: string[]
+  modelValue?: (string | number)[]
 }
 
 const isPopoverOpen = ref(false)
 const isAnimating = ref(false)
-const buttonRef = ref(undefined)
+const buttonRef = ref(null)
 
 const selectedValues = useVModel(props, 'modelValue', emits, {
   passive: false,
   defaultValue: [],
 })
 
-function toggleOption(value: string) {
+function toggleOption(value: string | number) {
   selectedValues.value = selectedValues.value
     ? (selectedValues.value.includes(value)
         ? selectedValues.value!.filter(v => v !== value)
@@ -195,6 +195,8 @@ function handleInputKeyDown(event: KeyboardEvent) {
         class="flex w-full p-0"
         align="start"
         @keydown.esc="isPopoverOpen = false"
+        :avoid-collisions="true"
+        :collision-padding="{bottom: 260}"
       >
         <Command>
           <CommandInput

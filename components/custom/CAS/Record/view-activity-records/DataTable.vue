@@ -9,10 +9,10 @@ import {
   useVueTable,
 } from '@tanstack/vue-table'
 
-import type { Club, LeaveRequest, User } from '@prisma/client'
+import type { ActivityRecord, Club, ClubMembership } from '@prisma/client'
 import { valueUpdater } from '@/lib/utils'
-import { Input } from '@/components/ui/input'
-import { Badge } from '~/components/ui/badge'
+import { DonutChart } from '@/components/ui/chart-donut'
+
 import {
   Table,
   TableBody,
@@ -28,12 +28,15 @@ const props = defineProps<{
   refreshFunction: Function
 }>()
 
-type LeaveRequestWithClubInfo = LeaveRequest & { club: Club, user: User }
+type ActivityRecordtWithClubInfo = ActivityRecord & {
+  attendees: ClubMembership[]
+  club: Club & { memberships: ClubMembership[] }
+}
 
 const isDialogOpen = ref(false)
 const sorting = ref<SortingState>([])
 const columnFilters = ref<ColumnFiltersState>([])
-const currentRequestInDialog = ref<LeaveRequestWithClubInfo>()
+const currentRequestInDialog = ref<ActivityRecordtWithClubInfo>()
 
 const table = useVueTable({
   get data() { return props.data },
@@ -57,7 +60,7 @@ table.setPageSize(5)
 
 async function submitDeletion(id: string) {
   isLoading.value = true
-  await useFetch('/api/cas/leave/delete', {
+  await useFetch('/api/cas/record/delete', {
     method: 'DELETE',
     body: {
       id,
@@ -89,7 +92,7 @@ async function submitDeletion(id: string) {
             <TableRow
               v-for="row in table.getRowModel().rows" :key="row.id"
               :data-state="row.getIsSelected() ? 'selected' : undefined"
-              @click="currentRequestInDialog = row.original as LeaveRequestWithClubInfo; isDialogOpen = true"
+              @click="currentRequestInDialog = row.original as ActivityRecordtWithClubInfo; isDialogOpen = true"
             >
               <TableCell v-for="cell in row.getVisibleCells()" :key="cell.id">
                 <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
@@ -106,14 +109,7 @@ async function submitDeletion(id: string) {
         </TableBody>
       </Table>
     </div>
-    <div class="flex justify-between pt-4">
-      <div class="flex items-center">
-        <Input
-          class="max-w-sm" placeholder="搜索原因..." size="sm"
-          :model-value="table.getColumn('reason')?.getFilterValue() as string"
-          @update:model-value=" table.getColumn('reason')?.setFilterValue($event)"
-        />
-      </div>
+    <div class="flex justify-between pt-4 flex-row-reverse">
       <div class="flex items-center justify-end space-x-2">
         <Button
           variant="outline"
@@ -137,49 +133,64 @@ async function submitDeletion(id: string) {
       <DialogHeader>
         <DialogTitle>详情</DialogTitle>
         <DialogDescription>
-          请假申请详情
+          活动记录详情
         </DialogDescription>
       </DialogHeader>
 
       <div>
         <div class="font-medium">
-          状态
-        </div>
-        <div v-if="currentRequestInDialog?.status === 'PENDING'" class="mt-1 bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300 w-[70px]">
-          等待审批
-        </div>
-        <Badge v-if="currentRequestInDialog?.status === 'APPROVED'" class="mt-1 bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300 w-[70px]">
-          审批通过
-        </Badge>
-        <Badge v-if="currentRequestInDialog?.status === 'DENIED'" class="mt-1 bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300 w-[70px]" color="orange">
-          被拒绝
-        </Badge>
-      </div>
-
-      <div>
-        <div class="font-medium">
           日期
         </div>
-        <div class="font-mono text-muted-foreground text-sm italic">
+        <div class="text-sm rounded border p-2 mt-1">
           {{ new Date(String(currentRequestInDialog?.startDate)).toLocaleDateString() }}
         </div>
       </div>
 
       <div>
         <div class="font-medium">
-          申请者
+          活动概况
         </div>
-        <div class="font-mono text-muted-foreground text-sm italic">
-          {{ currentRequestInDialog?.user.name }}
+        <div class="text-sm rounded border p-2 mt-1">
+          {{ currentRequestInDialog?.text }}
         </div>
       </div>
 
-      <div>
+      <div v-if="currentRequestInDialog?.attendees">
         <div class="font-medium">
-          原因
+          参与者
         </div>
-        <div class="font-mono text-muted-foreground text-sm italic">
-          {{ currentRequestInDialog?.reason }}
+        <div class="text-sm rounded border p-2 mt-1 grid grid-cols-2 gap-4">
+          <DonutChart
+            :data="[
+              { name: '参与者', num: currentRequestInDialog.attendees.length },
+              { name: '未参与者', num: currentRequestInDialog.club.memberships.length - currentRequestInDialog.attendees.length },
+            ]"
+            index="name"
+            category="num"
+            class="p-4"
+          />
+          <div class="h-full flex items-center justify-center">
+            <div>
+              <Badge class="mb-1" variant="outline">
+                参与
+              </Badge>
+              <div class="flex items-center flex-wrap">
+                <div v-for="(name, index) in currentRequestInDialog.attendees.map(attendee => attendee.name)" :key="index">
+                  {{ name }}
+                  <span v-if="index < currentRequestInDialog.attendees.length - 1" class="mr-1 text-muted-foreground">/</span>
+                </div>
+              </div>
+              <Badge class="mt-2 mb-1" variant="outline">
+                未参与
+              </Badge>
+              <div class="flex items-center flex-wrap">
+                <div v-for="(name, index) in currentRequestInDialog.club.memberships.map(attendee => attendee.name).filter(name => !currentRequestInDialog!.attendees.map(attendee => attendee.name).includes(name))" :key="index">
+                  {{ name }}
+                  <span v-if="index < currentRequestInDialog.club.memberships.length - currentRequestInDialog.attendees.length - 1" class="mr-1 text-muted-foreground">/</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 

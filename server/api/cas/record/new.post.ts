@@ -4,7 +4,10 @@ import * as z from 'zod'
 const prisma = new PrismaClient()
 
 const requestSchema = z.object({
-  id: z.string().uuid(),
+  club: z.string(),
+  date: z.string().datetime(),
+  text: z.string().min(10).max(200),
+  members: z.array(z.string().uuid()),
 })
 
 export default eventHandler(async (event) => {
@@ -17,12 +20,14 @@ export default eventHandler(async (event) => {
 
   const requestBody = await readValidatedBody(event, body => requestSchema.parse(body))
 
-  await prisma.leaveRequest.delete({
-    where: {
-      id: requestBody.id,
-      clerkUserId: auth.userId,
+  await prisma.activityRecord.create({
+    data: {
+      clubId: Number(requestBody.club),
+      date: requestBody.date,
+      text: requestBody.text,
+      attendees: {
+        connect: requestBody.members.map(id => ({ id })),
+      },
     },
-  }).catch(() => {
-    setResponseStatus(event, 404)
   })
 })

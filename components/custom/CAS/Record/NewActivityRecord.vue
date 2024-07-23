@@ -12,10 +12,13 @@ import { cn } from '~/lib/utils'
 import { Textarea } from '@/components/ui/textarea'
 import { useToast } from '@/components/ui/toast/use-toast'
 import { Toaster } from '~/components/ui/toast'
+import { Multiselect } from '@/components/ui/multiselect'
 
 const emit = defineEmits(['refresh'])
 
 const { toast } = useToast()
+
+const selectedClub = ref<string>()
 
 definePageMeta({
   middleware: ['auth'],
@@ -26,11 +29,12 @@ const isLoading = ref(false)
 const formSchema = toTypedSchema(z.object({
   club: z.string(),
   date: z.date(),
-  reason: z.string().max(100),
+  text: z.string().min(10).max(300),
+  members: z.array(z.string().uuid()),
 }))
 
 const { data } = await useAsyncData<AllClubs>('allClubs', () => {
-  return $fetch('/api/user/all_clubs', {
+  return $fetch('/api/user/all_clubs?includeMemberships=true', {
     headers: useRequestHeaders(),
     method: 'GET',
   })
@@ -49,7 +53,7 @@ const { handleSubmit, resetForm } = useForm({
 
 const onSubmit = handleSubmit(async (values) => {
   isLoading.value = true
-  const { error } = await useFetch('/api/cas/leave/new', {
+  const { error } = await useFetch('/api/cas/record/new', {
     headers: useRequestHeaders(),
     method: 'post',
     server: false,
@@ -75,7 +79,7 @@ const onSubmit = handleSubmit(async (values) => {
         <Icon name="material-symbols:add-circle-outline" />
         新增
       </CardTitle>
-      <CardDescription>在此处新增请假申请</CardDescription>
+      <CardDescription>在此处新增活动记录</CardDescription>
     </CardHeader>
     <CardContent>
       <form class="space-y-6" @submit="onSubmit">
@@ -83,7 +87,7 @@ const onSubmit = handleSubmit(async (values) => {
           <FormItem>
             <FormLabel>社团</FormLabel>
 
-            <Select v-bind="componentField">
+            <Select v-bind="componentField" @update:model-value="selectedClub = $event">
               <FormControl>
                 <SelectTrigger
                   :class="cn(
@@ -91,13 +95,13 @@ const onSubmit = handleSubmit(async (values) => {
                     !value && 'text-muted-foreground',
                   )" variant="outline" :disabled="isLoading"
                 >
-                  <SelectValue placeholder="选择您需要请假的社团..." />
+                  <SelectValue placeholder="选择您需要记录的社团..." />
                 </SelectTrigger>
               </FormControl>
               <SelectContent>
                 <SelectGroup v-if="data">
                   <SelectItem
-                    v-for="club in [...data.member, ...data.vice, ...data.president]"
+                    v-for="club in [...data.vice, ...data.president]"
                     :key="club.id" :value="String(club.id)"
                   >
                     {{ club.name.zh }}
@@ -111,7 +115,7 @@ const onSubmit = handleSubmit(async (values) => {
 
         <FormField v-slot="{ componentField, value }" name="date">
           <FormItem class="flex flex-col">
-            <FormLabel>请假日期</FormLabel>
+            <FormLabel>活动日期</FormLabel>
             <Popover>
               <PopoverTrigger as-child>
                 <FormControl>
@@ -128,22 +132,47 @@ const onSubmit = handleSubmit(async (values) => {
                 </FormControl>
               </PopoverTrigger>
               <PopoverContent class="p-0">
-                <Calendar :min-date="new Date()" v-bind="componentField" />
+                <Calendar v-bind="componentField" />
               </PopoverContent>
             </Popover>
             <FormMessage />
           </FormItem>
         </FormField>
 
-        <FormField v-slot="{ componentField }" name="reason">
+        <FormField v-slot="{ componentField }" name="text">
           <FormItem>
-            <FormLabel>请假原因</FormLabel>
+            <FormLabel>活动概要</FormLabel>
             <FormControl>
               <Textarea
                 class="resize-none"
                 placeholder="请假原因，最多一百字..."
                 v-bind="componentField"
                 :disabled="isLoading"
+              />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        </FormField>
+
+        <FormField v-slot="{ componentField }" name="members">
+          <FormItem>
+            <FormLabel>参与者</FormLabel>
+            <FormControl>
+              <Multiselect
+                v-if="data"
+                :options="((
+                  [...data.president, ...data.vice].find(
+                    (club) => club.id === Number(selectedClub),
+                  )
+                )?.memberships)?.map((membership) => ({
+                  label: membership.name,
+                  value: membership.id,
+                })) ?? []"
+                placeholder="Select options"
+                variant="inverted"
+                v-bind="componentField"
+                :animation="2"
+                :max-count="3"
               />
             </FormControl>
             <FormMessage />

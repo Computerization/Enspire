@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import LazyNewLeaveRequest from '~/components/custom/CAS/Leave/NewLeaveRequest.vue'
+import LazyNewActivityRecord from '~/components/custom/CAS/Record/NewActivityRecord.vue'
 import Skeleton from '~/components/ui/skeleton/Skeleton.vue'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card'
-import ViewMyLeaveRequests from '~/components/custom/CAS/Leave/ViewMyLeaveRequests.vue'
+import ViewMyActivityRecords from '~/components/custom/CAS/Record/ViewMyActivityRecords.vue'
 
 definePageMeta({
   middleware: ['auth'],
 })
 
 useHead({
-  title: 'Leave Request | Enspire',
+  title: 'Activity Record | Enspire',
 })
 
 const refreshState = ref(false)
@@ -18,7 +18,7 @@ const refreshState = ref(false)
 <template>
   <div class="space-y-4">
     <Suspense>
-      <ViewMyLeaveRequests :refresh-watcher="ref(refreshState)" />
+      <ViewMyActivityRecords :refresh-watcher="ref(refreshState)" />
       <template #fallback>
         <Card class="w-full">
           <CardHeader>
@@ -35,7 +35,7 @@ const refreshState = ref(false)
       </template>
     </Suspense>
     <Suspense>
-      <LazyNewLeaveRequest @refresh="refreshState = !refreshState" />
+      <LazyNewActivityRecord @refresh="refreshState = !refreshState" />
       <template #fallback>
         <Card class="w-full">
           <CardHeader>
