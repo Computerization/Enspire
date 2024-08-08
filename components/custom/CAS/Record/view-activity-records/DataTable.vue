@@ -25,7 +25,7 @@ import {
 const props = defineProps<{
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
-  refreshFunction: Function
+  refreshFunction: () => void
 }>()
 
 type ActivityRecordtWithClubInfo = ActivityRecord & {
