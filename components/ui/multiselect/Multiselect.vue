@@ -70,7 +70,7 @@ interface MultiSelectProps {
 
 const isPopoverOpen = ref(false)
 const isAnimating = ref(false)
-const buttonRef = ref(null)
+const buttonRef = ref(undefined)
 
 const selectedValues = useVModel(props, 'modelValue', emits, {
   passive: false,

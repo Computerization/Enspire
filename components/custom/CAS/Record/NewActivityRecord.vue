@@ -34,6 +34,7 @@ const formSchema = toTypedSchema(z.object({
 }))
 
 const { data } = await useAsyncData<AllClubs>('allClubs', () => {
+  // @ts-expect-error TS2321
   return $fetch('/api/user/all_clubs?includeMemberships=true', {
     headers: useRequestHeaders(),
     method: 'GET',

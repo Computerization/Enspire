@@ -39,6 +39,7 @@
     "unstorage": "^1.10.2",
     "uuid": "^10.0.0",
     "v-calendar": "^3.1.2",
+    "vaul-vue": "^0.2.0",
     "vee-validate": "^4.13.1",
     "vue-clerk": "^0.4.3",
     "zod": "^3.23.8"
@@ -54,6 +55,7 @@
     "@sentry/profiling-node": "^7.110.0",
     "@sentry/vue": "^8.9.2",
     "@tailwindcss/typography": "^0.5.13",
+    "@types/node-fetch": "^2.6.11",
     "@types/uuid": "^9.0.8",
     "@types/ws": "^8.5.10",
     "dayjs-nuxt": "^2.1.9",
