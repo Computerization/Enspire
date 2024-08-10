@@ -1,9 +1,17 @@
 import { PrismaClient } from '@prisma/client'
+import type { ClubMemberRole } from '@prisma/client'
 import crawler from './crawler'
 import type { Clubs } from '~/types/clubs'
 
 const prisma = new PrismaClient()
 const clubs: Clubs = await crawler() as Clubs
+
+interface ClubMembership {
+  tsimsStudentId: number
+  name: string
+  clubId: number
+  role: ClubMemberRole
+}
 
 const categories: (keyof Clubs)[] = ['Sports', 'Service', 'Arts', 'Life', 'Academic']
 
@@ -29,6 +37,8 @@ async function main() {
         const vicesByTsimsStudentId: number[] = []
         const membersByTsimsStudentId: number[] = []
 
+        const memberships: ClubMembership[] = []
+
         for (const member of club.gmember) {
           if (member.LeaderYes === '2') {
             if (presidentByTsimsStudentId !== 0)
@@ -42,6 +52,13 @@ async function main() {
           else {
             membersByTsimsStudentId.push(Number(member.StudentID))
           }
+
+          memberships.push({
+            tsimsStudentId: Number(member.StudentID),
+            name: member.S_Name,
+            clubId: Number(club.groups[0].C_GroupsID),
+            role: member.LeaderYes === '2' ? 'PRESIDENT' : (member.LeaderYes === '1' ? 'VICE_PRESIDENT' : 'MEMBER'),
+          })
         }
         /**
          * Add upsert action to the run sequence
@@ -80,12 +97,35 @@ async function main() {
             },
           },
         }))
+
+        for (const member of memberships) {
+          runSequence.push(prisma.clubMembership.upsert({
+            where: {
+              tsimsStudentId_clubId: {
+                tsimsStudentId: member.tsimsStudentId,
+                clubId: member.clubId,
+              },
+            },
+            update: {
+              role: member.role,
+              name: member.name,
+            },
+            create: {
+              tsimsStudentId: member.tsimsStudentId,
+              clubId: member.clubId,
+              role: member.role,
+              name: member.name,
+            },
+          }))
+        }
       }
     }
   }
   /**
    * Use transaction API to run all the actions. Just in case one of the clubs fail.
    */
+  // eslint-disable-next-line no-console
+  console.log(`start transaction with length ${runSequence.length}`)
   await prisma.$transaction(runSequence)
 }
 

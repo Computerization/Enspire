@@ -20,6 +20,9 @@ export default defineNuxtConfig({
     'nuxt-icon',
     '@nuxt/fonts',
     'nuxt-svgo',
+    'dayjs-nuxt',
+    '@sentry/nuxt/module',
+    '@nuxt/image',
   ],
   build: {
     transpile: ['vue-clerk', '@clerk/clerk-js'],
@@ -27,19 +30,15 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       sentry: {
-        dsn: process.env.SENTRY_DSM,
+        dsn: process.env.SENTRY_DSN,
         environment: 'development',
       },
       clerkPublishableKey: process.env.CLERK_PUBLISHABLE_KEY,
+      payloadCmsUrl: process.env.PAYLOAD_CMS_URL,
     },
     clubDataSecretKey: process.env.CLUB_DATA_SECRET_KEY,
     tsimsUrl: process.env.TSIMS_URL,
     clerkSecretKey: process.env.CLERK_SECRET_KEY,
-  },
-  features: {
-    // Solves the weird issue where netlify's Functions bundling process fails.
-    // ref: https://answers.netlify.com/t/typeerror-pattern-is-too-long/98172/5
-    inlineStyles: false,
   },
   shadcn: {
     /**
@@ -52,7 +51,18 @@ export default defineNuxtConfig({
      */
     componentDir: './components/ui',
   },
-  pwa: {
-    /* your pwa options */
+  dayjs: {
+    locales: ['en', 'zh-cn'],
+    plugins: ['relativeTime', 'utc', 'timezone'],
+    defaultLocale: 'zh-cn',
+    defaultTimezone: 'Asia/Shanghai',
+  },
+  sentry: {
+    debug: true,
+    sourceMapsUploadOptions: {
+      org: 'computerization',
+      project: 'enspire',
+      authToken: process.env.SENTRY_AUTH_TOKEN,
+    },
   },
 })
