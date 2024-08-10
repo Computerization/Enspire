@@ -25,6 +25,7 @@ import {
 const props = defineProps<{
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  // eslint-disable-next-line ts/no-unsafe-function-type
   refreshFunction: Function
 }>()
 
