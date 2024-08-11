@@ -71,7 +71,7 @@
     "vue-tsc": "^2.0.29"
   },
   "overrides": {
-    "nitropack": "2.9.5"
+    "nitropack": "2.9.7"
   },
   "prisma": {
     "schema": "db/schema.prisma"
