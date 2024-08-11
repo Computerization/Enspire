@@ -66,9 +66,9 @@ function signOutHandler() {
           </NuxtLink>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <NuxtLink to="https://github.com/Computerization/Enspire/issues/new/choose" target="_blank">
+          <NuxtLink to="https://github.com/Computerization/Enspire/discussions" target="_blank">
             <Icon class="mr-1" name="material-symbols:help-outline" />
-            <span>Feedback</span>
+            <span>Discussions</span>
           </NuxtLink>
         </DropdownMenuItem>
       </DropdownMenuGroup>
