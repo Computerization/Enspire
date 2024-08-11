@@ -20,6 +20,7 @@ export default defineNuxtConfig({
     'nuxt-icon',
     '@nuxt/fonts',
     'nuxt-svgo',
+    'dayjs-nuxt',
   ],
   build: {
     transpile: ['vue-clerk', '@clerk/clerk-js'],
@@ -31,6 +32,7 @@ export default defineNuxtConfig({
         environment: 'development',
       },
       clerkPublishableKey: process.env.CLERK_PUBLISHABLE_KEY,
+      payloadCmsUrl: process.env.PAYLOAD_CMS_URL,
     },
     clubDataSecretKey: process.env.CLUB_DATA_SECRET_KEY,
     tsimsUrl: process.env.TSIMS_URL,
@@ -52,7 +54,10 @@ export default defineNuxtConfig({
      */
     componentDir: './components/ui',
   },
-  pwa: {
-    /* your pwa options */
+  dayjs: {
+    locales: ['en', 'zh-cn'],
+    plugins: ['relativeTime', 'utc', 'timezone'],
+    defaultLocale: 'zh-cn',
+    defaultTimezone: 'Asia/Shanghai',
   },
 })
