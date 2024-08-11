@@ -32,7 +32,6 @@
     "h3-clerk": "^0.4.11",
     "iron-webcrypto": "^1.2.1",
     "lucide-vue-next": "^0.395.0",
-    "nitropack": "2.9.6",
     "radix-vue": "^1.9.3",
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7",
@@ -70,6 +69,9 @@
     "vue": "^3.4.37",
     "vue-router": "4.4.0",
     "vue-tsc": "^2.0.29"
+  },
+  "overrides": {
+    "nitropack": "2.9.5"
   },
   "prisma": {
     "schema": "db/schema.prisma"
