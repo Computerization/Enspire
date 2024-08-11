@@ -6,13 +6,6 @@ const isDark = usePreferredDark()
 const favicon = computed(() => isDark.value ? '/favicon-dark.ico' : '/favicon.ico')
 
 useFavicon(favicon)
-
-useHead({
-  meta: [
-    { name: 'theme-color', media: '(prefers-color-scheme: light)', content: 'white' },
-    { name: 'theme-color', media: '(prefers-color-scheme: dark)', content: '#1a202c' },
-  ],
-})
 </script>
 
 <template>
