@@ -1,4 +1,4 @@
-import { clerkPlugin } from 'vue-clerk/plugin'
+import { clerkPlugin } from 'vue-clerk'
 
 export default defineNuxtPlugin(async (nuxtApp) => {
   nuxtApp.vueApp.use(clerkPlugin, {

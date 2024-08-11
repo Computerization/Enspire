@@ -17,7 +17,8 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
 </script>
 
 <template>
-  <ComboboxContent v-bind="forwarded" :class="cn('max-h-[300px] overflow-y-auto overflow-x-hidden', props.class)">
+  <!-- Modified from original code: Heights limit is removed. Please use `<ScrollArea>` inside `<CommandList>`. -->
+  <ComboboxContent v-bind="forwarded" :class="cn(props.class)">
     <div role="presentation">
       <slot />
     </div>
