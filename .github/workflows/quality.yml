@@ -92,16 +92,3 @@ jobs:
 
       - name: Run typecheck
         run: pnpm run typecheck
-
-  conventional_commits:
-    name: Conventional commits check
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4.1.1
-        with:
-          show-progress: false
-
-      - name: Check if all commits comply with the specification
-        uses: webiny/action-conventional-commits@v1.3.0
