@@ -1,6 +1,11 @@
 import { PrismaClient } from '@prisma/client'
+import * as z from 'zod'
 
 const prisma = new PrismaClient()
+
+const requestSchema = z.object({
+  club: z.coerce.number(),
+})
 
 export default eventHandler(async (event) => {
   const { auth } = event.context
@@ -10,23 +15,26 @@ export default eventHandler(async (event) => {
     return
   }
 
-  const leaveRequestCount = await prisma.leaveRequest.count({
+  const requestQuery = await getValidatedQuery(event, body => requestSchema.parse(body))
+
+  const activityRecordCount = await prisma.activityRecord.count({
     where: {
-      clerkUserId: auth.userId,
+      clubId: requestQuery.club,
     },
   })
 
-  const leaveRequests = await prisma.leaveRequest.findMany({
+  const activityRecords = await prisma.activityRecord.findMany({
     where: {
-      clerkUserId: auth.userId,
+      clubId: requestQuery.club,
     },
     include: {
       club: {
         select: {
           name: true, // Only select the club's name
+          memberships: true,
         },
       },
-      user: {
+      attendees: {
         select: {
           name: true, // Only select the club's name
         },
@@ -35,7 +43,7 @@ export default eventHandler(async (event) => {
   })
 
   return {
-    data: leaveRequests,
-    total: leaveRequestCount,
+    data: activityRecords,
+    total: activityRecordCount,
   }
 })

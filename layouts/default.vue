@@ -81,9 +81,11 @@ watch(
               <!-- Sidebar -->
               <Sidebar class="top-0 hidden lg:inline-block h-full w-1/6" />
               <!-- Main content -->
-              <div class="h-full px-4 lg:px-8 w-full pt-8 pb-24 overflow-y-scroll">
-                <slot />
-              </div>
+              <ScrollArea class="h-full px-4 lg:px-8 w-full pt-8">
+                <div class="pb-24">
+                  <slot />
+                </div>
+              </ScrollArea>
             </div>
           </div>
         </div>

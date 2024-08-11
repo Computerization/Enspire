@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["relationJoins"]
 }
 
 datasource db {
@@ -8,18 +9,20 @@ datasource db {
 }
 
 model User {
-  id             String         @id @default(dbgenerated("gen_random_uuid()"))
-  clerkUserId    String         @unique
+  id             String       @id @default(dbgenerated("gen_random_uuid()"))
+  clerkUserId    String       @unique
   name           String
-  tsimsStudentId Int            @unique
-  LeaveRequest   LeaveRequest[]
+  tsimsStudentId Int          @unique
   ClubRating     ClubRating[]
 }
 
+// -----------------------------------------
+// ------------------CLUBS------------------
+// -----------------------------------------
 // Json types should be stored like {"zh": xxx, "en": xxx}.
 // Prisma itself doesn't validates what is in that Json, we should do it by ourselves when reading.
 model Club {
-  id                        Int            @id
+  id                        Int              @id
   name                      Json // multilingual
   foundedYear               Int?
   // All of the members are recorded by tsimsStudentId
@@ -28,31 +31,45 @@ model Club {
   vicesByTsimsStudentId     Int[] // Vice President
   membersByTsimsStudentId   Int[] // Members
   description               Json // multilingual
-  LeaveRequest              LeaveRequest[]
+  ActivityRecord            ActivityRecord[]
   ClubRating                ClubRating[]
   GroupInfo                 GroupInfo[]
+
+  memberships ClubMembership[]
 }
 
-enum LeaveRequestStatus {
-  PENDING
-  APPROVED
-  DENIED
+enum ClubMemberRole {
+  PRESIDENT
+  VICE_PRESIDENT
+  MEMBER
 }
 
-model LeaveRequest {
-  id          String             @id @default(dbgenerated("gen_random_uuid()"))
-  clerkUserId String // Link to User model
-  clubId      Int // Link to Club model
-  startDate   DateTime // Start date of the leave
-  endDate     DateTime // End date of the leave. Currently we will only support request for one day, but ik somebody would want to leave for a whole fucking semester.
-  reason      String
-  status      LeaveRequestStatus @default(PENDING)
+model ClubMembership {
+  id             String         @id @default(dbgenerated("gen_random_uuid()"))
+  tsimsStudentId Int
+  name           String
+  clubId         Int
+  role           ClubMemberRole
+
+  club           Club             @relation(fields: [clubId], references: [id])
+  ActivityRecord ActivityRecord[]
+
+  @@unique([tsimsStudentId, clubId]) // Ensure unique membership per club
+}
+
+// -----------------------------------------
+// ---------------ACTIVITY RECORDS------------
+// -----------------------------------------
+
+model ActivityRecord {
+  id     String   @id @default(dbgenerated("gen_random_uuid()"))
+  clubId Int // Link to Club model
+  date   DateTime // Start date of the leave
+  text   String
 
   // Relations
-  club Club @relation(fields: [clubId], references: [id])
-  user User @relation(fields: [clerkUserId], references: [clerkUserId])
-
-  @@unique([id, clubId, startDate, endDate]) // Same user's request for a club can't overlap in time
+  club      Club             @relation(fields: [clubId], references: [id])
+  attendees ClubMembership[]
 }
 
 model ClubRating {

@@ -5,6 +5,10 @@ definePageMeta({
   layout: 'sign-in-or-out',
   middleware: ['public'],
 })
+
+useHead({
+  title: 'Sign Up | Enspire',
+})
 </script>
 
 <template>
