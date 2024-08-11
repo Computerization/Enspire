@@ -6,7 +6,7 @@ const useIdFunction = () => useId()
 useHead({
   meta: [
     { name: 'theme-color', media: '(prefers-color-scheme: light)', content: 'white' },
-    { name: 'theme-color', media: '(prefers-color-scheme: dark)', content: '#1a202c' },
+    { name: 'theme-color', media: '(prefers-color-scheme: dark)', content: 'black' },
   ],
 })
 </script>
