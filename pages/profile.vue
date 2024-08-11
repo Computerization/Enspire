@@ -5,6 +5,10 @@ definePageMeta({
   middleware: ['auth'],
 })
 
+useHead({
+  title: 'Profile | Enspire',
+})
+
 const { user } = useUser()
 </script>
 
