@@ -17,12 +17,12 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v4.1.7
         with:
           show-progress: false
 
       - name: Setup node environment
-        uses: actions/setup-node@v4.0.2
+        uses: actions/setup-node@v4.0.3
         with:
           node-version: 20
           check-latest: true
@@ -58,12 +58,12 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v4.1.7
         with:
           show-progress: false
 
       - name: Setup node environment
-        uses: actions/setup-node@v4.0.2
+        uses: actions/setup-node@v4.0.3
         with:
           node-version: 20
           check-latest: true
@@ -92,16 +92,3 @@ jobs:
 
       - name: Run typecheck
         run: pnpm run typecheck
-
-  conventional_commits:
-    name: Conventional commits check
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4.1.1
-        with:
-          show-progress: false
-
-      - name: Check if all commits comply with the specification
-        uses: webiny/action-conventional-commits@v1.3.0
