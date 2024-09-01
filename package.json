@@ -9,6 +9,7 @@
     "preview": "NODE_OPTIONS='--import ./public/instrument.server.mjs' nuxt preview",
     "postinstall": "nuxt prepare && prisma generate",
     "update-club-info": "tsx utils/update-club-info.ts",
+    "upload-classroom-info": "tsx data/classroom/write.ts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "vue-tsc --noEmit --skipLibCheck"
@@ -33,6 +34,7 @@
     "iron-webcrypto": "^1.2.1",
     "lucide-vue-next": "^0.395.0",
     "radix-vue": "^1.9.3",
+    "sentry": "^0.1.2",
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7",
     "uncrypto": "^0.1.3",
