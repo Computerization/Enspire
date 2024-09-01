@@ -9,11 +9,12 @@ datasource db {
 }
 
 model User {
-  id             String       @id @default(dbgenerated("gen_random_uuid()"))
-  clerkUserId    String       @unique
-  name           String
-  tsimsStudentId Int          @unique
-  ClubRating     ClubRating[]
+  id                String              @id @default(dbgenerated("gen_random_uuid()"))
+  clerkUserId       String              @unique
+  name              String
+  tsimsStudentId    Int                 @unique
+  ClubRating        ClubRating[]
+  ReservationRecord ReservationRecord[]
 }
 
 // -----------------------------------------
@@ -22,7 +23,7 @@ model User {
 // Json types should be stored like {"zh": xxx, "en": xxx}.
 // Prisma itself doesn't validates what is in that Json, we should do it by ourselves when reading.
 model Club {
-  id                        Int              @id
+  id                        Int                 @id
   name                      Json // multilingual
   foundedYear               Int?
   // All of the members are recorded by tsimsStudentId
@@ -34,8 +35,8 @@ model Club {
   ActivityRecord            ActivityRecord[]
   ClubRating                ClubRating[]
   GroupInfo                 GroupInfo[]
-
-  memberships ClubMembership[]
+  ReservationRecord         ReservationRecord[]
+  ClubMembership            ClubMembership[]
 }
 
 enum ClubMemberRole {
@@ -98,4 +99,54 @@ model GroupInfo {
   club Club @relation(fields: [clubId], references: [id])
 
   @@unique([clubId])
+}
+
+model ClassroomData {
+  id                String              @id @default(dbgenerated("gen_random_uuid()"))
+  name              String
+  alias             String?
+  size              Int?
+  ReservationRecord ReservationRecord[]
+}
+
+enum Days {
+  SUNDAY
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+}
+
+enum Periods {
+  MORNING
+  ONE
+  TWO
+  THREE
+  FOUR
+  NOON
+  FIVE
+  SIX
+  SEVEN
+  EIGHT
+  NINE
+  AFTERCLASS
+}
+
+model ReservationRecord {
+  id                Int           @id @unique @default(sequence())
+  creationTimestamp DateTime      @default(now())
+  user              User          @relation(fields: [userId], references: [id])
+  userId            String
+  day               Days
+  period            Periods
+  classroom         ClassroomData @relation(fields: [classroomId], references: [id])
+  classroomId       String
+  club              Club          @relation(fields: [clubId], references: [id])
+  clubId            Int
+  note              String?
+
+  @@unique([classroomId, day, period])
+  @@unique([clubId, day, period])
 }

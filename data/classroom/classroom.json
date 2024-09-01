@@ -1,0 +1,152 @@
+[
+  {
+    "name": "C201",
+    "alias": "中教室",
+    "size": 24
+  },
+  {
+    "name": "C202",
+    "alias": "中教室",
+    "size": 20
+  },
+  {
+    "name": "C203",
+    "alias": "中教室",
+    "size": 24
+  },
+  {
+    "name": "C204",
+    "alias": "中教室",
+    "size": 28
+  },
+  {
+    "name": "C207",
+    "alias": "大教室",
+    "size": 52
+  },
+  {
+    "name": "C208",
+    "alias": "大教室",
+    "size": 38
+  },
+  {
+    "name": "C302",
+    "alias": "小教室",
+    "size": 16
+  },
+  {
+    "name": "C309",
+    "alias": "中教室",
+    "size": 24
+  },
+  {
+    "name": "C308",
+    "alias": "大教室",
+    "size": 38
+  },
+  {
+    "name": "D102",
+    "alias": "大教室",
+    "size": 36
+  },
+  {
+    "name": "B201",
+    "alias": "音乐教室",
+    "size": 16
+  },
+  {
+    "name": "B303",
+    "alias": "形体房",
+    "size": 0
+  },
+  {
+    "name": "A112",
+    "alias": "小教室",
+    "size": 16
+  },
+  {
+    "name": "A310",
+    "alias": "小教室",
+    "size": 16
+  },
+  {
+    "name": "A409",
+    "alias": "中教室",
+    "size": 26
+  },
+  {
+    "name": "A410",
+    "alias": "小教室",
+    "size": 16
+  },
+  {
+    "name": "A309",
+    "alias": "中教室",
+    "size": 24
+  },
+  {
+    "name": "A509",
+    "alias": "小教室",
+    "size": 16
+  },
+  {
+    "name": "A206",
+    "alias": "中教室",
+    "size": 24
+  },
+  {
+    "name": "A201",
+    "alias": "",
+    "size": 0
+  },
+  {
+    "name": "C304",
+    "alias": "",
+    "size": 0
+  },
+  {
+    "name": "C307",
+    "alias": "",
+    "size": 0
+  },
+  {
+    "name": "操场",
+    "alias": "靠近旗杆",
+    "size": 0
+  },
+  {
+    "name": "操场",
+    "alias": "操场中间",
+    "size": 0
+  },
+  {
+    "name": "操场",
+    "alias": "靠近雨棚",
+    "size": 0
+  },
+  {
+    "name": "旗杆边排球场",
+    "alias": "",
+    "size": 0
+  },
+  {
+    "name": "动感单车边场地",
+    "alias": "",
+    "size": 0
+  },
+  {
+    "name": "学校耕地",
+    "alias": "",
+    "size": 0
+  },
+  {
+    "name": "学生事务中心前空地",
+    "alias": "",
+    "size": 0
+  },
+  {
+    "name": "教工休息室旁乒乓桌",
+    "alias": "",
+    "size": 0
+  }
+]
