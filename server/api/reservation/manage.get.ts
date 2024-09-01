@@ -1,4 +1,4 @@
-import { PrismaClient, ReservationStatuses } from '@prisma/client'
+import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
@@ -17,30 +17,41 @@ export default eventHandler(async (event) => {
       statusMessage: 'Incomplete query',
     })
   }
-  if (query.action !== 'UNDO' && query.action !== 'APPROVE' && query.action !== 'DENY') {
+
+  if (query.action === 'DELETE') {
+    if (query.id === -1)
+      return
+    return await prisma.reservationRecord.delete({
+      where: {
+        id: Number(query.id),
+      },
+    })
+      .then(() => {
+        return 'SUCCESS'
+      })
+      .catch(() => {
+        throw createError({
+          statusCode: 400,
+          statusMessage: 'Record not found',
+        })
+      })
+  }
+  else if (query.action === 'DELALL') {
+    return await prisma.reservationRecord.deleteMany({})
+      .then(() => {
+        return 'SUCCESS'
+      })
+      .catch(() => {
+        throw createError({
+          statusCode: 400,
+          statusMessage: 'Record not found',
+        })
+      })
+  }
+  else {
     throw createError({
       statusCode: 400,
       statusMessage: 'Unknown action',
     })
   }
-
-  return await prisma.reservationRecord.update({
-    where: {
-      id: Number(query.id),
-    },
-    data: {
-      status: query.action === 'UNDO'
-        ? ReservationStatuses.PENDING
-        : (query.action === 'APPROVE' ? ReservationStatuses.APPROVED : ReservationStatuses.DENIED),
-    },
-  })
-    .then(() => {
-      return 'SUCCESS'
-    })
-    .catch(() => {
-      throw createError({
-        statusCode: 400,
-        statusMessage: 'Record not found',
-      })
-    })
 })

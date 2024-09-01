@@ -1,54 +1,13 @@
-import { PrismaClient } from '@prisma/client'
-import { autoDiscoverNodePerformanceMonitoringIntegrations } from '@sentry/node'
+import { Days, Periods, PrismaClient } from '@prisma/client'
 import * as z from 'zod'
 
 const prisma = new PrismaClient()
+type Period = typeof Periods[keyof typeof Periods]
 
-let START = 0
-let DATE = 0
-
-function toYYYYMMDD(d: Date) {
-  const r = d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate()
-  return r
-}
-
-function toHHMM(d: Date) {
-  return d.getHours() * 100 + d.getMinutes()
-}
-
-function isValidTime(t: number) {
-  return Number.isInteger(t) && (t >= 0 && t <= 2359) && (t % 100 <= 59)
-}
-
-const regularSchema = z.object({
-  date: z.number().min(toYYYYMMDD(new Date()), '预约时间必须在未来').refine((val) => {
-    DATE = val
-    return true
-  }),
-  loop: z.boolean(),
+const schema = z.object({
   day: z.any(),
-  start: z.number().refine((val) => {
-    START = val
-    if ((DATE === toYYYYMMDD(new Date())) && (val <= toHHMM(new Date())))
-      return false
-
-    return isValidTime(val)
-  }),
-  end: z.number().refine(val => (isValidTime(val) && val > START)),
+  period: z.custom(p => Object.values(Periods).includes(p as Period)),
   classroom: z.any(), // TODO: classroom id
-  description: z.string().min(5, { message: 'hi' }).max(35),
-  applicant: z.any(), // TODO: club id
-  note: z.string().max(500),
-})
-
-const loopSchema = z.object({
-  date: z.any(),
-  loop: z.boolean(),
-  day: z.string().length(7).regex(/^[01]+$/),
-  start: z.number().refine(val => isValidTime(val)),
-  end: z.number().refine(val => (isValidTime(val) && val > START)),
-  classroom: z.any(), // TODO: classroom id
-  description: z.string().min(5, { message: 'hi' }).max(35),
   applicant: z.any(), // TODO: club id
   note: z.string().max(500),
 })
@@ -61,31 +20,67 @@ export default eventHandler(async (event) => {
     return
   }
 
+  const getUser = await prisma.user.findUnique({
+    where: {
+      clerkUserId: auth.userId,
+    },
+  })
+
+  if (!getUser) {
+    setResponseStatus(event, 403)
+    return
+  }
+
   return readBody(event)
-    .then(body => body.loop ? loopSchema.parse(body) : regularSchema.parse(body))
+    .then(body => schema.parse(body))
     .then(async (body) => {
-      const r = await prisma.reservationRecord.create({
-        data: {
-          userId: auth.userId,
-          date: body.date,
-          loop: body.loop,
-          day: body.day,
-          start: body.start,
-          end: body.end,
-          description: body.description,
-          note: body.note,
-        },
+      await prisma.reservationRecord.createMany({
+        data: body.day.split('')
+          .map((dayBit: any, index: number) => {
+            if (dayBit === '1') {
+              return {
+                userId: getUser.id,
+                day: [
+                  Days.SUNDAY,
+                  Days.MONDAY,
+                  Days.TUESDAY,
+                  Days.WEDNESDAY,
+                  Days.THURSDAY,
+                  Days.FRIDAY,
+                  Days.SATURDAY,
+                ][index],
+                // There is no period #9 in Fridays; #8 is the last one
+                period: (index === 5 && body.period === Periods.NINE) ? Periods.AFTERCLASS : body.period,
+                classroomId: body.classroom,
+                clubId: body.applicant,
+                note: body.note,
+              }
+            }
+            return null
+          }).filter((record: any) => record !== null),
       })
       return {
-        status: 'success',
-        reservationId: r.id,
-        timestamp: r.creationTimestamp,
+        status: 'SUCCESS',
       }
     })
     .catch((error) => {
-      throw createError({
-        statusCode: 400,
-        message: error.message,
-      })
+      if (error.code === 'P2002') {
+        return {
+          status: 'PRISMA_ERROR',
+          message: '这个教室在此时段已被占用',
+        }
+      }
+      else if (error.code.startsWith('P20')) {
+        return {
+          status: 'PRISMA_ERROR',
+          message: `数据库错误: ${error.code}`,
+        }
+      }
+      else {
+        throw createError({
+          statusCode: 400,
+          message: error,
+        })
+      }
     })
 })

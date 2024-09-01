@@ -58,16 +58,12 @@ import { Button } from '@/components/ui/button'
               教室状态
             </Button>
           </NuxtLink>
-          <NuxtLink to="/manage/leave">
-            <Button :variant="$route.name === 'manage-leave' ? 'secondary' : 'ghost'" class="w-full justify-start mt-1">
-              <NuxtLink to="/manage/record">
-                <Button :variant="$route.name === 'manage-record' ? 'secondary' : 'ghost'" class="w-full justify-start mt-1">
-                  <Icon class="mr-2 h-4 w-4" name="charm:tick-double" />
-                  活动记录
-                </Button>
-              </NuxtLink>
-            </button>
-          </nuxtlink>
+          <NuxtLink to="/manage/record">
+            <Button :variant="$route.name === 'manage-record' ? 'secondary' : 'ghost'" class="w-full justify-start mt-1">
+              <Icon class="mr-2 h-4 w-4" name="charm:tick-double" />
+              活动记录
+            </Button>
+          </NuxtLink>
         </div>
       </div>
       <div class="py-2 px-3">

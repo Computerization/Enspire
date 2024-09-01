@@ -12,6 +12,7 @@ export default defineNuxtConfig({
       },
     },
   },
+
   modules: [
     '@vite-pwa/nuxt',
     '@nuxtjs/tailwindcss',
@@ -24,9 +25,11 @@ export default defineNuxtConfig({
     '@sentry/nuxt/module',
     '@nuxt/image',
   ],
+
   build: {
     transpile: ['vue-clerk', '@clerk/clerk-js'],
   },
+
   runtimeConfig: {
     public: {
       sentry: {
@@ -40,6 +43,7 @@ export default defineNuxtConfig({
     tsimsUrl: process.env.TSIMS_URL,
     clerkSecretKey: process.env.CLERK_SECRET_KEY,
   },
+
   shadcn: {
     /**
      * Prefix for all the imported component
@@ -51,12 +55,14 @@ export default defineNuxtConfig({
      */
     componentDir: './components/ui',
   },
+
   dayjs: {
     locales: ['en', 'zh-cn'],
     plugins: ['relativeTime', 'utc', 'timezone'],
     defaultLocale: 'zh-cn',
     defaultTimezone: 'Asia/Shanghai',
   },
+
   sentry: {
     debug: true,
     sourceMapsUploadOptions: {
@@ -65,4 +71,6 @@ export default defineNuxtConfig({
       authToken: process.env.SENTRY_AUTH_TOKEN,
     },
   },
+
+  compatibilityDate: '2024-08-31',
 })
