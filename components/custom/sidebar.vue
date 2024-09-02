@@ -66,6 +66,19 @@ import { Button } from '@/components/ui/button'
           </NuxtLink>
         </div>
       </div>
+      <div class="px-3 py-2">
+        <h2 class="relative px-4 text-lg font-semibold tracking-tight">
+          管理员
+        </h2>
+        <div class="mt-2">
+          <NuxtLink to="/admin/reservation">
+            <Button :variant="$route.name === 'admin-reservation' ? 'secondary' : 'ghost'" class="w-full justify-start">
+              <Icon class="mr-2 h-4 w-4" name="material-symbols:calendar-today-outline" />
+              管理预约
+            </Button>
+          </NuxtLink>
+        </div>
+      </div>
       <div class="py-2 px-3">
         <h2 class="relative px-4 text-lg font-semibold tracking-tight">
           信息

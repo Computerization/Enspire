@@ -14,44 +14,100 @@ export default eventHandler(async (event) => {
   if (!query.id || !query.action) {
     throw createError({
       statusCode: 400,
-      statusMessage: 'Incomplete query',
+      message: 'Incomplete query',
     })
   }
 
-  if (query.action === 'DELETE') {
-    if (query.id === -1)
-      return
-    return await prisma.reservationRecord.delete({
+  if (query.admin === 'true') {
+    if (0 /* TODO: admin key validation failed */) {
+      throw createError({
+        statusCode: 400,
+        message: '管理员认证失败',
+      })
+    }
+    else { // admin validation success
+      if (query.action === 'DELETE') {
+        if (query.id === -1)
+          return
+        return await prisma.reservationRecord.delete({
+          where: {
+            id: Number(query.id),
+          },
+        })
+          .then(() => {
+            return 'SUCCESS'
+          })
+          .catch(() => {
+            throw createError({
+              statusCode: 400,
+              message: '未找到记录',
+            })
+          })
+      }
+      else if (query.action === 'DELALL') {
+        return await prisma.reservationRecord.deleteMany({})
+          .then(() => {
+            return 'SUCCESS'
+          })
+          .catch(() => {
+            throw createError({
+              statusCode: 400,
+              message: '未找到记录',
+            })
+          })
+      }
+      else {
+        throw createError({
+          statusCode: 400,
+          message: '未知操作',
+        })
+      }
+    }
+  }
+  else {
+    const currentReservation = await prisma.reservationRecord.findUnique({
+      include: {
+        user: true,
+      },
       where: {
         id: Number(query.id),
       },
     })
-      .then(() => {
-        return 'SUCCESS'
+    if (!currentReservation) {
+      throw createError({
+        statusCode: 400,
+        message: '未找到记录',
       })
-      .catch(() => {
-        throw createError({
-          statusCode: 400,
-          statusMessage: 'Record not found',
+    }
+    else if (currentReservation.user.clerkUserId !== auth.userId) {
+      throw createError({
+        statusCode: 400,
+        message: '这不是你的记录',
+      })
+    }
+    else if (query.action === 'DELETE') {
+      if (query.id === -1)
+        return
+      return await prisma.reservationRecord.delete({
+        where: {
+          id: Number(query.id),
+        },
+      })
+        .then(() => {
+          return 'SUCCESS'
         })
-      })
-  }
-  else if (query.action === 'DELALL') {
-    return await prisma.reservationRecord.deleteMany({})
-      .then(() => {
-        return 'SUCCESS'
-      })
-      .catch(() => {
-        throw createError({
-          statusCode: 400,
-          statusMessage: 'Record not found',
+        .catch(() => {
+          throw createError({
+            statusCode: 400,
+            message: '未找到记录',
+          })
         })
+    }
+    else {
+      throw createError({
+        statusCode: 400,
+        message: '未知操作',
       })
-  }
-  else {
-    throw createError({
-      statusCode: 400,
-      statusMessage: 'Unknown action',
-    })
+    }
   }
 })
