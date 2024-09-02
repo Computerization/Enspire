@@ -25,7 +25,7 @@ let content: any[] = []
 async function load() {
   status.value = Statuses.LOADING
   try {
-    const data = await $fetch('/api/reservation/all')
+    const data = await $fetch('/api/reservation/all-admin')
     if (!data) {
       status.value = Statuses.ERROR
     }
@@ -50,9 +50,14 @@ const alertContent = {
 const managePending = ref(false)
 
 function confirmManage(id: number, action: string, currentStatus = '') {
-  alertContent.message = `将对 预约#${id} 执行以下操作: `
-  if (action === 'DELETE') {
-    alertContent.message += '撤销'
+  if (action === 'DELALL') {
+    alertContent.message = '将会删除全部预约记录，此操作不可撤销。'
+  }
+  else {
+    alertContent.message = `将对 预约#${id} 执行以下操作: `
+    if (action === 'DELETE') {
+      alertContent.message += '撤销'
+    }
   }
   alertContent.id = id
   alertContent.action = action
@@ -66,7 +71,8 @@ async function manage() {
       query: {
         id: alertContent.id,
         action: alertContent.action,
-        admin: false,
+        admin: true,
+        key: '',
       },
     })
     await load()
@@ -87,6 +93,11 @@ onMounted(async () => {
 </script>
 
 <template>
+  <Alert variant="destructive">
+    <AlertDescription>
+      警告：这是一个管理员页面。此页面中的所有操作均有最高权限，你可以删除任何存在的记录。进行操作前务必再次确认，操作不可撤销！
+    </AlertDescription>
+  </Alert>
   <AlertDialog v-model:open="dlgOpen">
     <AlertDialogContent>
       <AlertDialogHeader>
@@ -105,7 +116,7 @@ onMounted(async () => {
       </AlertDialogFooter>
     </AlertDialogContent>
   </AlertDialog>
-  <Table>
+  <Table class="mt-4">
     <TableHeader>
       <TableRow>
         <TableHead class="w-16">
@@ -118,7 +129,13 @@ onMounted(async () => {
         <TableHead>时间</TableHead>
         <TableHead>教室</TableHead>
         <TableHead>备注</TableHead>
-        <TableHead>管理</TableHead>
+        <TableHead>
+          <Skeleton v-if="status === Statuses.LOADING" class="h-5 my-2" />
+          <!-- TODO: This is very dangerous and its behavior must be changed in the future -->
+          <Button v-if="status === Statuses.READY" variant="link" class="p-0 text-red-500" @click="confirmManage(-1, 'DELALL')">
+            清空全部
+          </Button>
+        </TableHead>
       </TableRow>
     </TableHeader>
     <TableBody v-if="status === Statuses.LOADING">
