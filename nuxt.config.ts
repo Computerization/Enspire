@@ -21,7 +21,6 @@ export default defineNuxtConfig({
     'nuxt-icon',
     '@nuxt/fonts',
     'nuxt-svgo',
-    'dayjs-nuxt',
     '@sentry/nuxt/module',
     '@nuxt/image',
   ],

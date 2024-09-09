@@ -8,15 +8,17 @@ definePageMeta({
 useHead({
   title: 'Home | Enspire',
 })
+
+const now = new Date().getHours()
 </script>
 
 <template>
   <div class="text-3xl font-bold">
     {{
-      $dayjs().hour() < 5 ? '晚上好！'
-      : $dayjs().hour() < 12 ? '早上好！'
-        : $dayjs().hour() < 13 ? '中午好！'
-          : $dayjs().hour() < 18 ? '下午好！' : '晚上好！'
+      now < 5 ? '晚上好！'
+      : now < 12 ? '早上好！'
+        : now < 13 ? '中午好！'
+          : now < 18 ? '下午好！' : '晚上好！'
     }}
   </div>
   <div class="text-muted-foreground">
