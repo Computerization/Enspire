@@ -57,7 +57,7 @@
     "@rollup/plugin-wasm": "^6.2.2",
     "@tailwindcss/typography": "^0.5.14",
     "@types/node-fetch": "^2.6.11",
-    "@types/uuid": "^9.0.8",
+    "@types/uuid": "^10.0.0",
     "@types/ws": "^8.5.12",
     "dayjs-nuxt": "^2.1.9",
     "eslint": "^9.9.0",
