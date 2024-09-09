@@ -36,8 +36,8 @@ importers:
         specifier: ^4.13.2
         version: 4.13.2(vue@3.5.3(typescript@5.5.4))
       '@vite-pwa/nuxt':
-        specifier: ^0.8.1
-        version: 0.8.1(magicast@0.3.5)(rollup@4.21.2)(vite@5.4.3(@types/node@22.5.4)(terser@5.31.6))(webpack-sources@3.2.3)(workbox-build@7.1.1)(workbox-window@7.1.0)
+        specifier: ^0.10.0
+        version: 0.10.5(magicast@0.3.5)(rollup@4.21.2)(vite@5.4.3(@types/node@22.5.4)(terser@5.31.6))(webpack-sources@3.2.3)(workbox-build@7.1.1)(workbox-window@7.1.0)
       '@vueuse/core':
         specifier: ^10.11.1
         version: 10.11.1(vue@3.5.3(typescript@5.5.4))
@@ -2606,10 +2606,10 @@ packages:
     engines: {node: '>=16'}
     hasBin: true
 
-  '@vite-pwa/nuxt@0.8.1':
-    resolution: {integrity: sha512-XQYBeP1quQXLxPG25qL5igeYw7sSCUVNwekLr+P5WXpdm9o9GhZt2yPoWXkU372CunvqzXxYexzknqHS8zP/BQ==}
+  '@vite-pwa/nuxt@0.10.5':
+    resolution: {integrity: sha512-I+qTkgQB2lvpoKQGgARgszsV/rBDys2xstczmTIgYoaNPALz2+zkhN/O8Fl8QI2ZHBL+ZnfpSOCOm/77ugrFHg==}
     peerDependencies:
-      '@vite-pwa/assets-generator': ^0.2.4
+      '@vite-pwa/assets-generator': ^0.2.6
     peerDependenciesMeta:
       '@vite-pwa/assets-generator':
         optional: true
@@ -10513,7 +10513,7 @@ snapshots:
       - encoding
       - supports-color
 
-  '@vite-pwa/nuxt@0.8.1(magicast@0.3.5)(rollup@4.21.2)(vite@5.4.3(@types/node@22.5.4)(terser@5.31.6))(webpack-sources@3.2.3)(workbox-build@7.1.1)(workbox-window@7.1.0)':
+  '@vite-pwa/nuxt@0.10.5(magicast@0.3.5)(rollup@4.21.2)(vite@5.4.3(@types/node@22.5.4)(terser@5.31.6))(webpack-sources@3.2.3)(workbox-build@7.1.1)(workbox-window@7.1.0)':
     dependencies:
       '@nuxt/kit': 3.13.1(magicast@0.3.5)(rollup@4.21.2)(webpack-sources@3.2.3)
       pathe: 1.1.2
