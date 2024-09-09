@@ -96,8 +96,8 @@ importers:
         specifier: ^4.13.2
         version: 4.13.2(vue@3.5.3(typescript@5.5.4))
       vue-clerk:
-        specifier: ^0.4.17
-        version: 0.4.21(react@18.3.1)(vue@3.5.3(typescript@5.5.4))
+        specifier: ^0.6.0
+        version: 0.6.9(@clerk/backend@1.9.2(react@18.3.1))(react@18.3.1)(vue@3.5.3(typescript@5.5.4))
       zod:
         specifier: ^3.23.8
         version: 3.23.8
@@ -7194,10 +7194,14 @@ packages:
   vue-bundle-renderer@2.1.0:
     resolution: {integrity: sha512-uZ+5ZJdZ/b43gMblWtcpikY6spJd0nERaM/1RtgioXNfWFbjKlUwrS8HlrddN6T2xtptmOouWclxLUkpgcVX3Q==}
 
-  vue-clerk@0.4.21:
-    resolution: {integrity: sha512-sTuXfmxb5rBi1C87s/2TVS8pe8Aw92jpZNB/5BI1E0n6Lts0p9CsSmBiOcNfh3NTSw5P0OVbhbQKK/25LreYIg==}
+  vue-clerk@0.6.9:
+    resolution: {integrity: sha512-m/BKeil4LvWeHMqZ9ISP7aGb4Ld7Im4TEtWd6hkFu+G7Yf4d2NtZPZ609bHMQa01iAxnV1O6PomJ5VaNg56Nkg==}
     peerDependencies:
+      '@clerk/backend': ^1.9.0
       vue: ^3.2.0
+    peerDependenciesMeta:
+      '@clerk/backend':
+        optional: true
 
   vue-demi@0.14.10:
     resolution: {integrity: sha512-nMZBOwuzabUO0nLgIcc6rycZEebF6eeUfaiQx9+WSk8e29IbLvPU9feI6tqW4kTo3hvoYAJkMh8n8D0fuISphg==}
@@ -16131,11 +16135,13 @@ snapshots:
     dependencies:
       ufo: 1.5.4
 
-  vue-clerk@0.4.21(react@18.3.1)(vue@3.5.3(typescript@5.5.4)):
+  vue-clerk@0.6.9(@clerk/backend@1.9.2(react@18.3.1))(react@18.3.1)(vue@3.5.3(typescript@5.5.4)):
     dependencies:
       '@clerk/shared': 2.6.2(react@18.3.1)
       '@clerk/types': 4.19.0
       vue: 3.5.3(typescript@5.5.4)
+    optionalDependencies:
+      '@clerk/backend': 1.9.2(react@18.3.1)
     transitivePeerDependencies:
       - react
       - react-dom
