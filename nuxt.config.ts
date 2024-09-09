@@ -23,6 +23,7 @@ export default defineNuxtConfig({
     'nuxt-svgo',
     '@sentry/nuxt/module',
     '@nuxt/image',
+    'dayjs-nuxt',
   ],
 
   build: {
@@ -57,7 +58,7 @@ export default defineNuxtConfig({
 
   dayjs: {
     locales: ['en', 'zh-cn'],
-    plugins: ['relativeTime', 'utc', 'timezone'],
+    plugins: ['relativeTime', 'utc', 'timezone', 'localizedFormat'],
     defaultLocale: 'zh-cn',
     defaultTimezone: 'Asia/Shanghai',
   },

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { format } from 'date-fns'
 import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import * as z from 'zod'
@@ -127,7 +126,7 @@ const onSubmit = handleSubmit(async (values) => {
                     )" variant="outline"
                     :disabled="isLoading"
                   >
-                    <span>{{ value ? format(value, "PPP") : "选择日期..." }}</span>
+                    <span>{{ value ? $dayjs(value).format("LL") : "选择日期..." }}</span>
                     <Icon class="ms-auto opacity-50" name="material-symbols:calendar-today-outline" />
                   </Button>
                 </FormControl>

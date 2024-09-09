@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { format, utcToZonedTime, zonedTimeToUtc } from 'date-fns-tz'
-import { Card } from '@/components/ui/card'
 import { enums, time2period } from '~/components/custom/enum2str'
 import { useToast } from '@/components/ui/toast/use-toast'
 import Toaster from '@/components/ui/toast/Toaster.vue'
@@ -15,10 +13,12 @@ useHead({
 
 const { toast } = useToast()
 
-const utc8Time = utcToZonedTime((new Date()).toISOString(), 'Asia/Shanghai')
+const dayjs = useDayjs()
 
-const selectedDay = ref(enums.days.values[utc8Time.getDay()])
-const selectedPeriod = ref(time2period(utc8Time.getHours() * 100 + utc8Time.getMinutes(), selectedDay.value))
+const utc8Time = dayjs().tz('Asia/Shanghai')
+
+const selectedDay = ref(enums.days.values[utc8Time.day()])
+const selectedPeriod = ref(time2period(utc8Time.hour() * 100 + utc8Time.minute(), selectedDay.value))
 
 let dataLoaded = false
 let data: any
@@ -29,7 +29,7 @@ try {
   data = rawData.sort((a: any, b: any) => a.name < b.name ? -1 : 1)
   dataLoaded = true
 }
-catch (error) {
+catch {
   toast({
     title: '错误',
     description: '获取教室信息出错',

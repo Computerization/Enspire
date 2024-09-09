@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { format, formatDistanceToNow, parse } from 'date-fns'
-import { zhCN } from 'date-fns/locale'
 import { LoaderCircle } from 'lucide-vue-next'
-import { VueElement, onMounted } from 'vue'
+import { onMounted } from 'vue'
 import { enums } from '~/components/custom/enum2str'
 import { useToast } from '@/components/ui/toast/use-toast'
 import Toaster from '@/components/ui/toast/Toaster.vue'
@@ -133,7 +131,7 @@ onMounted(async () => {
         <TableCell class="text-muted-foreground">
           #{{ record.id }}
         </TableCell>
-        <TableCell>{{ formatDistanceToNow(new Date(record.creationTimestamp), { locale: zhCN, addSuffix: true }) }}</TableCell>
+        <TableCell>{{ $dayjs(record.creationTimestamp).fromNow() }}</TableCell>
         <TableCell>{{ record.user.name }}</TableCell>
         <TableCell>{{ record.club.name.zh }}</TableCell>
         <TableCell>{{ enums.days.map[record.day] }}</TableCell>
