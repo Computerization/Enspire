@@ -25,7 +25,7 @@
     "@unovis/vue": "^1.4.3",
     "@vee-validate/zod": "^4.13.2",
     "@vite-pwa/nuxt": "^0.8.1",
-    "@vueuse/core": "^10.11.1",
+    "@vueuse/core": "^11.0.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
