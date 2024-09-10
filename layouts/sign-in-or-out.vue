@@ -23,6 +23,9 @@ useFavicon(favicon)
       </div>
       <div class="relative z-20 mt-auto">
         <blockquote class="space-y-2">
+          <a href="https://www.netlify.com">
+            <img src="https://www.netlify.com/v3/img/components/netlify-color-accent.svg" alt="Deploys by Netlify">
+          </a>
           <p class="text-lg">
             "Make life great again at SWFLA!"
           </p>
