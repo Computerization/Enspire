@@ -68,7 +68,7 @@
     "tsx": "^4.17.0",
     "typescript": "^5.5.4",
     "vue": "^3.4.37",
-    "vue-router": "4.4.0",
+    "vue-router": "4.4.5",
     "vue-tsc": "^2.0.29"
   },
   "overrides": {
