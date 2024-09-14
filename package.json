@@ -48,7 +48,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.25.0",
+    "@antfu/eslint-config": "^3.0.0",
     "@changesets/changelog-github": "^0.5.0",
     "@nuxt/fonts": "^0.7.1",
     "@nuxt/image": "^1.7.0",
