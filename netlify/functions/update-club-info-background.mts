@@ -1,8 +1,14 @@
-import type { Config } from '@netlify/functions'
+import type { Config, Context } from '@netlify/functions'
+import { getStore } from '@netlify/blobs'
+import type { Clubs } from '~/types/clubs'
 import updateClubInfo from '~/utils/update-club-info'
 
-export default async () => {
-  await updateClubInfo()
+export default async (context: Context) => {
+  const store = getStore('enspire')
+  const clubs: Clubs = await updateClubInfo()
+  await store.setJSON('clubs', clubs)
+
+  return new Response('Done')
 }
 
 export const config: Config = {

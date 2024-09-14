@@ -127,6 +127,8 @@ export default async function main() {
   // eslint-disable-next-line no-console
   console.log(`start transaction with length ${runSequence.length}`)
   await prisma.$transaction(runSequence)
+
+  return clubs
 }
 
 main()

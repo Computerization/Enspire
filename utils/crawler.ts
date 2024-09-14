@@ -64,7 +64,5 @@ export default async function main(): Promise<Clubs> {
     }
   }
 
-  await useStorage('netlify').setItem('clubs', output)
-
   return output
 }

@@ -1,3 +1,5 @@
+import { getStore } from '@netlify/blobs'
+
 export default defineCachedEventHandler(async (event) => {
   const { auth } = event.context
 
@@ -6,5 +8,5 @@ export default defineCachedEventHandler(async (event) => {
     return
   }
 
-  return await useStorage('netlify').getItem('clubs')
+  return await getStore('enspire').get('clubs', { type: 'json' })
 }, { maxAge: 60 * 60 * 4 /* 4 hours */ })

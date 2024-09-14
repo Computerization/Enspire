@@ -10,10 +10,6 @@ export default defineNuxtConfig({
         dir: '/data',
         repo: 'computerization/enspire',
       },
-      netlify: {
-        driver: 'netlify',
-        name: 'enspire',
-      },
     },
   },
 
