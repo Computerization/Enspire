@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useClerk, useUser } from 'vue-clerk'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import {
@@ -11,6 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { useClerk, useUser } from 'vue-clerk'
 
 const { user } = useUser()
 
@@ -31,8 +31,10 @@ function signOutHandler() {
     <DropdownMenuTrigger as-child>
       <Button class="relative h-8 w-8 rounded-full" variant="ghost">
         <Avatar class="h-8 w-8">
-          <AvatarImage :src="String(user?.imageUrl!)" />
-          <AvatarFallback>C</AvatarFallback>
+          <AvatarImage v-if="user?.imageUrl" :src="String(user.imageUrl)" />
+          <AvatarFallback>
+            <Icon name="material-symbols:person-outline" size="1.5em" />
+          </AvatarFallback>
         </Avatar>
       </Button>
     </DropdownMenuTrigger>
