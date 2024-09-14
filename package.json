@@ -35,6 +35,7 @@
     "h3-clerk": "^0.4.12",
     "iron-webcrypto": "^1.2.1",
     "lucide-vue-next": "^0.441.0",
+    "ofetch": "^1.3.4",
     "radix-vue": "^1.9.5",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
