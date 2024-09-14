@@ -1,7 +1,7 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@3.0.3/schema.json",
   "commit": false,
-  "changelog": ["@changesets/changelog-github", { "repo": "qwerzl/enspire" }],
+  "changelog": ["@changesets/changelog-github", { "repo": "computerization/enspire" }],
   "fixed": [],
   "linked": [],
   "access": "restricted",
