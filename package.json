@@ -19,6 +19,7 @@
     "@changesets/cli": "^2.27.8",
     "@clerk/clerk-sdk-node": "^5.0.38",
     "@clerk/themes": "^2.1.29",
+    "@netlify/functions": "^2.8.1",
     "@nuxt/content": "^2.13.2",
     "@radix-icons/vue": "^1.0.0",
     "@sentry/nuxt": "^8.30.0",
@@ -51,6 +52,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^3.6.0",
     "@changesets/changelog-github": "^0.5.0",
+    "@netlify/blobs": "^8.0.1",
     "@nuxt/fonts": "^0.8.0",
     "@nuxt/image": "^1.8.0",
     "@nuxtjs/google-fonts": "^3.2.0",
