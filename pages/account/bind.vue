@@ -1,11 +1,4 @@
 <script setup lang="ts">
-import { useForm } from 'vee-validate'
-import { toTypedSchema } from '@vee-validate/zod'
-import * as z from 'zod'
-import { useClerk } from 'vue-clerk'
-import { useToast } from '@/components/ui/toast/use-toast'
-import Toaster from '@/components/ui/toast/Toaster.vue'
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,6 +10,14 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { Skeleton } from '@/components/ui/skeleton'
+import Toaster from '@/components/ui/toast/Toaster.vue'
+import { useToast } from '@/components/ui/toast/use-toast'
+import { toTypedSchema } from '@vee-validate/zod'
+import { useForm } from 'vee-validate'
+import { useClerk } from 'vue-clerk'
+import * as z from 'zod'
 
 const clerk = useClerk()
 
@@ -181,7 +182,8 @@ const submitConfirm = async function () {
                     :disabled="isLoading" auto-correct="off" class="mt-1" placeholder="四位验证码" type="text"
                     v-bind="componentField"
                   />
-                  <img :src="`data:image/jpeg;base64, ${initData?.img}`" alt="captcha" class="rounded my-1">
+                  <img v-if="initData?.img" :src="`data:image/jpeg;base64, ${initData?.img}`" alt="captcha" class="rounded my-1">
+                  <Skeleton v-else class="rounded my-1 w-[80px]" />
                 </div>
               </FormControl>
               <FormMessage />
