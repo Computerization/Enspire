@@ -7,5 +7,6 @@
   "access": "restricted",
   "baseBranch": "next",
   "updateInternalDependencies": "patch",
-  "ignore": []
+  "ignore": [],
+  "changelog": ["@changesets/changelog-github", { "repo": "qwerzl/enspire" }]
 }
