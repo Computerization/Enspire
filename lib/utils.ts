@@ -14,11 +14,3 @@ export function valueUpdater<T extends Updater<any>>(updaterOrValue: T, ref: Ref
       ? updaterOrValue(ref.value)
       : updaterOrValue
 }
-
-export function cleanHTML(content: string): string {
-  if (!content)
-    return ''
-
-  return content.replace(/<script[^>]*>([\s\S]*?)<\/script>/gi, '')
-    .replace(/<style[^>]*>([\s\S]*?)<\/style>/gi, '')
-}

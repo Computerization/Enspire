@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue'
+import ClubCard from '@/components/custom/club-card.vue'
 import { Input } from '@/components/ui/input'
-import TabsList from '@/components/ui/tabs/TabsList.vue'
 import Tabs from '@/components/ui/tabs/Tabs.vue'
 import TabsContent from '@/components/ui/tabs/TabsContent.vue'
+import TabsList from '@/components/ui/tabs/TabsList.vue'
 import TabsTrigger from '@/components/ui/tabs/TabsTrigger.vue'
-import ClubCard from '@/components/custom/club-card.vue'
+import { onMounted, ref, watch } from 'vue'
 
 import type { Club, ClubCategoryKey, Clubs, Groups } from '~/types/clubs'
 
