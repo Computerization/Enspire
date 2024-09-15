@@ -1,4 +1,12 @@
 export default defineNuxtConfig({
+  routeRules: {
+    '/**': {
+      headers: {
+        'Netlify-CDN-Cache-Control': 'no-store',
+      },
+    },
+  },
+
   nitro: {
     experimental: {
       openAPI: true,
