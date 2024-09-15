@@ -1,14 +1,6 @@
-import fetch, { Headers } from 'node-fetch'
 import * as dotenv from 'dotenv'
-import crypto from 'uncrypto'
-import * as Iron from 'iron-webcrypto'
-import { createStorage } from 'unstorage'
-import fsLiteDriver from 'unstorage/drivers/fs-lite'
+import { fetch, Headers } from 'ofetch'
 import type { Club, Clubs } from '~/types/clubs'
-
-const storage = createStorage({
-  driver: fsLiteDriver({ base: './data' }),
-})
 
 dotenv.config()
 
@@ -71,9 +63,6 @@ export default async function main(): Promise<Clubs> {
       output[category.C_Category as keyof Clubs]!.push(clubDetails)
     }
   }
-
-  const encrypted = await Iron.seal(crypto, output, process.env.CLUB_DATA_SECRET_KEY!, Iron.defaults)
-  await storage.setItem('clubs:encrypted', encrypted)
 
   return output
 }

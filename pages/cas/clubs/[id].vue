@@ -2,7 +2,7 @@
 import { useRoute } from 'vue-router'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { cleanHTML } from '@/lib/utils'
+import sanitizeHtml from 'sanitize-html'
 import type { Club, Clubs } from '~/types/clubs'
 
 const { data } = await useFetch<Clubs>('/api/club/all_details')
@@ -30,7 +30,9 @@ let hasDescriptionC = false
 let Description_C = ''
 
 if (filteredClubs[0] && filteredClubs[0].groups[0].C_DescriptionC) {
-  const tempDescription = cleanHTML(filteredClubs[0].groups[0].C_DescriptionC)
+  const tempDescription = sanitizeHtml(filteredClubs[0].groups[0].C_DescriptionC, {
+    allowedTags: [],
+  })
   if (tempDescription.trim() !== '') {
     Description_C = tempDescription
     hasDescriptionC = true

@@ -1,5 +1,4 @@
-import * as Iron from 'iron-webcrypto'
-import crypto from 'uncrypto'
+import { getStore } from '@netlify/blobs'
 
 export default defineCachedEventHandler(async (event) => {
   const { auth } = event.context
@@ -9,5 +8,5 @@ export default defineCachedEventHandler(async (event) => {
     return
   }
 
-  return (await Iron.unseal(crypto, (await useStorage('github').getItem('clubs:encrypted'))!, useRuntimeConfig().clubDataSecretKey!, Iron.defaults))
+  return await getStore('enspire').get('clubs', { type: 'json' })
 }, { maxAge: 60 * 60 * 4 /* 4 hours */ })

@@ -3,8 +3,9 @@ import type { PropType } from 'vue'
 import type { Club } from '~/types/clubs'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { cleanHTML, cn } from '@/lib/utils'
+import { cn } from '@/lib/utils'
 import Badge from '@/components/ui/badge/Badge.vue'
+import sanitizeHtml from 'sanitize-html'
 
 const props = defineProps({
   club: {
@@ -13,7 +14,9 @@ const props = defineProps({
   },
 })
 
-const Description_C = cleanHTML(props.club.groups[0].C_DescriptionC)
+const Description_C = sanitizeHtml(props.club.groups[0].C_DescriptionC, {
+  allowedTags: [],
+})
 </script>
 
 <template>

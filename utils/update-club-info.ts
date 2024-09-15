@@ -1,7 +1,7 @@
-import { PrismaClient } from '@prisma/client'
 import type { ClubMemberRole } from '@prisma/client'
-import crawler from './crawler'
+import { PrismaClient } from '@prisma/client'
 import type { Clubs } from '~/types/clubs'
+import crawler from './crawler'
 
 const prisma = new PrismaClient()
 const clubs: Clubs = await crawler() as Clubs
@@ -15,7 +15,7 @@ interface ClubMembership {
 
 const categories: (keyof Clubs)[] = ['Sports', 'Service', 'Arts', 'Life', 'Academic']
 
-async function main() {
+export default async function main() {
   const runSequence = []
   for (const category of categories) {
     const categoryClubs = clubs[category]
@@ -127,6 +127,8 @@ async function main() {
   // eslint-disable-next-line no-console
   console.log(`start transaction with length ${runSequence.length}`)
   await prisma.$transaction(runSequence)
+
+  return clubs
 }
 
 main()
