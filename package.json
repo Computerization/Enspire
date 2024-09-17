@@ -20,6 +20,8 @@
     "@clerk/clerk-sdk-node": "^5.0.38",
     "@clerk/themes": "^2.1.29",
     "@netlify/functions": "^2.8.1",
+    "@netlify/integrations": "^0.5.4",
+    "@netlify/sentry": "^0.0.10",
     "@nuxt/content": "^2.13.2",
     "@radix-icons/vue": "^1.0.0",
     "@sentry/nuxt": "^8.30.0",
