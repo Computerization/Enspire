@@ -1,9 +1,13 @@
-import type { Config, Context } from '@netlify/functions'
+import type { Config, Handler } from '@netlify/functions'
 import { getStore } from '@netlify/blobs'
+import { schedule } from '@netlify/functions'
+import { wrap } from '@netlify/integrations'
+
+import { withSentry } from '@netlify/sentry'
 import type { Clubs } from '~/types/clubs'
 import updateClubInfo from '~/utils/update-club-info'
 
-export default async (context: Context) => {
+async function myHandler() {
   const store = getStore('enspire')
   const clubs: Clubs = await updateClubInfo()
   await store.setJSON('clubs', clubs)
@@ -11,6 +15,19 @@ export default async (context: Context) => {
   return new Response('Done')
 }
 
-export const config: Config = {
-  schedule: '0 */12 * * *',
+const withIntegrations = wrap(withSentry)
+
+const config: Config = {
+  sentry: {
+    cronMonitoring: {
+      enable: true,
+      monitorId: 'update-club-info',
+    },
+  },
 }
+
+const handlerWithIntegrations = withIntegrations(myHandler, config) as Handler
+
+const handler = schedule('@hourly', handlerWithIntegrations)
+
+export { handler }
