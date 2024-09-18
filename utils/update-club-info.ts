@@ -1,10 +1,10 @@
 import type { ClubMemberRole } from '@prisma/client'
+import { getStore } from '@netlify/blobs'
 import { PrismaClient } from '@prisma/client'
 import type { Clubs } from '~/types/clubs'
 import crawler from './crawler'
 
 const prisma = new PrismaClient()
-const clubs: Clubs = await crawler() as Clubs
 
 interface ClubMembership {
   tsimsStudentId: number
@@ -16,6 +16,8 @@ interface ClubMembership {
 const categories: (keyof Clubs)[] = ['Sports', 'Service', 'Arts', 'Life', 'Academic']
 
 export default async function main() {
+  const clubs = await crawler() as Clubs
+
   const runSequence = []
   for (const category of categories) {
     const categoryClubs = clubs[category]
@@ -127,6 +129,9 @@ export default async function main() {
   // eslint-disable-next-line no-console
   console.log(`start transaction with length ${runSequence.length}`)
   await prisma.$transaction(runSequence)
+
+  const store = getStore('enspire')
+  await store.setJSON('clubs', clubs)
 
   return clubs
 }
