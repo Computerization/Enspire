@@ -1,4 +1,7 @@
 language: node_js
+node_js:
+  - 22
+dist: jammy
 
 cache:
   npm: false
@@ -6,7 +9,8 @@ cache:
     - "~/.pnpm-store"
     
 before_install:
-  - npm install -g pnpm
+  - corepack enable
+  - corepack prepare pnpm@latest-9 --activate
   - pnpm config set store-dir ~/.pnpm-store
   
 install:
