@@ -6,8 +6,7 @@ cache:
     - "~/.pnpm-store"
     
 before_install:
-  - corepack enable
-  - corepack prepare pnpm@latest-9 --activate
+  - npm install -g pnpm
   - pnpm config set store-dir ~/.pnpm-store
   
 install:
