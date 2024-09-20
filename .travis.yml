@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+  - 22
+dist: jammy
+
+cache:
+  npm: false
+  directories:
+    - "~/.pnpm-store"
+    
+before_install:
+  - corepack enable
+  - corepack prepare pnpm@latest-9 --activate
+  - pnpm config set store-dir ~/.pnpm-store
+  
+install:
+  - pnpm install
+
+script:
+  - pnpm run update-club-info
