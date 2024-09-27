@@ -4,7 +4,7 @@ generator client {
 }
 
 datasource db {
-  provider = "cockroachdb"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -61,7 +61,7 @@ model ClubMembership {
 // -----------------------------------------
 // ---------------ACTIVITY RECORDS------------
 // -----------------------------------------
-
+//
 model ActivityRecord {
   id     String   @id @default(dbgenerated("gen_random_uuid()"))
   clubId Int // Link to Club model
@@ -135,7 +135,7 @@ enum Periods {
 }
 
 model ReservationRecord {
-  id                Int           @id @unique @default(sequence())
+  id                String        @id @default(dbgenerated("gen_random_uuid()"))
   creationTimestamp DateTime      @default(now())
   user              User          @relation(fields: [userId], references: [id])
   userId            String
