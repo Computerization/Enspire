@@ -38,3 +38,7 @@ jobs:
         run: npx prisma migrate deploy
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      - name: Update the classroom data
+        run: pnpm run update-classroom-data
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}

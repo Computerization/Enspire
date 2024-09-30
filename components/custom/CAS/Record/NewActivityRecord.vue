@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { useForm } from 'vee-validate'
-import { toTypedSchema } from '@vee-validate/zod'
-import * as z from 'zod'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
-import type { AllClubs } from '~/types/api/user/all_clubs'
-import Calendar from '~/components/ui/calendar/Calendar.vue'
-import { cn } from '~/lib/utils'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Multiselect } from '@/components/ui/multiselect'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
 import { useToast } from '@/components/ui/toast/use-toast'
+import { toTypedSchema } from '@vee-validate/zod'
+import { useForm } from 'vee-validate'
+import * as z from 'zod'
+import Calendar from '~/components/ui/calendar/Calendar.vue'
 import { Toaster } from '~/components/ui/toast'
-import { Multiselect } from '@/components/ui/multiselect'
+import { cn } from '~/lib/utils'
+import type { AllClubs } from '~/types/api/user/all_clubs'
 
 const emit = defineEmits(['refresh'])
 
@@ -33,7 +33,6 @@ const formSchema = toTypedSchema(z.object({
 }))
 
 const { data } = await useAsyncData<AllClubs>('allClubs', () => {
-  // @ts-expect-error TS2321
   return $fetch('/api/user/all_clubs?includeMemberships=true', {
     headers: useRequestHeaders(),
     method: 'GET',
@@ -145,7 +144,7 @@ const onSubmit = handleSubmit(async (values) => {
             <FormControl>
               <Textarea
                 class="resize-none"
-                placeholder="请假原因，最多一百字..."
+                placeholder="详细记录，最多一百字..."
                 v-bind="componentField"
                 :disabled="isLoading"
               />
