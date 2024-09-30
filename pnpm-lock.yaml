@@ -110,6 +110,9 @@ importers:
       vue-clerk:
         specifier: ^0.6.9
         version: 0.6.9(@clerk/backend@1.11.1(react@18.3.1))(react@18.3.1)(vue@3.5.5(typescript@5.6.2))
+      yaml:
+        specifier: ^2.5.1
+        version: 2.5.1
       zod:
         specifier: ^3.23.8
         version: 3.23.8
