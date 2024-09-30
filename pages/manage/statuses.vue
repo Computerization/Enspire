@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import { enums, time2period } from '~/components/custom/enum2str'
-import { useToast } from '@/components/ui/toast/use-toast'
+import type { ClassroomData, ReservationRecord } from '@prisma/client'
 import Toaster from '@/components/ui/toast/Toaster.vue'
+import { useToast } from '@/components/ui/toast/use-toast'
+import { enums, time2period } from '~/components/custom/enum2str'
 
 definePageMeta({
   middleware: ['auth'],
 })
 
 useHead({
-  title: 'Classroom Statuses | Enspire',
+  title: 'Classroom Status | Enspire',
 })
 
 const { toast } = useToast()
@@ -21,22 +22,27 @@ const selectedDay = ref(enums.days.values[utc8Time.day()])
 const selectedPeriod = ref(time2period(utc8Time.hour() * 100 + utc8Time.minute(), selectedDay.value))
 
 let dataLoaded = false
-let data: any
 
-try {
-  const response = await $fetch('/api/reservation/classroomId')
-  const rawData = JSON.parse(response).data
-  data = rawData.sort((a: any, b: any) => a.name < b.name ? -1 : 1)
+const { data, refresh } = await useAsyncData<ClassroomData[]>('classroomStatuses', () => {
+  return $fetch<ClassroomData[]>(`/api/reservation/classroomId`, {
+    headers: useRequestHeaders(),
+    method: 'GET',
+  })
+})
+
+if (data.value) {
+  console.log('data:', data.value)
+  data.value = data.value.sort((a: any, b: any) => a.name < b.name ? -1 : 1)
   dataLoaded = true
 }
-catch {
+else {
   toast({
     title: '错误',
     description: '获取教室信息出错',
   })
 }
 
-function status(reservationRecords: object[]) {
+function status(reservationRecords: ReservationRecord[]) {
   for (const record of reservationRecords) {
     if (record.day === selectedDay.value && record.period === selectedPeriod.value) {
       return record.club.name.zh

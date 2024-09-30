@@ -20,6 +20,19 @@ const route = useRoute()
       </div>
       <div class="px-3 py-2">
         <h2 class="relative px-4 text-lg font-semibold tracking-tight">
+          学校事务
+        </h2>
+        <div class="mt-2">
+          <NuxtLink to="/forms">
+            <Button :variant="route.name === 'forms' ? 'secondary' : 'ghost'" class="w-full justify-start">
+              <Icon class="mr-2 h-4 w-4" name="material-symbols:grid-view-outline-rounded" />
+              表单
+            </Button>
+          </NuxtLink>
+        </div>
+      </div>
+      <div class="px-3 py-2">
+        <h2 class="relative px-4 text-lg font-semibold tracking-tight">
           社团信息
         </h2>
         <div class="mt-2">

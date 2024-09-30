@@ -8,7 +8,7 @@ export default eventHandler(async (event) => {
   if (!auth.userId)
     setResponseStatus(event, 403)
 
-  const records = await prisma.classroomData.findMany({
+  return prisma.classroomData.findMany({
     include: {
       ReservationRecord: {
         include: {
@@ -16,8 +16,5 @@ export default eventHandler(async (event) => {
         },
       },
     },
-  })
-  return JSON.stringify({
-    data: Array.from(records.values()),
-  })
+  });
 })

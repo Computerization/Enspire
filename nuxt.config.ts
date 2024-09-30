@@ -14,7 +14,7 @@ export default defineNuxtConfig({
     storage: {
       github: {
         driver: 'github',
-        branch: 'next',
+        branch: 'prod',
         dir: '/data',
         repo: 'computerization/enspire',
       },

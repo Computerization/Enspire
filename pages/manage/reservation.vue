@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { LoaderCircle } from 'lucide-vue-next'
+import type { ClassroomData } from '@prisma/client'
 import { Button } from '@/components/ui/button'
-import { useToast } from '@/components/ui/toast/use-toast'
 import Toaster from '@/components/ui/toast/Toaster.vue'
+import { useToast } from '@/components/ui/toast/use-toast'
+import { LoaderCircle } from 'lucide-vue-next'
 import { enums } from '~/components/custom/enum2str'
+import type { AllClubs } from '~/types/api/user/all_clubs'
 
 definePageMeta({
   middleware: ['auth'],
@@ -15,20 +17,35 @@ useHead({
 
 const { toast } = useToast()
 
-let dataLoaded = false
-let data: any // should be classroom data
-let clubs: any
+const { data } = await useAsyncData<ClassroomData[]>('classroomStatuses', () => {
+  return $fetch<ClassroomData[]>(`/api/reservation/classroomId`, {
+    headers: useRequestHeaders(),
+    method: 'GET',
+  })
+})
 
-try {
-  let response = await $fetch('/api/reservation/classroomId')
-  const rawData = JSON.parse(response).data
-  data = rawData.sort((a: any, b: any) => a.name < b.name ? -1 : 1)
-  response = await $fetch('/api/user/all_clubs')
-  clubs = response
-  dataLoaded = true
+if (!data.value) {
+  toast({
+    title: '错误',
+    description: '获取教室信息出错',
+  })
 }
-catch (error) {
-  console.log(error)
+else {
+  data.value = data.value.sort((a: any, b: any) => a.name < b.name ? -1 : 1)
+}
+
+const { data: clubs } = await useAsyncData<AllClubs>('clubs', () => {
+  return $fetch<AllClubs>(`/api/user/all_clubs`, {
+    headers: useRequestHeaders(),
+    method: 'GET',
+  })
+})
+
+if (!clubs.value) {
+  toast({
+    title: '错误',
+    description: '获取社团信息出错',
+  })
 }
 
 let reloadKey = 0
@@ -98,7 +115,7 @@ async function handleSubmit(e: any) {
     else if (data.value?.status === 'PRISMA_ERROR') {
       toast({
         title: '数据错误',
-        description: data.value?.message,
+        description: '请稍后再试',
         variant: 'destructive',
       })
     }
@@ -173,10 +190,10 @@ async function handleSubmit(e: any) {
           </FormItem>
           <FormItem>
             <FormLabel>选择教室</FormLabel>
-            <div v-if="!dataLoaded">
+            <div v-if="!clubs || !data">
               <Skeleton class="h-5 p-3 my-3" />
             </div>
-            <FormControl v-if="dataLoaded">
+            <FormControl>
               <Select v-model="formData.classroom" required>
                 <SelectTrigger>
                   <SelectValue placeholder="选择教室" />
@@ -211,7 +228,7 @@ async function handleSubmit(e: any) {
                   <SelectValue placeholder="选择你的社团" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectGroup v-if="clubs.president.length">
+                  <SelectGroup v-if="clubs?.president.length">
                     <SelectItem v-for="club in clubs.president" :key="club.id" :value="club.id">
                       {{ club.name.zh }}
                       <span class="inline-block text-gray-500">
@@ -219,16 +236,16 @@ async function handleSubmit(e: any) {
                       </span>
                     </SelectItem>
                   </SelectGroup>
-                  <SelectGroup v-if="clubs.vice.length">
-                    <SelectItem v-for="club in clubs.vice" :key="club.id" :value="club.id">
+                  <SelectGroup v-if="clubs?.vice.length">
+                    <SelectItem v-for="club in clubs?.vice" :key="club.id" :value="club.id">
                       {{ club.name.zh }}
                       <span class="inline-block text-gray-500">
                         副社
                       </span>
                     </SelectItem>
                   </SelectGroup>
-                  <SelectGroup v-if="clubs.member.length">
-                    <SelectItem v-for="club in clubs.member" :key="club.id" :value="club.id">
+                  <SelectGroup v-if="clubs?.member.length">
+                    <SelectItem v-for="club in clubs?.member" :key="club.id" :value="club.id">
                       {{ club.name.zh }}
                       <span class="inline-block text-gray-500">
                         成员
