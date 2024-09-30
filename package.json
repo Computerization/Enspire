@@ -10,7 +10,7 @@
     "preview": "NODE_OPTIONS='--import ./public/instrument.server.mjs' nuxt preview",
     "postinstall": "nuxt prepare && prisma generate",
     "update-club-info": "tsx utils/update-club-info.ts",
-    "upload-classroom-info": "tsx data/classroom/write.ts",
+    "update-classroom-data": "tsx utils/update-classroom-data.ts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "vue-tsc --noEmit --skipLibCheck"
