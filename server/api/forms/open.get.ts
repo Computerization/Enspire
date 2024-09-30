@@ -1,12 +1,6 @@
 import dayjs from 'dayjs'
-import { createStorage } from 'unstorage'
-import fsLiteDriver from 'unstorage/drivers/fs-lite'
 import { parse } from 'yaml'
 import type { Form, Forms } from '~/types/data/forms'
-
-const storage = createStorage({
-  driver: fsLiteDriver({ base: './data' }),
-})
 
 export default eventHandler(async (event) => {
   const { auth } = event.context
@@ -16,7 +10,7 @@ export default eventHandler(async (event) => {
     return
   }
 
-  const yaml = await storage.getItem('forms:forms.yaml') as string
+  const yaml = await useStorage('github').getItem('forms:forms.yaml') as string
 
   if (!yaml) {
     setResponseStatus(event, 404)
