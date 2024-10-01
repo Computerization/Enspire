@@ -5,7 +5,7 @@ import type { AllClubs } from '~/types/api/user/all_clubs'
 
 const route = useRoute()
 
-const isPresident = ref(false)
+const isPresidentOrVicePresident = ref(false)
 
 const { data } = await useAsyncData<AllClubs>('classroomStatuses', () => {
   return $fetch<AllClubs>(`/api/user/all_clubs`, {
@@ -14,8 +14,8 @@ const { data } = await useAsyncData<AllClubs>('classroomStatuses', () => {
   })
 })
 
-if (data.value?.president.length !== 0) {
-  isPresident.value = true
+if (data.value?.president.length !== 0 || data.value?.vice.length !== 0) {
+  isPresidentOrVicePresident.value = true
 }
 </script>
 
@@ -69,14 +69,14 @@ if (data.value?.president.length !== 0) {
           CAS管理
         </h2>
         <div class="mt-2">
-          <NuxtLink v-if="isPresident" to="/manage/reservation">
+          <NuxtLink v-if="isPresidentOrVicePresident" to="/manage/reservation">
             <Button :variant="route.name === 'manage-reservation' ? 'secondary' : 'ghost'" class="w-full justify-start">
               <Icon class="mr-2 h-4 w-4" name="material-symbols:calendar-today-outline" />
               预约教室
             </Button>
           </NuxtLink>
           <NuxtLink to="/manage/manage">
-            <Button v-if="isPresident" :variant="route.name === 'manage-manage' ? 'secondary' : 'ghost'" class="w-full justify-start">
+            <Button v-if="isPresidentOrVicePresident" :variant="route.name === 'manage-manage' ? 'secondary' : 'ghost'" class="w-full justify-start">
               <Icon class="mr-2 h-4 w-4" name="material-symbols:calendar-today-outline" />
               管理预约
             </Button>
@@ -88,7 +88,7 @@ if (data.value?.president.length !== 0) {
             </Button>
           </NuxtLink>
           <NuxtLink to="/manage/record">
-            <Button v-if="isPresident" :variant="route.name === 'manage-record' ? 'secondary' : 'ghost'" class="w-full justify-start mt-1">
+            <Button v-if="isPresidentOrVicePresident" :variant="route.name === 'manage-record' ? 'secondary' : 'ghost'" class="w-full justify-start mt-1">
               <Icon class="mr-2 h-4 w-4" name="charm:tick-double" />
               活动记录
             </Button>
