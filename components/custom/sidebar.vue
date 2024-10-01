@@ -1,19 +1,25 @@
 <script setup lang="ts">
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import { useClerk } from 'vue-clerk'
 import type { AllClubs } from '~/types/api/user/all_clubs'
+
+const clerk = useClerk()
 
 const route = useRoute()
 
 const isPresidentOrVicePresident = ref(false)
 
-const { data } = await useFetch<AllClubs>(`/api/user/all_clubs`, {
-  headers: useRequestHeaders(),
-  method: 'GET',
-})
-
-if (data.value && (data.value?.president.length !== 0 || data.value?.vice.length !== 0)) {
-  isPresidentOrVicePresident.value = true
+if (import.meta.client) {
+  if (clerk.user?.publicMetadata.binded) {
+    const data = await $fetch<AllClubs>(`/api/user/all_clubs`, {
+      headers: useRequestHeaders(),
+      method: 'GET',
+    })
+    if (data && (data.president.length !== 0 || data.vice.length !== 0)) {
+      isPresidentOrVicePresident.value = true
+    }
+  }
 }
 </script>
 
