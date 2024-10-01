@@ -35,8 +35,8 @@ model Club {
   ActivityRecord            ActivityRecord[]
   ClubRating                ClubRating[]
   GroupInfo                 GroupInfo[]
+  memberships               ClubMembership[]
   ReservationRecord         ReservationRecord[]
-  ClubMembership            ClubMembership[]
 }
 
 enum ClubMemberRole {
