@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import type { ClassroomData } from '@prisma/client'
 import { Button } from '@/components/ui/button'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
 import Toaster from '@/components/ui/toast/Toaster.vue'
 import { useToast } from '@/components/ui/toast/use-toast'
 import { LoaderCircle } from 'lucide-vue-next'
@@ -132,21 +139,21 @@ async function handleSubmit(e: any) {
 </script>
 
 <template>
-  <div>
-    <div class="inline-block align-top w-full lg:w-1/2 lg:max-w-[480px] p-5">
-      <div class="text-2xl">
-        预约教室
-      </div>
-      <div class="py-5" />
+  <Card>
+    <CardHeader>
+      <CardTitle>预约教室</CardTitle>
+      <CardDescription>在此处预约教室</CardDescription>
+    </CardHeader>
+    <CardContent>
       <form class="space-y-2" @submit="handleSubmit">
         <FormField name="main">
           <FormItem>
             <FormLabel>预约时间</FormLabel>
             <FormControl>
-              <div class="flex flex-col lg:flex-row lg:justify-stretch">
+              <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-1 justify-start">
                 <!-- This ToggleGroup should be implemented in a better way but anyway it works -->
-                <ToggleGroup :key="reloadKey" type="multiple" variant="outline" class="w-fit">
-                  <div class="text-center w-10">
+                <ToggleGroup :key="reloadKey" type="multiple" variant="outline">
+                  <div class="text-muted-foreground text-sm text-center w-7">
                     每周
                   </div>
                   <ToggleGroupItem value="mon" @click="day[1] = !day[1]">
@@ -178,6 +185,7 @@ async function handleSubmit(e: any) {
               </div>
             </FormControl>
           </FormItem>
+          <div class="py-1" />
           <FormItem>
             <FormLabel>选择教室</FormLabel>
             <div v-if="!clubs || !data">
@@ -209,7 +217,7 @@ async function handleSubmit(e: any) {
               </Select>
             </FormControl>
           </FormItem>
-          <div class="py-2" />
+          <div class="py-1" />
           <FormItem>
             <FormLabel>社团</FormLabel>
             <FormControl>
@@ -245,11 +253,9 @@ async function handleSubmit(e: any) {
                 </SelectContent>
               </Select>
             </FormControl>
-            <FormDescription>
-              选择一个社团
-            </FormDescription>
             <FormMessage />
           </FormItem>
+          <div class="py-1" />
           <FormItem>
             <FormLabel>备注</FormLabel>
             <FormControl>
@@ -264,11 +270,11 @@ async function handleSubmit(e: any) {
         <div class="py-2" />
         <Button type="submit" :disabled="pending" class="mr-3">
           <LoaderCircle v-if="pending" class="animate-spin mr-2" />
-          <span v-if="!pending">提交预约申请</span>
+          <span v-if="!pending">提交预约</span>
           <span v-if="pending">处理中...</span>
         </Button>
       </form>
-    </div>
-  </div>
+    </CardContent>
+  </Card>
   <Toaster />
 </template>
