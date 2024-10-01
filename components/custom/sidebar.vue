@@ -7,14 +7,12 @@ const route = useRoute()
 
 const isPresidentOrVicePresident = ref(false)
 
-const { data } = await useAsyncData<AllClubs>('classroomStatuses', () => {
-  return $fetch<AllClubs>(`/api/user/all_clubs`, {
-    headers: useRequestHeaders(),
-    method: 'GET',
-  })
+const { data } = await useFetch<AllClubs>(`/api/user/all_clubs`, {
+  headers: useRequestHeaders(),
+  method: 'GET',
 })
 
-if (data.value?.president.length !== 0 || data.value?.vice.length !== 0) {
+if (data.value && (data.value?.president.length !== 0 || data.value?.vice.length !== 0)) {
   isPresidentOrVicePresident.value = true
 }
 </script>
