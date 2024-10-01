@@ -70,7 +70,7 @@ export default eventHandler(async (event) => {
         user: true,
       },
       where: {
-        id: Number(query.id),
+        id: query.id,
       },
     })
     if (!currentReservation) {
@@ -90,7 +90,7 @@ export default eventHandler(async (event) => {
         return
       return await prisma.reservationRecord.delete({
         where: {
-          id: Number(query.id),
+          id: query.id,
         },
       })
         .then(() => {
