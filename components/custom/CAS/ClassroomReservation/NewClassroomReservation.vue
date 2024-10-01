@@ -13,14 +13,6 @@ import { LoaderCircle } from 'lucide-vue-next'
 import { enums } from '~/components/custom/enum2str'
 import type { AllClubs } from '~/types/api/user/all_clubs'
 
-definePageMeta({
-  middleware: ['auth'],
-})
-
-useHead({
-  title: 'Classroom Reservation | Enspire',
-})
-
 const { toast } = useToast()
 
 const { data } = await useAsyncData<ClassroomData[]>('classroomStatuses', () => {
