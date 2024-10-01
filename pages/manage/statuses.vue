@@ -31,7 +31,6 @@ const { data, refresh } = await useAsyncData<ClassroomData[]>('classroomStatuses
 })
 
 if (data.value) {
-  console.log('data:', data.value)
   data.value = data.value.sort((a: any, b: any) => a.name < b.name ? -1 : 1)
   dataLoaded = true
 }
@@ -86,8 +85,8 @@ function status(reservationRecords: ReservationRecord[]) {
       </div>
     </div>
   </div>
-  <div v-if="dataLoaded" class="flex flex-row flex-wrap gap-4">
-    <div v-for="classroom in data" :key="classroom.id" class="w-full lg:w-72 rounded-lg border">
+  <div v-if="dataLoaded" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-2">
+    <div v-for="classroom in data" :key="classroom.id" class="w-full rounded-lg border">
       <div
         class="rounded-t-lg w-full px-4 py-2 text-xs" :class="{
           'bg-red-800/[.2]': !!status(classroom.ReservationRecord),
@@ -96,7 +95,7 @@ function status(reservationRecords: ReservationRecord[]) {
       >
         {{ status(classroom.ReservationRecord) ? `${status(classroom.ReservationRecord)} 使用中` : '空闲' }}
       </div>
-      <div class="rounded-b-lg w-full px-4 py-2 lg:h-20">
+      <div class="rounded-b-lg w-full px-4 py-2">
         <div class="text-2xl font-bold flex flex-row flex-wrap items-center gap-2">
           <span class="inline-block">
             {{ classroom.name }}
