@@ -70,19 +70,19 @@ if (data.value?.president.length !== 0 || data.value?.vice.length !== 0) {
         </h2>
         <div class="mt-2">
           <NuxtLink v-if="isPresidentOrVicePresident" to="/manage/reservation">
-            <Button :variant="route.name === 'manage-reservation' ? 'secondary' : 'ghost'" class="w-full justify-start">
+            <Button :variant="route.name === 'manage-reservation' ? 'secondary' : 'ghost'" class="w-full justify-start mt-1">
               <Icon class="mr-2 h-4 w-4" name="material-symbols:calendar-today-outline" />
               预约教室
             </Button>
           </NuxtLink>
           <NuxtLink to="/manage/manage">
-            <Button v-if="isPresidentOrVicePresident" :variant="route.name === 'manage-manage' ? 'secondary' : 'ghost'" class="w-full justify-start">
+            <Button v-if="isPresidentOrVicePresident" :variant="route.name === 'manage-manage' ? 'secondary' : 'ghost'" class="w-full justify-start mt-1">
               <Icon class="mr-2 h-4 w-4" name="material-symbols:calendar-today-outline" />
               管理预约
             </Button>
           </NuxtLink>
           <NuxtLink to="/manage/statuses">
-            <Button :variant="route.name === 'manage-statuses' ? 'secondary' : 'ghost'" class="w-full justify-start">
+            <Button :variant="route.name === 'manage-statuses' ? 'secondary' : 'ghost'" class="w-full justify-start mt-1">
               <Icon class="mr-2 h-4 w-4" name="material-symbols:calendar-today-outline" />
               教室状态
             </Button>
