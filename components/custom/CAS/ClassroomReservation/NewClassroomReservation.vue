@@ -217,15 +217,15 @@ async function handleSubmit(e: any) {
                   <SelectValue placeholder="选择你的社团" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectGroup v-if="clubs?.president.length">
-                    <SelectItem v-for="club in clubs.president" :key="club.id" :value="club.id">
+                  <SelectGroup v-if="clubs?.president && clubs?.president.length">
+                    <SelectItem v-for="club in clubs?.president" :key="club.id" :value="club.id">
                       {{ club.name.zh }}
                       <span class="inline-block text-gray-500">
                         社长
                       </span>
                     </SelectItem>
                   </SelectGroup>
-                  <SelectGroup v-if="clubs?.vice.length">
+                  <SelectGroup v-if="clubs?.vice && clubs?.vice.length">
                     <SelectItem v-for="club in clubs?.vice" :key="club.id" :value="club.id">
                       {{ club.name.zh }}
                       <span class="inline-block text-gray-500">
@@ -233,7 +233,7 @@ async function handleSubmit(e: any) {
                       </span>
                     </SelectItem>
                   </SelectGroup>
-                  <SelectGroup v-if="clubs?.member.length">
+                  <SelectGroup v-if="clubs?.member && clubs?.member.length">
                     <SelectItem v-for="club in clubs?.member" :key="club.id" :value="club.id">
                       {{ club.name.zh }}
                       <span class="inline-block text-gray-500">
