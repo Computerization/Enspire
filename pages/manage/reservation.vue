@@ -133,16 +133,6 @@ async function handleSubmit(e: any) {
 
 <template>
   <div>
-    <div class="inline-block align-top w-full lg:w-1/2 p-5">
-      <div class="flex rounded border h-[50vh] lg:h-[80vh] items-center justify-center">
-        <div>
-          map placeholder
-          <div class="my-5" />
-          FORMDATA: (for testing only)
-          <pre>{{ JSON.stringify(formData, null, 2) }}</pre>
-        </div>
-      </div>
-    </div>
     <div class="inline-block align-top w-full lg:w-1/2 lg:max-w-[480px] p-5">
       <div class="text-2xl">
         预约教室
