@@ -42,7 +42,7 @@ export default defineNuxtConfig({
     public: {
       sentry: {
         dsn: process.env.SENTRY_DSN,
-        environment: 'development',
+        environment: process.env.SENTRY_ENV,
       },
       clerkPublishableKey: process.env.CLERK_PUBLISHABLE_KEY,
       payloadCmsUrl: process.env.PAYLOAD_CMS_URL,
@@ -72,7 +72,6 @@ export default defineNuxtConfig({
   },
 
   sentry: {
-    debug: true,
     sourceMapsUploadOptions: {
       org: 'computerization',
       project: 'enspire',
