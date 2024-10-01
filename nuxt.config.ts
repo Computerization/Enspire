@@ -26,7 +26,7 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@nuxt/content',
     'shadcn-nuxt',
-    'nuxt-icon',
+    '@nuxt/icon',
     '@nuxt/fonts',
     'nuxt-svgo',
     '@sentry/nuxt/module',
