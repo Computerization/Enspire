@@ -19,6 +19,7 @@
     "@changesets/cli": "^2.27.8",
     "@clerk/clerk-sdk-node": "^5.0.46",
     "@clerk/themes": "^2.1.33",
+    "@netlify/edge-functions": "^2.11.0",
     "@netlify/functions": "^2.8.2",
     "@netlify/integrations": "^0.5.4",
     "@netlify/sentry": "^0.0.10",
