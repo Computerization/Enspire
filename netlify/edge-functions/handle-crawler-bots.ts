@@ -16,5 +16,5 @@ export default async function () {
 
 export const config: Config = {
   cache: 'manual',
-  pattern: '^.*\\.[Pp][Hh][Pp]$',
+  pattern: '^.*\\.[Pp][Hh][Pp]|[Tt][Xx][Tt]$',
 }
