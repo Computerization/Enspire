@@ -17,6 +17,9 @@ importers:
       '@clerk/themes':
         specifier: ^2.1.33
         version: 2.1.33
+      '@netlify/edge-functions':
+        specifier: ^2.11.0
+        version: 2.11.0
       '@netlify/functions':
         specifier: ^2.8.2
         version: 2.8.2
@@ -1633,6 +1636,9 @@ packages:
   '@netlify/blobs@8.0.1':
     resolution: {integrity: sha512-IrZHVqillU0x12eDbsap4Ba6poi+4IdVCYjZa+tA0eD95TaSbSqfw1zNkO27MiKw0pOjPB6+RXFK4pdfOs/qUQ==}
     engines: {node: ^14.16.0 || >=16.0.0}
+
+  '@netlify/edge-functions@2.11.0':
+    resolution: {integrity: sha512-DZrDHdPX44Cj7T9geKdiIwHB6OScL7QFL10voC8TApgEwY/NhKfABBGF2cbUIfbAh3IAMBeikelT8PU0MqYnyg==}
 
   '@netlify/functions@2.8.2':
     resolution: {integrity: sha512-DeoAQh8LuNPvBE4qsKlezjKj0PyXDryOFJfJKo3Z1qZLKzQ21sT314KQKPVjfvw6knqijj+IO+0kHXy/TJiqNA==}
@@ -9471,6 +9477,8 @@ snapshots:
   '@mapbox/whoots-js@3.1.0': {}
 
   '@netlify/blobs@8.0.1': {}
+
+  '@netlify/edge-functions@2.11.0': {}
 
   '@netlify/functions@2.8.2':
     dependencies:
