@@ -1,18 +1,8 @@
 <script setup lang="ts" generic="TData, TValue">
-import type { ColumnDef, ColumnFiltersState, SortingState } from '@tanstack/vue-table'
-import {
-  FlexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useVueTable,
-} from '@tanstack/vue-table'
-
 import type { ActivityRecord, Club, ClubMembership } from '@prisma/client'
-import { valueUpdater } from '@/lib/utils'
-import { DonutChart } from '@/components/ui/chart-donut'
+import type { ColumnDef, ColumnFiltersState, SortingState } from '@tanstack/vue-table'
 
+import { DonutChart } from '@/components/ui/chart-donut'
 import {
   Table,
   TableBody,
@@ -21,6 +11,16 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { valueUpdater } from '@/lib/utils'
+
+import {
+  FlexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useVueTable,
+} from '@tanstack/vue-table'
 
 const props = defineProps<{
   columns: ColumnDef<TData, TValue>[]
@@ -144,6 +144,38 @@ async function submitDeletion(id: string) {
         </div>
         <div class="text-sm rounded border p-2 mt-1">
           {{ new Date(String(currentRequestInDialog?.date)).toLocaleDateString() }}
+        </div>
+      </div>
+
+      <div>
+        <div class="font-medium">
+          CAS时间
+        </div>
+        <div class="text-sm rounded border p-2 mt-1 flex justify-between">
+          <div class="flex items-center space-x-0.5">
+            <p class="font-bold">
+              C:
+            </p>
+            <div>
+              {{ currentRequestInDialog?.cTime }}小时
+            </div>
+          </div>
+          <div class="flex items-center space-x-0.5">
+            <p class="font-bold">
+              A:
+            </p>
+            <div>
+              {{ currentRequestInDialog?.aTime }}小时
+            </div>
+          </div>
+          <div class="flex items-center space-x-0.5">
+            <p class="font-bold">
+              S:
+            </p>
+            <div>
+              {{ currentRequestInDialog?.sTime }}小时
+            </div>
+          </div>
         </div>
       </div>
 
