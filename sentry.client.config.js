@@ -1,8 +1,9 @@
 import * as Sentry from '@sentry/nuxt'
 
 Sentry.init({
-  // There isn't any way to get the dsn from env var here
+  // eslint-disable-next-line no-undef
   environment: useRuntimeConfig().public.sentry.environment,
+  // eslint-disable-next-line no-undef
   dsn: useRuntimeConfig().public.sentry.dsn,
   // This sets the sample rate to be 10%. You may want this to be 100% while
   // in development and sample at a lower rate in production

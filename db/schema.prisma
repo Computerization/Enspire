@@ -67,6 +67,9 @@ model ActivityRecord {
   clubId Int // Link to Club model
   date   DateTime // Start date of the leave
   text   String
+  cTime  Float    @default(0)
+  aTime  Float    @default(0)
+  sTime  Float    @default(0)
 
   // Relations
   club      Club             @relation(fields: [clubId], references: [id])
