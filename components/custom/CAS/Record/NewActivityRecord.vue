@@ -162,6 +162,7 @@ const onSubmit = handleSubmit(async (values) => {
                 :min="0"
                 :model-value="value"
                 :step="0.5"
+                :disabled="isLoading"
                 :format-options="{
                   minimumFractionDigits: 1,
                 }"
