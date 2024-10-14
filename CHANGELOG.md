@@ -1,5 +1,11 @@
 # enspire
 
+## 1.1.0
+
+### Minor Changes
+
+- [`23f5689`](https://github.com/Computerization/Enspire/commit/23f5689cbd6e815c8bd9c8834be89aacd970954c) Thanks [@qwerzl](https://github.com/qwerzl)! - Support adding CAS time for activity record
+
 ## 1.0.0
 
 ### Major Changes
