@@ -2,6 +2,13 @@
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Multiselect } from '@/components/ui/multiselect'
+import {
+  NumberField,
+  NumberFieldContent,
+  NumberFieldDecrement,
+  NumberFieldIncrement,
+  NumberFieldInput,
+} from '@/components/ui/number-field'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
 import { useToast } from '@/components/ui/toast/use-toast'
@@ -30,6 +37,9 @@ const formSchema = toTypedSchema(z.object({
   date: z.date(),
   text: z.string().min(10).max(300),
   members: z.array(z.string().uuid()),
+  cTime: z.number().min(0).max(5),
+  aTime: z.number().min(0).max(5),
+  sTime: z.number().min(0).max(5),
 }))
 
 const { data } = await useAsyncData<AllClubs>('allClubs', () => {
@@ -46,8 +56,13 @@ if (!data.value) {
   })
 }
 
-const { handleSubmit, resetForm } = useForm({
+const { handleSubmit, resetForm, setFieldValue } = useForm({
   validationSchema: formSchema,
+  initialValues: {
+    cTime: 0,
+    aTime: 0,
+    sTime: 0,
+  },
 })
 
 const onSubmit = handleSubmit(async (values) => {
@@ -137,6 +152,40 @@ const onSubmit = handleSubmit(async (values) => {
             <FormMessage />
           </FormItem>
         </FormField>
+
+        <div class="flex space-x-2 w-full">
+          <FormField v-for="(slot, index) in ['cTime', 'aTime', 'sTime']" :key="index" v-slot="{ value }" :name="slot">
+            <FormItem>
+              <FormLabel>{{ ['C', 'A', 'S'][index] }}时间</FormLabel>
+              <NumberField
+                class="gap-2 w-max"
+                :min="0"
+                :model-value="value"
+                :step="0.5"
+                :format-options="{
+                  minimumFractionDigits: 1,
+                }"
+                @update:model-value="(v: number) => {
+                  if (v) {
+                    setFieldValue(slot as Parameters<typeof setFieldValue>[0], v)
+                  }
+                  else {
+                    setFieldValue(slot as Parameters<typeof setFieldValue>[0], undefined)
+                  }
+                }"
+              >
+                <NumberFieldContent>
+                  <NumberFieldDecrement />
+                  <FormControl>
+                    <NumberFieldInput />
+                  </FormControl>
+                  <NumberFieldIncrement />
+                </NumberFieldContent>
+              </NumberField>
+              <FormMessage />
+            </FormItem>
+          </FormField>
+        </div>
 
         <FormField v-slot="{ componentField }" name="text">
           <FormItem>
