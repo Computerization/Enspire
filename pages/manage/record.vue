@@ -26,7 +26,7 @@ const refreshState = ref(false)
               <Icon name="ic:sharp-remove-red-eye" />
               我的申请
             </CardTitle>
-            <CardDescription>在此处浏览您的活动记录</CardDescription>
+            <CardDescription>在此处浏览您的活动签到</CardDescription>
           </CardHeader>
           <CardContent>
             <Skeleton class="w-full h-32" />
@@ -43,7 +43,7 @@ const refreshState = ref(false)
               <Icon name="material-symbols:add-circle-outline" />
               新增
             </CardTitle>
-            <CardDescription>在此处新增活动记录</CardDescription>
+            <CardDescription>在此处新增活动签到</CardDescription>
           </CardHeader>
           <CardContent>
             <form class="space-y-6">

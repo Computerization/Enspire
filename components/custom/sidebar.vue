@@ -94,7 +94,7 @@ if (import.meta.client) {
           <NuxtLink to="/manage/record">
             <Button v-if="isPresidentOrVicePresident" :variant="route.name === 'manage-record' ? 'secondary' : 'ghost'" class="w-full justify-start mt-1">
               <Icon class="mr-2 h-4 w-4" name="charm:tick-double" />
-              活动记录
+              活动签到
             </Button>
           </NuxtLink>
         </div>
