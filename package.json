@@ -58,7 +58,7 @@
     "@antfu/eslint-config": "^3.7.3",
     "@changesets/changelog-github": "^0.5.0",
     "@netlify/blobs": "^8.0.1",
-    "@nuxt/fonts": "^0.8.0",
+    "@nuxt/fonts": "^0.10.0",
     "@nuxt/icon": "^1.5.2",
     "@nuxt/image": "^1.8.0",
     "@nuxtjs/google-fonts": "^3.2.0",
