@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useFavicon, usePreferredDark } from '@vueuse/core'
 import IconLogo from '@/assets/logo.svg'
+import { useFavicon, usePreferredDark } from '@vueuse/core'
 
 const isDark = usePreferredDark()
 const favicon = computed(() => isDark.value ? '/favicon-dark.ico' : '/favicon.ico')
