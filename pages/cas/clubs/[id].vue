@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { useRoute } from 'vue-router'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import sanitizeHtml from 'sanitize-html'
+import { useRoute } from 'vue-router'
 import type { Club, Clubs } from '~/types/clubs'
 
 const { data } = await useFetch<Clubs>('/api/club/all_details')

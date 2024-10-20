@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import type { Club } from '~/types/clubs'
+import Badge from '@/components/ui/badge/Badge.vue'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
-import Badge from '@/components/ui/badge/Badge.vue'
 import sanitizeHtml from 'sanitize-html'
+import type { Club } from '~/types/clubs'
 
 const props = defineProps({
   club: {
