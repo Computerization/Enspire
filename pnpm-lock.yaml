@@ -66,8 +66,8 @@ dependencies:
     specifier: ^1.13.0
     version: 1.13.0
   h3-clerk:
-    specifier: ^0.4.12
-    version: 0.4.12(h3@1.13.0)(react@18.3.1)
+    specifier: ^0.5.0
+    version: 0.5.4(h3@1.13.0)(react@18.3.1)
   iron-webcrypto:
     specifier: ^1.2.1
     version: 1.2.1
@@ -8839,8 +8839,8 @@ packages:
     dependencies:
       duplexer: 0.1.2
 
-  /h3-clerk@0.4.12(h3@1.13.0)(react@18.3.1):
-    resolution: {integrity: sha512-caFygiB+fwWrgImSDEvSnUdD2+YlpzSZ+SMBlUM+Ju7vV3R/uwXgWGhJXGWxmlRGOl+hmtpjlbRJk/NxtcfL+w==}
+  /h3-clerk@0.5.4(h3@1.13.0)(react@18.3.1):
+    resolution: {integrity: sha512-DRIXZSvtcyeRUtYhKKg/cL741yMfv50xpmtEtsCb6+RxsHhKBvtyrTlPB+DmftC/qtAl/xJbX9gVd2C/IUaOBQ==}
     peerDependencies:
       h3: ^1.8.0
     dependencies:
