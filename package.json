@@ -38,7 +38,7 @@
     "h3": "^1.13.0",
     "h3-clerk": "^0.4.12",
     "iron-webcrypto": "^1.2.1",
-    "lucide-vue-next": "^0.441.0",
+    "lucide-vue-next": "^0.453.0",
     "ofetch": "^1.4.1",
     "radix-vue": "^1.9.7",
     "sanitize-html": "^2.13.1",
