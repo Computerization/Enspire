@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
 import {
   Select,
   SelectContent,
@@ -48,12 +54,32 @@ async function onRefresh() {
   isLoading.value = false
 }
 
-watch(() => props.refreshWatcher, () => {
-  onRefresh()
-})
+watch(
+  () => props.refreshWatcher,
+  () => {
+    onRefresh()
+  },
+)
 
 watch(selectedClub, async () => {
   await onRefresh()
+})
+
+// Computed properties to calculate total CAS times
+const totalCTime = computed(() => {
+  return data.value?.data.reduce((sum, record) => sum + record.cTime, 0) || 0
+})
+
+const totalATime = computed(() => {
+  return data.value?.data.reduce((sum, record) => sum + record.aTime, 0) || 0
+})
+
+const totalSTime = computed(() => {
+  return data.value?.data.reduce((sum, record) => sum + record.sTime, 0) || 0
+})
+
+const totalCASTime = computed(() => {
+  return totalCTime.value + totalATime.value + totalSTime.value
 })
 </script>
 
@@ -76,18 +102,60 @@ watch(selectedClub, async () => {
             <SelectGroup>
               <SelectItem
                 v-for="club in [...clubs.vice, ...clubs.president]"
-                :key="club.id" :value="String(club.id)"
+                :key="club.id"
+                :value="String(club.id)"
               >
                 {{ club.name.zh }}
               </SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
-        <Button size="icon" variant="outline" :disabled="isLoading || !selectedClub" @click="onRefresh()">
-          <Icon name="material-symbols:refresh" :class="{ 'animate-spin': isLoading }" />
+        <Button
+          size="icon"
+          variant="outline"
+          :disabled="isLoading || !selectedClub"
+          @click="onRefresh()"
+        >
+          <Icon
+            name="material-symbols:refresh"
+            :class="{ 'animate-spin': isLoading }"
+          />
         </Button>
       </div>
-      <DataTable v-if="data && selectedClub" :columns="columns" :data="data.data" :refresh-function="refresh" />
+      <div v-if="selectedClub" class="mb-4 text-sm">
+        <div class="rounded border p-2 mt-1 flex justify-between">
+          <div class="flex items-center space-x-0.5">
+            <p class="font-bold">
+              C:
+            </p>
+            <div>{{ totalCTime }} 小时</div>
+          </div>
+          <div class="flex items-center space-x-0.5">
+            <p class="font-bold">
+              A:
+            </p>
+            <div>{{ totalATime }} 小时</div>
+          </div>
+          <div class="flex items-center space-x-0.5">
+            <p class="font-bold">
+              S:
+            </p>
+            <div>{{ totalSTime }} 小时</div>
+          </div>
+          <div class="flex items-center space-x-0.5">
+            <p class="font-bold">
+              Total:
+            </p>
+            <div>{{ totalCASTime }} 小时</div>
+          </div>
+        </div>
+      </div>
+      <DataTable
+        v-if="data && selectedClub"
+        :columns="columns"
+        :data="data.data"
+        :refresh-function="refresh"
+      />
     </CardContent>
   </Card>
   <Toaster />
