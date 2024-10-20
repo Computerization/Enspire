@@ -1,5 +1,5 @@
-import { v4 as uuidv4 } from 'uuid'
 import type { FetchContext } from 'ofetch'
+import { v4 as uuidv4 } from 'uuid'
 
 export default defineEventHandler(async (event) => {
   const { auth } = event.context

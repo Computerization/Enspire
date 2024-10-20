@@ -1,7 +1,7 @@
-import { z } from 'zod'
+import { clerkClient } from '@clerk/clerk-sdk-node'
 import { PrismaClient } from '@prisma/client'
 
-import { clerkClient } from '@clerk/clerk-sdk-node'
+import { z } from 'zod'
 
 const prisma = new PrismaClient()
 
