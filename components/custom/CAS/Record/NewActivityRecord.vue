@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
 import { Multiselect } from '@/components/ui/multiselect'
 import {
   NumberField,
@@ -9,7 +15,13 @@ import {
   NumberFieldIncrement,
   NumberFieldInput,
 } from '@/components/ui/number-field'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
 import { useToast } from '@/components/ui/toast/use-toast'
 import { toTypedSchema } from '@vee-validate/zod'
@@ -32,15 +44,17 @@ definePageMeta({
 
 const isLoading = ref(false)
 
-const formSchema = toTypedSchema(z.object({
-  club: z.string(),
-  date: z.date(),
-  text: z.string().min(10).max(300),
-  members: z.array(z.string().uuid()),
-  cTime: z.number().min(0).max(5),
-  aTime: z.number().min(0).max(5),
-  sTime: z.number().min(0).max(5),
-}))
+const formSchema = toTypedSchema(
+  z.object({
+    club: z.string(),
+    date: z.date(),
+    text: z.string().min(10).max(300),
+    members: z.array(z.string().uuid()),
+    cTime: z.number().min(0).max(5),
+    aTime: z.number().min(0).max(5),
+    sTime: z.number().min(0).max(5),
+  }),
+)
 
 const { data } = await useAsyncData<AllClubs>('allClubs', () => {
   return $fetch('/api/user/all_clubs?includeMemberships=true', {
@@ -101,13 +115,20 @@ const onSubmit = handleSubmit(async (values) => {
           <FormItem>
             <FormLabel>社团</FormLabel>
 
-            <Select v-bind="componentField" @update:model-value="selectedClub = $event">
+            <Select
+              v-bind="componentField"
+              @update:model-value="selectedClub = $event"
+            >
               <FormControl>
                 <SelectTrigger
-                  :class="cn(
-                    'w-full ps-3 text-start font-normal hover:bg-muted',
-                    !value && 'text-muted-foreground',
-                  )" variant="outline" :disabled="isLoading"
+                  :class="
+                    cn(
+                      'w-full ps-3 text-start font-normal hover:bg-muted',
+                      !value && 'text-muted-foreground',
+                    )
+                  "
+                  variant="outline"
+                  :disabled="isLoading"
                 >
                   <SelectValue placeholder="选择您需要记录的社团..." />
                 </SelectTrigger>
@@ -116,7 +137,8 @@ const onSubmit = handleSubmit(async (values) => {
                 <SelectGroup v-if="data">
                   <SelectItem
                     v-for="club in [...data.vice, ...data.president]"
-                    :key="club.id" :value="String(club.id)"
+                    :key="club.id"
+                    :value="String(club.id)"
                   >
                     {{ club.name.zh }}
                   </SelectItem>
@@ -134,14 +156,22 @@ const onSubmit = handleSubmit(async (values) => {
               <PopoverTrigger as-child>
                 <FormControl>
                   <Button
-                    :class="cn(
-                      'w-full ps-3 text-start font-normal',
-                      !value && 'text-muted-foreground',
-                    )" variant="outline"
+                    :class="
+                      cn(
+                        'w-full ps-3 text-start font-normal',
+                        !value && 'text-muted-foreground',
+                      )
+                    "
+                    variant="outline"
                     :disabled="isLoading"
                   >
-                    <span>{{ value ? $dayjs(value).format("LL") : "选择日期..." }}</span>
-                    <Icon class="ms-auto opacity-50" name="material-symbols:calendar-today-outline" />
+                    <span>{{
+                      value ? $dayjs(value).format("LL") : "选择日期..."
+                    }}</span>
+                    <Icon
+                      class="ms-auto opacity-50"
+                      name="material-symbols:calendar-today-outline"
+                    />
                   </Button>
                 </FormControl>
               </PopoverTrigger>
@@ -154,9 +184,14 @@ const onSubmit = handleSubmit(async (values) => {
         </FormField>
 
         <div class="flex space-x-2 w-full">
-          <FormField v-for="(slot, index) in ['cTime', 'aTime', 'sTime']" :key="index" v-slot="{ value }" :name="slot">
+          <FormField
+            v-for="(slot, index) in ['cTime', 'aTime', 'sTime']"
+            :key="index"
+            v-slot="{ value }"
+            :name="slot"
+          >
             <FormItem>
-              <FormLabel>{{ ['C', 'A', 'S'][index] }}时间</FormLabel>
+              <FormLabel>{{ ["C", "A", "S"][index] }}时间</FormLabel>
               <NumberField
                 class="gap-2 w-max"
                 :min="0"
@@ -209,14 +244,14 @@ const onSubmit = handleSubmit(async (values) => {
             <FormControl>
               <Multiselect
                 v-if="data"
-                :options="((
-                  [...data.president, ...data.vice].find(
-                    (club) => club.id === Number(selectedClub),
-                  )
-                )?.memberships)?.map((membership) => ({
-                  label: membership.name,
-                  value: membership.id,
-                })) ?? []"
+                :options="
+                  [...data.president, ...data.vice]
+                    .find((club) => club.id === Number(selectedClub))
+                    ?.memberships?.map((membership) => ({
+                      label: membership.name,
+                      value: membership.id,
+                    })) ?? []
+                "
                 placeholder="Select options"
                 variant="inverted"
                 v-bind="componentField"
@@ -229,7 +264,11 @@ const onSubmit = handleSubmit(async (values) => {
         </FormField>
 
         <Button :disabled="isLoading" type="submit">
-          <Icon v-if="isLoading" class="mr-2" name="svg-spinners:180-ring-with-bg" />
+          <Icon
+            v-if="isLoading"
+            class="mr-2"
+            name="svg-spinners:180-ring-with-bg"
+          />
           提交
         </Button>
       </form>

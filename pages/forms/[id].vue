@@ -30,7 +30,9 @@ if (!data.value) {
   })
 }
 
-const form = data.value!.find(form => form.id === useRoute().params.id)
+const form = data.value!.find(
+  form => form.id === String(useRoute().params.id),
+)
 </script>
 
 <template>
@@ -42,11 +44,14 @@ const form = data.value!.find(form => form.id === useRoute().params.id)
   </div>
   <div v-if="form" class="rounded">
     <ClientOnly>
-      <iframe :height="height - 110" width="100%" class="rounded" :src="`${form.url}&userid=${clerk.user.id}`" />
+      <iframe
+        :height="height - 110"
+        width="100%"
+        class="rounded"
+        :src="`${form.url}&userid=${clerk.user.id}`"
+      />
     </ClientOnly>
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
