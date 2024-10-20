@@ -72,8 +72,8 @@ dependencies:
     specifier: ^1.2.1
     version: 1.2.1
   lucide-vue-next:
-    specifier: ^0.441.0
-    version: 0.441.0(vue@3.5.12)
+    specifier: ^0.453.0
+    version: 0.453.0(vue@3.5.12)
   ofetch:
     specifier: ^1.4.1
     version: 1.4.1
@@ -9936,8 +9936,8 @@ packages:
     dependencies:
       yallist: 3.1.1
 
-  /lucide-vue-next@0.441.0(vue@3.5.12):
-    resolution: {integrity: sha512-WaPNRjH5O74mD3hVgKB4HtMYsjAuQSuOcNAeK8h6s8GqySkpsBnd2tmuc+EooNkogNv6l8UNmwgBANZVZ6SHqQ==}
+  /lucide-vue-next@0.453.0(vue@3.5.12):
+    resolution: {integrity: sha512-5zmv83vxAs9SVoe22veDBi8Dw0Fh2F+oTngWgKnKOkrZVbZjceXLQ3tescV2boB0zlaf9R2Sd9RuUP2766xvsQ==}
     peerDependencies:
       vue: '>=3.0.1'
     dependencies:
