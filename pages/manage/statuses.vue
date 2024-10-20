@@ -105,7 +105,7 @@ function status(reservationRecords: ReservationRecord[]) {
   >
     <div
       v-for="classroom in data"
-      :key="classroom.id"
+      :key="String(classroom.id)"
       class="w-full rounded-lg border"
     >
       <div
@@ -137,6 +137,6 @@ function status(reservationRecords: ReservationRecord[]) {
         </div>
       </div>
     </div>
+    <Toaster />
   </div>
-  <Toaster />
 </template>

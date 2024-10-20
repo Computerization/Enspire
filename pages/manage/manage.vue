@@ -90,9 +90,7 @@ onMounted(async () => {
       <AlertDialogHeader>
         <AlertDialogTitle>{{ alertContent.title }}</AlertDialogTitle>
         <AlertDialogDescription>
-          {{
-            alertContent.message
-          }}
+          {{ alertContent.message }}
         </AlertDialogDescription>
       </AlertDialogHeader>
       <AlertDialogFooter>
@@ -159,7 +157,7 @@ onMounted(async () => {
             <Button
               variant="link"
               class="p-0 text-red-500"
-              @click="confirmManage(record.id, 'DELETE')"
+              @click="confirmManage(Number(record.id), 'DELETE')"
             >
               撤销
             </Button>
