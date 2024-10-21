@@ -57,7 +57,8 @@ export default eventHandler(async (event) => {
               }
             }
             return null
-          }).filter((record: any) => record !== null),
+          })
+          .filter((record: any) => record !== null),
       })
       return {
         status: 'SUCCESS',

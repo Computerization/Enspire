@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { SignIn } from 'vue-clerk'
-import { usePreferredDark } from '@vueuse/core'
 import { dark } from '@clerk/themes'
+import { usePreferredDark } from '@vueuse/core'
+import { SignIn } from 'vue-clerk'
 
 const isDark = usePreferredDark()
 
