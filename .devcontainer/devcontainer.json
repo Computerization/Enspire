@@ -1,0 +1,28 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
+{
+  "name": "Enspire Dev",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:latest",
+
+  "mounts": [
+    // Share npm configuration with the host.
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.npmrc,target=/home/node/.npmrc,type=bind,consistency=cached"
+  ],
+
+  "postCreateCommand": "pnpm i",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // Required extensions
+        "Vue.volar",
+        "bradlc.vscode-tailwindcss",
+        "dbaeumer.vscode-eslint",
+        "Nuxtr.nuxtr-vscode",
+        "Prisma.prisma",
+        // Do not install Prettier. It will conflict with eslint.
+        "-esbenp.prettier-vscode"
+      ]
+    }
+  }
+}
