@@ -13,6 +13,11 @@ Enspire 的目标很简单，**Make CAS life easier for everyone**
 
 ## 本地运行
 
+### (可选) VSCode用户：设置Devcontainer
+1. F1调出Command Palette，选择`Dev Containers: Clone Repository in Container Volume...`
+2. 输入`https://github.com/computerization/enspire`
+> 不建议`Reopen in Container`，Bind Mounted Volume会导致严重的IO性能问题。
+
 ### 安装依赖
 
 ```bash
