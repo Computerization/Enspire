@@ -20,6 +20,7 @@
         "dbaeumer.vscode-eslint",
         "Nuxtr.nuxtr-vscode",
         "Prisma.prisma",
+        "lokalise.i18n-ally",
         // Do not install Prettier. It will conflict with eslint.
         "-esbenp.prettier-vscode"
       ]

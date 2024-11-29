@@ -24,6 +24,7 @@ export default defineNuxtConfig({
     '@sentry/nuxt/module',
     '@nuxt/image',
     'dayjs-nuxt',
+    '@nuxtjs/i18n',
   ],
 
   build: {
@@ -71,5 +72,22 @@ export default defineNuxtConfig({
     },
   },
 
+  future: {
+    compatibilityVersion: 4,
+  },
+
+  i18n: {
+    vueI18n: './i18n.config.ts',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root',
+    },
+  },
+
   compatibilityDate: '2024-08-31',
+
+  devtools: {
+    enabled: true,
+  },
 })
