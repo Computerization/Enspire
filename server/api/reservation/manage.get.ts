@@ -18,6 +18,8 @@ export default eventHandler(async (event) => {
     })
   }
 
+  const id = String(query.id) // Convert id to string
+
   if (query.admin === 'true') {
     if (0 /* TODO: admin key validation failed */) {
       throw createError({
@@ -25,15 +27,17 @@ export default eventHandler(async (event) => {
         message: '管理员认证失败',
       })
     }
-    else { // admin validation success
+    else {
+      // admin validation success
       if (query.action === 'DELETE') {
-        if (query.id === -1)
+        if (id === '-1')
           return
-        return await prisma.reservationRecord.delete({
-          where: {
-            id: Number(query.id),
-          },
-        })
+        return await prisma.reservationRecord
+          .delete({
+            where: {
+              id: Number(id),
+            },
+          })
           .then(() => {
             return 'SUCCESS'
           })
@@ -45,7 +49,8 @@ export default eventHandler(async (event) => {
           })
       }
       else if (query.action === 'DELALL') {
-        return await prisma.reservationRecord.deleteMany({})
+        return await prisma.reservationRecord
+          .deleteMany({})
           .then(() => {
             return 'SUCCESS'
           })
@@ -70,7 +75,7 @@ export default eventHandler(async (event) => {
         user: true,
       },
       where: {
-        id: query.id,
+        id: Number(id),
       },
     })
     if (!currentReservation) {
@@ -86,13 +91,14 @@ export default eventHandler(async (event) => {
       })
     }
     else if (query.action === 'DELETE') {
-      if (query.id === -1)
+      if (id === '-1')
         return
-      return await prisma.reservationRecord.delete({
-        where: {
-          id: query.id,
-        },
-      })
+      return await prisma.reservationRecord
+        .delete({
+          where: {
+            id: Number(id),
+          },
+        })
         .then(() => {
           return 'SUCCESS'
         })

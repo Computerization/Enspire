@@ -15,12 +15,15 @@ import type { AllClubs } from '~/types/api/user/all_clubs'
 
 const { toast } = useToast()
 
-const { data } = await useAsyncData<ClassroomData[]>('classroomStatuses', () => {
-  return $fetch<ClassroomData[]>(`/api/reservation/classroomId`, {
-    headers: useRequestHeaders(),
-    method: 'GET',
-  })
-})
+const { data } = await useAsyncData<ClassroomData[]>(
+  'classroomStatuses',
+  () => {
+    return $fetch<ClassroomData[]>(`/api/reservation/classroomId`, {
+      headers: useRequestHeaders(),
+      method: 'GET',
+    })
+  },
+)
 
 if (!data.value) {
   toast({
@@ -29,7 +32,7 @@ if (!data.value) {
   })
 }
 else {
-  data.value = data.value.sort((a: any, b: any) => a.name < b.name ? -1 : 1)
+  data.value = data.value.sort((a: any, b: any) => (a.name < b.name ? -1 : 1))
 }
 
 const { data: clubs } = await useAsyncData<AllClubs>('clubs', () => {
@@ -141,7 +144,9 @@ async function handleSubmit(e: any) {
           <FormItem>
             <FormLabel>预约时间</FormLabel>
             <FormControl>
-              <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-1 justify-start">
+              <div
+                class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-1 justify-start"
+              >
                 <!-- This ToggleGroup should be implemented in a better way but anyway it works -->
                 <ToggleGroup :key="reloadKey" type="multiple" variant="outline">
                   <div class="text-muted-foreground text-sm text-center w-7">
@@ -168,7 +173,11 @@ async function handleSubmit(e: any) {
                     <SelectValue placeholder="选择时段" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem v-for="period in enums.periods.values" :key="period" :value="period">
+                    <SelectItem
+                      v-for="period in enums.periods.values"
+                      :key="period"
+                      :value="period"
+                    >
                       {{ enums.periods.map[period] }}
                     </SelectItem>
                   </SelectContent>
@@ -200,7 +209,10 @@ async function handleSubmit(e: any) {
                         </span>
                       </span>
                       <span v-if="classroom.size" class="text-gray-400">
-                        可容纳<span class="inline-block w-5 text-center">{{ classroom.size }}</span>人
+                        可容纳<span class="inline-block w-5 text-center">{{
+                          classroom.size
+                        }}</span>
+                        人
                       </span>
                     </SelectItem>
                   </SelectGroup>
@@ -217,28 +229,36 @@ async function handleSubmit(e: any) {
                   <SelectValue placeholder="选择你的社团" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectGroup v-if="clubs?.president && clubs?.president.length">
-                    <SelectItem v-for="club in clubs?.president" :key="club.id" :value="club.id">
+                  <SelectGroup
+                    v-if="clubs?.president && clubs?.president.length"
+                  >
+                    <SelectItem
+                      v-for="club in clubs?.president"
+                      :key="club.id"
+                      :value="club.id"
+                    >
                       {{ club.name.zh }}
-                      <span class="inline-block text-gray-500">
-                        社长
-                      </span>
+                      <span class="inline-block text-gray-500"> 社长 </span>
                     </SelectItem>
                   </SelectGroup>
                   <SelectGroup v-if="clubs?.vice && clubs?.vice.length">
-                    <SelectItem v-for="club in clubs?.vice" :key="club.id" :value="club.id">
+                    <SelectItem
+                      v-for="club in clubs?.vice"
+                      :key="club.id"
+                      :value="club.id"
+                    >
                       {{ club.name.zh }}
-                      <span class="inline-block text-gray-500">
-                        副社
-                      </span>
+                      <span class="inline-block text-gray-500"> 副社 </span>
                     </SelectItem>
                   </SelectGroup>
                   <SelectGroup v-if="clubs?.member && clubs?.member.length">
-                    <SelectItem v-for="club in clubs?.member" :key="club.id" :value="club.id">
+                    <SelectItem
+                      v-for="club in clubs?.member"
+                      :key="club.id"
+                      :value="club.id"
+                    >
                       {{ club.name.zh }}
-                      <span class="inline-block text-gray-500">
-                        成员
-                      </span>
+                      <span class="inline-block text-gray-500"> 成员 </span>
                     </SelectItem>
                   </SelectGroup>
                 </SelectContent>
@@ -250,11 +270,15 @@ async function handleSubmit(e: any) {
           <FormItem>
             <FormLabel>备注</FormLabel>
             <FormControl>
-              <Textarea v-model="formData.note" type="text" placeholder="备注" class="resize-none" rows="3" />
+              <Textarea
+                v-model="formData.note"
+                type="text"
+                placeholder="备注"
+                class="resize-none"
+                rows="3"
+              />
             </FormControl>
-            <FormDescription>
-              非必填
-            </FormDescription>
+            <FormDescription> 非必填 </FormDescription>
             <FormMessage />
           </FormItem>
         </FormField>

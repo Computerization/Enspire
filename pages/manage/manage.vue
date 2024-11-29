@@ -33,7 +33,7 @@ async function load() {
       content = response.data
     }
   }
-  catch (error) {
+  catch {
     status.value = Statuses.ERROR
   }
 }
@@ -47,7 +47,7 @@ const alertContent = {
 }
 const managePending = ref(false)
 
-function confirmManage(id: number, action: string, currentStatus = '') {
+function confirmManage(id: number, action: string, _currentStatus = '') {
   alertContent.message = `将对 预约#${id} 执行以下操作: `
   if (action === 'DELETE') {
     alertContent.message += '撤销'
@@ -60,7 +60,7 @@ function confirmManage(id: number, action: string, currentStatus = '') {
 async function manage() {
   managePending.value = true
   try {
-    const data = await $fetch('/api/reservation/manage', {
+    const _data = await $fetch('/api/reservation/manage', {
       query: {
         id: alertContent.id,
         action: alertContent.action,
@@ -89,7 +89,9 @@ onMounted(async () => {
     <AlertDialogContent>
       <AlertDialogHeader>
         <AlertDialogTitle>{{ alertContent.title }}</AlertDialogTitle>
-        <AlertDialogDescription>{{ alertContent.message }}</AlertDialogDescription>
+        <AlertDialogDescription>
+          {{ alertContent.message }}
+        </AlertDialogDescription>
       </AlertDialogHeader>
       <AlertDialogFooter>
         <AlertDialogCancel :disabled="managePending">
@@ -138,7 +140,7 @@ onMounted(async () => {
         <TableCell>{{ enums.periods.map[record.period] }}</TableCell>
         <TableCell>{{ record.classroom.name }}</TableCell>
         <TableCell>
-          {{ record.note ? '' : '–' }}
+          {{ record.note ? "" : "–" }}
           <HoverCard v-if="record.note">
             <HoverCardTrigger>
               <Button variant="link" class="text-blue-500">
@@ -152,7 +154,11 @@ onMounted(async () => {
         </TableCell>
         <TableCell class="text-left">
           <div v-if="true" class="text-red-500">
-            <Button variant="link" class="p-0 text-red-500" @click="confirmManage(record.id, 'DELETE')">
+            <Button
+              variant="link"
+              class="p-0 text-red-500"
+              @click="confirmManage(Number(record.id), 'DELETE')"
+            >
               撤销
             </Button>
           </div>
@@ -160,10 +166,11 @@ onMounted(async () => {
       </TableRow>
     </TableBody>
   </Table>
-  <div v-if="status === Statuses.READY && !content.length" class="w-1/3 my-2 mx-auto text-center">
-    <Alert>
-      暂无记录
-    </Alert>
+  <div
+    v-if="status === Statuses.READY && !content.length"
+    class="w-1/3 my-2 mx-auto text-center"
+  >
+    <Alert> 暂无记录 </Alert>
   </div>
   <div v-if="status === Statuses.ERROR" class="w-1/3 my-2 mx-auto text-center">
     <Alert variant="destructive">
