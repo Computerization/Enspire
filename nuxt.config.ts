@@ -15,7 +15,7 @@ export default defineNuxtConfig({
 
   modules: [
     '@vite-pwa/nuxt',
-    '@nuxtjs/tailwindcss',
+    '@unocss/nuxt',
     '@nuxt/content',
     'shadcn-nuxt',
     '@nuxt/icon',
