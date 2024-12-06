@@ -14,14 +14,13 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        // Required extensions
         "Vue.volar",
         "bradlc.vscode-tailwindcss",
         "dbaeumer.vscode-eslint",
         "Nuxtr.nuxtr-vscode",
         "Prisma.prisma",
-        // Do not install Prettier. It will conflict with eslint.
-        "-esbenp.prettier-vscode"
+        "-esbenp.prettier-vscode",
+        "csstools.postcss"
       ]
     }
   },
