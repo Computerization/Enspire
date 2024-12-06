@@ -1,5 +1,15 @@
 # enspire
 
+## 1.2.0
+
+### Minor Changes
+
+- [#636](https://github.com/Computerization/Enspire/pull/636) [`4350e53`](https://github.com/Computerization/Enspire/commit/4350e534ebd9afe1a253cdbc198eae7932d26e73) Thanks [@at-wr](https://github.com/at-wr)! - Added a CAS time dashboard to the Activity Record, allowing for display of individual, combined, and total sums across all records.
+
+### Patch Changes
+
+- [#649](https://github.com/Computerization/Enspire/pull/649) [`b4ff929`](https://github.com/Computerization/Enspire/commit/b4ff929c22ff21601581a76cedfe4fd4f62cc729) Thanks [@qwerzl](https://github.com/qwerzl)! - Added loading page for better UX
+
 ## 1.1.0
 
 ### Minor Changes
