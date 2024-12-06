@@ -1,8 +1,8 @@
 import type { ActivityRecord, Club, ClubMembership } from '@prisma/client'
 import type { ColumnDef } from '@tanstack/vue-table'
-import { Button } from '#components'
 import { ArrowUpDown } from 'lucide-vue-next'
 import { h } from 'vue'
+import { Button } from '~/components/ui/button'
 import DropdownAction from './DataTableAction.vue'
 
 export const columns: ColumnDef<ActivityRecord>[] = [

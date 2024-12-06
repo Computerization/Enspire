@@ -1,9 +1,11 @@
 <script lang="ts" setup>
+import type { Club, Clubs } from '~/types/clubs'
+import Badge from '@/components/ui/badge/Badge.vue'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Separator } from '@/components/ui/separator'
 import sanitizeHtml from 'sanitize-html'
 import { useRoute } from 'vue-router'
-import type { Club, Clubs } from '~/types/clubs'
 
 const { data } = await useFetch<Clubs>('/api/club/all_details')
 
@@ -54,9 +56,9 @@ useHead({
     <div v-for="club in filteredClubs" :key="club.groups[0].C_GroupNo">
       <div v-for="group in club.groups" :key="group.C_GroupsID">
         <div class="flex flex-col-reverse xl:flex-row">
-          <Card class="xl:w-3/4 w-full mt-2 xl:mt-0">
+          <Card class="mt-2 w-full xl:mt-0 xl:w-3/4">
             <CardHeader>
-              <CardTitle class="flex justify-between items-center">
+              <CardTitle class="flex items-center justify-between">
                 <div>
                   {{ group.C_NameC }}
                 </div>
@@ -80,7 +82,7 @@ useHead({
                 简介
               </div>
               <div v-if="hasDescriptionC" class="my-3 text-sm" v-text="Description_C" />
-              <div v-else class="text-sm italic text-muted-foreground text-center w-full my-2">
+              <div v-else class="my-2 w-full text-center text-sm text-muted-foreground italic">
                 暂无简介 ;-(
               </div>
               <!-- Don't show the English Description until i18n is completed -->
@@ -88,15 +90,15 @@ useHead({
               <div class="font-bold">
                 成员
               </div>
-              <div v-if="club.gmember.length === 0" class="text-sm italic text-muted-foreground text-center w-full my-2">
+              <div v-if="club.gmember.length === 0" class="my-2 w-full text-center text-sm text-muted-foreground italic">
                 暂无成员 ;-(
               </div>
               <div v-else class="mt-3">
                 <div class="flex flex-wrap">
                   <div v-for="(member, index) in club.gmember" :key="member.StudentID" class="flex items-center">
-                    <div class="flex items-center text-sm mt-0.5">
+                    <div class="mt-0.5 flex items-center text-sm">
                       <span class="">{{ member.S_Name }}</span>
-                      <span v-if="member.S_Nickname" class="text-muted-foreground ml-1">({{ member.S_Nickname }})</span>
+                      <span v-if="member.S_Nickname" class="ml-1 text-muted-foreground">({{ member.S_Nickname }})</span>
                       <Badge v-if="Number(member.LeaderYes) === 2" variant="default" class="ml-1 -py-0.5">
                         社长
                       </Badge>
@@ -110,9 +112,9 @@ useHead({
               </div>
             </CardContent>
           </Card>
-          <Card class="xl:w-1/4 w-full xl:ml-2 h-min">
+          <Card class="h-min w-full xl:ml-2 xl:w-1/4">
             <CardHeader>
-              <CardTitle class="flex items-center h-min gap-x-1">
+              <CardTitle class="h-min flex items-center gap-x-1">
                 社团属性
               </CardTitle>
               <CardDescription class="flex items-center">
@@ -175,8 +177,8 @@ useHead({
     </div>
   </div>
   <div v-else>
-    <div class="flex flex-col justify-center h-1/2 text-center">
-      <h3 class="font-bold text-xl">
+    <div class="h-1/2 flex flex-col justify-center text-center">
+      <h3 class="text-xl font-bold">
         你当前访问的页面不存在，也许你应该考虑...
       </h3>
       <br>

@@ -1,7 +1,8 @@
 export default defineNuxtConfig({
   nitro: {
     experimental: {
-      openAPI: true,
+      // TODO: Track nuxt/content#2839. Waiting for a new release.
+      openAPI: false,
     },
     storage: {
       github: {
@@ -15,7 +16,7 @@ export default defineNuxtConfig({
 
   modules: [
     '@vite-pwa/nuxt',
-    '@nuxtjs/tailwindcss',
+    '@unocss/nuxt',
     '@nuxt/content',
     'shadcn-nuxt',
     '@nuxt/icon',

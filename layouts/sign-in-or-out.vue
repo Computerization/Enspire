@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import IconLogo from '@/assets/logo.svg'
 import { useFavicon, usePreferredDark } from '@vueuse/core'
 
 const isDark = usePreferredDark()
@@ -16,7 +15,7 @@ useFavicon(favicon)
   >
     <div class="relative hidden h-screen flex-col bg-muted text-white dark:border-r p-10 lg:flex bg-zinc-900">
       <div class="relative z-20 flex items-center text-lg font-medium">
-        <IconLogo class="text-3xl mt-1.5 hover:animate-spin" />
+        <SvgoLogo class="text-3xl mt-1.5 hover:animate-spin" />
         <div class="ml-0.5 text-2xl tracking-tight">
           enspire
         </div>

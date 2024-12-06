@@ -1,6 +1,7 @@
 <script setup lang="ts" generic="TData, TValue">
 import type { ActivityRecord, Club, ClubMembership } from '@prisma/client'
 import type { ColumnDef, ColumnFiltersState, SortingState } from '@tanstack/vue-table'
+import Badge from '@/components/ui/badge/Badge.vue'
 
 import { DonutChart } from '@/components/ui/chart-donut'
 import {

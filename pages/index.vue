@@ -24,7 +24,7 @@ const now = new Date().getHours()
   <div class="text-muted-foreground">
     Welcome to Enspire!
   </div>
-  <div class="space-y-2 mt-7">
+  <div class="mt-7 space-y-2">
     <Announcements />
   </div>
 </template>

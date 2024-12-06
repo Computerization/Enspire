@@ -42,10 +42,10 @@ watch(
         main content [100% height, overflow-scroll, additional whitespace in the bottom (that fills the space clipped by the main container)]
    -->
   <div class="h-screen">
-    <div class="top-0 flex flex-col h-full overflow-hidden">
+    <div class="top-0 h-full flex flex-col overflow-hidden">
       <!-- Navbar -->
-      <div class="border-b px-4 w-full backdrop-blur-3xl z-30">
-        <div class="flex h-14 items-center">
+      <div class="z-30 w-full border-b px-4 backdrop-blur-3xl">
+        <div class="h-14 flex items-center">
           <Toggle class="lg:hidden" data-state="off" @click="toggleSidebar">
             <Icon name="ph:list" size="1.3em" />
           </Toggle>
@@ -67,21 +67,21 @@ watch(
 
       <!-- Sidebar -->
       <div
-        class="fixed top-0 left-0 z-20 h-full transition-all duration-500 w-screen"
+        class="fixed left-0 top-0 z-20 h-full w-screen transition-all duration-500"
         :class="{ 'transform -translate-x-full': !isSidebarOpen, 'transform translate-x-0': isSidebarOpen }"
       >
         <Sidebar class="mt-14" />
       </div>
 
       <!-- Main area -->
-      <div class="grow grow-1 max-h-full">
-        <div class="border-t h-full">
-          <div class="bg-background h-full">
-            <div class="flex flex-row h-full">
+      <div class="max-h-full grow grow-1">
+        <div class="h-full border-t">
+          <div class="h-full bg-background">
+            <div class="h-full flex flex-row">
               <!-- Sidebar -->
-              <Sidebar class="top-0 hidden lg:inline-block h-full w-1/6" />
+              <Sidebar class="top-0 hidden h-full w-1/6 lg:inline-block" />
               <!-- Main content -->
-              <ScrollArea class="h-full px-4 lg:px-8 w-full pt-8">
+              <ScrollArea class="h-full w-full px-4 pt-8 lg:px-8">
                 <div class="pb-24">
                   <slot />
                 </div>

@@ -1,9 +1,9 @@
 name: Sync from staging to prod
 on:
   workflow_dispatch:
-  push:
-    tags:
-      - '**'
+  release:
+    types: [published]
+    
 jobs:
   sync-branch:
     runs-on: ubuntu-latest

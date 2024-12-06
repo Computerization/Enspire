@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Button } from '@/components/ui/button'
+import { Calendar } from '@/components/ui/calendar'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Multiselect } from '@/components/ui/multiselect'
 import {
@@ -12,15 +13,21 @@ import {
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
 import { useToast } from '@/components/ui/toast/use-toast'
+import { CalendarDate, DateFormatter, getLocalTimeZone, parseDate, today } from '@internationalized/date'
 import { toTypedSchema } from '@vee-validate/zod'
+import { Calendar as CalendarIcon } from 'lucide-vue-next'
+import { toDate } from 'radix-vue/date'
 import { useForm } from 'vee-validate'
 import * as z from 'zod'
-import Calendar from '~/components/ui/calendar/Calendar.vue'
 import { Toaster } from '~/components/ui/toast'
 import { cn } from '~/lib/utils'
 import type { AllClubs } from '~/types/api/user/all_clubs'
 
 const emit = defineEmits(['refresh'])
+
+const df = new DateFormatter('en-US', {
+  dateStyle: 'long',
+})
 
 const { toast } = useToast()
 
@@ -34,7 +41,9 @@ const isLoading = ref(false)
 
 const formSchema = toTypedSchema(z.object({
   club: z.string(),
-  date: z.date(),
+  date: z
+    .string()
+    .refine(v => v, { message: 'A date of birth is required.' }),
   text: z.string().min(10).max(300),
   members: z.array(z.string().uuid()),
   cTime: z.number().min(0).max(5),
@@ -56,7 +65,7 @@ if (!data.value) {
   })
 }
 
-const { handleSubmit, resetForm, setFieldValue } = useForm({
+const { handleSubmit, resetForm, setFieldValue, values } = useForm({
   validationSchema: formSchema,
   initialValues: {
     cTime: 0,
@@ -65,13 +74,19 @@ const { handleSubmit, resetForm, setFieldValue } = useForm({
   },
 })
 
+const calendarPlaceholder = ref()
+const calendarValue = computed({
+  get: () => values.date ? parseDate(values.date) : undefined,
+  set: val => val,
+})
+
 const onSubmit = handleSubmit(async (values) => {
   isLoading.value = true
   const { error } = await useFetch('/api/cas/record/new', {
     headers: useRequestHeaders(),
     method: 'post',
     server: false,
-    body: values,
+    body: { ...values, date: new Date(values.date) },
   })
   if (error.value) {
     toast({
@@ -127,38 +142,53 @@ const onSubmit = handleSubmit(async (values) => {
           </FormItem>
         </FormField>
 
-        <FormField v-slot="{ componentField, value }" name="date">
+        <FormField name="date">
           <FormItem class="flex flex-col">
             <FormLabel>活动日期</FormLabel>
             <Popover>
               <PopoverTrigger as-child>
                 <FormControl>
                   <Button
-                    :class="cn(
-                      'w-full ps-3 text-start font-normal',
-                      !value && 'text-muted-foreground',
-                    )" variant="outline"
-                    :disabled="isLoading"
+                    variant="outline" :class="cn(
+                      'w-[240px] ps-3 text-start font-normal w-full',
+                      !calendarValue && 'text-muted-foreground',
+                    )"
                   >
-                    <span>{{ value ? $dayjs(value).format("LL") : "选择日期..." }}</span>
-                    <Icon class="ms-auto opacity-50" name="material-symbols:calendar-today-outline" />
+                    <span>{{ calendarValue ? df.format(toDate(calendarValue)) : "Pick a date" }}</span>
+                    <CalendarIcon class="ms-auto h-4 w-4 opacity-50" />
                   </Button>
+                  <input hidden>
                 </FormControl>
               </PopoverTrigger>
-              <PopoverContent class="p-0">
-                <Calendar v-bind="componentField" />
+              <PopoverContent class="w-auto p-0">
+                <Calendar
+                  v-model:placeholder="calendarPlaceholder"
+                  v-model="calendarValue"
+                  calendar-label="Date"
+                  initial-focus
+                  :min-value="new CalendarDate(2020, 1, 1)"
+                  :max-value="today(getLocalTimeZone())"
+                  @update:model-value="(v) => {
+                    if (v) {
+                      setFieldValue('date', v.toString())
+                    }
+                    else {
+                      setFieldValue('date', undefined)
+                    }
+                  }"
+                />
               </PopoverContent>
             </Popover>
             <FormMessage />
           </FormItem>
         </FormField>
 
-        <div class="flex space-x-2 w-full">
+        <div class="w-full flex space-x-2">
           <FormField v-for="(slot, index) in ['cTime', 'aTime', 'sTime']" :key="index" v-slot="{ value }" :name="slot">
             <FormItem>
               <FormLabel>{{ ['C', 'A', 'S'][index] }}时间</FormLabel>
               <NumberField
-                class="gap-2 w-max"
+                class="w-max gap-2"
                 :min="0"
                 :model-value="value"
                 :step="0.5"
