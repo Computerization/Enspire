@@ -1,5 +1,11 @@
 # enspire
 
+## 1.2.2
+
+### Patch Changes
+
+- [`d393d47`](https://github.com/Computerization/Enspire/commit/d393d47ee573cca82163aaad3b7ea19550a9e23b) Thanks [@qwerzl](https://github.com/qwerzl)! - Minor bug fixes
+
 ## 1.2.1
 
 ### Patch Changes
