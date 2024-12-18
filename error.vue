@@ -22,19 +22,19 @@ const handleError = () => reloadNuxtApp({ path: '/' })
             Oops! Lost in Cyberspace
           </h1>
           <p class="text-gray-500">
-            Looks like you've ventured into the unknown digital realm. <br>
-            Don't worry, the error is reported and we'll fix it soon.
+            别担心，错误已被报告，我们会尽快修复。<br>
+            请尝试点击“回到首页”，在多数情况下这会解决问题。
           </p>
         </div>
         <div class="flex justify-center space-x-2">
           <Button
             @click="handleError"
           >
-            Return to Homepage
+            回到首页
           </Button>
           <NuxtLink to="https://github.com/Computerization/Enspire/issues" external>
             <Button variant="outline">
-              View Ongoing Issues
+              查看已知问题
             </Button>
           </NuxtLink>
         </div>
