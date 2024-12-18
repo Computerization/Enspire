@@ -23,8 +23,8 @@ const selectedPeriod = ref(time2period(utc8Time.hour() * 100 + utc8Time.minute()
 
 let dataLoaded = false
 
-const { data, refresh } = await useAsyncData<ClassroomData[]>('classroomStatuses', () => {
-  return $fetch<ClassroomData[]>(`/api/reservation/classroomId`, {
+const { data } = await useAsyncData<ClassroomData[]>('classroomStatuses', async () => {
+  return await $fetch<ClassroomData[]>(`/api/reservation/classroomId`, {
     headers: useRequestHeaders(),
     method: 'GET',
   })

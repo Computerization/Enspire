@@ -29,7 +29,7 @@ const refreshState = ref(false)
             <CardDescription>在此处浏览您的活动签到</CardDescription>
           </CardHeader>
           <CardContent>
-            <Skeleton class="w-full h-32" />
+            <Skeleton class="h-32 w-full" />
           </CardContent>
         </Card>
       </template>

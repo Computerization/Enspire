@@ -72,5 +72,9 @@ export default defineNuxtConfig({
     },
   },
 
+  sourcemap: {
+    client: true,
+  },
+
   compatibilityDate: '2024-08-31',
 })

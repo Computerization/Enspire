@@ -51,8 +51,8 @@ const formSchema = toTypedSchema(z.object({
   sTime: z.number().min(0).max(5),
 }))
 
-const { data } = await useAsyncData<AllClubs>('allClubs', () => {
-  return $fetch('/api/user/all_clubs?includeMemberships=true', {
+const { data } = await useAsyncData<AllClubs>('allClubsWithMemberships', async () => {
+  return await $fetch<AllClubs>('/api/user/all_clubs?includeMemberships=true', {
     headers: useRequestHeaders(),
     method: 'GET',
   })

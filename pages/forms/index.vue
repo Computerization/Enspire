@@ -18,8 +18,8 @@ useHead({
   title: 'Forms | Enspire',
 })
 
-const { data } = await useAsyncData<Form[]>('classroomStatuses', () => {
-  return $fetch<Form[]>(`/api/forms/open`, {
+const { data } = await useAsyncData<Form[]>('classroomStatuses', async () => {
+  return await $fetch<Form[]>(`/api/forms/open`, {
     headers: useRequestHeaders(),
     method: 'GET',
   })

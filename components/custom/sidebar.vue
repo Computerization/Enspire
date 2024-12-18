@@ -12,11 +12,11 @@ const isPresidentOrVicePresident = ref(false)
 
 if (import.meta.client) {
   if (clerk.user?.publicMetadata.binded) {
-    const data = await $fetch<AllClubs>(`/api/user/all_clubs`, {
+    const clubs = await $fetch<AllClubs>(`/api/user/all_clubs`, {
       headers: useRequestHeaders(),
       method: 'GET',
     })
-    if (data && (data.president.length !== 0 || data.vice.length !== 0)) {
+    if (clubs && (clubs.president.length !== 0 || clubs.vice.length !== 0)) {
       isPresidentOrVicePresident.value = true
     }
   }
@@ -25,9 +25,9 @@ if (import.meta.client) {
 
 <template>
   <div :class="cn('h-full', $attrs.class ?? '')">
-    <div class="space-y-3 py-4 backdrop-blur-3xl border-r-2 h-full">
+    <div class="h-full border-r-2 py-4 backdrop-blur-3xl space-y-3">
       <div class="px-3 py-2">
-        <div class="space-y-1 mt-2">
+        <div class="mt-2 space-y-1">
           <NuxtLink to="/">
             <Button :variant="route.name === 'index' ? 'secondary' : 'ghost'" class="w-full justify-start">
               <Icon class="mr-2 h-4 w-4" name="material-symbols:home-outline-rounded" />

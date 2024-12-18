@@ -32,7 +32,7 @@ definePageMeta({
 const selectedClub = ref<string>()
 const isLoading = ref(false)
 
-const { data: clubs } = await useAsyncData<AllClubs>('clubs', () => {
+const { data: clubs } = await useAsyncData<AllClubs>('allClubs', () => {
   return $fetch<AllClubs>(`/api/user/all_clubs`, {
     headers: useRequestHeaders(),
     method: 'GET',

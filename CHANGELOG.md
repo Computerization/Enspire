@@ -1,5 +1,13 @@
 # enspire
 
+## 1.2.1
+
+### Patch Changes
+
+- [`5c40bf2`](https://github.com/Computerization/Enspire/commit/5c40bf23883d39d5ec6b3d23a293c599f90c1324) Thanks [@qwerzl](https://github.com/qwerzl)! - Bug fixes
+
+- [`61ac93c`](https://github.com/Computerization/Enspire/commit/61ac93c4a9b9aa5cabebda94efc1a9ef0346b659) Thanks [@qwerzl](https://github.com/qwerzl)! - Add customized error page
+
 ## 1.2.0
 
 ### Minor Changes

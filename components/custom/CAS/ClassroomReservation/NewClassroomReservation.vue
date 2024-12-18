@@ -32,7 +32,7 @@ else {
   data.value = data.value.sort((a: any, b: any) => a.name < b.name ? -1 : 1)
 }
 
-const { data: clubs } = await useAsyncData<AllClubs>('clubs', () => {
+const { data: clubs } = await useAsyncData<AllClubs>('allClubs', () => {
   return $fetch<AllClubs>(`/api/user/all_clubs`, {
     headers: useRequestHeaders(),
     method: 'GET',
