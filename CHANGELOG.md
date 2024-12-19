@@ -1,5 +1,11 @@
 # enspire
 
+## 1.2.3
+
+### Patch Changes
+
+- [`4c6d9b6`](https://github.com/Computerization/Enspire/commit/4c6d9b623126b7e65adf7be94269e1fafba52d6f) Thanks [@qwerzl](https://github.com/qwerzl)! - Bug fix: Updated logic for displaying the loading page
+
 ## 1.2.2
 
 ### Patch Changes

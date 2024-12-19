@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import { ConfigProvider } from 'radix-vue'
-import { ClerkLoaded, ClerkLoading } from 'vue-clerk'
-import { IndefiniteProgressBar } from '~/components/ui/indefinite-progress-bar'
+import { useClerkProvider } from 'vue-clerk'
 import '@unocss/reset/tailwind-compat.css'
 
+const { isClerkLoaded } = useClerkProvider()
+
 const useIdFunction = () => useId()
+
+const isEnspireLoading = useState('isEnspireLoading', () => false)
 
 useHead({
   meta: [
@@ -18,19 +21,17 @@ useHead({
   <ConfigProvider :use-id="useIdFunction">
     <NuxtLoadingIndicator />
     <VitePwaManifest />
-    <ClerkLoading>
-      <div class="absolute z-100 h-screen w-screen bg-background">
-        <div class="h-full w-full flex flex-col items-center justify-center space-y-6">
-          <div class="flex justify-center space-x-1">
-            <SvgoLogo class="pt-1 text-7xl hover:animate-spin" />
-            <div class="mt-1 text-6xl tracking-tight">
-              enspire
-            </div>
+    <div v-if="!isClerkLoaded || isEnspireLoading" class="absolute z-100 h-screen w-screen bg-background">
+      <div class="h-full w-full flex flex-col items-center justify-center space-y-6">
+        <div class="flex justify-center space-x-1">
+          <SvgoLogo class="pt-1 text-7xl hover:animate-spin" />
+          <div class="mt-1 text-6xl tracking-tight">
+            enspire
           </div>
-          <Icon name="svg-spinners:3-dots-fade" size="2em" />
         </div>
+        <Icon name="svg-spinners:3-dots-fade" size="2em" />
       </div>
-    </ClerkLoading>
+    </div>
     <NuxtLayout class="z-10">
       <NuxtPage />
     </NuxtLayout>

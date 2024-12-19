@@ -1,14 +1,14 @@
 <script setup lang="ts">
+import type { AllClubs } from '~/types/api/user/all_clubs'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { useClerk } from 'vue-clerk'
-import type { AllClubs } from '~/types/api/user/all_clubs'
 
 const clerk = useClerk()
-
 const route = useRoute()
 
 const isPresidentOrVicePresident = ref(false)
+useState('isEnspireLoading').value = true
 
 if (import.meta.client) {
   if (clerk.user?.publicMetadata.binded) {
@@ -16,8 +16,11 @@ if (import.meta.client) {
       headers: useRequestHeaders(),
       method: 'GET',
     })
-    if (clubs && (clubs.president.length !== 0 || clubs.vice.length !== 0)) {
-      isPresidentOrVicePresident.value = true
+    if (clubs) {
+      useState('isEnspireLoading').value = false
+      if (clubs.president.length !== 0 || clubs.vice.length !== 0) {
+        isPresidentOrVicePresident.value = true
+      }
     }
   }
 }
