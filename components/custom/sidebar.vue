@@ -2,26 +2,21 @@
 import type { AllClubs } from '~/types/api/user/all_clubs'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import { useClerk } from 'vue-clerk'
 
-const clerk = useClerk()
 const route = useRoute()
 
 const isPresidentOrVicePresident = ref(false)
 useState('isEnspireLoading').value = true
 
-if (import.meta.client) {
-  if (clerk.user?.publicMetadata.binded) {
-    const clubs = await $fetch<AllClubs>(`/api/user/all_clubs`, {
-      headers: useRequestHeaders(),
-      method: 'GET',
-    })
-    if (clubs) {
-      useState('isEnspireLoading').value = false
-      if (clubs.president.length !== 0 || clubs.vice.length !== 0) {
-        isPresidentOrVicePresident.value = true
-      }
-    }
+const { data: clubs, suspense } = useQuery<AllClubs>({
+  queryKey: ['/api/user/all_clubs'],
+})
+await suspense()
+
+if (clubs.value) {
+  useState('isEnspireLoading').value = false
+  if (clubs.value.president.length !== 0 || clubs.value.vice.length !== 0) {
+    isPresidentOrVicePresident.value = true
   }
 }
 </script>
@@ -64,7 +59,7 @@ if (import.meta.client) {
             </Button>
           </NuxtLink>
           <NuxtLink v-if="[0, 1, 5, 6].includes(new Date().getMonth())" to="/cas/rating">
-            <Button :variant="route.name === 'cas-rating' ? 'secondary' : 'ghost'" class="w-full justify-start mt-1">
+            <Button :variant="route.name === 'cas-rating' ? 'secondary' : 'ghost'" class="mt-1 w-full justify-start">
               <Icon class="mr-2 h-4 w-4" name="material-symbols:rate-review-outline" />
               期末评价
             </Button>

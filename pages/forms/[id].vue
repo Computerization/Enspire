@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import type { Form } from '~/types/data/forms'
 import { useWindowSize } from '@vueuse/core'
 import { useClerk } from 'vue-clerk'
 import { toast } from '~/components/ui/toast'
-import type { Form } from '~/types/data/forms'
 
 const clerk = useClerk()
 
@@ -16,12 +16,10 @@ useHead({
   title: 'Forms | Enspire',
 })
 
-const { data } = await useAsyncData<Form[]>('classroomStatuses', async () => {
-  return await $fetch<Form[]>(`/api/forms/open`, {
-    headers: useRequestHeaders(),
-    method: 'GET',
-  })
+const { data, suspense } = useQuery<Form[]>({
+  queryKey: ['/api/forms/open'],
 })
+await suspense()
 
 if (!data.value) {
   toast({

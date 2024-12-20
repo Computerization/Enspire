@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
+import type { MyRecords } from '~/types/api/cas/record/my'
+import type { AllClubs } from '~/types/api/user/all_clubs'
 import {
   Card,
   CardContent,
@@ -16,36 +18,26 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Toaster } from '~/components/ui/toast'
-import type { MyRecords } from '~/types/api/cas/record/my'
-import type { AllClubs } from '~/types/api/user/all_clubs'
 import { columns } from './view-activity-records/columns'
 import DataTable from './view-activity-records/DataTable.vue'
+import { useQuery } from '@tanstack/vue-query';
 
 const props = defineProps<{
   refreshWatcher: Ref<boolean>
 }>()
 
-definePageMeta({
-  middleware: ['auth'],
-})
-
 const selectedClub = ref<string>()
 const isLoading = ref(false)
 
-const { data: clubs } = await useAsyncData<AllClubs>('allClubs', () => {
-  return $fetch<AllClubs>(`/api/user/all_clubs`, {
-    headers: useRequestHeaders(),
-    method: 'GET',
-  })
+const { data: clubs, suspense } = useQuery<AllClubs>({
+  queryKey: ['/api/user/all_clubs'],
 })
+await suspense()
 
-const { data, refresh } = await useAsyncData<MyRecords>('allRequests', () => {
-  return selectedClub.value
-    ? $fetch<MyRecords>(`/api/cas/record/my?club=${selectedClub.value}`, {
-      headers: useRequestHeaders(),
-      method: 'GET',
-    })
-    : Promise.resolve({ total: 0, data: [] })
+const { data, refetch: refresh } = useQuery<MyRecords>({
+  queryKey: [`/api/cas/record/my?club=`, selectedClub],
+  enabled: !!selectedClub.value,
+  placeholderData: { total: 0, data: [] },
 })
 
 async function onRefresh() {

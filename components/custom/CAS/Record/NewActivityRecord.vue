@@ -33,10 +33,6 @@ const { toast } = useToast()
 
 const selectedClub = ref<string>()
 
-definePageMeta({
-  middleware: ['auth'],
-})
-
 const isLoading = ref(false)
 
 const formSchema = toTypedSchema(z.object({
@@ -51,12 +47,10 @@ const formSchema = toTypedSchema(z.object({
   sTime: z.number().min(0).max(5),
 }))
 
-const { data } = await useAsyncData<AllClubs>('allClubsWithMemberships', async () => {
-  return await $fetch<AllClubs>('/api/user/all_clubs?includeMemberships=true', {
-    headers: useRequestHeaders(),
-    method: 'GET',
-  })
+const { data, suspense } = useQuery<AllClubs>({
+  queryKey: ['/api/user/all_clubs'],
 })
+await suspense()
 
 if (!data.value) {
   throw createError({
