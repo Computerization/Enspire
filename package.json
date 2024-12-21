@@ -1,7 +1,7 @@
 {
   "name": "enspire",
   "type": "module",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "private": true,
   "packageManager": "pnpm@9.14.4+sha512.c8180b3fbe4e4bca02c94234717896b5529740a6cbadf19fa78254270403ea2f27d4e1d46a08a0f56c89b63dc8ebfd3ee53326da720273794e6200fcf0d184ab",
   "scripts": {
@@ -29,6 +29,7 @@
     "@nuxt/content": "^2.13.4",
     "@radix-icons/vue": "^1.0.0",
     "@sentry/nuxt": "^8.42.0",
+    "@tanstack/vue-query": "^5.62.8",
     "@tanstack/vue-table": "^8.20.5",
     "@unovis/ts": "^1.4.5",
     "@unovis/vue": "^1.4.5",
@@ -71,6 +72,7 @@
     "@nuxtjs/google-fonts": "^3.2.0",
     "@prisma/client": "^6.0.1",
     "@rollup/plugin-wasm": "^6.2.2",
+    "@tanstack/eslint-plugin-query": "^5.62.1",
     "@types/node-fetch": "^2.6.12",
     "@types/sanitize-html": "^2.13.0",
     "@types/uuid": "^10.0.0",

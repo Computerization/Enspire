@@ -5,7 +5,7 @@ const prisma = new PrismaClient()
 export default eventHandler(async (event) => {
   const { auth } = event.context
 
-  if (!auth.userId) {
+  if ((auth?.userId) == null) {
     setResponseStatus(event, 403)
     return
   }
@@ -16,8 +16,6 @@ export default eventHandler(async (event) => {
     },
   })).tsimsStudentId
 
-  const query = getQuery(event)
-
   return {
     president: await prisma.club.findMany({
       where: {
@@ -26,7 +24,7 @@ export default eventHandler(async (event) => {
       select: {
         id: true,
         name: true,
-        memberships: query.includeMemberships === 'true',
+        memberships: true,
       },
     }),
     vice: await prisma.club.findMany({
@@ -38,7 +36,7 @@ export default eventHandler(async (event) => {
       select: {
         id: true,
         name: true,
-        memberships: query.includeMemberships === 'true',
+        memberships: true,
       },
     }),
     member: await prisma.club.findMany({
@@ -50,7 +48,7 @@ export default eventHandler(async (event) => {
       select: {
         id: true,
         name: true,
-        memberships: query.includeMemberships === 'true',
+        memberships: true,
       },
     }),
   }

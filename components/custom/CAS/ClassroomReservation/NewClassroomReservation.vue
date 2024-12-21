@@ -15,12 +15,10 @@ import { enums } from '~/components/custom/enum2str'
 
 const { toast } = useToast()
 
-const { data } = await useAsyncData<ClassroomData[]>('classroomStatuses', () => {
-  return $fetch<ClassroomData[]>(`/api/reservation/classroomId`, {
-    headers: useRequestHeaders(),
-    method: 'GET',
-  })
+const { data, suspense } = useQuery<ClassroomData[]>({
+  queryKey: ['/api/reservation/classroomId'],
 })
+await suspense()
 
 if (!data.value) {
   toast({
@@ -32,12 +30,10 @@ else {
   data.value = data.value.sort((a: any, b: any) => a.name < b.name ? -1 : 1)
 }
 
-const { data: clubs } = await useAsyncData<AllClubs>('allClubs', () => {
-  return $fetch<AllClubs>(`/api/user/all_clubs`, {
-    headers: useRequestHeaders(),
-    method: 'GET',
-  })
+const { data: clubs, suspense: clubsSuspense } = useQuery<AllClubs>({
+  queryKey: ['/api/user/all_clubs'],
 })
+await clubsSuspense()
 
 if (!clubs.value) {
   toast({

@@ -2,11 +2,10 @@
 import type { Announcements } from '~/types/payloadcms/announcements'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 
-const { data } = await useAsyncData<Announcements>('allRequests', () => {
-  return $fetch('/api/cms/api/announcements', {
-    method: 'GET',
-  })
+const { data, suspense } = useQuery<Announcements>({
+  queryKey: ['/api/cms/api/announcements'],
 })
+await suspense()
 </script>
 
 <template>

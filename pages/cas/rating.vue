@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { InternalApi } from 'nitropack'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select'
@@ -28,11 +29,8 @@ const formSchema = toTypedSchema(z.object({
   comment: z.string().max(100).optional(),
 }))
 
-const { data } = await useAsyncData('allRequests', () => {
-  return $fetch('/api/club/rating/available', {
-    headers: useRequestHeaders(),
-    method: 'GET',
-  })
+const { data } = await useQuery<InternalApi['/api/club/rating/available']['get']>({
+  queryKey: ['/api/club/rating/available'],
 })
 
 if (!data.value) {
@@ -91,7 +89,7 @@ function onSubmitRating() {
                 <SelectContent>
                   <SelectGroup v-if="data">
                     <SelectItem v-for="club in data" :key="club.id" :value="String(club.id)">
-                      {{ typeof club.name === 'object' && 'zh' in club.name! ? club.name.zh : '' }}
+                      {{ typeof club?.name === 'object' && 'zh' in club.name! ? club.name.zh : '' }}
                     </SelectItem>
                   </SelectGroup>
                 </SelectContent>

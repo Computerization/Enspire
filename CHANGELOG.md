@@ -1,5 +1,11 @@
 # enspire
 
+## 1.2.4
+
+### Patch Changes
+
+- [#656](https://github.com/Computerization/Enspire/pull/656) [`6db4416`](https://github.com/Computerization/Enspire/commit/6db4416a1c22a37b6a00bd188702fb49c028d6aa) Thanks [@qwerzl](https://github.com/qwerzl)! - Refactor internal strategy for making API requests
+
 ## 1.2.3
 
 ### Patch Changes

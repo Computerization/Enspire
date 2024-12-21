@@ -76,5 +76,20 @@ export default defineNuxtConfig({
     client: true,
   },
 
+  imports: {
+    presets: [
+      {
+        from: '@tanstack/vue-query',
+        imports: ['useQuery'],
+      },
+    ],
+  },
+
+  vite: {
+    optimizeDeps: {
+      exclude: ['vee-validate'],
+    },
+  },
+
   compatibilityDate: '2024-08-31',
 })

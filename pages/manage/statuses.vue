@@ -23,12 +23,10 @@ const selectedPeriod = ref(time2period(utc8Time.hour() * 100 + utc8Time.minute()
 
 let dataLoaded = false
 
-const { data } = await useAsyncData<ClassroomData[]>('classroomStatuses', async () => {
-  return await $fetch<ClassroomData[]>(`/api/reservation/classroomId`, {
-    headers: useRequestHeaders(),
-    method: 'GET',
-  })
+const { data, suspense } = useQuery<ClassroomData[]>({
+  queryKey: ['/api/reservation/classroomId'],
 })
+suspense()
 
 if (data.value) {
   data.value = data.value.sort((a: any, b: any) => a.name < b.name ? -1 : 1)
