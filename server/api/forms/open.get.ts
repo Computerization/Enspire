@@ -1,6 +1,6 @@
+import type { Form, Forms } from '@@/types/data/forms'
 import dayjs from 'dayjs'
 import { parse } from 'yaml'
-import type { Form, Forms } from '~/types/data/forms'
 
 export default eventHandler(async (event) => {
   const { auth } = event.context

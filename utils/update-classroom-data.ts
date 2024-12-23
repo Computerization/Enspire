@@ -1,5 +1,5 @@
+import data from '@@/data/classroom/classroom.json'
 import { PrismaClient } from '@prisma/client'
-import data from '~/data/classroom/classroom.json'
 
 const prisma = new PrismaClient()
 

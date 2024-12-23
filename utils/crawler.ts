@@ -1,6 +1,6 @@
+import type { Club, Clubs } from '@@/types/clubs'
 import * as dotenv from 'dotenv'
 import { fetch, Headers } from 'ofetch'
-import type { Club, Clubs } from '~/types/clubs'
 
 dotenv.config()
 
@@ -9,7 +9,7 @@ class TSession {
 
   constructor() {
     const PHPSESSID = process.env.PHPSESSID
-    if (!PHPSESSID || !process.env.TSIMS_URL)
+    if ((PHPSESSID == null) || (process.env.TSIMS_URL == null))
       throw new Error('PHPSESSID or TSIMS_URL environment variable is not set')
 
     this.headers = new Headers({
@@ -46,7 +46,7 @@ class TSession {
       headers: this.headers,
       body: formData,
     })
-    return await response.json()
+    return await response.json() as Promise<Club>
   }
 }
 
