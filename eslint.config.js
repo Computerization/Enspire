@@ -6,7 +6,6 @@ export default antfu({
     tsconfigPath: 'tsconfig.json',
   },
   vue: true,
-  ignores: ['app/components/ui/'],
   unocss: true,
   ...pluginQuery.configs['flat/recommended'],
 }, {
