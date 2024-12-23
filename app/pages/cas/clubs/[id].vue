@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Club, Clubs } from '~/types/clubs'
+import type { Club, Clubs } from '@@/types/clubs'
 import Badge from '@/components/ui/badge/Badge.vue'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'

@@ -1,6 +1,7 @@
 <script setup lang="ts">
+import type { AllClubs } from '@@/types/api/user/all_clubs'
 import type { ClassroomData } from '@prisma/client'
-import type { AllClubs } from '~/types/api/user/all_clubs'
+import { enums } from '@/components/custom/enum2str'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -11,7 +12,6 @@ import {
 } from '@/components/ui/card'
 import { useToast } from '@/components/ui/toast/use-toast'
 import { LoaderCircle } from 'lucide-vue-next'
-import { enums } from '~/components/custom/enum2str'
 
 const { toast } = useToast()
 

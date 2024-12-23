@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Announcements from '~/components/custom/Index/announcements.vue'
+import Announcements from '@/components/custom/Index/announcements.vue'
 
 definePageMeta({
   middleware: ['auth'],

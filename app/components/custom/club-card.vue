@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import type { Club } from '@@/types/clubs'
 import type { PropType } from 'vue'
-import type { Club } from '~/types/clubs'
 import Badge from '@/components/ui/badge/Badge.vue'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'

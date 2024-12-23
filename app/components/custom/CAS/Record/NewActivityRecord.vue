@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { AllClubs } from '@@/types/api/user/all_clubs'
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -12,16 +13,15 @@ import {
 } from '@/components/ui/number-field'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
+import { Toaster } from '@/components/ui/toast'
 import { useToast } from '@/components/ui/toast/use-toast'
+import { cn } from '@/lib/utils'
 import { CalendarDate, DateFormatter, getLocalTimeZone, parseDate, today } from '@internationalized/date'
 import { toTypedSchema } from '@vee-validate/zod'
 import { Calendar as CalendarIcon } from 'lucide-vue-next'
 import { toDate } from 'radix-vue/date'
 import { useForm } from 'vee-validate'
 import * as z from 'zod'
-import { Toaster } from '~/components/ui/toast'
-import { cn } from '~/lib/utils'
-import type { AllClubs } from '~/types/api/user/all_clubs'
 
 const emit = defineEmits(['refresh'])
 

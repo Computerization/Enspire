@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { Form } from '~/types/data/forms'
+import type { Form } from '@@/types/data/forms'
+import { toast } from '@/components/ui/toast'
 import { useWindowSize } from '@vueuse/core'
 import { useClerk } from 'vue-clerk'
-import { toast } from '~/components/ui/toast'
 
 const clerk = useClerk()
 

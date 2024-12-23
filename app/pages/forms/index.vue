@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Form } from '~/types/data/forms'
+import type { Form } from '@@/types/data/forms'
 import {
   Card,
   CardDescription,
@@ -7,8 +7,8 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { toast } from '@/components/ui/toast'
 import Toaster from '@/components/ui/toast/Toaster.vue'
-import { toast } from '~/components/ui/toast'
 
 definePageMeta({
   middleware: ['auth'],

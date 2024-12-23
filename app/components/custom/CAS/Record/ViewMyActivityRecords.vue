@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import type { MyRecords } from '@@/types/api/cas/record/my'
+import type { AllClubs } from '@@/types/api/user/all_clubs'
 import type { Ref } from 'vue'
-import type { MyRecords } from '~/types/api/cas/record/my'
-import type { AllClubs } from '~/types/api/user/all_clubs'
 import {
   Card,
   CardContent,
@@ -17,10 +17,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { Toaster } from '~/components/ui/toast'
+import { Toaster } from '@/components/ui/toast'
 import { columns } from './view-activity-records/columns'
 import DataTable from './view-activity-records/DataTable.vue'
-import { useQuery } from '@tanstack/vue-query';
 
 const props = defineProps<{
   refreshWatcher: Ref<boolean>
@@ -115,7 +114,7 @@ const totalCASTime = computed(() => {
         </Button>
       </div>
       <div v-if="selectedClub" class="mb-4 text-sm">
-        <div class="rounded border p-2 mt-1 flex justify-between">
+        <div class="mt-1 flex justify-between border rounded p-2">
           <div class="flex items-center space-x-0.5">
             <p class="font-bold">
               C:

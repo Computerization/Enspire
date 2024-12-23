@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { AllClubs } from '~/types/api/user/all_clubs'
+import type { AllClubs } from '@@/types/api/user/all_clubs'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
@@ -72,36 +72,36 @@ if (clubs.value) {
         </h2>
         <div class="mt-2">
           <NuxtLink v-if="isPresidentOrVicePresident" to="/manage/reservation">
-            <Button :variant="route.name === 'manage-reservation' ? 'secondary' : 'ghost'" class="w-full justify-start mt-1">
+            <Button :variant="route.name === 'manage-reservation' ? 'secondary' : 'ghost'" class="mt-1 w-full justify-start">
               <Icon class="mr-2 h-4 w-4" name="material-symbols:calendar-today-outline" />
               预约教室
             </Button>
           </NuxtLink>
           <NuxtLink to="/manage/manage">
-            <Button v-if="isPresidentOrVicePresident" :variant="route.name === 'manage-manage' ? 'secondary' : 'ghost'" class="w-full justify-start mt-1">
+            <Button v-if="isPresidentOrVicePresident" :variant="route.name === 'manage-manage' ? 'secondary' : 'ghost'" class="mt-1 w-full justify-start">
               <Icon class="mr-2 h-4 w-4" name="material-symbols:calendar-today-outline" />
               管理预约
             </Button>
           </NuxtLink>
           <NuxtLink to="/manage/statuses">
-            <Button :variant="route.name === 'manage-statuses' ? 'secondary' : 'ghost'" class="w-full justify-start mt-1">
+            <Button :variant="route.name === 'manage-statuses' ? 'secondary' : 'ghost'" class="mt-1 w-full justify-start">
               <Icon class="mr-2 h-4 w-4" name="material-symbols:calendar-today-outline" />
               教室状态
             </Button>
           </NuxtLink>
           <NuxtLink to="/manage/record">
-            <Button :variant="route.name === 'manage-record' ? 'secondary' : 'ghost'" class="w-full justify-start mt-1">
+            <Button :variant="route.name === 'manage-record' ? 'secondary' : 'ghost'" class="mt-1 w-full justify-start">
               <Icon class="mr-2 h-4 w-4" name="charm:tick-double" />
               活动签到
             </Button>
           </NuxtLink>
         </div>
       </div>
-      <div class="py-2 px-3">
+      <div class="px-3 py-2">
         <h2 class="relative px-4 text-lg font-semibold tracking-tight">
           信息
         </h2>
-        <div class="space-y-1 mt-2">
+        <div class="mt-2 space-y-1">
           <NuxtLink to="/about">
             <Button :variant="route.name === 'about' ? 'secondary' : 'ghost'" class="w-full justify-start">
               <Icon class="mr-2 h-4 w-4" name="material-symbols:info-outline" />

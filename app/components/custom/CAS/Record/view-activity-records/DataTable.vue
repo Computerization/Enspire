@@ -12,7 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { valueUpdater } from '~/lib/utils'
+import { valueUpdater } from '@/lib/utils'
 import {
   FlexRender,
   getCoreRowModel,

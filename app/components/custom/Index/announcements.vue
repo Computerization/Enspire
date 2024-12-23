@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Announcements } from '~/types/payloadcms/announcements'
+import type { Announcements } from '@@/types/payloadcms/announcements'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 
 const { data, suspense } = useQuery<Announcements>({

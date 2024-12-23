@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { ClassroomData, ReservationRecord } from '@prisma/client'
+import { enums, time2period } from '@/components/custom/enum2str'
 import Toaster from '@/components/ui/toast/Toaster.vue'
 import { useToast } from '@/components/ui/toast/use-toast'
-import { enums, time2period } from '~/components/custom/enum2str'
 
 definePageMeta({
   middleware: ['auth'],

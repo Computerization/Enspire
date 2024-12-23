@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import LazyNewActivityRecord from '~/components/custom/CAS/Record/NewActivityRecord.vue'
-import ViewMyActivityRecords from '~/components/custom/CAS/Record/ViewMyActivityRecords.vue'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card'
-import Skeleton from '~/components/ui/skeleton/Skeleton.vue'
+import LazyNewActivityRecord from '@/components/custom/CAS/Record/NewActivityRecord.vue'
+import ViewMyActivityRecords from '@/components/custom/CAS/Record/ViewMyActivityRecords.vue'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import Skeleton from '@/components/ui/skeleton/Skeleton.vue'
 
 definePageMeta({
   middleware: ['auth'],

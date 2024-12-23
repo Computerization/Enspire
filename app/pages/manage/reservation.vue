@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import NewClassroomReservation from '~/components/custom/CAS/ClassroomReservation/NewClassroomReservation.vue'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card'
+import NewClassroomReservation from '@/components/custom/CAS/ClassroomReservation/NewClassroomReservation.vue'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
 definePageMeta({
   middleware: ['auth'],

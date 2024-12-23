@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import { enums } from '@/components/custom/enum2str'
 import Toaster from '@/components/ui/toast/Toaster.vue'
 import { useToast } from '@/components/ui/toast/use-toast'
 import { LoaderCircle } from 'lucide-vue-next'
 import { onMounted } from 'vue'
-import { enums } from '~/components/custom/enum2str'
 
 definePageMeta({
   middleware: ['auth'],

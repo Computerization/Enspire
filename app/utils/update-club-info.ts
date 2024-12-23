@@ -1,7 +1,7 @@
+import type { Clubs } from '@@/types/clubs'
 import type { ClubMemberRole } from '@prisma/client'
 import { getStore } from '@netlify/blobs'
 import { PrismaClient } from '@prisma/client'
-import type { Clubs } from '~/types/clubs'
 import crawler from './crawler'
 
 const prisma = new PrismaClient()

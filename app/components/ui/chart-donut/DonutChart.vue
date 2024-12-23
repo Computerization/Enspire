@@ -4,7 +4,7 @@ import { Donut } from '@unovis/ts'
 import { type Component, computed, ref } from 'vue'
 import { useMounted } from '@vueuse/core'
 import type { BaseChartProps } from '.'
-import { ChartSingleTooltip, defaultColors } from '~/components/ui/chart'
+import { ChartSingleTooltip, defaultColors } from '@/components/ui/chart'
 import { cn } from '@/lib/utils'
 
 const props = withDefaults(defineProps<Pick<BaseChartProps<T>, 'data' | 'colors' | 'index' | 'margin' | 'showLegend' | 'showTooltip' | 'filterOpacity'> & {
