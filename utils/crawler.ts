@@ -46,7 +46,7 @@ class TSession {
       headers: this.headers,
       body: formData,
     })
-    return await response.json()
+    return await response.json() as Promise<Club>
   }
 }
 
