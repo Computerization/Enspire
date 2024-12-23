@@ -46,15 +46,8 @@ export default defineNuxtConfig({
   },
 
   shadcn: {
-    /**
-     * Prefix for all the imported component
-     */
     prefix: '',
-    /**
-     * Directory that the component lives in.
-     * @default "./components/ui"
-     */
-    componentDir: './components/ui',
+    componentDir: './app/components/ui',
   },
 
   dayjs: {
@@ -92,4 +85,8 @@ export default defineNuxtConfig({
   },
 
   compatibilityDate: '2024-08-31',
+
+  future: {
+    compatibilityVersion: 4,
+  },
 })
