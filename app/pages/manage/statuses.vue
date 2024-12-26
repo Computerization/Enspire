@@ -26,7 +26,7 @@ let dataLoaded = false
 const { data, suspense } = useQuery<ClassroomData[]>({
   queryKey: ['/api/reservation/classroomId'],
 })
-suspense()
+await suspense()
 
 if (data.value) {
   data.value = data.value.sort((a: any, b: any) => a.name < b.name ? -1 : 1)

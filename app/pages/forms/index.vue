@@ -21,7 +21,7 @@ useHead({
 const { data, suspense } = useQuery<Form[]>({
   queryKey: ['/api/forms/open'],
 })
-suspense()
+await suspense()
 
 if (!data.value) {
   toast({
