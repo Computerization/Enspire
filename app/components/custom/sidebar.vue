@@ -107,7 +107,6 @@ const sidebarData = ref({
             size="lg"
             class="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground hover:bg-transparent group-data-[collapsible=icon]:mt-2"
           >
-            <!-- <Avatar class="h-8 w-8 rounded-lg"> -->
             <div>
               <SvgoLogo class="ml-0.2 pt-1 text-[30px]" />
             </div>
@@ -242,32 +241,6 @@ const sidebarData = ref({
     </Sidebar>
     <SidebarInset>
       <slot />
-      <!-- <header class="group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12 h-16 flex shrink-0 items-center gap-2 transition-[width,height] ease-linear">
-        <div class="flex items-center gap-2 px-4">
-          <SidebarTrigger class="-ml-1" />
-          <Separator orientation="vertical" class="mr-2 h-4" />
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem class="hidden md:block">
-                <BreadcrumbLink href="#">
-                  Building Your Application
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator class="hidden md:block" />
-              <BreadcrumbItem>
-                <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
-        </div>
-      </header>
-      <ScrollArea class="h-full w-full px-4 pt-8 lg:px-8">
-        <div class="pb-24">
-          <main>
-            <slot />
-          </main>
-        </div>
-      </ScrollArea> -->
     </SidebarInset>
   </SidebarProvider>
 </template>
