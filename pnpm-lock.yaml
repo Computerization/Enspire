@@ -138,6 +138,9 @@ importers:
       '@iconify-json/charm':
         specifier: ^1.2.1
         version: 1.2.1
+      '@iconify-json/lucide':
+        specifier: ^1.2.20
+        version: 1.2.20
       '@iconify-json/material-symbols':
         specifier: ^1.2.8
         version: 1.2.8
@@ -1647,6 +1650,9 @@ packages:
 
   '@iconify-json/charm@1.2.1':
     resolution: {integrity: sha512-BB9cI5YlAx0pfnukaM4JVIXGvGjIrq/tr9RHDElHXcoZku1ZLd3G2Dn7vqhYLkHl4x2ZX23gbKwX22aEs8xdfw==}
+
+  '@iconify-json/lucide@1.2.20':
+    resolution: {integrity: sha512-m/8rqukvQfsE+MYTwNXCxP/K2iucTCGSQfS0XZhYpkZKGRdiEOdAAnd8Vv+E78xKK94Jza2eTc5ihxbw6+i7EQ==}
 
   '@iconify-json/material-symbols@1.2.8':
     resolution: {integrity: sha512-X89QwN5eRMVHEfm5HWMYCZxkUqUPQM2TNv7D8rIPUn2jTzDmgjgiTMomn3DOXWyh1/geHPnTt1bTSFcUXlpGbw==}
@@ -10069,6 +10075,10 @@ snapshots:
   '@humanwhocodes/retry@0.4.1': {}
 
   '@iconify-json/charm@1.2.1':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/lucide@1.2.20':
     dependencies:
       '@iconify/types': 2.0.0
 
