@@ -7,6 +7,7 @@ import {
 import { useClerk, useUser } from 'vue-clerk'
 
 const { user } = useUser()
+const config = useRuntimeConfig()
 
 const clerk = useClerk()
 
@@ -51,7 +52,7 @@ const sidebarData = ref({
     {
       title: '教室信息',
       url: '#',
-      icon: 'material-symbols:meeting-room',
+      icon: 'lucide:door-open',
       isActive: true,
       items: [
         {
@@ -77,7 +78,7 @@ const sidebarData = ref({
           {
             title: '活动记录',
             url: '#',
-            icon: 'lucide:clipboard-pen',
+            icon: 'lucide:pencil-ruler',
             isActive: true,
             items: [
               {
@@ -101,14 +102,42 @@ const sidebarData = ref({
     <Sidebar collapsible="icon">
       <SidebarHeader>
         <SidebarMenu>
-          <SidebarMenuButton
-            size="lg"
-            class="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground hover:bg-transparent group-data-[collapsible=icon]:mt-2"
-          >
-            <div>
-              <SvgoLogo class="ml-0.2 pt-1 text-[30px]" />
-            </div>
-          </SidebarMenuButton>
+          <DropdownMenu>
+            <DropdownMenuTrigger as-child>
+              <SidebarMenuButton
+                size="lg"
+                class="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground flex items-center justify-between hover:bg-transparent group-data-[collapsible=icon]:mt-2"
+              >
+                <div>
+                  <SvgoLogo class="ml-0.2 pt-1 text-[30px]" />
+                </div>
+                <div class="mt-1.5">
+                  <Icon name="lucide:ellipsis-vertical" class="ml-auto size-4" />
+                </div>
+              </SidebarMenuButton>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent class="min-w-56 w-[--radix-dropdown-menu-trigger-width] rounded-lg" side="bottom" align="end" :side-offset="4">
+              <DropdownMenuLabel class="p-0 font-normal">
+                <div class="flex items-center gap-2 px-2 py-1.5 text-left text-sm">
+                  <div class="grid flex-1 text-left text-sm leading-tight">
+                    <span class="truncate font-semibold">Enspire</span>
+                    <span class="truncate text-xs">
+                      v{{ config.public.appVersion }}
+                    </span>
+                  </div>
+                </div>
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <NuxtLink to="/about" as-child>
+                  <DropdownMenuItem>
+                    <Icon class="mr-1" name="lucide:info" />
+                    <span>关于Enspire</span>
+                  </DropdownMenuItem>
+                </NuxtLink>
+              </DropdownMenuGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
@@ -121,7 +150,7 @@ const sidebarData = ref({
             >
               <SidebarMenuButton as-child>
                 <NuxtLink :href="item.url">
-                  <Icon :name="item.icon" />
+                  <Icon :name="item.icon" size="1.1em" />
                   <span>{{ item.name }}</span>
                 </NuxtLink>
               </SidebarMenuButton>
@@ -140,9 +169,9 @@ const sidebarData = ref({
               <SidebarMenuItem>
                 <CollapsibleTrigger as-child>
                   <SidebarMenuButton :tooltip="item.title">
-                    <Icon :name="item.icon" />
+                    <Icon :name="item.icon" size="1.2em" />
                     <span>{{ item.title }}</span>
-                    <ChevronRight class="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                    <Icon name="lucide:chevron-right" class="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
                   </SidebarMenuButton>
                 </CollapsibleTrigger>
                 <CollapsibleContent>
@@ -183,7 +212,7 @@ const sidebarData = ref({
                     <span class="truncate font-semibold">{{ user.firstName }}</span>
                     <span class="truncate text-xs">{{ user.primaryEmailAddress }}</span>
                   </div>
-                  <ChevronsUpDown class="ml-auto size-4" />
+                  <Icon name="lucide:chevrons-up-down" class="ml-auto size-4" />
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
               <DropdownMenuContent class="min-w-56 w-[--radix-dropdown-menu-trigger-width] rounded-lg" side="bottom" align="end" :side-offset="4">
