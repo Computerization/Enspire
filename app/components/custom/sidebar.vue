@@ -129,6 +129,21 @@ const sidebarData = ref({
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
+                <NuxtLink to="https://github.com/Computerization/Enspire" target="_blank" as-child>
+                  <DropdownMenuItem>
+                    <Icon class="mr-1" name="material-symbols:open-in-new" />
+                    <span>GitHub</span>
+                  </DropdownMenuItem>
+                </NuxtLink>
+                <NuxtLink to="https://github.com/Computerization/Enspire/discussions" target="_blank" as-child>
+                  <DropdownMenuItem>
+                    <Icon class="mr-1" name="material-symbols:help-outline" />
+                    <span>Discussions</span>
+                  </DropdownMenuItem>
+                </NuxtLink>
+              </DropdownMenuGroup>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
                 <NuxtLink to="/about" as-child>
                   <DropdownMenuItem>
                     <Icon class="mr-1" name="lucide:info" />
@@ -236,21 +251,6 @@ const sidebarData = ref({
                     <DropdownMenuItem>
                       <Icon class="mr-1" name="material-symbols:person-outline" />
                       <span>Profile</span>
-                    </DropdownMenuItem>
-                  </NuxtLink>
-                </DropdownMenuGroup>
-                <DropdownMenuSeparator />
-                <DropdownMenuGroup>
-                  <NuxtLink to="https://github.com/Computerization/Enspire" target="_blank" as-child>
-                    <DropdownMenuItem>
-                      <Icon class="mr-1" name="material-symbols:open-in-new" />
-                      <span>GitHub</span>
-                    </DropdownMenuItem>
-                  </NuxtLink>
-                  <NuxtLink to="https://github.com/Computerization/Enspire/discussions" target="_blank" as-child>
-                    <DropdownMenuItem>
-                      <Icon class="mr-1" name="material-symbols:help-outline" />
-                      <span>Discussions</span>
                     </DropdownMenuItem>
                   </NuxtLink>
                 </DropdownMenuGroup>
