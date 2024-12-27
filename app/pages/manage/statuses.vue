@@ -6,6 +6,7 @@ import { useToast } from '@/components/ui/toast/use-toast'
 
 definePageMeta({
   middleware: ['auth'],
+  breadcrumb: '教室状态',
 })
 
 useHead({
@@ -27,9 +28,9 @@ const { data, suspense } = useQuery<ClassroomData[]>({
   queryKey: ['/api/reservation/classroomId'],
 })
 await suspense()
-
+const sortedClassroomData = ref<ClassroomData[]>()
 if (data.value) {
-  data.value = data.value.sort((a: any, b: any) => a.name < b.name ? -1 : 1)
+  sortedClassroomData.value = [...data.value].sort((a: any, b: any) => a.name < b.name ? -1 : 1)
   dataLoaded = true
 }
 else {
@@ -84,7 +85,7 @@ function status(reservationRecords: ReservationRecord[]) {
     </div>
   </div>
   <div v-if="dataLoaded" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-2">
-    <div v-for="classroom in data" :key="classroom.id" class="w-full rounded-lg border">
+    <div v-for="classroom in sortedClassroomData" :key="classroom.id" class="w-full rounded-lg border">
       <div
         class="rounded-t-lg w-full px-4 py-2 text-xs" :class="{
           'bg-red-800/[.2]': !!status(classroom.ReservationRecord),

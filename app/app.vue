@@ -1,7 +1,14 @@
-<script setup lang="ts">
+<script setup lang=ts>
+import { useFavicon, usePreferredDark } from '@vueuse/core'
 import { ConfigProvider } from 'radix-vue'
 import { useClerkProvider } from 'vue-clerk'
+
 import '@unocss/reset/tailwind-compat.css'
+
+const isDark = usePreferredDark()
+const favicon = computed(() => isDark.value ? '/favicon-dark.ico' : '/favicon.ico')
+
+useFavicon(favicon)
 
 const { isClerkLoaded } = useClerkProvider()
 
@@ -32,9 +39,11 @@ useHead({
         <Icon name="svg-spinners:3-dots-fade" size="2em" />
       </div>
     </div>
-    <NuxtLayout class="z-10">
-      <NuxtPage />
-    </NuxtLayout>
+    <div>
+      <NuxtLayout class="z-10">
+        <NuxtPage />
+      </NuxtLayout>
+    </div>
   </ConfigProvider>
 </template>
 
@@ -47,7 +56,7 @@ useHead({
 
 /* TODO: Weird that this border-color is ignored by Unocss. Might need to investigate further. */
 * {
-  border-color: hsl(var(--border)) !important;
+  border-color: hsl(var(--border));
 }
 
 @media (prefers-color-scheme: light) {
@@ -82,6 +91,16 @@ useHead({
     /* change to any hsl value you want */
     --vis-primary-color: 160 81% 40%;
     --vis-text-color: var(--muted-foreground);
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --un-default-border-color: hsl(var(--border));
   }
 }
 
@@ -113,9 +132,18 @@ useHead({
     --vis-tooltip-backdrop-filter: none !important;
     --vis-tooltip-padding: none !important;
     --vis-secondary-color: var(--primary);
-    /* change to any hsl value you want */
     --vis-primary-color: 160 81% 40%;
     --vis-text-color: var(--muted-foreground);
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --un-default-border-color: hsl(var(--border));
   }
 }
 </style>

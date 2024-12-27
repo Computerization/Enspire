@@ -12,6 +12,7 @@ import { onMounted, ref, watch } from 'vue'
 // This page requires login
 definePageMeta({
   middleware: ['auth'],
+  breadcrumb: '社团列表',
 })
 
 useHead({

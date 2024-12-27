@@ -3,6 +3,7 @@ import Announcements from '@/components/custom/Index/announcements.vue'
 
 definePageMeta({
   middleware: ['auth'],
+  breadcrumb: 'Home',
 })
 
 useHead({

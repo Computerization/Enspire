@@ -7,6 +7,7 @@ import { onMounted } from 'vue'
 
 definePageMeta({
   middleware: ['auth'],
+  breadcrumb: '管理预约',
 })
 
 const { toast } = useToast()

@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 
 definePageMeta({
   middleware: ['auth'],
+  breadcrumb: '新建预约',
 })
 
 useHead({

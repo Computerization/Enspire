@@ -12,6 +12,7 @@ import Toaster from '@/components/ui/toast/Toaster.vue'
 
 definePageMeta({
   middleware: ['auth'],
+  breadcrumb: '表单',
 })
 
 useHead({

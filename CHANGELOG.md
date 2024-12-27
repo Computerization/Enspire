@@ -1,5 +1,14 @@
 # enspire
 
+## 1.3.0
+
+### Minor Changes
+
+- [#661](https://github.com/Computerization/Enspire/pull/661) [`cf15286`](https://github.com/Computerization/Enspire/commit/cf15286f6ed93fabf5d68620e2cb79f1d0c619b5) Thanks [@qwerzl](https://github.com/qwerzl)! - <br />
+  **Welcome to Enspire v1.3.0!**
+
+  This version introduces redesign of the sidebar.
+
 ## 1.2.5
 
 ### Patch Changes
