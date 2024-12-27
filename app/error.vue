@@ -6,6 +6,8 @@ const props = defineProps({
 })
 
 const handleError = () => reloadNuxtApp({ path: '/' })
+
+console.error(props.error)
 </script>
 
 <template>

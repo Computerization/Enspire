@@ -1,3 +1,5 @@
+import packageJson from './package.json'
+
 export default defineNuxtConfig({
   nitro: {
     experimental: {
@@ -39,6 +41,7 @@ export default defineNuxtConfig({
       },
       clerkPublishableKey: process.env.CLERK_PUBLISHABLE_KEY,
       payloadCmsUrl: process.env.PAYLOAD_CMS_URL,
+      appVersion: packageJson.version,
     },
     clubDataSecretKey: process.env.CLUB_DATA_SECRET_KEY,
     tsimsUrl: process.env.TSIMS_URL,
