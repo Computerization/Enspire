@@ -43,14 +43,14 @@ const sidebarData = ref({
       icon: 'lucide:pie-chart',
     },
     {
-      name: '社团信息',
+      name: '社团列表',
       url: '/cas/clubs',
       icon: 'lucide:map',
     },
   ],
   cas: [
     {
-      title: '教室信息',
+      title: '教室',
       url: '#',
       icon: 'lucide:door-open',
       isActive: true,
@@ -62,7 +62,7 @@ const sidebarData = ref({
         ...(isPresidentOrVicePresident.value
           ? [
               {
-                title: '预约',
+                title: '新建预约',
                 url: '/manage/reservation',
               },
               {

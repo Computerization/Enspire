@@ -6,6 +6,7 @@ import { useToast } from '@/components/ui/toast/use-toast'
 
 definePageMeta({
   middleware: ['auth'],
+  breadcrumb: '教室状态',
 })
 
 useHead({

@@ -2,6 +2,11 @@
 import { ref } from 'vue'
 
 const refreshState = ref(false)
+
+definePageMeta({
+  middleware: ['auth'],
+  breadcrumb: '新建',
+})
 </script>
 
 <template>
@@ -14,7 +19,7 @@ const refreshState = ref(false)
             <Icon name="material-symbols:add-circle-outline" />
             新增
           </CardTitle>
-          <CardDescription>在此处新增活动签到</CardDescription>
+          <CardDescription>在此处新增活动记录</CardDescription>
         </CardHeader>
         <CardContent>
           <form class="space-y-6">

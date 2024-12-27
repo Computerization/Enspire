@@ -22,6 +22,7 @@ watch(() => route.path, () => {
       }
     }
   })
+  console.log(breadcrumbs.value)
 }, { immediate: true })
 </script>
 
@@ -33,12 +34,14 @@ watch(() => route.path, () => {
           Enspire
         </BreadcrumbLink>
       </BreadcrumbItem>
-      <BreadcrumbSeparator v-for="(index) in breadcrumbs" :key="`breadcrumb-separator-${String(index)}`" class="hidden md:block" />
-      <BreadcrumbItem v-for="(breadcrumb, index) in breadcrumbs" :key="`breadcrumb-${String(index)}`" class="hidden md:block">
-        <BreadcrumbLink :href="breadcrumb!.path">
-          {{ breadcrumb!.meta.breadcrumb ?? breadcrumb.path.split('/').pop() }}
-        </BreadcrumbLink>
-      </BreadcrumbItem>
+      <template v-for="(breadcrumb, index) in breadcrumbs" :key="`breadcrumb-${String(index)}`">
+        <BreadcrumbSeparator class="hidden md:block" />
+        <BreadcrumbItem class="hidden md:block">
+          <BreadcrumbLink :href="breadcrumb!.path">
+            {{ breadcrumb!.meta.breadcrumb ?? breadcrumb.path.split('/').pop() }}
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+      </template>
     </BreadcrumbList>
   </Breadcrumb>
 </template>
