@@ -28,9 +28,9 @@ model Club {
   ActivityRecord            ActivityRecord[]
   memberships               ClubMembership[]
   ClubRating                ClubRating[]
+  FileUploadRecord          FileUploadRecord?
   GroupInfo                 GroupInfo?
   ReservationRecord         ReservationRecord[]
-  FileUploadRecord          FileUploadRecord[]
 }
 
 model ClubMembership {
@@ -56,28 +56,23 @@ model File {
 model FileUploadRecord {
   id           String         @id @default(dbgenerated("gen_random_uuid()"))
   clubId       Int            @unique
-  club         Club           @relation(fields: [clubId], references: [id])
   fileId       String         @unique
-  file         File           @relation(fields: [fileId], references: [id])
   fileUploadId String         @unique
-  fileUpload   FileCollection @relation(fields: [fileUploadId], references: [id])
   createdAt    DateTime       @default(now())
+  club         Club           @relation(fields: [clubId], references: [id])
+  file         File           @relation(fields: [fileId], references: [id])
+  fileUpload   FileCollection @relation(fields: [fileUploadId], references: [id])
 }
 
 model FileCollection {
-  id               String             @id @default(dbgenerated("gen_random_uuid()"))
+  id               String            @id @default(dbgenerated("gen_random_uuid()"))
   name             String
   status           FormStatus
   fileNaming       String
   fileTypes        String[]
-  FileUploadRecord FileUploadRecord[]
+  FileUploadRecord FileUploadRecord?
 
   @@map("FileUpload")
-}
-
-enum FormStatus {
-  OPEN
-  CLOSED
 }
 
 model ActivityRecord {
@@ -137,6 +132,11 @@ model ReservationRecord {
 
   @@unique([classroomId, day, period])
   @@unique([clubId, day, period])
+}
+
+enum FormStatus {
+  OPEN
+  CLOSED
 }
 
 enum ClubMemberRole {

@@ -45,6 +45,12 @@ if (clubs.value) {
               表单
             </Button>
           </NuxtLink>
+          <NuxtLink to="/forms/files">
+            <Button v-if="isPresidentOrVicePresident" :variant="route.name === 'files' ? 'secondary' : 'ghost'" class="mt-1 w-full justify-start">
+              <Icon class="mr-2 h-4 w-4" name="material-symbols:calendar-today-outline" />
+              社团文件
+            </Button>
+          </NuxtLink>
         </div>
       </div>
       <div class="px-3 py-2">

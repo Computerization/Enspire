@@ -35,7 +35,7 @@
     "@unovis/vue": "^1.4.5",
     "@vee-validate/zod": "^4.14.7",
     "@vite-pwa/nuxt": "^0.10.6",
-    "@vueuse/core": "^12.0.0",
+    "@vueuse/core": "^12.2.0",
     "aws4fetch": "^1.0.20",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
