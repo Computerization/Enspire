@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import type { AllClubs } from '@@/types/api/user/all_clubs'
 import {
-  Bot,
   ChevronRight,
   ChevronsUpDown,
-  SquareTerminal,
 } from 'lucide-vue-next'
 import { useClerk, useUser } from 'vue-clerk'
 
@@ -53,7 +51,7 @@ const sidebarData = ref({
     {
       title: '教室信息',
       url: '#',
-      icon: SquareTerminal,
+      icon: 'material-symbols:meeting-room',
       isActive: true,
       items: [
         {
@@ -79,7 +77,7 @@ const sidebarData = ref({
           {
             title: '活动记录',
             url: '#',
-            icon: Bot,
+            icon: 'lucide:clipboard-pen',
             isActive: true,
             items: [
               {
@@ -142,7 +140,7 @@ const sidebarData = ref({
               <SidebarMenuItem>
                 <CollapsibleTrigger as-child>
                   <SidebarMenuButton :tooltip="item.title">
-                    <component :is="item.icon" />
+                    <Icon :name="item.icon" />
                     <span>{{ item.title }}</span>
                     <ChevronRight class="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
                   </SidebarMenuButton>
