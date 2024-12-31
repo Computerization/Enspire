@@ -1,5 +1,15 @@
 # enspire
 
+## 1.4.0
+
+### Minor Changes
+
+- [#668](https://github.com/Computerization/Enspire/pull/668) [`7521890`](https://github.com/Computerization/Enspire/commit/75218909c3773369b6e44bcb196c576423e007dd) Thanks [@q1zhen](https://github.com/q1zhen)! - Added club file uploading portal
+
+### Patch Changes
+
+- [#672](https://github.com/Computerization/Enspire/pull/672) [`5e72e0f`](https://github.com/Computerization/Enspire/commit/5e72e0feb4632739cf1c5b37774e7051f7e706ad) Thanks [@q1zhen](https://github.com/q1zhen)! - Navbar bugfix
+
 ## 1.3.0
 
 ### Minor Changes
