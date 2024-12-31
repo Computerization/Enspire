@@ -1,3 +1,5 @@
+import packageJson from './package.json'
+
 export default defineNuxtConfig({
   nitro: {
     experimental: {
@@ -47,6 +49,7 @@ export default defineNuxtConfig({
       },
       clerkPublishableKey: process.env.CLERK_PUBLISHABLE_KEY,
       payloadCmsUrl: process.env.PAYLOAD_CMS_URL,
+      appVersion: packageJson.version,
     },
     clubDataSecretKey: process.env.CLUB_DATA_SECRET_KEY,
     tsimsUrl: process.env.TSIMS_URL,
@@ -92,7 +95,8 @@ export default defineNuxtConfig({
     },
   },
 
-  compatibilityDate: '2024-08-31',
+  // Time flies...
+  compatibilityDate: '2024-12-30',
 
   future: {
     compatibilityVersion: 4,

@@ -41,9 +41,9 @@ if (filteredClubs[0] && filteredClubs[0].groups[0].C_DescriptionC) {
   }
 }
 
-// This page requires login
 definePageMeta({
   middleware: ['auth'],
+  breadcrumb: '社团详情',
 })
 
 useHead({

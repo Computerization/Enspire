@@ -12,6 +12,7 @@ import Toaster from '@/components/ui/toast/Toaster.vue'
 
 definePageMeta({
   middleware: ['auth'],
+  breadcrumb: '表单',
 })
 
 useHead({
@@ -21,7 +22,7 @@ useHead({
 const { data, suspense } = useQuery<Form[]>({
   queryKey: ['/api/forms/open'],
 })
-suspense()
+await suspense()
 
 if (!data.value) {
   toast({

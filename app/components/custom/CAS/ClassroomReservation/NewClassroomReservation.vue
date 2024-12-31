@@ -19,6 +19,7 @@ const { data, suspense } = useQuery<ClassroomData[]>({
   queryKey: ['/api/reservation/classroomId'],
 })
 await suspense()
+const sortedClassroomData = ref<ClassroomData[]>()
 
 if (!data.value) {
   toast({
@@ -27,7 +28,7 @@ if (!data.value) {
   })
 }
 else {
-  data.value = data.value.sort((a: any, b: any) => a.name < b.name ? -1 : 1)
+  sortedClassroomData.value = [...data.value].sort((a: any, b: any) => a.name < b.name ? -1 : 1)
 }
 
 const { data: clubs, suspense: clubsSuspense } = useQuery<AllClubs>({
@@ -78,7 +79,7 @@ async function handleSubmit(e: any) {
   }
   pending.value = true
   try {
-    const { data, error } = await useFetch('/api/reservation/new', {
+    const { data: submitData, error } = await useFetch('/api/reservation/new', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -92,7 +93,7 @@ async function handleSubmit(e: any) {
         variant: 'destructive',
       })
     }
-    else if (data.value?.status === 'SUCCESS') {
+    else if (submitData.value?.status === 'SUCCESS') {
       toast({
         title: '创建成功',
         description: '已成功创建预约记录，你可以在「管理预约」中查看',
@@ -106,7 +107,7 @@ async function handleSubmit(e: any) {
       formData.value.applicant = ''
       formData.value.note = ''
     }
-    else if (data.value?.status === 'PRISMA_ERROR') {
+    else if (submitData.value?.status === 'PRISMA_ERROR') {
       toast({
         title: '数据错误',
         description: '请稍后再试',
@@ -132,15 +133,15 @@ async function handleSubmit(e: any) {
       <CardDescription>在此处预约教室</CardDescription>
     </CardHeader>
     <CardContent>
-      <form class="space-y-2" @submit="handleSubmit">
+      <Form class="space-y-2" @submit="handleSubmit">
         <FormField name="main">
           <FormItem>
             <FormLabel>预约时间</FormLabel>
             <FormControl>
-              <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-1 justify-start">
+              <div class="flex flex-col justify-start sm:flex-row space-y-2 sm:space-x-1 sm:space-y-0">
                 <!-- This ToggleGroup should be implemented in a better way but anyway it works -->
-                <ToggleGroup :key="reloadKey" type="multiple" variant="outline">
-                  <div class="text-muted-foreground text-sm text-center w-7">
+                <ToggleGroup :key="`reloadKey-${reloadKey}`" type="multiple" variant="outline">
+                  <div class="w-7 text-center text-sm text-muted-foreground">
                     每周
                   </div>
                   <ToggleGroupItem value="mon" @click="day[1] = !day[1]">
@@ -164,7 +165,7 @@ async function handleSubmit(e: any) {
                     <SelectValue placeholder="选择时段" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem v-for="period in enums.periods.values" :key="period" :value="period">
+                    <SelectItem v-for="period in enums.periods.values" :key="`period-${period}`" :value="period">
                       {{ enums.periods.map[period] }}
                     </SelectItem>
                   </SelectContent>
@@ -175,7 +176,7 @@ async function handleSubmit(e: any) {
           <div class="py-1" />
           <FormItem>
             <FormLabel>选择教室</FormLabel>
-            <div v-if="!clubs || !data">
+            <div v-if="!clubs || !sortedClassroomData">
               <Skeleton class="h-5 p-3 my-3" />
             </div>
             <FormControl>
@@ -185,7 +186,7 @@ async function handleSubmit(e: any) {
                 </SelectTrigger>
                 <!-- Only available classrooms should be filled in the following <SelectContent/> -->
                 <SelectContent>
-                  <SelectGroup v-for="classroom in data" :key="classroom.id">
+                  <SelectGroup v-for="classroom in sortedClassroomData" :key="`classroom-${classroom.id}`">
                     <SelectItem :value="classroom.id.toString()">
                       <span class="inline-block min-w-32 text-left">
                         <span class="inline-block min-w-14">
@@ -214,7 +215,7 @@ async function handleSubmit(e: any) {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup v-if="clubs?.president && clubs?.president.length">
-                    <SelectItem v-for="club in clubs?.president" :key="club.id" :value="club.id">
+                    <SelectItem v-for="club in clubs?.president" :key="`club-${club.id}`" :value="String(club.id)">
                       {{ club.name.zh }}
                       <span class="inline-block text-gray-500">
                         社长
@@ -222,7 +223,7 @@ async function handleSubmit(e: any) {
                     </SelectItem>
                   </SelectGroup>
                   <SelectGroup v-if="clubs?.vice && clubs?.vice.length">
-                    <SelectItem v-for="club in clubs?.vice" :key="club.id" :value="club.id">
+                    <SelectItem v-for="club in clubs?.vice" :key="`club-${club.id}`" :value="String(club.id)">
                       {{ club.name.zh }}
                       <span class="inline-block text-gray-500">
                         副社
@@ -230,7 +231,7 @@ async function handleSubmit(e: any) {
                     </SelectItem>
                   </SelectGroup>
                   <SelectGroup v-if="clubs?.member && clubs?.member.length">
-                    <SelectItem v-for="club in clubs?.member" :key="club.id" :value="club.id">
+                    <SelectItem v-for="club in clubs?.member" :key="`club-${club.id}`" :value="String(club.id)">
                       {{ club.name.zh }}
                       <span class="inline-block text-gray-500">
                         成员
@@ -260,7 +261,7 @@ async function handleSubmit(e: any) {
           <span v-if="!pending">提交预约</span>
           <span v-if="pending">处理中...</span>
         </Button>
-      </form>
+      </Form>
     </CardContent>
   </Card>
 </template>

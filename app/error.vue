@@ -6,12 +6,14 @@ const props = defineProps({
 })
 
 const handleError = () => reloadNuxtApp({ path: '/' })
+
+console.error(props.error)
 </script>
 
 <template>
   <div class="min-h-screen flex items-center px-4 py-12 lg:px-12 md:px-8 sm:px-6 xl:px-16">
-    <div class="w-full grid">
-      <div class="col-start-1 row-start-1 w-full flex h-full items-center justify-center">
+    <div class="grid w-full">
+      <div class="col-start-1 row-start-1 h-full w-full flex items-center justify-center">
         <div class="z-10 select-none text-9xl text-foreground font-bold tracking-tighter opacity-10">
           {{ props.error?.statusCode }}
         </div>

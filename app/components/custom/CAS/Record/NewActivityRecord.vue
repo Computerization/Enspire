@@ -177,12 +177,12 @@ const onSubmit = handleSubmit(async (values) => {
           </FormItem>
         </FormField>
 
-        <div class="w-full flex space-x-2">
+        <div class="w-full flex justify-between space-x-2">
           <FormField v-for="(slot, index) in ['cTime', 'aTime', 'sTime']" :key="index" v-slot="{ value }" :name="slot">
-            <FormItem>
+            <FormItem class="w-full">
               <FormLabel>{{ ['C', 'A', 'S'][index] }}时间</FormLabel>
               <NumberField
-                class="w-max gap-2"
+                class="w-full gap-2"
                 :min="0"
                 :model-value="value"
                 :step="0.5"
@@ -195,7 +195,7 @@ const onSubmit = handleSubmit(async (values) => {
                     setFieldValue(slot as Parameters<typeof setFieldValue>[0], v)
                   }
                   else {
-                    setFieldValue(slot as Parameters<typeof setFieldValue>[0], undefined)
+                    setFieldValue(slot as Parameters<typeof setFieldValue>[0], 0)
                   }
                 }"
               >
