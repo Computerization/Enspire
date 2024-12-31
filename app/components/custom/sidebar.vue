@@ -72,6 +72,10 @@ const sidebarData = ref({
     ...(isPresidentOrVicePresident.value
       ? [
           {
+            title: '社团文件',
+            url: '/forms/files',
+          },
+          {
             title: '活动记录',
             url: '#',
             icon: 'lucide:pencil-ruler',

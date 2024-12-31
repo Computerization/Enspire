@@ -17,91 +17,96 @@ model User {
   ReservationRecord ReservationRecord[]
 }
 
-// -----------------------------------------
-// ------------------CLUBS------------------
-// -----------------------------------------
-// Json types should be stored like {"zh": xxx, "en": xxx}.
-// Prisma itself doesn't validates what is in that Json, we should do it by ourselves when reading.
 model Club {
   id                        Int                 @id
-  name                      Json // multilingual
+  name                      Json
   foundedYear               Int?
-  // All of the members are recorded by tsimsStudentId
-  // instead of a foreign key from the user schema for sake of simplicity when batch importing club infos
-  presidentByTsimsStudentId Int // President. Only one.
-  vicesByTsimsStudentId     Int[] // Vice President
-  membersByTsimsStudentId   Int[] // Members
-  description               Json // multilingual
+  presidentByTsimsStudentId Int
+  vicesByTsimsStudentId     Int[]
+  membersByTsimsStudentId   Int[]
+  description               Json
   ActivityRecord            ActivityRecord[]
-  ClubRating                ClubRating[]
-  GroupInfo                 GroupInfo[]
   memberships               ClubMembership[]
+  ClubRating                ClubRating[]
+  FileUploadRecord          FileUploadRecord[]
+  GroupInfo                 GroupInfo?
   ReservationRecord         ReservationRecord[]
 }
 
-enum ClubMemberRole {
-  PRESIDENT
-  VICE_PRESIDENT
-  MEMBER
-}
-
 model ClubMembership {
-  id             String         @id @default(dbgenerated("gen_random_uuid()"))
+  id             String           @id @default(dbgenerated("gen_random_uuid()"))
   tsimsStudentId Int
   name           String
   clubId         Int
   role           ClubMemberRole
-
   club           Club             @relation(fields: [clubId], references: [id])
-  ActivityRecord ActivityRecord[]
+  ActivityRecord ActivityRecord[] @relation("ActivityRecordToClubMembership")
 
-  @@unique([tsimsStudentId, clubId]) // Ensure unique membership per club
+  @@unique([tsimsStudentId, clubId])
 }
 
-// -----------------------------------------
-// ---------------ACTIVITY RECORDS------------
-// -----------------------------------------
-//
-model ActivityRecord {
-  id     String   @id @default(dbgenerated("gen_random_uuid()"))
-  clubId Int // Link to Club model
-  date   DateTime // Start date of the leave
-  text   String
-  cTime  Float    @default(0)
-  aTime  Float    @default(0)
-  sTime  Float    @default(0)
+model File {
+  id               String            @id @default(dbgenerated("gen_random_uuid()"))
+  name             String
+  fileId           String
+  createdAt        DateTime          @default(now())
+  FileUploadRecord FileUploadRecord?
+}
 
-  // Relations
+model FileUploadRecord {
+  id           String         @id @default(dbgenerated("gen_random_uuid()"))
+  clubId       Int
+  fileId       String         @unique
+  fileUploadId String
+  createdAt    DateTime       @default(now())
+  club         Club           @relation(fields: [clubId], references: [id])
+  file         File           @relation(fields: [fileId], references: [id])
+  fileUpload   FileCollection @relation(fields: [fileUploadId], references: [id])
+}
+
+model FileCollection {
+  id               String            @id @default(dbgenerated("gen_random_uuid()"))
+  name             String
+  status           FormStatus
+  fileNaming       String
+  fileTypes        String[]
+  FileUploadRecord FileUploadRecord[]
+
+  @@map("FileUpload")
+}
+
+model ActivityRecord {
+  id        String           @id @default(dbgenerated("gen_random_uuid()"))
+  clubId    Int
+  date      DateTime
+  text      String
+  aTime     Float            @default(0)
+  cTime     Float            @default(0)
+  sTime     Float            @default(0)
   club      Club             @relation(fields: [clubId], references: [id])
-  attendees ClubMembership[]
+  attendees ClubMembership[] @relation("ActivityRecordToClubMembership")
 }
 
 model ClubRating {
   id        String   @id @default(dbgenerated("gen_random_uuid()"))
-  rateBy    String // Link to User model
-  clubId    Int // Link to Club model
-  rating    Int      @default(0) // 0 as initial rate lol
-  comment   String? // Optional comment for a rating
-  ratedAt   DateTime @default(now()) // I guess we don't need this as we already have `rateScope`
-  rateScope String // Identifier for the current semester, required since one can only vote once in one semester; stored as <year><a|b>, i.e., 2024a
+  rateBy    String
+  clubId    Int
+  rating    Int      @default(0)
+  comment   String?
+  ratedAt   DateTime @default(now())
+  rateScope String
+  club      Club     @relation(fields: [clubId], references: [id])
+  user      User     @relation(fields: [rateBy], references: [clerkUserId])
 
-  // Relations
-  user User @relation(fields: [rateBy], references: [clerkUserId])
-  club Club @relation(fields: [clubId], references: [id])
-
-  @@unique([clubId, rateBy, rateScope]) // One student can vote only once in one semester
+  @@unique([clubId, rateBy, rateScope])
 }
 
 model GroupInfo {
   id                    String   @id @default(dbgenerated("gen_random_uuid()"))
-  clubId                Int // Link to Club model
+  clubId                Int      @unique
   wechatGroupUrl        String
   wechatGroupExpiration DateTime @default(now())
-
-  // Relations
-  club Club @relation(fields: [clubId], references: [id])
-
-  @@unique([clubId])
+  club                  Club     @relation(fields: [clubId], references: [id])
 }
 
 model ClassroomData {
@@ -110,6 +115,34 @@ model ClassroomData {
   alias             String?
   size              Int?
   ReservationRecord ReservationRecord[]
+}
+
+model ReservationRecord {
+  id                String        @id @default(dbgenerated("gen_random_uuid()"))
+  creationTimestamp DateTime      @default(now())
+  userId            String
+  day               Days
+  period            Periods
+  classroomId       String
+  clubId            Int
+  note              String?
+  classroom         ClassroomData @relation(fields: [classroomId], references: [id])
+  club              Club          @relation(fields: [clubId], references: [id])
+  user              User          @relation(fields: [userId], references: [id])
+
+  @@unique([classroomId, day, period])
+  @@unique([clubId, day, period])
+}
+
+enum FormStatus {
+  OPEN
+  CLOSED
+}
+
+enum ClubMemberRole {
+  PRESIDENT
+  VICE_PRESIDENT
+  MEMBER
 }
 
 enum Days {
@@ -135,21 +168,4 @@ enum Periods {
   EIGHT
   NINE
   AFTERCLASS
-}
-
-model ReservationRecord {
-  id                String        @id @default(dbgenerated("gen_random_uuid()"))
-  creationTimestamp DateTime      @default(now())
-  user              User          @relation(fields: [userId], references: [id])
-  userId            String
-  day               Days
-  period            Periods
-  classroom         ClassroomData @relation(fields: [classroomId], references: [id])
-  classroomId       String
-  club              Club          @relation(fields: [clubId], references: [id])
-  clubId            Int
-  note              String?
-
-  @@unique([classroomId, day, period])
-  @@unique([clubId, day, period])
 }

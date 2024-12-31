@@ -13,6 +13,14 @@ export default defineNuxtConfig({
         dir: '/data',
         repo: 'computerization/enspire',
       },
+      s3: {
+        driver: 's3',
+        endpoint: process.env.S3_ENDPOINT,
+        accessKeyId: process.env.S3_ACCESS_KEY_ID,
+        secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+        bucket: process.env.S3_BUCKET,
+        region: 'ap-northeast-1',
+      },
     },
   },
 
@@ -92,5 +100,9 @@ export default defineNuxtConfig({
 
   future: {
     compatibilityVersion: 4,
+  },
+
+  devtools: {
+    enabled: true,
   },
 })
