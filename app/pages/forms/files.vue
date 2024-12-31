@@ -9,13 +9,6 @@ import { v4 as uuidv4 } from 'uuid'
 import { useForm } from 'vee-validate'
 import * as z from 'zod'
 
-// ZOD!
-const formSchema = toTypedSchema(z.object({
-  file: z
-    .instanceof(FileList)
-    .refine(file => file?.length === 1, 'File is required.'),
-}))
-
 definePageMeta({
   middleware: ['auth'],
 })

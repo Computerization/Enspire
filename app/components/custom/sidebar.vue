@@ -73,7 +73,15 @@ const sidebarData = ref({
       ? [
           {
             title: '社团文件',
-            url: '/forms/files',
+            url: '#',
+            icon: 'lucide:file-text',
+            isActive: true,
+            items: [
+              {
+                title: '社团文件',
+                url: '/forms/files',
+              },
+            ],
           },
           {
             title: '活动记录',
