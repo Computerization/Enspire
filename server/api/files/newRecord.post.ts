@@ -12,7 +12,22 @@ export default eventHandler(async (event) => {
 
   return readBody(event)
     .then(async (body) => {
-      const { clubId, collectionId, fileContent, fileName } = body
+      const { clubId, collectionId, fileContent, rawName } = body
+      const collectionInfo = await prisma.fileCollection.findFirst({
+        where: {
+          id: collectionId,
+        },
+      })
+      const clubInfo = await prisma.club.findFirst({
+        where: {
+          id: clubId,
+        },
+      })
+      const naming = collectionInfo?.fileNaming
+      const fileName = naming
+        .replaceAll('$id$', clubId)
+        .replaceAll('$club$', clubInfo.name.zh)
+        .replaceAll('$ext$', rawName.split('.').pop())
       try {
         const existingRecord = await prisma.fileUploadRecord.findFirstOrThrow({
           where: {

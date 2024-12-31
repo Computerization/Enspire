@@ -11,16 +11,16 @@ export default eventHandler(async (event) => {
 
   return readBody(event)
     .then(async (body) => {
-      const { clubId, collection } = body
-      const records = await prisma.fileUploadRecord.findMany({
+      const { fileId } = body
+      const file = await prisma.file.findFirst({
         where: {
-          clubId,
-          fileUploadId: collection,
-        },
-        include: {
-          file: true,
+          id: fileId,
         },
       })
-      return records
+      const data = await useStorage('s3').getItem(file.fileId)
+      return {
+        url: data,
+        name: file.name,
+      }
     })
 })
