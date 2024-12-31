@@ -1,0 +1,5 @@
+---
+"enspire": patch
+---
+
+Navbar bugfix
