@@ -1,5 +1,11 @@
 # enspire
 
+## 1.4.2
+
+### Patch Changes
+
+- [#676](https://github.com/Computerization/Enspire/pull/676) [`f4492f4`](https://github.com/Computerization/Enspire/commit/f4492f42ba9e0f1430b681419e8900163777bb32) Thanks [@q1zhen](https://github.com/q1zhen)! - bugfixes
+
 ## 1.4.1
 
 ### Patch Changes
