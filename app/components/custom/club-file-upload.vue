@@ -130,7 +130,9 @@ async function download() {
     // window.open(data)
     downloadLink.value = data.url
     downloadFilename.value = data.name
-    dlink.value.click()
+    nextTick(() => {
+      dlink.value.click()
+    })
     downloading.value = false
   }
   downloadLink.value = ''
