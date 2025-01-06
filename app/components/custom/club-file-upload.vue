@@ -84,10 +84,14 @@ const onSubmit = form.handleSubmit(async (values) => {
   submitting.value = false
 })
 
+const downloadLink = ref('')
+const downloadFilename = ref('')
 const msg = ref('')
 const currentClubData = ref(null)
 const clubUpdating = ref(false)
 async function updateClub() {
+  downloadLink.value = ''
+  downloadFilename.value = ''
   if (!props.club) {
     msg.value = '请先选择一个社团'
     currentClubData.value = undefined
@@ -112,8 +116,6 @@ async function updateClub() {
   clubUpdating.value = false
 }
 
-const downloadLink = ref('')
-const downloadFilename = ref('')
 const dlink: Ref<HTMLElement | null> = ref(null)
 const downloading = ref(false)
 async function download() {
@@ -133,8 +135,6 @@ async function download() {
     dlink.value.click()
     downloading.value = false
   }
-  downloadLink.value = ''
-  downloadFilename.value = ''
 }
 
 watch(
@@ -184,6 +184,10 @@ await updateClub()
     <div v-else class="mt-2">
       {{ msg }}
     </div>
-    <a ref="dlink" :href="downloadLink" :download="downloadFilename" class="hidden">Download</a>
+    <a
+      ref="dlink" :href="downloadLink" :download="downloadFilename" class="hidden"
+    >Download</a>
+    <!-- @click="downloadLink = '';
+              downloadFilename = ''" -->
   </Card>
 </template>

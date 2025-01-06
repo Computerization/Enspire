@@ -66,7 +66,7 @@ export default eventHandler(async (event) => {
           console.log('Failed when updating')
           return {
             success: false,
-            error,
+            error: error.toString(),
           }
         }
         console.log('Updated s3 content')
@@ -108,7 +108,7 @@ export default eventHandler(async (event) => {
           console.log('Failed to create')
           return {
             success: false,
-            error,
+            error: error.toString(),
           }
         }
       }
