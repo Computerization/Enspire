@@ -75,7 +75,7 @@ function readFileAsDataURL(file: File) {
 const onSubmit = form.handleSubmit(async (values) => {
   submitting.value = true
   const fileName = values.file.name
-  const status = await $fetch('/api/files/newRecord', {
+  const status = await $fetch('/api/files/new-record', {
     method: 'POST',
     body: {
       clubId: Number.parseInt(props.club),
@@ -99,7 +99,7 @@ async function updateClub() {
     return
   }
   clubUpdating.value = true
-  const data = await $fetch('/api/files/clubRecords', {
+  const data = await $fetch('/api/files/club-records', {
     method: 'POST',
     body: {
       clubId: Number.parseInt(props.club),
