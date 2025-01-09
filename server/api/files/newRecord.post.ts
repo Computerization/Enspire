@@ -1,6 +1,13 @@
 import { PrismaClient } from '@prisma/client'
 import { randomUUID } from 'uncrypto'
 
+interface Body {
+  clubId: number
+  collectionId: string
+  fileContent: string
+  rawName: string
+}
+
 const prisma = new PrismaClient()
 
 export default eventHandler(async (event) => {
@@ -11,24 +18,28 @@ export default eventHandler(async (event) => {
   }
 
   return readBody(event)
-    .then(async (body) => {
+    .then(async (body: Body) => {
       const { clubId, collectionId, fileContent, rawName } = body
-      const collectionInfo = await prisma.fileCollection.findFirst({
-        where: {
-          id: collectionId,
-        },
-      })
-      const clubInfo = await prisma.club.findFirst({
-        where: {
-          id: clubId,
-        },
-      })
-      const naming = collectionInfo?.fileNaming
-      const fileName = naming
-        .replaceAll('$id$', clubId)
-        .replaceAll('$club$', clubInfo.name.zh)
-        .replaceAll('$ext$', rawName.split('.').pop())
+      // TODO: this should be enabled after the ID mismatch is fixed
+      // const collectionInfo = await prisma.fileCollection.findFirst({
+      //   where: {
+      //     id: collectionId,
+      //   },
+      // })
+      // const clubInfo = await prisma.club.findFirst({
+      //   where: {
+      //     id: clubId,
+      //   },
+      // })
+      // const naming = collectionInfo?.fileNaming
+      // const fileName = naming
+      //   .replaceAll('$id$', clubId)
+      //   .replaceAll('$club$', clubInfo.name.zh)
+      //   .replaceAll('$ext$', rawName.split('.').pop())
+      // TODO: (cont.) and this should be removed
+      const fileName = rawName
       try {
+        // An error will be thrown if the club's record does not exist
         const existingRecord = await prisma.fileUploadRecord.findFirstOrThrow({
           where: {
             clubId,
@@ -49,7 +60,7 @@ export default eventHandler(async (event) => {
               file: {
                 update: {
                   where: {
-                    id: existingRecord.fileId,
+                    id: existingRecord.file.id,
                   },
                   data: {
                     name: fileName,
@@ -61,54 +72,51 @@ export default eventHandler(async (event) => {
           })
           await useStorage('s3').setItemRaw(existingRecord.file.fileId, fileContent)
         }
-        catch (error) {
-          console.log(error)
-          console.log('Failed when updating')
+        catch (error: any) {
           return {
             success: false,
-            error: error.toString(),
+            error: String(error),
           }
         }
-        console.log('Updated s3 content')
         return {
           success: true,
         }
       }
-      catch (error) {
-        const fileUUID = randomUUID()
-        try {
-          await prisma.fileUploadRecord.create({
-            data: {
-              club: {
-                connect: {
-                  id: clubId,
+      catch (__error) {
+        if (__error instanceof Error) {
+          // Create a new record (the record is not found)
+          const fileUUID = randomUUID()
+          try {
+            await prisma.fileUploadRecord.create({
+              data: {
+                club: {
+                  connect: {
+                    id: clubId,
+                  },
+                },
+                fileUpload: {
+                  connect: {
+                    id: collectionId,
+                  },
+                },
+                file: {
+                  create: {
+                    fileId: fileUUID,
+                    name: fileName,
+                  },
                 },
               },
-              fileUpload: {
-                connect: {
-                  id: collectionId,
-                },
-              },
-              file: {
-                create: {
-                  fileId: fileUUID,
-                  name: fileName,
-                },
-              },
-            },
-          })
-          await useStorage('s3').setItemRaw(fileUUID, fileContent)
-          console.log('Created s3 content')
-          return {
-            success: true,
+            })
+            await useStorage('s3').setItemRaw(fileUUID, fileContent)
+            return {
+              success: true,
+            }
           }
-        }
-        catch (error) {
-          console.log(error)
-          console.log('Failed to create')
-          return {
-            success: false,
-            error: error.toString(),
+          catch (error) {
+            return {
+              success: false,
+              error: String(error),
+            }
           }
         }
       }

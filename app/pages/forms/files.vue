@@ -22,7 +22,7 @@ const { toast } = useToast()
 const { data: collectionsData, suspense: _s1 } = useQuery<FileCollection[]>({
   queryKey: ['/api/files/collections'],
 })
-await _s1() // suspense要await
+await _s1()
 
 const collectionLoaded = ref(false)
 if (collectionsData.value) {
@@ -38,7 +38,7 @@ else {
 const { data: clubData, suspense: _s2 } = useQuery<AllClubs>({
   queryKey: ['/api/user/all_clubs'],
 })
-await _s2() // suspense要await
+await _s2()
 
 const clubLoaded = ref(false)
 if (clubData.value) {
@@ -59,16 +59,16 @@ const selectedClub = ref('')
     <SelectTrigger class="mb-4 w-full lg:w-72">
       <SelectValue placeholder="选择一个社团" />
     </SelectTrigger>
-    <SelectContent>
-      <SelectItem v-for="club in clubData.president" :key="club.id" :value="club.id">
+    <SelectContent v-if="clubLoaded && clubData">
+      <SelectItem v-for="club in clubData.president" :key="club.id" :value="String(club.id)">
         {{ club.name.zh }}
+      </SelectItem>
+      <SelectItem value="21">
+        测试组
       </SelectItem>
     </SelectContent>
   </Select>
-  <div v-if="!collectionLoaded">
-    loading
-  </div>
-  <div v-if="collectionLoaded" class="grid grid-cols-1 gap-4 lg:grid-cols-3">
+  <div v-if="clubLoaded && collectionLoaded" class="grid grid-cols-1 gap-4 lg:grid-cols-3">
     <ClubFileUpload
       v-for="collection in collectionsData"
       :key="collection.id"
@@ -77,6 +77,9 @@ const selectedClub = ref('')
       :filetypes="collection.fileTypes"
       :title="collection.name"
     />
+  </div>
+  <div v-else>
+    loading
   </div>
   <Toaster />
 </template>
