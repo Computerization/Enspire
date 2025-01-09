@@ -63,9 +63,6 @@ const selectedClub = ref('')
       <SelectItem v-for="club in clubData.president" :key="club.id" :value="String(club.id)">
         {{ club.name.zh }}
       </SelectItem>
-      <SelectItem value="21">
-        测试组
-      </SelectItem>
     </SelectContent>
   </Select>
   <div v-if="clubLoaded && collectionLoaded" class="grid grid-cols-1 gap-4 lg:grid-cols-3">
