@@ -86,6 +86,7 @@ const onSubmit = form.handleSubmit(async (values) => {
   })
   form.resetForm()
   inputKey.value = uuidv4()
+  await updateClub()
   msg.value = (status && status.success) ? `${fileName} (提交成功)` : '提交失败'
   submitting.value = false
 })
@@ -173,7 +174,7 @@ await updateClub()
         </FormItem>
       </FormField>
       <div class="mt-2">
-        <Button type="submit" variant="secondary" :disabled="!form.values.file || submitting || clubUpdating">
+        <Button type="submit" variant="secondary" :disabled="!form.values.file || submitting || clubUpdating || !props.club">
           上传
         </Button>
         <Button v-if="currentClubData" :disabled="downloading" variant="outline" class="ml-2" type="button" @click="download">

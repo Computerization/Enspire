@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import { randomUUID } from 'uncrypto'
+import { z } from 'zod'
 
 interface Body {
   clubId: number
@@ -7,6 +8,13 @@ interface Body {
   fileContent: string
   rawName: string
 }
+
+const bodySchema = z.object({
+  clubId: z.number().int(),
+  collectionId: z.string(),
+  fileContent: z.string(),
+  rawName: z.string().max(256),
+})
 
 const prisma = new PrismaClient()
 
@@ -19,6 +27,12 @@ export default eventHandler(async (event) => {
 
   return readBody(event)
     .then(async (body: Body) => {
+      if (!bodySchema.safeParse(body).success) {
+        return {
+          success: false,
+          error: 'Invalid file given',
+        }
+      }
       const { clubId, collectionId, fileContent, rawName } = body
       // TODO: this should be enabled after the ID mismatch is fixed
       // const collectionInfo = await prisma.fileCollection.findFirst({
