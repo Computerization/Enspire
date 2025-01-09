@@ -29,17 +29,17 @@ definePageMeta({
 })
 
 const form = useForm({}) // The form
-const inputKey = ref(uuidv4()) // To force update the <Input>
-const currentClubData: any = ref(null) // Data for the current club's record
+const inputKey = ref(uuidv4()) // To force update the <Input file>
+const currentClubData: Ref<Record<string, any> | null> = ref(null) // Data for the current club's record
 const msg = ref('') // Message (time / status) shown at the bottom of the card
 
 const clubUpdating = ref(false) // Flag for club data updating
 const submitting = ref(false) // Flag for file submission
 const downloading = ref(false) // Flag for downloading file
 
+const dlink: Ref<HTMLElement | null> = ref(null) // The <a> element
 const downloadLink = ref('') // The data url to be filled in <a>
 const downloadFilename = ref('') // The filename to be filled in <a>
-const dlink: Ref<HTMLElement | null> = ref(null) // The <a> element
 
 function fileTypesPrompt(fileTypes: string[]) {
   if (fileTypes.length === 0 || fileTypes.includes('*')) {
@@ -133,8 +133,7 @@ async function download() {
       downloadLink.value = data.url
       downloadFilename.value = data.name
       nextTick(() => {
-        if (dlink.value)
-          dlink.value.click()
+        dlink.value!.click()
       })
       downloading.value = false
     }
