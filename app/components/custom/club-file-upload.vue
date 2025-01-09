@@ -72,22 +72,35 @@ function readFileAsDataURL(file: File) {
   })
 }
 
+const formSchema = z.object({
+  clubId: z.number().int(),
+  collectionId: z.string(),
+  fileContent: z.string(),
+  rawName: z.string().max(256),
+})
+
 const onSubmit = form.handleSubmit(async (values) => {
   submitting.value = true
   const fileName = values.file.name
-  const status = await $fetch('/api/files/new-record', {
-    method: 'POST',
-    body: {
-      clubId: Number.parseInt(props.club),
-      collectionId: props.collection,
-      fileContent: await readFileAsDataURL(values.file),
-      rawName: fileName,
-    },
-  })
-  form.resetForm()
-  inputKey.value = uuidv4()
-  await updateClub()
-  msg.value = (status && status.success) ? `${fileName} (提交成功)` : '提交失败'
+  const data = {
+    clubId: Number.parseInt(props.club),
+    collectionId: props.collection,
+    fileContent: await readFileAsDataURL(values.file),
+    rawName: fileName,
+  }
+  if (formSchema.safeParse(data).success) {
+    const status = await $fetch('/api/files/new-record', {
+      method: 'POST',
+      body: data,
+    })
+    form.resetForm()
+    inputKey.value = uuidv4()
+    await updateClub()
+    msg.value = (status && status.success) ? `${fileName} (提交成功)` : '提交失败'
+  }
+  else {
+    msg.value = '文件内容异常'
+  }
   submitting.value = false
 })
 
