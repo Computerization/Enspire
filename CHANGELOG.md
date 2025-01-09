@@ -1,5 +1,11 @@
 # enspire
 
+## 1.4.4
+
+### Patch Changes
+
+- [#683](https://github.com/Computerization/Enspire/pull/683) [`1f5c353`](https://github.com/Computerization/Enspire/commit/1f5c353d33175053d884eae5e6b6d106d58276cb) Thanks [@q1zhen](https://github.com/q1zhen)! - validation fixes and interface logic fixes
+
 ## 1.4.3
 
 ### Patch Changes
