@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import type { FileCollection } from '@prisma/client'
-import type { AllClubs } from '~~/types/api/user/all_clubs'
-import Toaster from '@/components/ui/toast/Toaster.vue'
-import { useToast } from '@/components/ui/toast/use-toast'
 import { toTypedSchema } from '@vee-validate/zod'
 import dayjs from 'dayjs'
 import { v4 as uuidv4 } from 'uuid'
@@ -32,6 +28,19 @@ definePageMeta({
   middleware: ['auth'],
 })
 
+const form = useForm({}) // The form
+const inputKey = ref(uuidv4()) // To force update the <Input file>
+const currentClubData: Ref<Record<string, any> | null> = ref(null) // Data for the current club's record
+const msg = ref('') // Message (time / status) shown at the bottom of the card
+
+const clubUpdating = ref(false) // Flag for club data updating
+const submitting = ref(false) // Flag for file submission
+const downloading = ref(false) // Flag for downloading file
+
+const dlink: Ref<HTMLElement | null> = ref(null) // The <a> element
+const downloadLink = ref('') // The data url to be filled in <a>
+const downloadFilename = ref('') // The filename to be filled in <a>
+
 function fileTypesPrompt(fileTypes: string[]) {
   if (fileTypes.length === 0 || fileTypes.includes('*')) {
     return '无文件类型限制'
@@ -54,7 +63,6 @@ function fileTypesAcceptAttr(fileTypes: string[]) {
 //   file: z.custom(v => v, 'File missing'),
 // }))
 
-// 滚一边去
 function readFileAsDataURL(file: File) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
@@ -64,60 +72,51 @@ function readFileAsDataURL(file: File) {
   })
 }
 
-const form = useForm({})
-const inputKey = ref(uuidv4())
-const submitting = ref(false)
 const onSubmit = form.handleSubmit(async (values) => {
   submitting.value = true
-  await $fetch('/api/files/newRecord', {
+  const fileName = values.file.name
+  const status = await $fetch('/api/files/new-record', {
     method: 'POST',
     body: {
       clubId: Number.parseInt(props.club),
       collectionId: props.collection,
       fileContent: await readFileAsDataURL(values.file),
-      rawName: values.file.name,
+      rawName: fileName,
     },
   })
   form.resetForm()
   inputKey.value = uuidv4()
-  await updateClub()
+  msg.value = (status && status.success) ? `${fileName} (提交成功)` : '提交失败'
   submitting.value = false
 })
 
-const downloadLink = ref('')
-const downloadFilename = ref('')
-const msg = ref('')
-const currentClubData = ref(null)
-const clubUpdating = ref(false)
 async function updateClub() {
   downloadLink.value = ''
   downloadFilename.value = ''
   if (!props.club) {
     msg.value = '请先选择一个社团'
-    currentClubData.value = undefined
+    currentClubData.value = null
     return
   }
   clubUpdating.value = true
-  const data = await $fetch('/api/files/clubRecords', {
+  const data = await $fetch('/api/files/club-records', {
     method: 'POST',
     body: {
-      cludId: Number.parseInt(props.club),
+      clubId: Number.parseInt(props.club),
       collection: props.collection,
     },
   })
-  if (data && data.length !== 0) {
-    msg.value = `最后提交于 ${dayjs(data[0].createdAt).fromNow()}`
+  if (data[0] && data.length !== 0) {
+    msg.value = `${data[0].file.name} (${dayjs(data[0].createdAt).fromNow()})`
     currentClubData.value = data[0]
   }
   else {
     msg.value = '尚未提交'
-    currentClubData.value = undefined
+    currentClubData.value = null
   }
   clubUpdating.value = false
 }
 
-const dlink: Ref<HTMLElement | null> = ref(null)
-const downloading = ref(false)
 async function download() {
   if (currentClubData.value) {
     downloading.value = true
@@ -130,12 +129,14 @@ async function download() {
     // const blob = new Blob([new Uint8Array(Array.from(atob(data), c => c.charCodeAt(0)))])
     // window.open(URL.createObjectURL(blob))
     // window.open(data)
-    downloadLink.value = data.url
-    downloadFilename.value = data.name
-    nextTick(() => {
-      dlink.value.click()
-    })
-    downloading.value = false
+    if (typeof data.url === 'string' && typeof data.name === 'string') {
+      downloadLink.value = data.url
+      downloadFilename.value = data.name
+      nextTick(() => {
+        dlink.value!.click()
+      })
+      downloading.value = false
+    }
   }
 }
 
@@ -189,7 +190,5 @@ await updateClub()
     <a
       ref="dlink" :href="downloadLink" :download="downloadFilename" class="hidden"
     >Download</a>
-    <!-- @click="downloadLink = '';
-              downloadFilename = ''" -->
   </Card>
 </template>

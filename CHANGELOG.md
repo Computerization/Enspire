@@ -1,5 +1,13 @@
 # enspire
 
+## 1.4.3
+
+### Patch Changes
+
+- [#679](https://github.com/Computerization/Enspire/pull/679) [`fc40f32`](https://github.com/Computerization/Enspire/commit/fc40f327979a6464a5e1f747596e2d7982afc571) Thanks [@qwerzl](https://github.com/qwerzl)! - Skip auth middleware on initial client load
+
+- [#682](https://github.com/Computerization/Enspire/pull/682) [`d5d6c6a`](https://github.com/Computerization/Enspire/commit/d5d6c6a8b076c05f8b71328c7fabb50f545aad59) Thanks [@q1zhen](https://github.com/q1zhen)! - fix upload logic
+
 ## 1.4.2
 
 ### Patch Changes
