@@ -1,5 +1,11 @@
 # enspire
 
+## 1.5.0
+
+### Minor Changes
+
+- [#685](https://github.com/Computerization/Enspire/pull/685) [`f938b6c`](https://github.com/Computerization/Enspire/commit/f938b6c595a81df2f1dba4eff0621fbda06d9113) Thanks [@q1zhen](https://github.com/q1zhen)! - admin page
+
 ## 1.4.4
 
 ### Patch Changes

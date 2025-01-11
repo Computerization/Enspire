@@ -4,6 +4,7 @@ import { useClerk, useUser } from 'vue-clerk'
 
 const { user } = useUser()
 const config = useRuntimeConfig()
+const route = useRoute()
 
 const clerk = useClerk()
 
@@ -14,10 +15,17 @@ function signOutHandler() {
 const isPresidentOrVicePresident = ref(false)
 useState('isEnspireLoading').value = true
 
-const { data: clubs, suspense } = useQuery<AllClubs>({
+const { data: clubs, suspense: __s1 } = useQuery<AllClubs>({
   queryKey: ['/api/user/all_clubs'],
 })
-await suspense()
+await __s1()
+
+const isUserAdmin = ref(false)
+const { data: roleData, suspense: __s2 } = useQuery<any>({
+  queryKey: ['/api/user/check-role'],
+})
+await __s2()
+isUserAdmin.value = roleData.value?.success === true && roleData.value.role === 'ADMIN'
 
 if (clubs.value) {
   useState('isEnspireLoading').value = false
@@ -102,6 +110,13 @@ const sidebarData = ref({
         ]
       : []),
   ],
+  admin: [
+    {
+      name: '社团文件',
+      url: '/admin/manage-files',
+      icon: 'lucide:lock-keyhole',
+    },
+  ],
 })
 </script>
 
@@ -171,7 +186,7 @@ const sidebarData = ref({
               v-for="item in sidebarData.school"
               :key="item.name"
               class="rounded"
-              :class="{ 'bg-foreground/10': $route.path === item.url }"
+              :class="{ 'bg-foreground/10': route.path === item.url }"
             >
               <SidebarMenuButton as-child>
                 <NuxtLink :href="item.url">
@@ -206,7 +221,7 @@ const sidebarData = ref({
                       :key="subItem.title"
                       class="flex items-center"
                     >
-                      <div v-if="$route.path === subItem.url" class="border-text mr-2 h-4 w-1 border-l-2 border-foreground rounded -ml-3" />
+                      <div v-if="route.path === subItem.url" class="border-text mr-2 h-4 w-1 border-l-2 border-foreground rounded -ml-3" />
                       <SidebarMenuSubButton as-child>
                         <NuxtLink :href="subItem.url">
                           <span>{{ subItem.title }}</span>
@@ -217,6 +232,24 @@ const sidebarData = ref({
                 </CollapsibleContent>
               </SidebarMenuItem>
             </Collapsible>
+          </SidebarMenu>
+        </SidebarGroup>
+        <SidebarGroup v-if="isUserAdmin" class="group-data-[collapsible=icon]:hidden">
+          <SidebarGroupLabel>管理</SidebarGroupLabel>
+          <SidebarMenu>
+            <SidebarMenuItem
+              v-for="item in sidebarData.admin"
+              :key="item.name"
+              class="rounded"
+              :class="{ 'bg-foreground/10': route.path === item.url }"
+            >
+              <SidebarMenuButton as-child>
+                <NuxtLink :href="item.url">
+                  <Icon :name="item.icon" size="1.1em" />
+                  <span>{{ item.name }}</span>
+                </NuxtLink>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>

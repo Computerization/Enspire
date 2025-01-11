@@ -15,6 +15,12 @@ model User {
   tsimsStudentId    Int                 @unique
   ClubRating        ClubRating[]
   ReservationRecord ReservationRecord[]
+  role              Roles               @default(MEMBER)
+}
+
+enum Roles {
+  MEMBER
+  ADMIN
 }
 
 model Club {
@@ -65,7 +71,7 @@ model FileUploadRecord {
 }
 
 model FileCollection {
-  id               String            @id @default(dbgenerated("gen_random_uuid()"))
+  id               String             @id @default(dbgenerated("gen_random_uuid()"))
   name             String
   status           FormStatus
   fileNaming       String
