@@ -1,7 +1,5 @@
 import { PrismaClient, Roles } from '@prisma/client'
 
-const prisma = new PrismaClient()
-
 export interface getRoleResponse {
   success: boolean
   role: string | null
@@ -10,6 +8,7 @@ export interface getRoleResponse {
 
 export async function getRole(clerkId: string): Promise<getRoleResponse> {
   try {
+    const prisma = new PrismaClient()
     const user = await prisma.user.findFirstOrThrow({
       where: {
         clerkUserId: clerkId,

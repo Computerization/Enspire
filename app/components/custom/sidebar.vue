@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import type { AllClubs } from '@@/types/api/user/all_clubs'
-import type { getRoleResponse } from '~~/utils/user-roles'
 import { useClerk, useUser } from 'vue-clerk'
-import { isAdmin } from '~~/utils/user-roles'
 
 const { user } = useUser()
 const config = useRuntimeConfig()
@@ -23,11 +21,11 @@ const { data: clubs, suspense: __s1 } = useQuery<AllClubs>({
 await __s1()
 
 const isUserAdmin = ref(false)
-const { data: roleData, suspense: __s2 } = useQuery<getRoleResponse>({
+const { data: roleData, suspense: __s2 } = useQuery<any>({
   queryKey: ['/api/user/check-role'],
 })
 await __s2()
-isUserAdmin.value = isAdmin(roleData.value)
+isUserAdmin.value = roleData.value?.success === true && roleData.value.role === 'ADMIN'
 
 if (clubs.value) {
   useState('isEnspireLoading').value = false
