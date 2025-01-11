@@ -1,5 +1,0 @@
----
-"enspire": minor
----
-
-admin page
