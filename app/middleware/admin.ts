@@ -1,7 +1,6 @@
-import { Roles } from '@prisma/client'
 import { until } from '@vueuse/core'
 import { useClerk, useClerkProvider } from 'vue-clerk'
-import { getRole, isAdmin } from '~~/utils/user-roles'
+// import { getRole, isAdmin } from '~~/utils/user-roles'
 
 export default defineNuxtRouteMiddleware(async () => {
   // Modified from auth.ts
@@ -18,7 +17,7 @@ export default defineNuxtRouteMiddleware(async () => {
     if (clerk.loaded && clerk.user?.id == null)
       return navigateTo('/sign-in')
     const response = await $fetch('/api/user/check-role')
-    if (!isAdmin(response))
+    if (!(response?.success === true && response.role === 'ADMIN'))
       return abortNavigation()
   }
 
@@ -26,8 +25,8 @@ export default defineNuxtRouteMiddleware(async () => {
     const id = nuxtApp.ssrContext?.event.context.auth?.userId
     if (id == null)
       return navigateTo('/sign-in')
-    const response = await getRole(id)
-    if (!isAdmin(response))
-      return abortNavigation()
+    // const response = await getRole(id)
+    // if (!(response?.success === true && response.role === 'ADMIN'))
+    //   return abortNavigation()
   }
 })

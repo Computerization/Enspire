@@ -1,15 +1,14 @@
-import type { $Enums } from '@prisma/client'
 import { PrismaClient, Roles } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
 export interface getRoleResponse {
   success: boolean
-  role: $Enums.Roles | null
+  role: string | null
   error?: string
 }
 
-export async function getRole(clerkId: string) {
+export async function getRole(clerkId: string): Promise<getRoleResponse> {
   try {
     const user = await prisma.user.findFirstOrThrow({
       where: {
@@ -30,7 +29,7 @@ export async function getRole(clerkId: string) {
   }
 }
 
-export function isRole(roleData: getRoleResponse | undefined, theRole: $Enums.Roles) {
+export function isRole(roleData: getRoleResponse | undefined, theRole: string) {
   return roleData?.success === true && roleData.role === theRole
 }
 
