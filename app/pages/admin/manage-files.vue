@@ -5,6 +5,7 @@ import JSZip from 'jszip'
 
 definePageMeta({
   middleware: ['admin'],
+  breadcrumb: '管理文件',
 })
 
 useHead({

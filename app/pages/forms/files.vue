@@ -11,6 +11,7 @@ import * as z from 'zod'
 
 definePageMeta({
   middleware: ['auth'],
+  breadcrumb: '社团文件',
 })
 
 useHead({

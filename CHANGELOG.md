@@ -1,5 +1,15 @@
 # enspire
 
+## 1.6.0
+
+### Minor Changes
+
+- [`42fcaf7`](https://github.com/Computerization/Enspire/commit/42fcaf7f5eb44611adc66d48fa3429a16606c7a6) Thanks [@at-wr](https://github.com/at-wr)! - Add Profile page with Activity stats and Account Info
+
+- [`4424e5c`](https://github.com/Computerization/Enspire/commit/4424e5cafddc3d7d2e2975bc96aa7ecc77f4da2c) Thanks [@at-wr](https://github.com/at-wr)! - Add missing breadcrumb and title
+
+- [`eeb9628`](https://github.com/Computerization/Enspire/commit/eeb9628279e57a0e4ccd1e2cf3a6f83852de200e) Thanks [@at-wr](https://github.com/at-wr)! - Improve text description at front-end
+
 ## 1.5.0
 
 ### Minor Changes

@@ -1,6 +1,11 @@
 <script setup lang="ts">
 definePageMeta({
   middleware: ['auth'],
+  breadcrumb: '关于',
+})
+
+useHead({
+  title: 'About | Enspire',
 })
 </script>
 

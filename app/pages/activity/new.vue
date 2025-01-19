@@ -7,6 +7,10 @@ definePageMeta({
   middleware: ['auth'],
   breadcrumb: '新建',
 })
+
+useHead({
+  title: 'Add Activity Record | Enspire',
+})
 </script>
 
 <template>

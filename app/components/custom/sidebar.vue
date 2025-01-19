@@ -170,7 +170,7 @@ const sidebarData = ref({
                 <NuxtLink to="/about" as-child>
                   <DropdownMenuItem>
                     <Icon class="mr-1" name="lucide:info" />
-                    <span>关于Enspire</span>
+                    <span>关于 Enspire</span>
                   </DropdownMenuItem>
                 </NuxtLink>
               </DropdownMenuGroup>
@@ -292,7 +292,7 @@ const sidebarData = ref({
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                  <NuxtLink to="#" target="_blank" as-child>
+                  <NuxtLink to="/profile" as-child>
                     <DropdownMenuItem>
                       <Icon class="mr-1" name="material-symbols:person-outline" />
                       <span>Profile</span>

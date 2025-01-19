@@ -1,6 +1,6 @@
 ![logo-bg-white](https://github.com/Computerization/Enspire/assets/46770502/27133de7-efd7-4860-8f83-e160a25ab042)
 
-![GitHub deployments](https://img.shields.io/github/deployments/computerization/enspire/production?logo=vercel&label=vercel)
+![GitHub deployments](https://img.shields.io/github/deployments/computerization/enspire/production?logo=netlify&label=Netlify)
  ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/computerization/enspire/quality.yml) ![GitHub License](https://img.shields.io/github/license/computerization/enspire) ![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/m/computerization/enspire/next)
 
 ---
@@ -13,10 +13,15 @@ Enspire 的目标很简单，**Make CAS life easier for everyone**
 
 ## 本地运行
 
-### (可选) VSCode用户：设置Devcontainer
-1. F1调出Command Palette，选择`Dev Containers: Clone Repository in Container Volume...`
-2. 输入`https://github.com/computerization/enspire`
-> 不建议`Reopen in Container`，Bind Mounted Volume会导致严重的IO性能问题。
+### (可选) For Visual Studio Code
+<details>
+ <summary>设置 Devcontainer</summary>
+
+1. F1 调出 Command Palette，选择 `Dev Containers: Clone Repository in Container Volume...`
+2. 输入 `https://github.com/computerization/enspire`
+
+> 不建议 `Reopen in Container`，Bind Mounted Volume 会导致严重的IO性能问题。
+</details>
 
 ### 安装依赖
 
@@ -50,17 +55,21 @@ pnpm run dev
 ```
 浏览器访问 `http://localhost:3000` 即可。
 
-### WebStorm 兼容性问题
-#### pnpm & Prisma
+### Troubleshooting
+<details>
+ <summary>pnpm & Prisma 兼容性错误</summary>
 
 [WebStorm](https://www.jetbrains.com/zh-cn/webstorm/) + [pnpm](https://pnpm.io/zh/) + [Prisma](https://www.prisma.io/) 目前存在兼容性问题，目前解决方式如下:
 
 - 每次更新 Prisma 后于左侧文件目录中查找 node_modules/.pnpm/@prisma+client@x.x.x
 - 右键 > Mark Directory as > Not Excluded
+</details>
 
-#### ESLint 错误
-
+<details>
+ <summary>ESLint 错误</summary>
 如果您遇到 WebStorm 于代码窗口上提示 `ESLint: Error: invalid Options`，请尝试将 WebStorm IDE 更新至最新版本。
+
+</details>
 
 ## 技术细节
 

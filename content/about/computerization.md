@@ -1,4 +1,4 @@
-# 关于我们
+# 开发团队
 
 [信息化社 Computerization](https://computerization.io/) (C 社) 是一个长期在幕后工作的，以面向社团的知识性服务为主的，一个小而精的服务类 CS 社团。
 

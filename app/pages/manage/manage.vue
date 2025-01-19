@@ -10,6 +10,10 @@ definePageMeta({
   breadcrumb: '管理预约',
 })
 
+useHead({
+  title: 'Manage Reservation | Enspire',
+})
+
 const { toast } = useToast()
 
 enum Statuses {
@@ -97,7 +101,7 @@ onMounted(async () => {
           取消
         </AlertDialogCancel>
         <Button :disabled="managePending" @click="manage()">
-          <LoaderCircle v-if="managePending" class="animate-spin mr-2" />
+          <LoaderCircle v-if="managePending" class="mr-2 animate-spin" />
           <span v-if="!managePending">确认</span>
           <span v-if="managePending">处理中...</span>
         </Button>
@@ -123,7 +127,7 @@ onMounted(async () => {
     <TableBody v-if="status === Statuses.LOADING">
       <TableRow v-for="i in 5" :key="i">
         <TableCell v-for="j in 9" :key="j">
-          <Skeleton class="h-5 my-2" />
+          <Skeleton class="my-2 h-5" />
         </TableCell>
       </TableRow>
     </TableBody>
@@ -161,12 +165,12 @@ onMounted(async () => {
       </TableRow>
     </TableBody>
   </Table>
-  <div v-if="status === Statuses.READY && !content.length" class="w-1/3 my-2 mx-auto text-center">
+  <div v-if="status === Statuses.READY && !content.length" class="mx-auto my-2 w-1/3 text-center">
     <Alert>
       暂无记录
     </Alert>
   </div>
-  <div v-if="status === Statuses.ERROR" class="w-1/3 my-2 mx-auto text-center">
+  <div v-if="status === Statuses.ERROR" class="mx-auto my-2 w-1/3 text-center">
     <Alert variant="destructive">
       加载失败
     </Alert>

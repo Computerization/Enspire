@@ -3,6 +3,10 @@ definePageMeta({
   middleware: ['auth'],
   breadcrumb: '浏览',
 })
+
+useHead({
+  title: 'Activities | Enspire',
+})
 </script>
 
 <template>
