@@ -1,5 +1,19 @@
 # enspire
 
+## 1.7.0
+
+### Minor Changes
+
+- [#692](https://github.com/Computerization/Enspire/pull/692) [`27f6e2f`](https://github.com/Computerization/Enspire/commit/27f6e2f83ec50566073a625050d498b6ee4820cb) Thanks [@at-wr](https://github.com/at-wr)! - Settings dialog and user profile component
+
+- [#694](https://github.com/Computerization/Enspire/pull/694) [`bf3e2bb`](https://github.com/Computerization/Enspire/commit/bf3e2bb9bb354dfbb702e0850901606396c96b47) Thanks [@at-wr](https://github.com/at-wr)! - Enhance Home Page
+
+### Patch Changes
+
+- [#694](https://github.com/Computerization/Enspire/pull/694) [`bf3e2bb`](https://github.com/Computerization/Enspire/commit/bf3e2bb9bb354dfbb702e0850901606396c96b47) Thanks [@at-wr](https://github.com/at-wr)! - Edit Profile Sidebar text
+
+- [#694](https://github.com/Computerization/Enspire/pull/694) [`bf3e2bb`](https://github.com/Computerization/Enspire/commit/bf3e2bb9bb354dfbb702e0850901606396c96b47) Thanks [@at-wr](https://github.com/at-wr)! - Fix Profile breadcrumb
+
 ## 1.6.0
 
 ### Minor Changes
