@@ -295,7 +295,7 @@ const sidebarData = ref({
                   <NuxtLink to="/profile" as-child>
                     <DropdownMenuItem>
                       <Icon class="mr-1" name="material-symbols:person-outline" />
-                      <span>Profile</span>
+                      <span>个人资料</span>
                     </DropdownMenuItem>
                   </NuxtLink>
                 </DropdownMenuGroup>

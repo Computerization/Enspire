@@ -18,6 +18,7 @@ const isDark = usePreferredDark()
 
 definePageMeta({
   middleware: ['auth'],
+  breadcrumb: 'Profile',
 })
 
 useHead({
