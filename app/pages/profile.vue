@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import type { AllClubs } from '@@/types/api/user/all_clubs'
+import { Button } from '@/components/ui/button'
+import { dark } from '@clerk/themes'
+import { Dialog, DialogContent } from '@/components/ui/dialog'
 import type { MyRecords } from '@@/types/api/cas/record/my'
 import { useUser } from 'vue-clerk'
 import { usePreferredDark } from '@vueuse/core'
@@ -9,9 +12,13 @@ import {
   Settings,
   Clock,
 } from 'lucide-vue-next'
+import { UserProfile } from 'vue-clerk'
+
+const isDark = usePreferredDark()
 
 definePageMeta({
   middleware: ['auth'],
+  breadcrumb: 'Profile',
 })
 
 useHead({
@@ -28,6 +35,9 @@ const stats = ref({
 })
 
 const isLoading = ref(true)
+
+// Add this with your other refs
+const isSettingsOpen = ref(false)
 
 // Fetch clubs data
 const { data: clubs } = await useQuery<AllClubs>({
@@ -84,23 +94,39 @@ onMounted(() => {
     <Card>
       <CardHeader>
         <CardTitle class="text-3xl">
-          <div class="flex items-center gap-4">
-            <Avatar class="h-16 w-16 rounded-lg">
-              <AvatarImage v-if="user" :src="user.imageUrl" :alt="user.firstName" />
-              <AvatarFallback class="rounded-lg">
-                {{ user?.firstName?.slice(0, 2) }}
-              </AvatarFallback>
-            </Avatar>
-            <div>
-              👋 Hi, {{ user?.firstName }}!
-              <div class="text-base font-normal text-muted-foreground">
-                {{ user?.primaryEmailAddress }}
+          <div class="flex items-center justify-between w-full">
+            <div class="flex items-center gap-4">
+              <Avatar class="h-16 w-16 rounded-lg">
+                <AvatarImage v-if="user" :src="user.imageUrl" :alt="user.firstName" />
+                <AvatarFallback class="rounded-lg">
+                  {{ user?.firstName?.slice(0, 2) }}
+                </AvatarFallback>
+              </Avatar>
+              <div>
+                👋🏻 Hi, {{ user?.firstName }}!
+                <div class="text-base font-normal text-muted-foreground">
+                  {{ user?.primaryEmailAddress }}
+                </div>
               </div>
             </div>
+            <Button variant="ghost" size="icon" @click="isSettingsOpen = true">
+              <Settings class="h-5 w-5" />
+              <span class="sr-only">Open settings</span>
+            </Button>
           </div>
         </CardTitle>
       </CardHeader>
+      <!-- Rest of your existing card content -->
     </Card>
+
+    <!-- Settings Dialog -->
+    <Dialog :open="isSettingsOpen" @update:open="isSettingsOpen = false">
+      <DialogContent class="sm:max-w-[880px] p-0">
+        <UserProfile 
+          :appearance="{ baseTheme: isDark ? dark : undefined }"
+        />
+      </DialogContent>
+    </Dialog>
 
     <div class="grid gap-4 md:grid-cols-2">
       <!-- Account Info Card -->
