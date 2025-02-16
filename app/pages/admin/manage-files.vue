@@ -202,7 +202,7 @@ watch(
                         <AlertDialogTitle>下载中...</AlertDialogTitle>
                         <AlertDialogDescription>
                           <div>{{ dlAllMsg }}</div>
-                          <Progress v-model="progress" class="h-1 w-full" />
+                          <Progress v-model="progress" class="mb-5 h-1 w-full" />
                         </AlertDialogDescription>
                       </AlertDialogHeader>
                       <AlertDialogFooter>
