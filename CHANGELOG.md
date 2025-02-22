@@ -1,5 +1,21 @@
 # enspire
 
+## 1.8.0
+
+### Minor Changes
+
+- [#697](https://github.com/Computerization/Enspire/pull/697) [`2fab8f2`](https://github.com/Computerization/Enspire/commit/2fab8f26de240e32410b76e3dcad5c2ab48bc83a) Thanks [@at-wr](https://github.com/at-wr)! - Add Word Counter and Member Counter
+
+- [#697](https://github.com/Computerization/Enspire/pull/697) [`2fab8f2`](https://github.com/Computerization/Enspire/commit/2fab8f26de240e32410b76e3dcad5c2ab48bc83a) Thanks [@at-wr](https://github.com/at-wr)! - Replace Multiselect with Checkbox on NewActivityRecord
+
+### Patch Changes
+
+- [#697](https://github.com/Computerization/Enspire/pull/697) [`2fab8f2`](https://github.com/Computerization/Enspire/commit/2fab8f26de240e32410b76e3dcad5c2ab48bc83a) Thanks [@at-wr](https://github.com/at-wr)! - Sort by date descending order & add page size in DataTable
+
+- [#697](https://github.com/Computerization/Enspire/pull/697) [`2fab8f2`](https://github.com/Computerization/Enspire/commit/2fab8f26de240e32410b76e3dcad5c2ab48bc83a) Thanks [@at-wr](https://github.com/at-wr)! - Add refresh watcher to CustomCASRecordViewMyActivityRecords component
+
+- [`7a0e20b`](https://github.com/Computerization/Enspire/commit/7a0e20b4181a5a081d6efe9a9bb8715b9439402c) Thanks [@at-wr](https://github.com/at-wr)! - Fixed the style of Alert Dialog Progess
+
 ## 1.7.0
 
 ### Minor Changes
