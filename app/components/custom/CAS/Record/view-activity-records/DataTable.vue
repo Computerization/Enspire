@@ -35,7 +35,12 @@ type ActivityRecordtWithClubInfo = ActivityRecord & {
 }
 
 const isDialogOpen = ref(false)
-const sorting = ref<SortingState>([])
+const sorting = ref<SortingState>([
+  {
+    id: 'date', // Match this with your date column's accessorKey
+    desc: true // true for descending order (newest first)
+  }
+])
 const columnFilters = ref<ColumnFiltersState>([])
 const currentRequestInDialog = ref<ActivityRecordtWithClubInfo>()
 
@@ -52,12 +57,15 @@ const table = useVueTable({
     get sorting() { return sorting.value },
     get columnFilters() { return columnFilters.value },
   },
+  initialState: {
+    sorting: sorting.value
+  }
 })
 
 const isLoading = ref(false)
 const deleteDialogOpen = ref(false)
 
-table.setPageSize(5)
+table.setPageSize(20)
 
 async function submitDeletion(id: string) {
   isLoading.value = true

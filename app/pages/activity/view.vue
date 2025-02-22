@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+import { ref } from 'vue'
+import CustomCASRecordViewMyActivityRecords from '@/components/custom/CAS/Record/ViewMyActivityRecords.vue'
+
 definePageMeta({
   middleware: ['auth'],
   breadcrumb: '浏览',
@@ -7,11 +10,11 @@ definePageMeta({
 useHead({
   title: 'Activities | Enspire',
 })
-</script>
+</script> 
 
 <template>
   <Suspense>
-    <CustomCASRecordViewMyActivityRecords />
+    <CustomCASRecordViewMyActivityRecords :refreshWatcher="ref(false)" />
     <template #fallback>
       <Card class="w-full">
         <CardHeader>

@@ -3,7 +3,7 @@ import type { AllClubs } from '@@/types/api/user/all_clubs'
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Multiselect } from '@/components/ui/multiselect'
+import { Checkbox } from '@/components/ui/checkbox'
 import {
   NumberField,
   NumberFieldContent,
@@ -39,12 +39,12 @@ const formSchema = toTypedSchema(z.object({
   club: z.string(),
   date: z
     .string()
-    .refine(v => v, { message: 'A date of birth is required.' }),
-  text: z.string().min(10).max(300),
+    .refine(v => v, { message: '日期为必填项' }),
+  text: z.string().min(10, "字数不得少于 10 字符").max(300, "字数不得大于 300 字符"),
   members: z.array(z.string().uuid()),
-  cTime: z.number().min(0).max(5),
-  aTime: z.number().min(0).max(5),
-  sTime: z.number().min(0).max(5),
+  cTime: z.number().min(0).max(5, "时长不得大于 5 小时"),
+  aTime: z.number().min(0).max(5, "时长不得大于 5 小时"),
+  sTime: z.number().min(0).max(5, "时长不得大于 5 小时"),
 }))
 
 const { data, suspense } = useQuery<AllClubs>({
@@ -67,6 +67,17 @@ const { handleSubmit, resetForm, setFieldValue, values } = useForm({
     sTime: 0,
   },
 })
+
+const selectedMembers = ref<string[]>([])
+
+const handleCheckboxChange = (memberId: string, checked: boolean) => {
+  if (checked) {
+    selectedMembers.value.push(memberId)
+  } else {
+    selectedMembers.value = selectedMembers.value.filter(id => id !== memberId)
+  }
+  setFieldValue('members', selectedMembers.value)
+}
 
 const calendarPlaceholder = ref()
 const calendarValue = computed({
@@ -148,7 +159,7 @@ const onSubmit = handleSubmit(async (values) => {
                       !calendarValue && 'text-muted-foreground',
                     )"
                   >
-                    <span>{{ calendarValue ? df.format(toDate(calendarValue)) : "Pick a date" }}</span>
+                    <span>{{ calendarValue ? df.format(toDate(calendarValue)) : "请选择日期..." }}</span>
                     <CalendarIcon class="ms-auto h-4 w-4 opacity-50" />
                   </Button>
                   <input hidden>
@@ -212,13 +223,16 @@ const onSubmit = handleSubmit(async (values) => {
           </FormField>
         </div>
 
-        <FormField v-slot="{ componentField }" name="text">
+        <FormField v-slot="{ componentField, value }" name="text">
           <FormItem>
-            <FormLabel>活动概要</FormLabel>
+            <div class="flex items-center justify-between">
+              <FormLabel>活动概要</FormLabel>
+              <span class="text-sm text-muted-foreground">{{ value?.length || 0 }}/300</span>
+            </div>
             <FormControl>
               <Textarea
                 class="resize-none"
-                placeholder="详细记录，最多一百字..."
+                placeholder="详细记录，最多三百字..."
                 v-bind="componentField"
                 :disabled="isLoading"
               />
@@ -229,24 +243,30 @@ const onSubmit = handleSubmit(async (values) => {
 
         <FormField v-slot="{ componentField }" name="members">
           <FormItem>
-            <FormLabel>参与者</FormLabel>
+            <div class="flex items-center justify-between">
+              <FormLabel>参与者 <span class="text-sm text-muted-foreground">({{ selectedMembers.length }}/{{ (([...data.president, ...data.vice].find(club => club.id === Number(selectedClub))?.memberships) ?? []).length }})</span></FormLabel>
+            </div>
             <FormControl>
-              <Multiselect
-                v-if="data"
-                :options="((
-                  [...data.president, ...data.vice].find(
-                    (club) => club.id === Number(selectedClub),
-                  )
-                )?.memberships)?.map((membership) => ({
-                  label: membership.name,
-                  value: membership.id,
-                })) ?? []"
-                placeholder="Select options"
-                variant="inverted"
-                v-bind="componentField"
-                :animation="2"
-                :max-count="3"
-              />
+              <div class="flex flex-wrap gap-x-2 gap-y-2">
+                <div 
+                  v-for="member in (
+                    [...data.president, ...data.vice].find(
+                      club => club.id === Number(selectedClub)
+                    )?.memberships
+                  ) ?? []"
+                  :key="member.id"
+                  class="flex items-center space-x-1"
+                >
+                  <Checkbox 
+                    :id="member.id"
+                    :value="member.id"
+                    :checked="selectedMembers.includes(member.id)"
+                    @update:checked="(checked) => handleCheckboxChange(member.id, checked)"
+                    class="w-3.5 h-3.5"
+                  />
+                  <Label :for="member.id">{{ member.name }}</Label>
+                </div>
+              </div>
             </FormControl>
             <FormMessage />
           </FormItem>
