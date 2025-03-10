@@ -5,8 +5,13 @@ const prisma = new PrismaClient()
 
 const requestSchema = z.object({
   clubId: z.number(),
-  wechatGroupUrl: z.string().startsWith('https://weixin.qq.com/g/', { message: 'WeChat Group URL required' }),
-  wechatGroupExpiration: z.string().datetime(),
+  wechatGroupUrl: z.string().startsWith('https://weixin.qq.com/g/', { 
+    message: 'WeChat Group URL required' 
+  }),
+  wechatGroupExpiration: z.string().datetime().refine(
+    (date) => new Date(date) > new Date(),
+    { message: "Expiration date must be in the future" }
+  ),
 })
 
 export default eventHandler(async (event) => {

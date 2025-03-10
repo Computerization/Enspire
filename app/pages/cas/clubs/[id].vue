@@ -6,21 +6,24 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Separator } from '@/components/ui/separator'
 import sanitizeHtml from 'sanitize-html'
 import { useRoute } from 'vue-router'
+import type { GroupInfo } from '@prisma/client'
+import { useUser } from 'vue-clerk'
 
 const { data } = await useFetch<Clubs>('/api/club/all_details')
 
 const clubs = data.value!
 
 const route = useRoute()
-const id = route.params.id // Fetch current Club ID via route params
+const id = route.params.id
 
-// Filter clubs based on C_GroupsID and include information at the same level as groups
+const { user } = useUser()
+
 const filteredClubs = Object.values(clubs).flatMap(clubCategory =>
   clubCategory.filter((club: Club) =>
     club.groups.some(group => group.C_GroupsID === id),
   ).map((club: Club) => ({
-    ...club, // Spread to include all same-level information
-    groups: club.groups.filter(group => group.C_GroupsID === id), // Filter groups to only include those that match the ID
+    ...club,
+    groups: club.groups.filter(group => group.C_GroupsID === id),
   })),
 ) as Club[]
 
@@ -41,6 +44,53 @@ if (filteredClubs[0] && filteredClubs[0].groups[0].C_DescriptionC) {
   }
 }
 
+const { data: groupInfo } = await useQuery<GroupInfo>({
+  queryKey: ['/api/cas/info/get', { club: id }],
+  enabled: !!id,
+})
+
+const isPresident = computed(() => {
+  if (!user.value || !filteredClubs.length) return false
+  const club = filteredClubs[0]
+  return club.presidentByTsimsStudentId === Number(user.value.tsimsStudentId)
+})
+
+// Group info editing
+const isEditing = ref(false)
+const newGroupUrl = ref('')
+const newExpiration = ref('')
+
+async function updateGroupInfo() {
+  if (!newGroupUrl.value || !newExpiration.value) return
+
+  try {
+    if (!groupInfo.value) {
+      // Create
+      await $fetch('/api/cas/info/new', {
+        method: 'POST',
+        body: {
+          clubId: Number(id),
+          wechatGroupUrl: newGroupUrl.value,
+          wechatGroupExpiration: newExpiration.value,
+        },
+      })
+    } else {
+      // Update
+      await $fetch('/api/cas/info/update', {
+        method: 'POST',
+        body: {
+          clubId: Number(id),
+          wechatGroupUrl: newGroupUrl.value, 
+          wechatGroupExpiration: newExpiration.value,
+        },
+      })
+    }
+    isEditing.value = false
+  } catch (error) {
+    console.error('Failed to update group info:', error)
+  }
+}
+
 definePageMeta({
   middleware: ['auth'],
   breadcrumb: '社团详情',
@@ -55,90 +105,171 @@ useHead({
   <div v-if="filteredClubs.length > 0">
     <div v-for="club in filteredClubs" :key="club.groups[0].C_GroupNo">
       <div v-for="group in club.groups" :key="group.C_GroupsID">
-        <div class="flex flex-col-reverse xl:flex-row">
-          <Card class="mt-2 w-full xl:mt-0 xl:w-3/4">
-            <CardHeader>
-              <CardTitle class="flex items-center justify-between">
-                <div>
-                  {{ group.C_NameC }}
-                </div>
-                <Badge v-if="club.gmember.length === 0" variant="destructive">
-                  已解散
-                </badge>
-              </CardTitle>
+        <div class="grid grid-cols-1 xl:grid-cols-4 gap-4">
+          <div class="xl:col-span-3 space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle class="flex items-center justify-between">
+                  <div>
+                    {{ group.C_NameC }}
+                  </div>
+                  <Badge v-if="club.gmember.length === 0" variant="destructive">
+                    已解散
+                  </Badge>
+                </CardTitle>
 
-              <CardDescription class="flex items-center">
-                <Icon name="material-symbols:language" />
-                <div v-if="group.C_NameE" class="ml-1">
-                  {{ group.C_NameE }}
+                <CardDescription class="flex items-center">
+                  <Icon name="material-symbols:language" />
+                  <div v-if="group.C_NameE" class="ml-1">
+                    {{ group.C_NameE }}
+                  </div>
+                  <div v-else class="ml-1">
+                    Club Description
+                  </div>
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div class="font-bold">
+                  简介
                 </div>
-                <div v-else class="ml-1">
-                  Club Description
+                <div v-if="hasDescriptionC" class="my-3 text-sm" v-text="Description_C" />
+                <div v-else class="my-2 w-full text-center text-sm text-muted-foreground italic">
+                  暂无简介 ;-(
                 </div>
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div class="font-bold">
-                简介
-              </div>
-              <div v-if="hasDescriptionC" class="my-3 text-sm" v-text="Description_C" />
-              <div v-else class="my-2 w-full text-center text-sm text-muted-foreground italic">
-                暂无简介 ;-(
-              </div>
-              <!-- Don't show the English Description until i18n is completed -->
-              <Separator class="my-4" />
-              <div class="font-bold">
-                成员
-              </div>
-              <div v-if="club.gmember.length === 0" class="my-2 w-full text-center text-sm text-muted-foreground italic">
-                暂无成员 ;-(
-              </div>
-              <div v-else class="mt-3">
-                <div class="flex flex-wrap">
-                  <div v-for="(member, index) in club.gmember" :key="member.StudentID" class="flex items-center">
-                    <div class="mt-0.5 flex items-center text-sm">
-                      <span class="">{{ member.S_Name }}</span>
-                      <span v-if="member.S_Nickname" class="ml-1 text-muted-foreground">({{ member.S_Nickname }})</span>
-                      <Badge v-if="Number(member.LeaderYes) === 2" variant="default" class="ml-1 -py-0.5">
-                        社长
-                      </Badge>
-                      <Badge v-else-if="Number(member.LeaderYes) === 1" variant="secondary" class="ml-1 -py-0.5">
-                        副社
-                      </Badge>
-                      <span v-if="index < club.gmember.length - 1" class="mx-2">/</span>
+                <!-- Don't show the English Description until i18n is completed -->
+                <Separator class="my-4" />
+                <div class="font-bold">
+                  成员
+                </div>
+                <div v-if="club.gmember.length === 0" class="my-2 w-full text-center text-sm text-muted-foreground italic">
+                  暂无成员 ;-(
+                </div>
+                <div v-else class="mt-3">
+                  <div class="flex flex-wrap">
+                    <div v-for="(member, index) in club.gmember" :key="member.StudentID" class="flex items-center">
+                      <div class="mt-0.5 flex items-center text-sm">
+                        <span class="">{{ member.S_Name }}</span>
+                        <span v-if="member.S_Nickname" class="ml-1 text-muted-foreground">({{ member.S_Nickname }})</span>
+                        <Badge v-if="Number(member.LeaderYes) === 2" variant="default" class="ml-1 -py-0.5">
+                          社长
+                        </Badge>
+                        <Badge v-else-if="Number(member.LeaderYes) === 1" variant="secondary" class="ml-1 -py-0.5">
+                          副社
+                        </Badge>
+                        <span v-if="index < club.gmember.length - 1" class="mx-2">/</span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
-          <Card class="h-min w-full xl:ml-2 xl:w-1/4">
-            <CardHeader>
-              <CardTitle class="h-min flex items-center gap-x-1">
-                社团属性
-              </CardTitle>
-              <CardDescription class="flex items-center">
-                <Icon name="material-symbols:info-outline" />
-                <div class="ml-1">
-                  Club Information
+              </CardContent>
+            </Card>
+          </div>
+
+          <!-- Right sidebar -->
+          <div class="xl:col-span-1 space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle class="h-min flex items-center gap-x-1">
+                  社团属性
+                </CardTitle>
+                <CardDescription class="flex items-center">
+                  <Icon name="material-symbols:info-outline" />
+                  <div class="ml-1">
+                    Club Information
+                  </div>
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div>
+                  <span class="font-bold">社团类型</span>: {{ group.C_Category }}
                 </div>
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div>
-                <span class="font-bold">社团类型</span>: {{ group.C_Category }}
-              </div>
-              <div>
-                <span class="font-bold">社团人数</span>: {{ groupMemberCounts }} 人
-              </div>
-              <div v-if="club.supervisor" class="flex">
-                <span class="font-bold">指导老师:</span>
-                <span v-for="supervisor in club.supervisor" :key="supervisor.TeacherID" class="ml-2">
-                  {{ supervisor.T_Name }} ({{ supervisor.T_Nickname }})
-                </span>
-              </div>
-            </CardContent>
-          </Card>
+                <div>
+                  <span class="font-bold">社团人数</span>: {{ groupMemberCounts }} 人
+                </div>
+                <div v-if="club.supervisor" class="flex">
+                  <span class="font-bold">指导老师:</span>
+                  <span v-for="supervisor in club.supervisor" :key="supervisor.TeacherID" class="ml-2">
+                    {{ supervisor.T_Name }} ({{ supervisor.T_Nickname }})
+                  </span>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle class="h-min flex items-center gap-x-1">
+                  招新信息
+                </CardTitle>
+                <CardDescription class="flex items-center">
+                  <Icon name="material-symbols:group-add" />
+                  <div class="ml-1">
+                    Recruitment
+                  </div>
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div v-if="groupInfo && !isEditing" class="space-y-4">
+                  <div class="text-sm text-muted-foreground">
+                    扫描下方二维码加入微信群
+                  </div>
+                  <div class="flex justify-center">
+                    <img 
+                      :src="groupInfo.wechatGroupUrl" 
+                      alt="WeChat QR Code" 
+                      class="w-48 h-48 rounded-lg shadow-sm" 
+                    />
+                  </div>
+                  <div class="text-sm text-muted-foreground">
+                    二维码有效期至: {{ new Date(groupInfo.wechatGroupExpiration).toLocaleDateString() }}
+                  </div>
+                  <Button v-if="isPresident" @click="isEditing = true" class="w-full">
+                    <Icon name="material-symbols:edit" class="mr-2" />
+                    更新群二维码
+                  </Button>
+                </div>
+
+                <div v-else-if="isPresident" class="space-y-4">
+                  <form @submit.prevent="updateGroupInfo" class="space-y-4">
+                    <FormField>
+                      <FormLabel>微信群二维码链接</FormLabel>
+                      <FormControl>
+                        <Input 
+                          v-model="newGroupUrl"
+                          placeholder="https://weixin.qq.com/g/xxxxxx"
+                          type="url"
+                          required
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        请粘贴微信群二维码链接
+                      </FormDescription>
+                    </FormField>
+
+                    <FormField>
+                      <FormLabel>有效期</FormLabel>
+                      <FormControl>
+                        <Input
+                          v-model="newExpiration"
+                          type="datetime-local"
+                          required
+                          min={new Date().toISOString().slice(0, 16)}
+                        />
+                      </FormControl>
+                    </FormField>
+
+                    <div class="flex gap-2">
+                      <Button type="submit" class="w-full">保存</Button>
+                      <Button variant="outline" @click="isEditing = false" class="w-full">取消</Button>
+                    </div>
+                  </form>
+                </div>
+
+                <div v-else>
+                  <p class="text-sm text-muted-foreground text-center">该社团暂未开放招新</p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </div>
         <!--        <div style="display:none"> -->
         <!--          <Card v-if="club.grecord.length > 0" class="w-full"> -->

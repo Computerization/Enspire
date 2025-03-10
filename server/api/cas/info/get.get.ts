@@ -4,7 +4,7 @@ import * as z from 'zod'
 const prisma = new PrismaClient()
 
 const requestSchema = z.object({
-  club: z.number(),
+  club: z.coerce.number(),
 })
 
 export default eventHandler(async (event) => {
@@ -15,16 +15,17 @@ export default eventHandler(async (event) => {
     return
   }
 
-  // get clubId from request body
-  const requestBody = await readValidatedBody(event, body => requestSchema.parse(body))
+  const query = await getValidatedQuery(event, query => requestSchema.parse(query))
 
-  return await prisma.groupInfo.findUnique({
+  const groupInfo = await prisma.groupInfo.findUnique({
     where: {
-      clubId: Number(requestBody.club),
+      clubId: query.club,
     },
-    // only use include if the value required is not a scalar
-    // include: {
-    //   wechatGroupUrl: true,
-    // },
   })
+
+  if (groupInfo && groupInfo.wechatGroupExpiration < new Date()) {
+    return null
+  }
+
+  return groupInfo
 })
