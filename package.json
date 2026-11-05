@@ -46,7 +46,7 @@
     "import-in-the-middle": "^1.12.0",
     "iron-webcrypto": "^1.2.1",
     "jszip": "^3.10.1",
-    "lucide-vue-next": "^0.466.0",
+    "lucide-vue-next": "^0.577.0",
     "ofetch": "^1.4.1",
     "radix-vue": "^1.9.11",
     "sanitize-html": "^2.14.0",
